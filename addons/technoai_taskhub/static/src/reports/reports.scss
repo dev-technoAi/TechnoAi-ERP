@@ -1,0 +1,200 @@
+// Reports page: KPI cards, won revenue bars and team workload
+
+.o_taskhub_reports {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    > .o_control_panel {
+        min-height: 62px;
+        flex: none;
+    }
+
+    .o_taskhub_title {
+        font-size: 1.15rem;
+        font-weight: 500;
+    }
+
+    .o_taskhub_tabs {
+        display: flex;
+        gap: 6px;
+    }
+
+    .o_taskhub_tab {
+        height: 30px;
+        padding: 0 12px;
+        border: 1px solid $border-color;
+        border-radius: 15px;
+        background: $white;
+        font-size: 0.85rem;
+
+        &.active {
+            border-color: #101F23;
+            background: #101F23;
+            color: $white;
+        }
+    }
+
+    > .o_content {
+        flex: 1;
+        overflow: auto;
+        background: transparent;
+    }
+
+    .o_taskhub_report_kpis {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 16px;
+    }
+
+    .o_taskhub_report_kpi {
+        padding: 14px 16px;
+        border-radius: 10px;
+        background: $white;
+        cursor: pointer;
+
+        small {
+            display: block;
+            color: $text-muted;
+        }
+
+        b {
+            display: block;
+            margin-top: 4px;
+            font-size: 1.35rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        em {
+            font-size: 0.75rem;
+            font-style: normal;
+            color: $o-success;
+        }
+    }
+
+    .o_taskhub_report_row {
+        display: flex;
+        gap: 16px;
+        align-items: stretch;
+    }
+
+    .o_taskhub_report_card {
+        padding: 18px 20px;
+        border-radius: 10px;
+        background: $white;
+    }
+
+    .o_taskhub_legend {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+    }
+
+    .o_taskhub_legend_now,
+    .o_taskhub_bar_now {
+        background: $o-brand-primary;
+    }
+
+    .o_taskhub_legend_prev,
+    .o_taskhub_bar_prev {
+        background: #CFE6EC;
+    }
+
+    .o_taskhub_bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+        height: 240px;
+        padding-top: 10px;
+        border-bottom: 1px solid $border-color;
+    }
+
+    .o_taskhub_bar_slot {
+        position: relative;
+        display: flex;
+        flex: 1;
+        align-items: flex-end;
+        gap: 1px;
+        height: 100%;
+
+        i {
+            display: block;
+            flex: 1;
+            min-height: 1px;
+            border-radius: 3px 3px 0 0;
+        }
+    }
+
+    .o_taskhub_bar_labels {
+        display: flex;
+        gap: 3px;
+        padding-top: 6px;
+        color: $text-muted;
+        font-size: 0.72rem;
+
+        span {
+            flex: 1;
+            overflow: visible;
+            white-space: nowrap;
+        }
+    }
+
+    .o_taskhub_workload {
+        width: 420px;
+        flex: none;
+    }
+
+    .o_taskhub_wl {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+        cursor: pointer;
+
+        b {
+            width: 24px;
+            text-align: right;
+        }
+    }
+
+    .o_taskhub_wl_avatar {
+        display: grid;
+        flex: none;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        background: #146B8C;
+        color: $white;
+        font-size: 0.7rem;
+        font-weight: 600;
+    }
+
+    .o_taskhub_wl_name {
+        width: 150px;
+        line-height: 1.2;
+
+        small {
+            display: block;
+            color: $text-muted;
+        }
+    }
+
+    .o_taskhub_wl_bar {
+        flex: 1;
+        height: 8px;
+        overflow: hidden;
+        border-radius: 4px;
+        background: #EEF2F5;
+
+        i {
+            display: block;
+            height: 100%;
+            background: $o-brand-primary;
+        }
+    }
+}

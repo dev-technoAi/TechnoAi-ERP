@@ -9,6 +9,7 @@
                     <button name="action_start" string="Start" type="object" class="btn-primary" invisible="state != 'todo'"/>
                     <button name="action_mark_done" string="Mark Done" type="object" class="btn-primary" invisible="state == 'done'"/>
                     <button name="action_reopen" string="Reopen" type="object" invisible="state != 'done'"/>
+                    <button name="action_dispatch" string="Dispatch" type="object" icon="fa-paper-plane" invisible="not user_id"/>
                     <button name="action_save_as_template" string="Save as Template" type="object"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
@@ -165,7 +166,7 @@
     <record id="taskhub_task_action" model="ir.actions.act_window">
         <field name="name">All Tasks</field>
         <field name="res_model">taskhub.task</field>
-        <field name="view_mode">list,kanban,calendar,form</field>
+        <field name="view_mode">list,kanban,calendar,pivot,graph,form</field>
         <field name="context">{'search_default_open': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create your first task</p>

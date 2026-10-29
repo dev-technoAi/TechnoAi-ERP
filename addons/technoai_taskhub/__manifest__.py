@@ -25,6 +25,8 @@ data clears test data while keeping templates, departments and the team.
         'data/taskhub_mail_template_data.xml',
         'wizard/taskhub_team_member_views.xml',
         'wizard/taskhub_reset_views.xml',
+        'wizard/taskhub_dispatch_views.xml',
+        'views/res_config_settings_views.xml',
         'views/taskhub_task_views.xml',
         'views/taskhub_template_views.xml',
         'views/taskhub_rfq_views.xml',

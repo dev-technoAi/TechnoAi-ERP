@@ -3,6 +3,8 @@ from . import taskhub_template
 from . import taskhub_rfq
 from . import taskhub_quotation
 from . import taskhub_sourcing
+from . import taskhub_report
 from . import hr_employee
+from . import res_config_settings
 from . import res_partner
 from . import res_users

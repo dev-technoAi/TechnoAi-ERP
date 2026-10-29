@@ -165,6 +165,38 @@ class TaskhubTask(models.Model):
         self.write({'alert_dismissed': True})
         return True
 
+    def action_dispatch(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Dispatch task'),
+            'res_model': 'taskhub.dispatch',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_task_id': self.id},
+        }
+
+    def _dispatch_text(self):
+        """ Plain-text summary of the task for email and WhatsApp. """
+        self.ensure_one()
+        lines = ['📋 %s' % self.name]
+        meta = [dict(PRIORITIES).get(self.priority), self.department_id.name]
+        if self.date_deadline:
+            local = fields.Datetime.context_timestamp(self.with_user(self.user_id or self.env.user), self.date_deadline)
+            meta.append(_('due %s', local.strftime('%d/%m/%Y %H:%M')))
+        lines.append(' · '.join(filter(None, meta)))
+        description = html2plaintext(self.description or '').strip()
+        if description:
+            lines += ['', description[:600]]
+        if self.check_ids:
+            lines += ['', _('Checklist:')] + [
+                '%s %s' % ('✅' if check.status == 'completed' else '⬜', check.name) for check in self.check_ids]
+        base_url = self.get_base_url()
+        lines += ['', _('Open in Techno AI: %s/technoai/action-technoai_taskhub.taskhub_task_action/%s', base_url, self.id)]
+        if self.env.user.name:
+            lines.append(_('From %s', self.env.user.name))
+        return '\n'.join(lines)
+
     def action_save_as_template(self):
         self.ensure_one()
         template = self.env['taskhub.template'].create({

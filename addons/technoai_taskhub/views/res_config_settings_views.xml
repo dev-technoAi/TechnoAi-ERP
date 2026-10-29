@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.taskhub</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Task Hub" string="Task Hub" name="technoai_taskhub" groups="base.group_system">
+                    <block title="WhatsApp dispatch" name="taskhub_whatsapp">
+                        <setting string="Provider" help="How Dispatch sends WhatsApp messages. Without an account, WhatsApp opens with the message ready to send.">
+                            <field name="taskhub_whatsapp_provider" widget="radio"/>
+                        </setting>
+                        <setting string="WhatsApp Cloud API" invisible="taskhub_whatsapp_provider != 'cloud'"
+                                 help="Meta business account. Free-form messages reach people who wrote to you in the last 24 hours.">
+                            <div class="content-group">
+                                <div class="row mt8"><label for="taskhub_wa_cloud_token" class="col-lg-4 o_light_label"/><field name="taskhub_wa_cloud_token" password="True"/></div>
+                                <div class="row"><label for="taskhub_wa_cloud_phone_id" class="col-lg-4 o_light_label"/><field name="taskhub_wa_cloud_phone_id"/></div>
+                            </div>
+                        </setting>
+                        <setting string="Twilio" invisible="taskhub_whatsapp_provider != 'twilio'">
+                            <div class="content-group">
+                                <div class="row mt8"><label for="taskhub_wa_twilio_sid" class="col-lg-4 o_light_label"/><field name="taskhub_wa_twilio_sid"/></div>
+                                <div class="row"><label for="taskhub_wa_twilio_token" class="col-lg-4 o_light_label"/><field name="taskhub_wa_twilio_token" password="True"/></div>
+                                <div class="row"><label for="taskhub_wa_twilio_from" class="col-lg-4 o_light_label"/><field name="taskhub_wa_twilio_from" placeholder="+14155238886"/></div>
+                            </div>
+                        </setting>
+                        <setting string="Green API" invisible="taskhub_whatsapp_provider != 'green'">
+                            <div class="content-group">
+                                <div class="row mt8"><label for="taskhub_wa_green_instance" class="col-lg-4 o_light_label"/><field name="taskhub_wa_green_instance"/></div>
+                                <div class="row"><label for="taskhub_wa_green_token" class="col-lg-4 o_light_label"/><field name="taskhub_wa_green_token" password="True"/></div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="taskhub_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'technoai_taskhub', 'bin_size': False}</field>
+    </record>
+</odoo>

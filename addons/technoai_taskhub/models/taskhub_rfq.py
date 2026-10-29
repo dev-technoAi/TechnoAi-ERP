@@ -49,6 +49,7 @@ class TaskhubRfq(models.Model):
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
     amount = fields.Monetary('Value', tracking=True, help='Quoted value; the final contract value once won.')
     date_quoted = fields.Datetime('Quote sent on', readonly=True)
+    date_closed = fields.Datetime('Closed on', readonly=True, help='When the RFQ was won, lost or rejected.')
     reason = fields.Text('Win / loss / rejection reason', tracking=True)
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company)
     color = fields.Integer()
@@ -59,6 +60,12 @@ class TaskhubRfq(models.Model):
             if vals.get('name', _('New')) == _('New'):
                 vals['name'] = self.env['ir.sequence'].next_by_code('taskhub.rfq') or _('New')
         return super().create(vals_list)
+
+    def write(self, vals):
+        if 'state' in vals:
+            closed = vals['state'] in ('won', 'lost', 'rejected')
+            vals = dict(vals, date_closed=fields.Datetime.now() if closed else False)
+        return super().write(vals)
 
     def _read_group_state(self, states, domain):
         return [key for key, _label in RFQ_STATES if key != 'rejected']
