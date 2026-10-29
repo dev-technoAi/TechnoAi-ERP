@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="technoai_ai.AiSystray">
+        <div class="o_tai_ai_systray d-flex align-items-center">
+            <button type="button" t-attf-class="o_tai_ai_btn {{ state.open and !state.minimized ? 'active' : '' }}"
+                    title="Techno AI assistant" aria-label="Techno AI assistant" t-on-click="() => this.ai.toggle()">AI</button>
+        </div>
+    </t>
+
+    <t t-name="technoai_ai.Logo">
+        <span t-attf-class="o_tai_ai_logo {{ size or '' }}">AI</span>
+    </t>
+
+    <t t-name="technoai_ai.AiPanel">
+        <div t-if="state.open" t-attf-class="o_tai_ai_panel {{ state.expanded ? 'o_expanded' : '' }} {{ state.minimized ? 'o_minimized' : '' }}">
+            <!-- header -->
+            <div class="o_tai_ai_head" t-on-click="() => state.minimized and (state.minimized = false)">
+                <t t-call="technoai_ai.Logo"/>
+                <Dropdown position="'bottom-start'" menuClass="'o_tai_ai_history'" beforeOpen="() => this.ai.refreshChats()">
+                    <button class="o_tai_ai_title btn btn-link p-0" title="Chats">
+                        <span t-esc="state.chat and state.chat.name or 'Techno AI'" class="text-truncate"/>
+                        <i class="fa fa-caret-down ms-1"/>
+                    </button>
+                    <t t-set-slot="content">
+                        <DropdownItem onSelected="() => this.ai.newChat()"><i class="fa fa-plus me-2"/>New chat</DropdownItem>
+                        <div t-if="state.chats.length" class="dropdown-divider"/>
+                        <DropdownItem t-foreach="state.chats" t-as="chat" t-key="chat.id" onSelected="() => this.ai.openChat(chat.id)"
+                                      class="state.chat and state.chat.id === chat.id ? 'active' : ''">
+                            <span class="text-truncate d-block" t-esc="chat.name"/>
+                        </DropdownItem>
+                    </t>
+                </Dropdown>
+                <div class="o_tai_ai_head_actions">
+                    <button class="btn btn-link" title="Minimize" t-on-click.stop="() => state.minimized = !state.minimized">
+                        <i t-attf-class="fa {{ state.minimized ? 'fa-window-maximize' : 'fa-minus' }}"/>
+                    </button>
+                    <button t-if="!state.minimized" class="btn btn-link" t-att-title="state.expanded ? 'Smaller' : 'Full screen'" t-on-click.stop="() => state.expanded = !state.expanded">
+                        <i t-attf-class="fa {{ state.expanded ? 'fa-compress' : 'fa-expand' }}"/>
+                    </button>
+                    <button class="btn btn-link" title="Close" t-on-click.stop="() => this.ai.close()"><i class="fa fa-times"/></button>
+                </div>
+            </div>
+
+            <t t-if="!state.minimized">
+                <div t-if="state.showResume and resumeChat" class="o_tai_ai_resume">
+                    <span>New chat started.</span>
+                    <a href="#" t-on-click.prevent="() => this.ai.openChat(resumeChat.id)">Resume previous chat <i class="fa fa-angle-right"/></a>
+                    <button class="btn btn-link ms-auto p-0" title="Dismiss" t-on-click="() => state.showResume = false"><i class="fa fa-times"/></button>
+                </div>
+
+                <div class="o_tai_ai_body" t-ref="body">
+                    <div t-if="state.status and !state.status.configured" class="alert alert-warning mb-0">
+                        <t t-if="state.status.is_admin">Add an AI provider key in <b>Settings &gt; General Settings &gt; Techno AI assistant</b> to start.</t>
+                        <t t-else="">The assistant is not set up yet. Ask an administrator to add an AI provider key.</t>
+                    </div>
+
+                    <div t-if="!items.length and !state.draft" class="o_tai_ai_empty">
+                        <h3><t t-call="technoai_ai.Logo"><t t-set="size" t-value="'o_lg'"/></t>Techno AI</h3>
+                        <p>I'm your sidekick for day-to-day work: finding records, totals and charts, tasks and messages.</p>
+                        <div>
+                            <button t-foreach="suggestions" t-as="s" t-key="s_index" class="o_tai_ai_chip" t-on-click="() => this.send(s.text)">
+                                <i t-attf-class="fa {{ s.icon }}"/><t t-esc="s.text"/>
+                            </button>
+                        </div>
+                    </div>
+
+                    <t t-foreach="items" t-as="item" t-key="item_index">
+                        <div t-if="item.type === 'user'" class="o_tai_ai_me" t-esc="item.text"/>
+                        <t t-else="">
+                            <div t-if="item.type === 'text'" class="o_tai_ai_bot o_tai_ai_text" t-out="formatText(item.text)"/>
+                            <div t-elif="item.type === 'step'" class="o_tai_ai_step"><i class="fa fa-check"/><t t-esc="item.text"/></div>
+                            <div t-elif="item.type === 'error'" class="o_tai_ai_error"><i class="fa fa-exclamation-triangle"/><t t-esc="item.text"/></div>
+                            <div t-elif="item.type === 'records'" class="o_tai_ai_records">
+                                <div t-foreach="item.records" t-as="rec" t-key="rec.id" class="o_tai_ai_card">
+                                    <div class="o_tai_ai_card_head">
+                                        <span class="text-truncate" t-esc="rec.name"/>
+                                        <span t-attf-class="o_tai_ai_tag {{ item.badge ? 'o_ok' : '' }}" t-esc="item.badge or item.model_name"/>
+                                    </div>
+                                    <div t-if="rec.fields.length" class="o_tai_ai_kv">
+                                        <t t-foreach="rec.fields" t-as="f" t-key="f_index"><span t-esc="f[0]"/><span t-esc="f[1]"/></t>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm mt-2" t-on-click="() => this.ai.openRecord(item.model, rec.id)"><i class="fa fa-external-link me-1"/>Open</button>
+                                </div>
+                            </div>
+                            <div t-elif="item.type === 'chart'" class="o_tai_ai_card">
+                                <div t-if="item.title" class="o_tai_ai_card_head"><span t-esc="item.title"/></div>
+                                <div t-attf-class="o_tai_ai_chart {{ item.chart === 'pie' ? 'o_pie' : '' }}"><AiChart item="item"/></div>
+                                <button class="btn btn-secondary btn-sm mt-2" t-on-click="() => this.ai.openChart(item)"><i class="fa fa-bar-chart me-1"/>Open in analysis</button>
+                            </div>
+                            <div t-elif="item.type === 'link'">
+                                <button class="btn btn-secondary btn-sm" t-on-click="() => this.ai.openLink(item)"><i class="fa fa-external-link me-1"/><t t-esc="item.label"/></button>
+                            </div>
+                            <div t-elif="item.type === 'confirm'" t-attf-class="o_tai_ai_card o_confirm o_{{ item.state }}">
+                                <div class="o_tai_ai_card_head">
+                                    <span t-esc="item.title"/>
+                                    <span t-attf-class="o_tai_ai_tag {{ item.state === 'pending' ? 'o_warn' : item.state === 'done' ? 'o_ok' : '' }}" t-esc="cardStateLabel(item)"/>
+                                </div>
+                                <div class="o_tai_ai_kv">
+                                    <span>Action</span><span><t t-esc="item.action"/> · <t t-esc="item.model_name"/></span>
+                                    <t t-foreach="item.fields" t-as="f" t-key="f_index"><span t-esc="f[0]"/><span t-esc="f[1]"/></t>
+                                </div>
+                                <div t-if="item.state === 'pending' and state.chat.pending" class="d-flex gap-2 mt-2">
+                                    <button class="btn btn-primary btn-sm" t-att-disabled="state.busy" t-on-click="() => this.ai.confirm(true)"><i class="fa fa-check me-1"/>Yes, do it</button>
+                                    <button class="btn btn-secondary btn-sm" t-att-disabled="state.busy" t-on-click="() => this.change()">Change</button>
+                                    <button class="btn btn-secondary btn-sm" t-att-disabled="state.busy" t-on-click="() => this.ai.confirm(false)">Cancel</button>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+
+                    <div t-if="state.draft" class="o_tai_ai_me" t-esc="state.draft"/>
+                    <div t-if="state.busy" class="o_tai_ai_thinking"><span/><span/><span/></div>
+                    <div t-if="state.localError" class="o_tai_ai_error"><i class="fa fa-exclamation-triangle"/><t t-esc="state.localError"/></div>
+                </div>
+
+                <div class="o_tai_ai_input">
+                    <button class="btn btn-link" title="New chat" t-on-click="() => this.ai.newChat()"><i class="fa fa-plus-circle"/></button>
+                    <textarea t-ref="input" rows="1" placeholder="Message Techno AI..." t-att-value="ui.text"
+                              t-on-input="onInput" t-on-keydown="onKeydown"/>
+                    <button t-if="Recognition and !ui.text.trim()" t-attf-class="btn btn-link {{ ui.listening ? 'o_listening' : '' }}" title="Speak" t-on-click="listen">
+                        <i class="fa fa-microphone"/>
+                    </button>
+                    <button t-else="" class="btn btn-link o_send" title="Send" t-att-disabled="state.busy or !ui.text.trim()" t-on-click="() => this.send()">
+                        <i class="fa fa-paper-plane"/>
+                    </button>
+                </div>
+                <div class="o_tai_ai_foot">AI can make mistakes. It asks you before creating or changing anything.</div>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="technoai_ai.AiChart">
+        <canvas t-ref="canvas"/>
+    </t>
+</templates>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.technoai.ai</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='integration']" position="before">
+                <block title="Techno AI assistant" name="technoai_ai">
+                    <setting string="AI provider" help="The AI behind the assistant in the top bar. Each provider bills its own API usage; new chats use the provider chosen here.">
+                        <field name="technoai_ai_provider" widget="radio"/>
+                        <div class="content-group mt8">
+                            <div class="row" invisible="technoai_ai_provider != 'anthropic'">
+                                <label for="technoai_ai_anthropic_key" class="col-lg-4 o_light_label"/><field name="technoai_ai_anthropic_key" password="True" placeholder="sk-ant-..."/>
+                                <label for="technoai_ai_anthropic_model" class="col-lg-4 o_light_label"/><field name="technoai_ai_anthropic_model"/>
+                            </div>
+                            <div class="row" invisible="technoai_ai_provider != 'openai'">
+                                <label for="technoai_ai_openai_key" class="col-lg-4 o_light_label"/><field name="technoai_ai_openai_key" password="True" placeholder="sk-..."/>
+                                <label for="technoai_ai_openai_model" class="col-lg-4 o_light_label"/><field name="technoai_ai_openai_model"/>
+                            </div>
+                            <div class="row" invisible="technoai_ai_provider != 'gemini'">
+                                <label for="technoai_ai_gemini_key" class="col-lg-4 o_light_label"/><field name="technoai_ai_gemini_key" password="True"/>
+                                <label for="technoai_ai_gemini_model" class="col-lg-4 o_light_label"/><field name="technoai_ai_gemini_model"/>
+                            </div>
+                            <button name="action_technoai_ai_test" type="object" string="Test connection" icon="fa-plug" class="btn-link mt8"/>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

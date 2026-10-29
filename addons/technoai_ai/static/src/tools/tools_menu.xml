@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="technoai_ai.ToolsMenu">
+        <Dropdown position="'bottom-end'" menuClass="'o_tai_tools_menu'">
+            <button title="Tools" aria-label="Tools">
+                <i class="fa fa-lg fa-wrench"/>
+            </button>
+            <t t-set-slot="content">
+                <div class="dropdown-header">Tools</div>
+                <DropdownItem onSelected="() => this.toggleDebug()">
+                    <i class="fa fa-fw fa-bug me-2"/><t t-if="debug">Developer mode off</t><t t-else="">Developer mode on</t>
+                </DropdownItem>
+                <DropdownItem onSelected="() => this.regenerateAssets()"><i class="fa fa-fw fa-refresh me-2"/>Reload assets</DropdownItem>
+                <DropdownItem onSelected="() => this.openBackups()"><i class="fa fa-fw fa-database me-2"/>Backups</DropdownItem>
+                <div class="dropdown-divider"/>
+                <DropdownItem onSelected="() => this.open('base.action_res_users')"><i class="fa fa-fw fa-users me-2"/>Users</DropdownItem>
+                <DropdownItem onSelected="() => this.open('base.action_ir_mail_server_list')"><i class="fa fa-fw fa-plug me-2"/>Email servers</DropdownItem>
+                <DropdownItem onSelected="() => this.open('base.ir_cron_act')"><i class="fa fa-fw fa-clock-o me-2"/>Scheduled actions</DropdownItem>
+                <DropdownItem onSelected="() => this.open('base.ir_config_list_action')"><i class="fa fa-fw fa-cogs me-2"/>System parameters</DropdownItem>
+            </t>
+        </Dropdown>
+    </t>
+</templates>
