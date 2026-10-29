@@ -1,322 +1,396 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<templates xml:space="preserve">
-
-  <t t-name="web.NavBar">
-    <header class="o_navbar" t-ref="root">
-      <nav
-        class="o_main_navbar d-print-none"
-        data-command-category="disabled"
-      >
-        <!-- Apps Menu -->
-        <t t-call="web.NavBar.AppsMenu">
-          <t t-set="apps" t-value="menuService.getApps()" />
-        </t>
-
-        <!-- App Brand -->
-        <DropdownItem
-          t-if="!this.ui.isSmall and currentApp and !state.isHomeMenuOpened"
-          t-esc="currentApp.name"
-          class="'o_menu_brand d-flex'"
-          onSelected="() => this.onNavBarDropdownItemSelection(currentApp)"
-          attrs="{ href: getMenuItemHref(currentApp), 'data-menu-xmlid': currentApp.xmlid, 'data-section': currentApp.id }"
-        />
-
-        <div class="o_navbar_breadcrumbs d-contents"/>
-
-        <t t-if="!this.ui.isSmall and !state.isHomeMenuOpened">
-          <!-- Current App Sections -->
-          <t t-if="currentAppSections.length" t-call="web.NavBar.SectionsMenu">
-            <t t-set="sections" t-value="currentAppSections" />
-          </t>
-        </t>
-
-        <!-- Systray -->
-        <div class="o_menu_systray d-flex flex-shrink-0 ms-auto" role="menu">
-          <t t-foreach="systrayItems" t-as="item" t-key="item.key">
-            <!-- This ensures the correct order of the systray items -->
-            <div t-att-data-index="item.index"/>
-            <ErrorHandler onError="error => this.handleItemError(error, item)">
-                <t t-component="item.Component" t-props="item.props"/>
-            </ErrorHandler>
-          </t>
-        </div>
-      </nav>
-
-      <!-- Full-screen Enterprise Apps Launcher Grid (Techno AI Home Menu) -->
-      <t t-if="state.isHomeMenuOpened" t-portal="'body'">
-        <div class="o_techno_home_menu">
-          <!-- Top Utility Badge -->
-          <div class="d-flex align-items-center justify-content-between w-100 px-4 pt-3 pb-2" style="max-width: 900px;">
-            <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill" style="background: rgba(18, 28, 33, 0.85); border: 1px solid rgba(40, 159, 183, 0.35);">
-              <span class="rounded-circle" style="width: 8px; height: 8px; background-color: #9fe7e7;"></span>
-              <span style="font-family: monospace; font-size: 12px; font-weight: 700; color: #ffffff;">technoai.ae</span>
-              <span class="badge rounded-pill" style="background: #146b8c; color: #9fe7e7; font-size: 10px;">Enterprise Apps</span>
-            </div>
-            <button class="btn btn-sm btn-outline-secondary text-white rounded-pill px-3" t-on-click="() => this.toggleHomeMenu(false)">
-              <i class="oi oi-close me-1"></i> Close
-            </button>
-          </div>
-
-          <!-- Search Bar -->
-          <div class="o_home_search my-4">
-            <i class="oi oi-search" style="color: #289fb7;" />
-            <input 
-              type="text" 
-              t-model="state.searchQuery" 
-              placeholder="Search applications..." 
-              autofocus="autofocus"
-            />
-            <button t-if="state.searchQuery" class="btn btn-sm btn-link text-muted p-0" t-on-click="() => state.searchQuery = ''">
-              <i class="oi oi-close" />
-            </button>
-          </div>
-
-          <!-- Apps Grid matching screenshot -->
-          <div class="o_apps_grid my-auto">
-            <t t-foreach="filteredApps" t-as="app" t-key="app.id">
-              <a 
-                class="o_app_item" 
-                t-att-href="getMenuItemHref(app)"
-                t-on-click.prevent="() => this.onAppClick(app)"
-              >
-                <div class="o_app_icon_box">
-                  <img 
-                    t-if="app.webIconData" 
-                    t-att-src="app.webIconData" 
-                    t-att-alt="app.name" 
-                  />
-                  <img 
-                    t-elif="app.webIcon" 
-                    t-attf-src="/{{app.webIcon.replace(',', '/')}}" 
-                    t-att-alt="app.name" 
-                  />
-                  <div t-else="" class="text-white fw-bold fs-3">
-                    <t t-esc="app.name ? app.name[0] : 'A'"/>
-                  </div>
-                </div>
-                <span class="o_app_label" t-esc="app.name"/>
-              </a>
-            </t>
-          </div>
-
-          <!-- Footer Legal -->
-          <div class="mt-auto pt-4 text-center small" style="color: #94a3b8;">
-            Techno AI FZE &#8226; Dubai, UAE &#8226; Redefining Intelligness
-          </div>
-        </div>
-      </t>
-    </header>
-  </t>
-
-  <t t-name="web.SectionMenu">
-    <li class="px-3" t-if="section.childrenTree.length">
-        <div class="bg-transparent"
-            t-att-class="{
-                'fw-bolder text-900 pt-3 pb-2': !isNested,
-                'border-top': !isNested &amp;&amp; subMenu_index != 0,
-                'py-2': isNested,
-            }"
-            t-att-data-menu-xmlid="section.xmlid" t-esc="section.name"/>
-        <ul class="list-unstyled ps-0">
-            <t t-foreach="section.childrenTree" t-as="subSection" t-key="subSection_index">
-                <t t-call="web.SectionMenu">
-                    <t t-set="section" t-value="subSection"/>
-                    <t t-set="isNested" t-value="true"/>
-                </t>
-            </t>
-        </ul>
-    </li>
-    <li t-else="" t-on-click="() => this._onMenuClicked(section)"  t-att-data-menu-xmlid="section.xmlid"
-        t-att-class="{
-            'fw-bold text-900 py-3': !isNested,
-            'border-top': !isNested &amp;&amp; subMenu_index != 0,
-            'py-2': isNested,
-        }">
-        <t t-esc="section.name"/>
-    </li>
-  </t>
-
-  <t t-name="web.NavBar.AppsMenu">
-    <t t-if="this.ui.isSmall">
-      <a href="/odoo" class="o_menu_toggle border-0" t-att-class="{'hasImage': currentApp?.webIconData}" accesskey="h" t-ref="menuApps" t-on-click.prevent="_openAppMenuSidebar">
-        <t t-call="web.NavBar.AppsMenu.Sidebar"/>
-      </a>
-    </t>
-    <t t-else="">
-      <div t-if="!isScopedApp" class="o_navbar_apps_menu">
-        <button 
-          data-hotkey="h" 
-          title="Home Menu (Apps Launcher)" 
-          class="btn btn-link text-white p-2 d-flex align-items-center"
-          t-on-click="() => this.toggleHomeMenu()"
-        >
-          <i class="oi oi-apps" style="font-size: 1.25rem;" />
-        </button>
-      </div>
-      <div t-else="" class="mx-2"/>
-    </t>
-  </t>
-
-  <t t-name="web.NavBar.AppsMenu.Sidebar">
-    <i class="fa fa-bars" aria-hidden="true"/>
-    <t t-portal="'body'">
-      <Transition name="'o-app-menu-sidebar'" visible="state.isAppMenuSidebarOpened" leaveDuration="200" t-slot-scope="transition">
-        <div class="o_app_menu_sidebar position-fixed top-0 bottom-0 end-100 d-flex flex-column flex-nowrap" t-att-class="transition.className" t-on-touchstart.stop="_onSwipeStart" t-on-touchend.stop="_onSwipeEnd">
-          <div class="o_sidebar_topbar d-flex align-items-center justify-content-between flex-shrink-0 py-0 fs-4">
-              <small class="d-flex align-items-center justify-content-between ms-2">
-                  <a href="/odoo" class="btn btn-primary" t-on-click.prevent="onAllAppsBtnClick"><i class="oi oi-apps"></i><span class="px-2">All Apps</span></a>
-              </small>
-              <button class="o_sidebar_close oi oi-close btn d-flex align-items-center h-100 bg-transparent border-0 fs-2 text-reset" aria-label="Close menu" title="Close menu" t-on-click.stop="_closeAppMenuSidebar"/>
-          </div>
-          <nav class="o_burger_menu_content flex-grow-1 flex-shrink-1 overflow-auto o_burger_menu_app">
-                <div t-if="!state.isAllAppsMenuOpened and currentApp" class="d-flex align-items-center m-3 mb-0">
-                  <img style="height: 2em;" t-if="currentApp.webIconData" class="o_app_icon me-2" t-attf-src="{{currentApp.webIconData}}"/>
-                  <span class="fs-4 fw-bolder"><t t-esc="currentApp.name"/></span>
-                </div>
-                <ul class="list-unstyled py-2 ps-0 mb-0">
-                    <t t-if="!state.isAllAppsMenuOpened">
-                      <t t-foreach="currentAppSections" t-as="subMenu" t-key="subMenu_index">
-                        <t t-call="web.SectionMenu">
-                            <t t-set="section" t-value="subMenu" />
-                        </t>
-                      </t>
-                    </t>
-
-                    <t t-else="">
-                      <t t-foreach="apps" t-as="app" t-key="app_index">
-                        <li t-att-data-menu-xmlid="app.xmlid" class="o_app fw-bolder py-2" t-att-class="{'bg-primary-subtle': menuService.getCurrentApp() === app}" t-on-click="() => {this.onNavBarDropdownItemSelection(app); this._closeAppMenuSidebar();}">
-                          <div class="d-flex align-items-center">
-                            <img style="height: 3em;" t-if="app.webIconData" class="o_app_icon me-2" t-attf-src="{{app.webIconData}}"/>
-                            <t t-esc="app.name"/>
-                          </div>
-                        </li>
-                      </t>
-                    </t>
-                </ul>
-          </nav>
-        </div>
-      </Transition>
-      <div t-if="state.isAppMenuSidebarOpened" class="modal-backdrop show d-block d-md-none" t-on-click.stop="_closeAppMenuSidebar" t-on-touchstart.stop="_onSwipeStart" t-on-touchend.stop="_onSwipeEnd" />
-    </t>
-  </t>
-
-  <t t-name="web.NavBar.SectionsMenu">
-    <div class="o_menu_sections d-flex flex-grow-1 flex-shrink-1 w-0" t-ref="appSubMenus" role="menu">
-        <t t-if="!this.ui.isSmall and !state.isHomeMenuOpened">
-            <DropdownGroup>
-                <t t-foreach="sections" t-as="section" t-key="section.id">
-                    <t
-                        t-set="sectionsVisibleCount"
-                        t-value="(sections.length - currentAppSectionsExtra.length)"
-                    />
-
-                    <t t-if="section_index lt Math.min(10, sectionsVisibleCount)">
-                        <t t-set="hotkey" t-value="((section_index + 1) % 10).toString()" />
-                    </t>
-                    <t t-else="">
-                        <t t-set="hotkey" t-value="undefined" />
-                    </t>
-
-                    <t t-if="!section.childrenTree.length">
-                        <DropdownItem
-                            class="'o_nav_entry'"
-                            onSelected="() => this.onNavBarDropdownItemSelection(section)"
-                            t-esc="section.name"
-                            attrs="{
-                                href: getMenuItemHref(section),
-                                'data-hotkey': hotkey,
-                                'data-menu-xmlid': section.xmlid,
-                                'data-section': section.id,
-                            }"
-                        />
-                    </t>
-                    <t t-else="">
-                        <Dropdown>
-                            <button t-att-data-hotkey="hotkey" t-att-data-menu-xmlid="section.xmlid">
-                                <span t-esc="section.name" t-att-data-section="section.id" />
-                            </button>
-                            <t t-set-slot="content">
-                                <t t-call="web.NavBar.SectionsMenu.Dropdown.MenuSlot">
-                                <t t-set="items" t-value="section.childrenTree" />
-                                <t t-set="decalage" t-value="20" />
-                                </t>
-                            </t>
-                        </Dropdown>
-                    </t>
-                </t>
-
-                <t t-if="currentAppSectionsExtra.length" t-call="web.NavBar.SectionsMenu.MoreDropdown">
-                    <t t-set="sections" t-value="currentAppSectionsExtra" />
-                    <t t-if="sectionsVisibleCount lt 10">
-                        <t t-set="hotkey" t-value="(sectionsVisibleCount + 1 % 10).toString()" />
-                    </t>
-                </t>
-            </DropdownGroup>
-        </t>
-    </div>
-  </t>
-
-  <t t-name="web.NavBar.DropdownItem" t-inherit="web.DropdownItem" t-inherit-mode="primary">
-    <xpath expr="//t[@t-tag]" position="attributes">
-      <attribute name="t-att-style">props.style</attribute>
-    </xpath>
-  </t>
-
-  <t t-name="web.NavBar.SectionsMenu.Dropdown.MenuSlot">
-    <t t-set="style" t-value="`padding-left: ${decalage}px;`" />
-    <t t-foreach="items" t-as="item" t-key="item.id">
-      <DropdownItem
-        t-if="!item.childrenTree.length"
-        class="{
-          'dropdown-item': true,
-          o_dropdown_menu_group_entry: decalage gt 20
-        }"
-        t-esc="item.name"
-        onSelected="() => this.onNavBarDropdownItemSelection(item)"
-        attrs="{ style: style, href: getMenuItemHref(item), 'data-menu-xmlid': item.xmlid, 'data-section': item.id }"
-      />
-
-      <t t-else="">
-        <div class="dropdown-menu_group dropdown-header" t-att-style="style" t-esc="item.name" />
-        <t t-call="web.NavBar.SectionsMenu.Dropdown.MenuSlot">
-          <t t-set="items" t-value="item.childrenTree" />
-          <t t-set="decalage" t-value="decalage + 12" />
-        </t>
-      </t>
-    </t>
-  </t>
-
-  <t t-name="web.NavBar.SectionsMenu.MoreDropdown">
-    <div class="o_menu_sections_more">
-      <Dropdown>
-        <button title="More Menu" t-att-data-hotkey="hotkey">
-          <i class="fa fa-plus"/>
-        </button>
-
-        <t t-set-slot="content">
-          <t t-foreach="sections" t-as="section" t-key="section.id">
-            <t t-if="!section.childrenTree.length">
-              <DropdownItem
-                class="'o_more_dropdown_section'"
-                onSelected="() => this.onNavBarDropdownItemSelection(section)"
-                t-esc="section.name"
-                attrs="{ href: getMenuItemHref(section), 'data-menu-xmlid': section.xmlid, 'data-section': section.id }"
-              />
-            </t>
-            <t t-else="">
-              <div
-                class="o_more_dropdown_section o_more_dropdown_section_group dropdown-header bg-100"
-                t-esc="section.name"
-              />
-              <t t-call="web.NavBar.SectionsMenu.Dropdown.MenuSlot">
-                <t t-set="items" t-value="section.childrenTree" />
-                <t t-set="decalage" t-value="20" />
-              </t>
-            </t>
-          </t>
-        </t>
-      </Dropdown>
-    </div>
-  </t>
-
-</templates>
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+  <t t-name="web.NavBar">
+    <header class="o_navbar" t-ref="root">
+      <nav
+        class="o_main_navbar d-print-none"
+        data-command-category="disabled"
+      >
+        <!-- Apps Menu -->
+        <t t-call="web.NavBar.AppsMenu">
+          <t t-set="apps" t-value="menuService.getApps()" />
+        </t>
+
+        <!-- App Brand -->
+        <DropdownItem
+          t-if="!this.ui.isSmall and currentApp and !state.isHomeMenuOpened"
+          t-esc="currentApp.name"
+          class="'o_menu_brand d-flex'"
+          onSelected="() => this.onNavBarDropdownItemSelection(currentApp)"
+          attrs="{ href: getMenuItemHref(currentApp), 'data-menu-xmlid': currentApp.xmlid, 'data-section': currentApp.id }"
+        />
+
+        <div class="o_navbar_breadcrumbs d-contents"/>
+
+        <t t-if="!this.ui.isSmall and !state.isHomeMenuOpened">
+          <!-- Current App Sections -->
+          <t t-if="currentAppSections.length" t-call="web.NavBar.SectionsMenu">
+            <t t-set="sections" t-value="currentAppSections" />
+          </t>
+        </t>
+
+        <!-- Systray -->
+        <div class="o_menu_systray d-flex flex-shrink-0 ms-auto" role="menu">
+          <t t-foreach="systrayItems" t-as="item" t-key="item.key">
+            <!-- This ensures the correct order of the systray items -->
+            <div t-att-data-index="item.index"/>
+            <ErrorHandler onError="error => this.handleItemError(error, item)">
+                <t t-component="item.Component" t-props="item.props"/>
+            </ErrorHandler>
+          </t>
+        </div>
+      </nav>
+
+      <!-- Full-screen Enterprise Apps Launcher Grid (Techno AI Home Menu) -->
+      <t t-if="state.isHomeMenuOpened" t-portal="'body'">
+        <div class="o_techno_home_menu">
+          <!-- Top Utility Badge & Customize Controls -->
+          <div class="d-flex align-items-center justify-content-between w-100 px-4 pt-3 pb-2" style="max-width: 900px;">
+            <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill" style="background: rgba(18, 28, 33, 0.85); border: 1px solid rgba(40, 159, 183, 0.35);">
+              <span class="rounded-circle" style="width: 8px; height: 8px; background-color: #9fe7e7;"></span>
+              <span style="font-family: monospace; font-size: 12px; font-weight: 700; color: #ffffff;">technoai.ae</span>
+              <span class="badge rounded-pill" style="background: #146b8c; color: #9fe7e7; font-size: 10px;">Enterprise Apps</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <t t-if="!state.isEditingApps">
+                <button 
+                  class="btn btn-sm rounded-pill px-3 d-flex align-items-center gap-1 shadow-sm"
+                  style="border: 1px solid #289fb7; color: #9fe7e7; background: rgba(40, 159, 183, 0.18);"
+                  t-on-click="() => this.toggleEditApps(true)"
+                  title="Customize apps layout and order"
+                >
+                  <i class="fa fa-pencil" style="font-size: 11px;"></i>
+                  <span style="font-size: 12px; font-weight: 600;">Edit Apps</span>
+                </button>
+              </t>
+              <t t-else="">
+                <button 
+                  class="btn btn-sm rounded-pill px-3 d-flex align-items-center gap-1 shadow"
+                  style="background: #289fb7; border: 1px solid #9fe7e7; color: #0d1417; font-weight: 700;"
+                  t-on-click="() => this.toggleEditApps(false)"
+                >
+                  <i class="fa fa-check" style="font-size: 11px;"></i>
+                  <span style="font-size: 12px;">Done</span>
+                </button>
+                <button 
+                  class="btn btn-sm btn-outline-secondary text-white-50 rounded-pill px-2 d-flex align-items-center gap-1"
+                  t-on-click="() => this.resetAppsOrder()"
+                  title="Reset to default order"
+                >
+                  <i class="fa fa-undo" style="font-size: 10px;"></i>
+                  <span style="font-size: 11px;">Reset</span>
+                </button>
+              </t>
+              <button class="btn btn-sm btn-outline-secondary text-white rounded-pill px-3" t-on-click="() => this.toggleHomeMenu(false)">
+                <i class="oi oi-close me-1"></i> Close
+              </button>
+            </div>
+          </div>
+
+          <!-- Edit Mode Guide Banner -->
+          <div t-if="state.isEditingApps" class="o_edit_mode_banner d-flex align-items-center gap-2 px-3 py-1 rounded-pill my-2" style="background: rgba(40, 159, 183, 0.15); border: 1px dashed #289fb7; color: #9fe7e7; font-size: 12px;">
+            <i class="fa fa-arrows"></i>
+            <span>Drag and drop icons to reorder, or use &lt; &gt; buttons. Click <strong>Done</strong> to save.</span>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="o_home_search my-3" t-if="!state.isEditingApps">
+            <i class="oi oi-search" style="color: #289fb7;" />
+            <input 
+              type="text" 
+              t-model="state.searchQuery" 
+              placeholder="Search applications..." 
+              autofocus="autofocus"
+            />
+            <button t-if="state.searchQuery" class="btn btn-sm btn-link text-muted p-0" t-on-click="() => state.searchQuery = ''">
+              <i class="oi oi-close" />
+            </button>
+          </div>
+
+          <!-- Apps Grid matching screenshot with Drag and Drop -->
+          <div class="o_apps_grid my-auto" t-att-class="{'o_edit_mode': state.isEditingApps}">
+            <t t-foreach="filteredApps" t-as="app" t-key="app.id">
+              <div 
+                class="o_app_item_wrap"
+                t-att-class="{
+                  'o_dragging': state.draggedAppId === app.id,
+                  'o_drag_target': state.dragOverAppId === app.id and state.draggedAppId !== app.id,
+                }"
+                t-att-draggable="state.isEditingApps ? 'true' : 'false'"
+                t-on-dragstart="(ev) => this.onAppDragStart(ev, app)"
+                t-on-dragover="(ev) => this.onAppDragOver(ev, app)"
+                t-on-dragenter="(ev) => this.onAppDragEnter(ev, app)"
+                t-on-dragleave="(ev) => this.onAppDragLeave(ev, app)"
+                t-on-drop="(ev) => this.onAppDrop(ev, app)"
+                t-on-dragend="() => this.onAppDragEnd()"
+              >
+                <a 
+                  class="o_app_item" 
+                  t-att-href="state.isEditingApps ? '#' : getMenuItemHref(app)"
+                  t-on-click.prevent="() => this.onAppClick(app)"
+                >
+                  <div class="o_app_icon_box position-relative">
+                    <img 
+                      t-if="app.webIconData" 
+                      t-att-src="app.webIconData" 
+                      t-att-alt="app.name" 
+                    />
+                    <img 
+                      t-elif="app.webIcon" 
+                      t-attf-src="/{{app.webIcon.replace(',', '/')}}" 
+                      t-att-alt="app.name" 
+                    />
+                    <div t-else="" class="text-white fw-bold fs-3">
+                      <t t-esc="app.name ? app.name[0] : 'A'"/>
+                    </div>
+                    <div t-if="state.isEditingApps" class="o_app_drag_badge" title="Drag to reorder">
+                      <i class="fa fa-arrows"></i>
+                    </div>
+                  </div>
+                  <span class="o_app_label" t-esc="app.name"/>
+                </a>
+
+                <!-- Reorder buttons in edit mode -->
+                <div t-if="state.isEditingApps" class="o_app_reorder_controls d-flex align-items-center justify-content-center gap-1 mt-1">
+                  <button 
+                    class="btn btn-sm p-0 rounded-circle o_btn_shift"
+                    t-on-click.stop.prevent="() => this.moveApp(app.id, -1)"
+                    title="Move left"
+                  >
+                    <i class="oi oi-chevron-left" style="font-size: 10px;"></i>
+                  </button>
+                  <button 
+                    class="btn btn-sm p-0 rounded-circle o_btn_shift"
+                    t-on-click.stop.prevent="() => this.moveApp(app.id, 1)"
+                    title="Move right"
+                  >
+                    <i class="oi oi-chevron-right" style="font-size: 10px;"></i>
+                  </button>
+                </div>
+              </div>
+            </t>
+          </div>
+
+          <!-- Footer Legal -->
+          <div class="mt-auto pt-4 text-center small" style="color: #94a3b8;">
+            Techno AI FZE &#8226; Dubai, UAE &#8226; Redefining Intelligness
+          </div>
+        </div>
+      </t>
+    </header>
+  </t>
+
+  <t t-name="web.SectionMenu">
+    <li class="px-3" t-if="section.childrenTree.length">
+        <div class="bg-transparent"
+            t-att-class="{
+                'fw-bolder text-900 pt-3 pb-2': !isNested,
+                'border-top': !isNested &amp;&amp; subMenu_index != 0,
+                'py-2': isNested,
+            }"
+            t-att-data-menu-xmlid="section.xmlid" t-esc="section.name"/>
+        <ul class="list-unstyled ps-0">
+            <t t-foreach="section.childrenTree" t-as="subSection" t-key="subSection_index">
+                <t t-call="web.SectionMenu">
+                    <t t-set="section" t-value="subSection"/>
+                    <t t-set="isNested" t-value="true"/>
+                </t>
+            </t>
+        </ul>
+    </li>
+    <li t-else="" t-on-click="() => this._onMenuClicked(section)"  t-att-data-menu-xmlid="section.xmlid"
+        t-att-class="{
+            'fw-bold text-900 py-3': !isNested,
+            'border-top': !isNested &amp;&amp; subMenu_index != 0,
+            'py-2': isNested,
+        }">
+        <t t-esc="section.name"/>
+    </li>
+  </t>
+
+  <t t-name="web.NavBar.AppsMenu">
+    <t t-if="this.ui.isSmall">
+      <a href="/odoo" class="o_menu_toggle border-0" t-att-class="{'hasImage': currentApp?.webIconData}" accesskey="h" t-ref="menuApps" t-on-click.prevent="_openAppMenuSidebar">
+        <t t-call="web.NavBar.AppsMenu.Sidebar"/>
+      </a>
+    </t>
+    <t t-else="">
+      <div t-if="!isScopedApp" class="o_navbar_apps_menu">
+        <button 
+          data-hotkey="h" 
+          title="Home Menu (Apps Launcher)" 
+          class="btn btn-link text-white p-2 d-flex align-items-center"
+          t-on-click="() => this.toggleHomeMenu()"
+        >
+          <i class="oi oi-apps" style="font-size: 1.25rem;" />
+        </button>
+      </div>
+      <div t-else="" class="mx-2"/>
+    </t>
+  </t>
+
+  <t t-name="web.NavBar.AppsMenu.Sidebar">
+    <i class="fa fa-bars" aria-hidden="true"/>
+    <t t-portal="'body'">
+      <Transition name="'o-app-menu-sidebar'" visible="state.isAppMenuSidebarOpened" leaveDuration="200" t-slot-scope="transition">
+        <div class="o_app_menu_sidebar position-fixed top-0 bottom-0 end-100 d-flex flex-column flex-nowrap" t-att-class="transition.className" t-on-touchstart.stop="_onSwipeStart" t-on-touchend.stop="_onSwipeEnd">
+          <div class="o_sidebar_topbar d-flex align-items-center justify-content-between flex-shrink-0 py-0 fs-4">
+              <small class="d-flex align-items-center justify-content-between ms-2">
+                  <a href="/odoo" class="btn btn-primary" t-on-click.prevent="onAllAppsBtnClick"><i class="oi oi-apps"></i><span class="px-2">All Apps</span></a>
+              </small>
+              <button class="o_sidebar_close oi oi-close btn d-flex align-items-center h-100 bg-transparent border-0 fs-2 text-reset" aria-label="Close menu" title="Close menu" t-on-click.stop="_closeAppMenuSidebar"/>
+          </div>
+          <nav class="o_burger_menu_content flex-grow-1 flex-shrink-1 overflow-auto o_burger_menu_app">
+                <div t-if="!state.isAllAppsMenuOpened and currentApp" class="d-flex align-items-center m-3 mb-0">
+                  <img style="height: 2em;" t-if="currentApp.webIconData" class="o_app_icon me-2" t-attf-src="{{currentApp.webIconData}}"/>
+                  <span class="fs-4 fw-bolder"><t t-esc="currentApp.name"/></span>
+                </div>
+                <ul class="list-unstyled py-2 ps-0 mb-0">
+                    <t t-if="!state.isAllAppsMenuOpened">
+                      <t t-foreach="currentAppSections" t-as="subMenu" t-key="subMenu_index">
+                        <t t-call="web.SectionMenu">
+                            <t t-set="section" t-value="subMenu" />
+                        </t>
+                      </t>
+                    </t>
+
+                    <t t-else="">
+                      <t t-foreach="apps" t-as="app" t-key="app_index">
+                        <li t-att-data-menu-xmlid="app.xmlid" class="o_app fw-bolder py-2" t-att-class="{'bg-primary-subtle': menuService.getCurrentApp() === app}" t-on-click="() => {this.onNavBarDropdownItemSelection(app); this._closeAppMenuSidebar();}">
+                          <div class="d-flex align-items-center">
+                            <img style="height: 3em;" t-if="app.webIconData" class="o_app_icon me-2" t-attf-src="{{app.webIconData}}"/>
+                            <t t-esc="app.name"/>
+                          </div>
+                        </li>
+                      </t>
+                    </t>
+                </ul>
+          </nav>
+        </div>
+      </Transition>
+      <div t-if="state.isAppMenuSidebarOpened" class="modal-backdrop show d-block d-md-none" t-on-click.stop="_closeAppMenuSidebar" t-on-touchstart.stop="_onSwipeStart" t-on-touchend.stop="_onSwipeEnd" />
+    </t>
+  </t>
+
+  <t t-name="web.NavBar.SectionsMenu">
+    <div class="o_menu_sections d-flex flex-grow-1 flex-shrink-1 w-0" t-ref="appSubMenus" role="menu">
+        <t t-if="!this.ui.isSmall and !state.isHomeMenuOpened">
+            <DropdownGroup>
+                <t t-foreach="sections" t-as="section" t-key="section.id">
+                    <t
+                        t-set="sectionsVisibleCount"
+                        t-value="(sections.length - currentAppSectionsExtra.length)"
+                    />
+
+                    <t t-if="section_index lt Math.min(10, sectionsVisibleCount)">
+                        <t t-set="hotkey" t-value="((section_index + 1) % 10).toString()" />
+                    </t>
+                    <t t-else="">
+                        <t t-set="hotkey" t-value="undefined" />
+                    </t>
+
+                    <t t-if="!section.childrenTree.length">
+                        <DropdownItem
+                            class="'o_nav_entry'"
+                            onSelected="() => this.onNavBarDropdownItemSelection(section)"
+                            t-esc="section.name"
+                            attrs="{
+                                href: getMenuItemHref(section),
+                                'data-hotkey': hotkey,
+                                'data-menu-xmlid': section.xmlid,
+                                'data-section': section.id,
+                            }"
+                        />
+                    </t>
+                    <t t-else="">
+                        <Dropdown>
+                            <button t-att-data-hotkey="hotkey" t-att-data-menu-xmlid="section.xmlid">
+                                <span t-esc="section.name" t-att-data-section="section.id" />
+                            </button>
+                            <t t-set-slot="content">
+                                <t t-call="web.NavBar.SectionsMenu.Dropdown.MenuSlot">
+                                <t t-set="items" t-value="section.childrenTree" />
+                                <t t-set="decalage" t-value="20" />
+                                </t>
+                            </t>
+                        </Dropdown>
+                    </t>
+                </t>
+
+                <t t-if="currentAppSectionsExtra.length" t-call="web.NavBar.SectionsMenu.MoreDropdown">
+                    <t t-set="sections" t-value="currentAppSectionsExtra" />
+                    <t t-if="sectionsVisibleCount lt 10">
+                        <t t-set="hotkey" t-value="(sectionsVisibleCount + 1 % 10).toString()" />
+                    </t>
+                </t>
+            </DropdownGroup>
+        </t>
+    </div>
+  </t>
+
+  <t t-name="web.NavBar.DropdownItem" t-inherit="web.DropdownItem" t-inherit-mode="primary">
+    <xpath expr="//t[@t-tag]" position="attributes">
+      <attribute name="t-att-style">props.style</attribute>
+    </xpath>
+  </t>
+
+  <t t-name="web.NavBar.SectionsMenu.Dropdown.MenuSlot">
+    <t t-set="style" t-value="`padding-left: ${decalage}px;`" />
+    <t t-foreach="items" t-as="item" t-key="item.id">
+      <DropdownItem
+        t-if="!item.childrenTree.length"
+        class="{
+          'dropdown-item': true,
+          o_dropdown_menu_group_entry: decalage gt 20
+        }"
+        t-esc="item.name"
+        onSelected="() => this.onNavBarDropdownItemSelection(item)"
+        attrs="{ style: style, href: getMenuItemHref(item), 'data-menu-xmlid': item.xmlid, 'data-section': item.id }"
+      />
+
+      <t t-else="">
+        <div class="dropdown-menu_group dropdown-header" t-att-style="style" t-esc="item.name" />
+        <t t-call="web.NavBar.SectionsMenu.Dropdown.MenuSlot">
+          <t t-set="items" t-value="item.childrenTree" />
+          <t t-set="decalage" t-value="decalage + 12" />
+        </t>
+      </t>
+    </t>
+  </t>
+
+  <t t-name="web.NavBar.SectionsMenu.MoreDropdown">
+    <div class="o_menu_sections_more">
+      <Dropdown>
+        <button title="More Menu" t-att-data-hotkey="hotkey">
+          <i class="fa fa-plus"/>
+        </button>
+
+        <t t-set-slot="content">
+          <t t-foreach="sections" t-as="section" t-key="section.id">
+            <t t-if="!section.childrenTree.length">
+              <DropdownItem
+                class="'o_more_dropdown_section'"
+                onSelected="() => this.onNavBarDropdownItemSelection(section)"
+                t-esc="section.name"
+                attrs="{ href: getMenuItemHref(section), 'data-menu-xmlid': section.xmlid, 'data-section': section.id }"
+              />
+            </t>
+            <t t-else="">
+              <div
+                class="o_more_dropdown_section o_more_dropdown_section_group dropdown-header bg-100"
+                t-esc="section.name"
+              />
+              <t t-call="web.NavBar.SectionsMenu.Dropdown.MenuSlot">
+                <t t-set="items" t-value="section.childrenTree" />
+                <t t-set="decalage" t-value="20" />
+              </t>
+            </t>
+          </t>
+        </t>
+      </Dropdown>
+    </div>
+  </t>
+
+</templates>
