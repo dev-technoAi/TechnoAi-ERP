@@ -785,7 +785,7 @@ class AccountMove(models.Model):
         return taxes
 
     def _search_product_for_import(self, item_description):
-        # Exported Odoo XML will have item_description = "[default_code] name".
+        # Exported Techno AI XML will have item_description = "[default_code] name".
         # We can check if it follows the same format and search for the product with the default code and the name.
         code_and_name = re.match(r"(\[(?P<default_code>.*?)\]\s)?(?P<name>.*)", item_description).groupdict()
         product = self.env['product.product']._retrieve_product(**code_and_name)

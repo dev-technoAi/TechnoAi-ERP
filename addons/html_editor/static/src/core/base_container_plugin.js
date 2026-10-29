@@ -86,7 +86,7 @@ export class BaseContainerPlugin extends Plugin {
      * avoid an infinite loop:
      * Considering a `DIV`,
      * - During `unsplittable_node_predicates`, one predicate should return true
-     *   if the `DIV` is NOT a baseContainer candidate (Odoo specification),
+     *   if the `DIV` is NOT a baseContainer candidate (Techno AI specification),
      *   therefore `invalid_for_base_container_predicates` should be evaluated.
      * - During `invalid_for_base_container_predicates`, one predicate should
      *   return true if the `DIV` is unsplittable, because a node has to be

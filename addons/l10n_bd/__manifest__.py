@@ -7,7 +7,7 @@
     'version': '1.0',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Bangladesh in Odoo
+This is the base module to manage the accounting chart for Bangladesh in Techno AI
 ==============================================================================
 
 Bangladesh accounting basic charts and localization.

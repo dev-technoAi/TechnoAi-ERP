@@ -574,7 +574,7 @@ class Partner(models.Model):
             emails_normalized = tools.email_normalize_all(partner.email)
             if emails_normalized:
                 # note: multi-email input leads to invalid email like "Name" <email1, email2>
-                # but this is current behavior in Odoo 14+ and some servers allow it
+                # but this is current behavior in Techno AI 14+ and some servers allow it
                 partner.email_formatted = tools.formataddr((
                     partner.name or u"False",
                     ','.join(emails_normalized)

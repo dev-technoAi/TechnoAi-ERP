@@ -70,7 +70,7 @@ export class Homepage extends Component {
 
             this.state.waitRestart = true;
         } catch {
-            console.warn("Error while restarting Odoo Service");
+            console.warn("Error while restarting Techno AI Service");
         }
     }
 
@@ -128,7 +128,7 @@ export class Homepage extends Component {
                     <WifiDialog />
                 </t>
             </SingleData>
-            <SingleData name="'Odoo database connected'" value="state.data.server_status" icon="'fa-link'">
+            <SingleData name="'Techno AI database connected'" value="state.data.server_status" icon="'fa-link'">
 				<t t-set-slot="button">
 					<ServerDialog />
 				</t>

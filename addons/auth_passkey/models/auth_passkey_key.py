@@ -92,7 +92,7 @@ class PassKey(models.Model):
         assert request
         registration_options = json.loads(options_to_json(generate_registration_options(
             rp_id=url_parse(self.get_base_url()).host,
-            rp_name='Odoo',
+            rp_name='Techno AI',
             user_id=str(self.env.user.id).encode(),
             user_name=self.env.user.login,
             authenticator_selection=AuthenticatorSelectionCriteria(

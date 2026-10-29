@@ -155,7 +155,7 @@ export class OdooChartUIPlugin extends OdooUIPlugin {
     }
 
     /**
-     * Get the callback used for onClick and onHover in an Odoo Chart
+     * Get the callback used for onClick and onHover in a Techno AI Chart
      */
     getChartDatasetActionCallbacks(chart) {
         const { datasets, labels } = chart.dataSource.getData();

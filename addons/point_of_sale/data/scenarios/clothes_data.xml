@@ -275,7 +275,7 @@
             <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_category_upper')])]" />
         </record>
         <record model="product.product" id="product_odoo_sneakers">
-            <field name="name">Odoo Sneakers</field>
+            <field name="name">Techno AI Sneakers</field>
             <field name="list_price">60.40</field>
             <field name="standard_price">54.36</field>
             <field name="description_sale">Trainers in cotton canvas with a padded top edge, tongue and lacing at the front.</field>

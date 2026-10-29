@@ -148,7 +148,7 @@ class DeliveryCarrier(models.Model):
             'domain': [['name', '=like', 'delivery_%'], ['name', 'not in', exclude_apps]],
             'type': 'ir.actions.act_window',
             'help': _('''<p class="o_view_nocontent">
-                    Buy Odoo Enterprise now to get more providers.
+                    Buy Techno AI Enterprise now to get more providers.
                 </p>'''),
         }
 

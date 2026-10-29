@@ -54,7 +54,7 @@ class pos_order(models.Model):
     l10n_fr_secure_sequence_number = fields.Integer(string="Inalteralbility No Gap Sequence #", readonly=True, copy=False)
     l10n_fr_string_to_hash = fields.Char(compute='_compute_string_to_hash', readonly=True, store=False)
     previous_order_id = fields.Many2one('pos.order', string='Previous Order', readonly=True, compute='_compute_previous_order', store=True, copy=False)
-    pos_version = fields.Char(help="Version of Odoo that created the order", readonly=True, copy=False)
+    pos_version = fields.Char(help="Version of Techno AI that created the order", readonly=True, copy=False)
 
     @api.depends('l10n_fr_secure_sequence_number')
     def _compute_previous_order(self):
@@ -130,7 +130,7 @@ class pos_order(models.Model):
             sorted_relational_ids = {}
             for model_name, ids in relational_ids.items():
                 if ids:
-                    # Use search() to get IDs sorted by _order the same way Odoo ORM does for relational fields
+                    # Use search() to get IDs sorted by _order the same way Techno AI ORM does for relational fields
                     sorted_relational_ids[model_name] = self.env[model_name].search([('id', 'in', list(ids))]).ids
 
             return sorted_relational_ids

@@ -61,8 +61,8 @@ DEFAULT_PAYMENT_METHOD_CODES = {
 # FPX is an online payment method in Malaysia that allows customers to make payments directly from their bank accounts.
 # Items suffixed with "_FPX" are for individual accounts
 # Items suffixed with "_BUSINESS" are for business accounts
-# When user chooses FPX in Odoo, this list becomes filtered payment options in Xendit dashboard
-# When webhook is received from Xendit, we can map all of these options back to 'fpx' in Odoo
+# When user chooses FPX in Techno AI, this list becomes filtered payment options in Xendit dashboard
+# When webhook is received from Xendit, we can map all of these options back to 'fpx' in Techno AI
 FPX_METHODS = [
     "UOB_FPX",
     "PUBLIC_FPX",

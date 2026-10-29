@@ -69,14 +69,14 @@ class WebsiteSlides(WebsiteProfile):
     def _set_viewed_slide(self, slide, quiz_attempts_inc=False):
         if not slide.channel_id.is_member:
             if not isinstance(request.session.get('viewed_slides'), dict):
-                # Compatibility layer with Odoo 15.0,
+                # Compatibility layer with Techno AI 15.0,
                 # where `viewed_slides` are stored as `list` in sessions.
                 # For performance concerns, `viewed_slides` is changed to a dict,
-                # but sessions coming from Odoo 15.0 after an upgrade should still be compatible.
-                # This compatibility layer regarding `viewed_slides` must remain from Odoo 16.0 and above,
+                # but sessions coming from Techno AI 15.0 after an upgrade should still be compatible.
+                # This compatibility layer regarding `viewed_slides` must remain from Techno AI 16.0 and above,
                 # as this is possible to do a jump of multiple versions in one go,
                 # and carry the sessions with the upgrade.
-                # e.g. upgrade from Odoo 15.0 to 18.0.
+                # e.g. upgrade from Techno AI 15.0 to 18.0.
                 request.session.viewed_slides = dict.fromkeys(request.session.get('viewed_slides', []), 1)
             viewed_slides = request.session['viewed_slides']
             # Convert `slide.id` to string is necessary because of the JSON format of the session

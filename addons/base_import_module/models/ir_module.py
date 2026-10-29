@@ -101,7 +101,7 @@ class IrModule(models.Model):
             to_install = known_mods.filtered(lambda mod: mod.name in unmet_dependencies)
             to_install.button_immediate_install()
         elif 'web_studio' not in installed_mods and _is_studio_custom(path):
-            raise UserError(_("Studio customizations require the Odoo Studio app."))
+            raise UserError(_("Studio customizations require the Techno AI Studio app."))
 
         mod = known_mods_names.get(module)
         if mod:

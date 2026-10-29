@@ -71,7 +71,7 @@
                     <Direccion t-out="recipient['partner_address']"/>
                 </IDDestinatario>
             </Destinatarios>
-            <VariosDestinatarios t-if="is_emission">N</VariosDestinatarios> <!-- Odoo does not support multi-recipient invoices (TBAI does)-->
+            <VariosDestinatarios t-if="is_emission">N</VariosDestinatarios> <!-- Techno AI does not support multi-recipient invoices (TBAI does)-->
             <EmitidaPorTercerosODestinatario t-if="is_emission">N</EmitidaPorTercerosODestinatario>
         </template>
 

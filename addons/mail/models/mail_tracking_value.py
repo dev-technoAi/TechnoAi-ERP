@@ -210,7 +210,7 @@ class MailTracking(models.Model):
     def _format_display_value(self, field_type, new=True):
         """ Format value of 'mail.tracking.value', according to the field type.
 
-        :param str field_type: Odoo field type;
+        :param str field_type: Techno AI field type;
         :param bool new: if True, display the 'new' value. Otherwise display
           the 'old' one.
         """

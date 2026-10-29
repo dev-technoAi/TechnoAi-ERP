@@ -112,12 +112,12 @@ class ResConfigSettings(models.TransientModel):
 
     def button_migrate_peppol_registration(self):
         """
-        Migrates AWAY from Odoo's SMP.
+        Migrates AWAY from Techno AI's SMP.
         If the user is a receiver, they need to request a migration key, generated on the IAP server.
         The migration key is then displayed in Peppol settings.
         Currently, reopening after migrating away is not supported.
         """
-        raise UserError(_("This feature is deprecated. Contact Odoo support if you need a migration key."))
+        raise UserError(_("This feature is deprecated. Contact Techno AI support if you need a migration key."))
 
     def button_peppol_disconnect_branch_from_parent(self):
         self.ensure_one()

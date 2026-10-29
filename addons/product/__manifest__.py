@@ -6,7 +6,7 @@
     'category': 'Sales/Sales',
     'depends': ['base', 'mail', 'uom'],
     'description': """
-This is the base module for managing products and pricelists in Odoo.
+This is the base module for managing products and pricelists in Techno AI.
 ========================================================================
 
 Products support variants, different pricing methods, vendors information,

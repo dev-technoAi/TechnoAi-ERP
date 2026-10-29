@@ -111,7 +111,7 @@ class PaymentTransaction(models.Model):
             self._set_canceled(extra_allowed_states=('done',))
         elif tx_status in TRANSACTION_STATUS_MAPPING['refunded']:
             # The payment has been refunded from Authorize.net side before we could refund it. We
-            # create a refund tx on Odoo to reflect the move of the funds.
+            # create a refund tx on Techno AI to reflect the move of the funds.
             refund_tx = super()._send_refund_request(amount_to_refund=amount_to_refund)
             refund_tx._set_done()
             # Immediately post-process the transaction as the post-processing will not be

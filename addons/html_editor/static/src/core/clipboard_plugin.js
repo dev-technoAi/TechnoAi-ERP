@@ -81,16 +81,16 @@ export const CLIPBOARD_WHITELISTS = {
         "img-thumbnail",
         "rounded",
         "rounded-circle",
-        // Odoo tables
+        // Techno AI tables
         "o_table",
         "table",
         "table-bordered",
         /^padding-/,
         /^shadow/,
-        // Odoo colors
+        // Techno AI colors
         /^text-o-/,
         /^bg-o-/,
-        // Odoo lists
+        // Techno AI lists
         "o_checked",
         "o_checklist",
         "oe-nested",
@@ -793,7 +793,7 @@ function getImageUrl(file) {
     });
 }
 
-// @phoenix @todo: move to Odoo plugin?
+// @phoenix @todo: move to Techno AI plugin?
 /**
  * Returns true if the provided node can suport html content.
  *

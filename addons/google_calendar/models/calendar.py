@@ -99,7 +99,7 @@ class Meeting(models.Model):
         previous_alarms_per_event = {event.id: event.alarm_ids for event in self} if 'alarm_ids' in values else {}
         res = super(Meeting, self.with_context(dont_notify=notify_context)).write(values)
         if previous_alarms_per_event:
-            # Only check events whose alarms actually changed (Google -> Odoo sync only logs on Google alarms update).
+            # Only check events whose alarms actually changed (Google -> Techno AI sync only logs on Google alarms update).
             events_to_check = self.filtered(lambda event: event.alarm_ids != previous_alarms_per_event[event.id])
             events_to_check._check_alarm_ids_sync_limit()
         if recurrence_update_setting in ('all_events',) and len(self) == 1 and values.keys() & self._get_google_synced_fields():
@@ -300,7 +300,7 @@ class Meeting(models.Model):
         return commands
 
     def action_mass_archive(self, recurrence_update_setting):
-        """ Delete recurrence in Odoo if in 'all_events' or in 'future_events' edge case, triggering one mail. """
+        """ Delete recurrence in Techno AI if in 'all_events' or in 'future_events' edge case, triggering one mail. """
         self.ensure_one()
         google_service = GoogleCalendarService(self.env['google.service'])
         archive_future_events = recurrence_update_setting == 'future_events' and self == self.recurrence_id.base_event_id
@@ -369,11 +369,11 @@ class Meeting(models.Model):
         if not self.active:
             values['status'] = 'cancelled'
         if self.user_id and self.user_id != self.env.user and not bool(self.user_id.sudo().google_calendar_token):
-            # The organizer is an Odoo user that do not sync his calendar
+            # The organizer is a Techno AI user that do not sync his calendar
             values['extendedProperties']['shared']['%s_owner_id' % self.env.cr.dbname] = self.user_id.id
         elif not self.user_id:
             # We can't store on the shared properties in that case without getting a 403. It can happen when
-            # the owner is not an Odoo user: We don't store the real owner identity (mail)
+            # the owner is not a Techno AI user: We don't store the real owner identity (mail)
             # If we are not the owner, we should change the post values to avoid errors because we don't have
             # write permissions
             # See https://developers.google.com/calendar/concepts/sharing

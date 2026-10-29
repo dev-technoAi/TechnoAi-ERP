@@ -22,9 +22,9 @@ _logger = logging.getLogger(__name__)
 MAX_RECURRENT_EVENT = 720
 
 # API requests are sent to Microsoft Calendar after the current transaction ends.
-# This ensures changes are sent to Microsoft only if they really happened in the Odoo database.
+# This ensures changes are sent to Microsoft only if they really happened in the Techno AI database.
 # It is particularly important for event creation , otherwise the event might be created
-# twice in Microsoft if the first creation crashed in Odoo.
+# twice in Microsoft if the first creation crashed in Techno AI.
 def after_commit(func):
     @wraps(func)
     def wrapped(self, *args, **kwargs):
@@ -249,7 +249,7 @@ class MicrosoftSync(models.AbstractModel):
 
     def _update_microsoft_recurrence(self, recurrence, events):
         """
-        Update Odoo events from Outlook recurrence and events.
+        Update Techno AI events from Outlook recurrence and events.
         """
         # get the list of events to update ...
         events_to_update = events.filter(lambda e: e.seriesMasterId == self.microsoft_id)
@@ -289,7 +289,7 @@ class MicrosoftSync(models.AbstractModel):
     @api.model
     def _sync_microsoft2odoo(self, microsoft_events: MicrosoftEvent):
         """
-        Synchronize Microsoft recurrences in Odoo.
+        Synchronize Microsoft recurrences in Techno AI.
         Creates new recurrences, updates existing ones.
         :return: synchronized odoo
         """
@@ -326,7 +326,7 @@ class MicrosoftSync(models.AbstractModel):
         synced_recurrences |= cancelled_recurrences
         synced_events |= cancelled_events | cancelled_recurrences.calendar_event_ids
 
-        # Get sync lower bound days range for checking if old events must be updated in Odoo.
+        # Get sync lower bound days range for checking if old events must be updated in Techno AI.
         ICP = self.env['ir.config_parameter'].sudo()
         lower_bound_day_range = ICP.get_param('microsoft_calendar.sync.lower_bound_range')
 
@@ -364,8 +364,8 @@ class MicrosoftSync(models.AbstractModel):
 
     def _check_old_event_update_required(self, lower_bound_day_range, update_time_diff):
         """
-        Checks if an old event in Odoo should be updated locally. This verification is necessary because
-        sometimes events in Odoo have the same state in Microsoft and even so they trigger updates locally
+        Checks if an old event in Techno AI should be updated locally. This verification is necessary because
+        sometimes events in Techno AI have the same state in Microsoft and even so they trigger updates locally
         due to a second or less of update time difference, thus spamming unwanted emails on Microsoft side.
         """
         # Event can be updated locally if its stop date is bigger than lower bound and the update time difference is reasonable (1 hour).
@@ -381,7 +381,7 @@ class MicrosoftSync(models.AbstractModel):
     @after_commit
     def _microsoft_delete(self, user_id, event_id, timeout=TIMEOUT):
         """
-        Once the event has been really removed from the Odoo database, remove it from the Outlook calendar.
+        Once the event has been really removed from the Techno AI database, remove it from the Outlook calendar.
 
         Note that all self attributes to use in this method must be provided as method parameters because
         'self' won't exist when this method will be really called due to @after_commit decorator.
@@ -395,7 +395,7 @@ class MicrosoftSync(models.AbstractModel):
     @after_commit
     def _microsoft_patch(self, user_id, event_id, values, timeout=TIMEOUT):
         """
-        Once the event has been really modified in the Odoo database, modify it in the Outlook calendar.
+        Once the event has been really modified in the Techno AI database, modify it in the Outlook calendar.
 
         Note that all self attributes to use in this method must be provided as method parameters because
         'self' may have been modified between the call of '_microsoft_patch' and its execution,
@@ -414,7 +414,7 @@ class MicrosoftSync(models.AbstractModel):
     @after_commit
     def _microsoft_insert(self, values, timeout=TIMEOUT):
         """
-        Once the event has been really added in the Odoo database, add it in the Outlook calendar.
+        Once the event has been really added in the Techno AI database, add it in the Outlook calendar.
 
         Note that all self attributes to use in this method must be provided as method parameters because
         'self' may have been modified between the call of '_microsoft_insert' and its execution,
@@ -442,7 +442,7 @@ class MicrosoftSync(models.AbstractModel):
             if token:
                 self._ensure_attendees_have_email()
                 # Fetch the event's id (ms_organizer_event_id) using its iCalUId (ms_universal_event_id) since the
-                # former differs for each attendee. This info is required for sending the event answer and Odoo currently
+                # former differs for each attendee. This info is required for sending the event answer and Techno AI currently
                 # saves the event's id of the last user who synced the event (who might be or not the current user).
                 status, event = microsoft_service._get_single_event(self.ms_universal_event_id, token=token)
                 if status and event and event.get('value') and len(event.get('value')) == 1:
@@ -455,7 +455,7 @@ class MicrosoftSync(models.AbstractModel):
 
     def _get_microsoft_records_to_sync(self, full_sync=False):
         """
-        Return records that should be synced from Odoo to Microsoft
+        Return records that should be synced from Techno AI to Microsoft
         :param full_sync: If True, all events attended by the user are returned
         :return: events
         """
@@ -467,9 +467,9 @@ class MicrosoftSync(models.AbstractModel):
         self, microsoft_event: MicrosoftEvent, default_reminders=(), default_values=None, with_ids=False
     ):
         """
-        Implements this method to return a dict of Odoo values corresponding
+        Implements this method to return a dict of Techno AI values corresponding
         to the Microsoft event given as parameter
-        :return: dict of Odoo formatted values
+        :return: dict of Techno AI formatted values
         """
         raise NotImplementedError()
 
@@ -555,7 +555,7 @@ class MicrosoftSync(models.AbstractModel):
     def _is_microsoft_insertion_blocked(self, sender_user):
         """
         Returns True if the record insertion to Microsoft should be blocked.
-        This is a necessary step for ensuring data match between Odoo and Microsoft,
+        This is a necessary step for ensuring data match between Techno AI and Microsoft,
         as it prevents attendees to synchronize new records on behalf of the owners,
         otherwise the event ownership would be lost in Outlook and it would block the
         future record synchronization for the original owner.

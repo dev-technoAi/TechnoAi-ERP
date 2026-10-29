@@ -295,7 +295,7 @@ export class ListCorePlugin extends OdooCorePlugin {
     }
 
     /**
-     * Build an Odoo List
+     * Build a Techno AI List
      * @param {string} sheetId Id of the sheet
      * @param {[number,number]} anchor Top-left cell in which the list should be inserted
      * @param {string} id Id of the list

@@ -352,7 +352,7 @@ class AccountMove(models.Model):
                     sep = ', ' if description else ''
                     description = f"{description}{sep}{downpayment_moves_description}"
             # Workaround: remove line breaks due to Tax Agency portal bug.
-            # This deviates from Odoo's standard behavior and must be reviewed if the issue gets fixed.
+            # This deviates from Techno AI's standard behavior and must be reviewed if the issue gets fixed.
             description = description and description.replace('\n', ' ').strip() or "NO NAME"
 
             # Price unit.
@@ -1270,7 +1270,7 @@ class AccountMove(models.Model):
         }
 
     def _l10n_it_edi_import_invoice(self, invoice, data, is_new):
-        """ Decodes a l10n_it_edi move into an Odoo move.
+        """ Decodes a l10n_it_edi move into a Techno AI move.
 
         :param data:   the dictionary with the content to be imported
                        keys: 'filename', 'content', 'xml_tree', 'type', 'sort_weight'
@@ -1677,7 +1677,7 @@ class AccountMove(models.Model):
         build_error = self._l10n_it_edi_build_move_error
 
         if pdf_moves := self.filtered(lambda move: move.invoice_pdf_report_id and not move.l10n_it_edi_attachment_id):
-            message = _("Please delete the PDF attachment before sending to the SDI. Odoo will regenerate the PDF, making sure everything is consistent with the XML.")
+            message = _("Please delete the PDF attachment before sending to the SDI. Techno AI will regenerate the PDF, making sure everything is consistent with the XML.")
             errors['l10n_it_edi_pdf_already_generated'] = build_error(message=message, records=pdf_moves)
 
         if moves := self.filtered(lambda move: move.l10n_it_edi_is_self_invoice and move._l10n_it_edi_services_or_goods() == 'both'):

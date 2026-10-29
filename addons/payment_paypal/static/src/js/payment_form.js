@@ -136,8 +136,8 @@ paymentForm.include({
     },
 
     /**
-     * Load the JS from the PayPal SDK URL and set an identifier dedicated to Odoo, for PayPal to be 
-     * able to recognize which transactions are originating from Odoo.
+     * Load the JS from the PayPal SDK URL and set an identifier dedicated to Techno AI, for PayPal to be 
+     * able to recognize which transactions are originating from Techno AI.
      * 
      * @private
      * @param {string} paypalSDKURL - The SDK URL that needs to be loaded on the page.

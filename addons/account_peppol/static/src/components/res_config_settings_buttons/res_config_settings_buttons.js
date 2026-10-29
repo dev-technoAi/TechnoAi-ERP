@@ -99,8 +99,8 @@ class PeppolSettingsButtons extends Component {
     showConfirmation(warning, methodName) {
         const message = _t(warning);
         const confirmMessage = this.isPdpEdiIdentification
-              ? _t("You will no longer be able to send or receive documents via the Odoo Approved Platform. Are you sure you want to proceed?")
-              : _t("You will no longer be able to send or receive Peppol documents in Odoo. Are you sure you want to proceed?");
+              ? _t("You will no longer be able to send or receive documents via the Techno AI Approved Platform. Are you sure you want to proceed?")
+              : _t("You will no longer be able to send or receive Peppol documents in Techno AI. Are you sure you want to proceed?");
         this.dialogService.add(ConfirmationDialog, {
             body: markup(
                 `<div class="text-danger">${escape(message)}</div>

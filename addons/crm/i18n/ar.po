@@ -1,16 +1,16 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * crm
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Mustafa J. Kadhem <safi2266@gmail.com>, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-10-20 09:55+0000\n"
@@ -318,7 +318,7 @@ msgid ""
 "board, you'll discover what <t t-out=\"object.company_id.name or ''\">My "
 "Company (San Francisco)</t> has to offer. My name is <t t-"
 "out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the "
-"most out of Odoo. Could we plan a quick demo soon?<br/>\n"
+"most out of Techno AI. Could we plan a quick demo soon?<br/>\n"
 "                            Feel free to reach out at any time!<br/><br/>\n"
 "                            Best,<br/>\n"
 "                            <t t-if=\"object.user_id\">\n"
@@ -370,7 +370,7 @@ msgid ""
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
 "    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?"
-"utm_source=db&amp;utm_medium=email\" style=\"color: #875A7B;\">Odoo</a>\n"
+"utm_source=db&amp;utm_medium=email\" style=\"color: #875A7B;\">Techno AI</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -993,7 +993,7 @@ msgstr "قم بتصنيف وتحليل العملاء المهتمين/الفر�
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid ""
-"Click on the breadcrumb to go back to your Pipeline. Odoo will save all "
+"Click on the breadcrumb to go back to your Pipeline. Techno AI will save all "
 "modifications as you navigate."
 msgstr ""
 "اضغط على آثار التتبع للعودة إلى مخطط سير عملك. سيقوم أودو بحفظ كافة التعديلات "
@@ -1407,7 +1407,7 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_4
 msgid ""
 "Did you know you can search a company by name or VAT number to instantly "
-"fill in all its data? Odoo autocompletes everything for you: logo, address, "
+"fill in all its data? Techno AI autocompletes everything for you: logo, address, "
 "company size, business information, social media accounts, etc."
 msgstr ""
 "هل تعلم أنه بوسعك البحث عن شركة عن طريق الاسم أو الرقم الضريبي لملء كافة "
@@ -1418,7 +1418,7 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_5
 msgid ""
 "Did you know you can turn a list of opportunities into a map view, using the "
-"top-right map icon? A lot of screens in Odoo can be turned into a map: "
+"top-right map icon? A lot of screens in Techno AI can be turned into a map: "
 "tasks, contacts, delivery orders, etc."
 msgstr ""
 "هل تعلم أنه باستطاعتك تحويل قائمة من العملاء المهتمين إلى عرض خريطة باستخدام "
@@ -2396,7 +2396,7 @@ msgstr "إنشاء عرض سعر"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
 msgid ""
-"Make and receive calls from Odoo with Ringover's dialer. Track calls, SMS "
+"Make and receive calls from Techno AI with Ringover's dialer. Track calls, SMS "
 "messages, and get AI-powered transcripts of your conversations."
 msgstr ""
 "تمكن من إجراء المكالمات واستقبالها من أودو باستخدام برنامج Ringover للاتصال. "
@@ -2816,7 +2816,7 @@ msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_case_form_view_salesteams_opportunity
 msgid ""
-"Odoo helps you keep track of your sales pipeline to follow\n"
+"Techno AI helps you keep track of your sales pipeline to follow\n"
 "                    up potential sales and better forecast your future "
 "revenues."
 msgstr ""
@@ -2826,9 +2826,9 @@ msgstr ""
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_2
 msgid ""
-"Odoo's artificial intelligence engine predicts the success rate of each "
+"Techno AI's artificial intelligence engine predicts the success rate of each "
 "opportunity based on your history. You can always update the success rate "
-"manually, but if you let Odoo do the job the score is updated while the "
+"manually, but if you let Techno AI do the job the score is updated while the "
 "opportunity moves forward in your sales cycle."
 msgstr ""
 "يتوقع محرك الذكاء الاصطناعي لدى أودو نسبة النجاح لكل فرصة بناءً على سجلك. "
@@ -3687,7 +3687,7 @@ msgstr ""
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (Techno AI Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
@@ -3838,7 +3838,7 @@ msgstr "نصيحة: قم بتحويل رسائل البريد الإلكترون
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_1
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_1
-msgid "Tip: Did you know Odoo has built-in lead mining?"
+msgid "Tip: Did you know Techno AI has built-in lead mining?"
 msgstr "نصيحة: هل تعلم أن أودو مجهز بنظام ضمنياً لاستقطاب العملاء المهتمين؟ "
 
 #. module: crm
@@ -4406,7 +4406,7 @@ msgstr "مجهول "
 #~ "board, you'll discover what <t t-out=\"object.company_id.name or ''\">My "
 #~ "Company (San Francisco)</t> has to offer. My name is <t t-"
 #~ "out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the "
-#~ "most out of Odoo. Could we plan a quick demo soon?<br/>\n"
+#~ "most out of Techno AI. Could we plan a quick demo soon?<br/>\n"
 #~ "                            Feel free to reach out at any time!<br/><br/"
 #~ ">\n"
 #~ "                            Best,<br/>\n"
@@ -4461,7 +4461,7 @@ msgstr "مجهول "
 #~ "<!-- POWERED BY -->\n"
 #~ "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
 #~ "    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?"
-#~ "utm_source=db&amp;utm_medium=email\" style=\"color: #875A7B;\">Odoo</a>\n"
+#~ "utm_source=db&amp;utm_medium=email\" style=\"color: #875A7B;\">Techno AI</a>\n"
 #~ "</td></tr>\n"
 #~ "</table>\n"
 #~ "        "

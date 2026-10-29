@@ -114,7 +114,7 @@
                                         </kanban>
                                     </field>
                                     <p class="text-muted" colspan="2">
-                                        Operators that do not show any activity In Odoo for more than 30 minutes will be considered as disconnected.
+                                        Operators that do not show any activity In Techno AI for more than 30 minutes will be considered as disconnected.
                                     </p>
                             </page>
                             <page string="Options" name="options">

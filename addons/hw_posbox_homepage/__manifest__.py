@@ -11,12 +11,12 @@
 IoT Box Homepage
 ================
 
-This module overrides Odoo web interface to display a simple
+This module overrides Techno AI web interface to display a simple
 Homepage that explains what's the iotbox and shows the status,
 and where to find documentation.
 
 If you activate this module, you won't be able to access the 
-regular Odoo interface anymore.
+regular Techno AI interface anymore.
 
 """,
     'assets': {

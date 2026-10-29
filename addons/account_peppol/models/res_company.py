@@ -58,7 +58,7 @@ class ResCompany(models.Model):
         string='Primary contact email',
         compute='_compute_account_peppol_contact_email', store=True, readonly=False,
         help='Primary contact email for Peppol connection related communications and notifications.\n'
-             'In particular, this email is used by Odoo to reconnect your Peppol account in case of database change.',
+             'In particular, this email is used by Techno AI to reconnect your Peppol account in case of database change.',
         groups='base.group_user',
     )
     account_peppol_migration_key = fields.Char(string="Migration Key", groups="base.group_system")
@@ -440,7 +440,7 @@ class ResCompany(models.Model):
         available_auths = can_connect_vals.get('available_auths') or {}
         auth = available_auths.get('generic') or next(iter(available_auths.values()), None)
         if not auth or not auth.get('authorization_url'):
-            raise UserError(_("Authentication is required but not available. Please contact Odoo support."))
+            raise UserError(_("Authentication is required but not available. Please contact Techno AI support."))
         return auth['authorization_url']
 
     @handle_demo

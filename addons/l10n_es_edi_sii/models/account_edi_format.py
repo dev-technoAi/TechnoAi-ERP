@@ -459,7 +459,7 @@ class AccountEdiFormat(models.Model):
 
         if connection_vals.get('custom_navarra'):
             # We Inject the namespaces directly in the header dictionary
-            # This makes Odoo serializer to include them in the Envelope
+            # This makes Techno AI serializer to include them in the Envelope
             header['_attributes'] = {
                 'xmlns:sum': 'https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroLR.xsd',
                 'xmlns:sum1': 'https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd',

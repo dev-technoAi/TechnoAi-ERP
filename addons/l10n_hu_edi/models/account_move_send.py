@@ -65,7 +65,7 @@ class AccountMoveSend(models.AbstractModel):
 
         # Pre-emptively acquire write lock on all invoices to be processed
         # Otherwise, we will get a serialization error later
-        # (bad, because Odoo will try to retry the entire request, leading to duplicate sending to NAV)
+        # (bad, because Techno AI will try to retry the entire request, leading to duplicate sending to NAV)
         invoices_hu._l10n_hu_edi_acquire_lock()
 
         # STEP 1: Generate and send the invoice XMLs.

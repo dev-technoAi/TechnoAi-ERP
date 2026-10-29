@@ -23,9 +23,9 @@ _logger = logging.getLogger(__name__)
 
 
 # API requests are sent to Google Calendar after the current transaction ends.
-# This ensures changes are sent to Google only if they really happened in the Odoo database.
+# This ensures changes are sent to Google only if they really happened in the Techno AI database.
 # It is particularly important for event creation , otherwise the event might be created
-# twice in Google if the first creation crashed in Odoo.
+# twice in Google if the first creation crashed in Techno AI.
 def after_commit(func):
     @wraps(func)
     def wrapped(self, *args, **kwargs):
@@ -120,7 +120,7 @@ class GoogleSync(models.AbstractModel):
         elif synced:
             # Since we can not delete such an event (see method comment), we archive it.
             # Notice that archiving an event will delete the associated event on Google.
-            # Then, since it has been deleted on Google, the event is also deleted on Odoo DB (_sync_google2odoo).
+            # Then, since it has been deleted on Google, the event is also deleted on Techno AI DB (_sync_google2odoo).
             self.action_archive()
             return True
         return super().unlink()
@@ -163,11 +163,11 @@ class GoogleSync(models.AbstractModel):
 
     @api.model
     def _sync_google2odoo(self, google_events: GoogleEvent, write_dates=None, default_reminders=()):
-        """Synchronize Google recurrences in Odoo. Creates new recurrences, updates
+        """Synchronize Google recurrences in Techno AI. Creates new recurrences, updates
         existing ones.
 
-        :param google_recurrences: Google recurrences to synchronize in Odoo
-        :param write_dates: A dictionary mapping Odoo record IDs to their write dates.
+        :param google_recurrences: Google recurrences to synchronize in Techno AI
+        :param write_dates: A dictionary mapping Techno AI record IDs to their write dates.
         :return: synchronized odoo recurrences
         """
         write_dates = dict(write_dates or {})
@@ -183,7 +183,7 @@ class GoogleSync(models.AbstractModel):
         cancelled_odoo = self.browse(cancelled.odoo_ids(self.env))
 
         # Check if it is a recurring event that has been rescheduled.
-        # We have to check if an event already exists in Odoo.
+        # We have to check if an event already exists in Techno AI.
         # Explanation:
         # A recurrent event with `google_id` is equal to ID_RANGE_TIMESTAMP can be rescheduled.
         # The new `google_id` will be equal to ID_TIMESTAMP.
@@ -205,7 +205,7 @@ class GoogleSync(models.AbstractModel):
             # Last updated wins.
             # This could be dangerous if google server time and odoo server time are different
             updated = parse(gevent.updated)
-            # Use the record's write_date to apply Google updates only if they are newer than Odoo's write_date.
+            # Use the record's write_date to apply Google updates only if they are newer than Techno AI's write_date.
             odoo_record_write_date = write_dates.get(odoo_record.id, odoo_record.write_date)
             # Migration from 13.4 does not fill write_date. Therefore, we force the update from Google.
             if not odoo_record_write_date or updated >= pytz.utc.localize(odoo_record_write_date):
@@ -321,7 +321,7 @@ class GoogleSync(models.AbstractModel):
                         self.with_context(dont_notify=True).need_sync = False
 
     def _get_records_to_sync(self, full_sync=False):
-        """Return records that should be synced from Odoo to Google
+        """Return records that should be synced from Techno AI to Google
 
         :param full_sync: If True, all events attended by the user are returned
         :return: events
@@ -341,7 +341,7 @@ class GoogleSync(models.AbstractModel):
         return self.with_context(active_test=False).search(domain, limit=200)
 
     def _check_any_records_to_sync(self):
-        """ Returns True if there are pending records to be synchronized from Odoo to Google, False otherwise. """
+        """ Returns True if there are pending records to be synchronized from Techno AI to Google, False otherwise. """
         is_active_clause = (self._active_name, '=', True) if self._active_name else expression.TRUE_LEAF
         domain = expression.AND([self._get_sync_domain(), [
             '|',
@@ -374,9 +374,9 @@ class GoogleSync(models.AbstractModel):
 
     @api.model
     def _odoo_values(self, google_event: GoogleEvent, default_reminders=()):
-        """Implements this method to return a dict of Odoo values corresponding
+        """Implements this method to return a dict of Techno AI values corresponding
         to the Google event given as parameter
-        :return: dict of Odoo formatted values
+        :return: dict of Techno AI formatted values
         """
         raise NotImplementedError()
 
@@ -417,7 +417,7 @@ class GoogleSync(models.AbstractModel):
     def _is_google_insertion_blocked(self, sender_user):
         """
         Returns True if the record insertion to Google should be blocked.
-        This is a necessary step for ensuring data match between Odoo and Google,
+        This is a necessary step for ensuring data match between Techno AI and Google,
         as it avoids that events have permanently the wrong organizer in Google
         by not synchronizing records through owner and not through the attendees.
         """

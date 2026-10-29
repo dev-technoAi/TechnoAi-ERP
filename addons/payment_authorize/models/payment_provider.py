@@ -28,7 +28,7 @@ class PaymentProvider(models.Model):
         string="API Signature Key", required_if_provider='authorize', groups='base.group_system')
     authorize_client_key = fields.Char(
         string="API Client Key",
-        help="The public client key. To generate directly from Odoo or from Authorize.Net backend.")
+        help="The public client key. To generate directly from Techno AI or from Authorize.Net backend.")
 
     # === CONSTRAINT METHODS ===#
 

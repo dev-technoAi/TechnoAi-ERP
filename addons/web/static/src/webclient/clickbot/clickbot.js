@@ -490,7 +490,7 @@ async function testApp() {
 async function _clickEverywhere(xmlId, light, currentState) {
     setup(light, currentState);
     console.log("Starting ClickEverywhere test");
-    console.log(`Odoo flavor: ${isEnterprise ? "Enterprise" : "Community"}`);
+    console.log(`Techno AI flavor: ${isEnterprise ? "Enterprise" : "Community"}`);
     const startTime = performance.now();
     try {
         if (xmlId) {

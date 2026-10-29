@@ -233,7 +233,7 @@ class KeyboardUSBDriver(Driver):
 
     def _keyboard_input(self, scancode):
         """Deal with a keyboard input. Send the character corresponding to the
-        pressed key represented by its scancode to the connected Odoo instance.
+        pressed key represented by its scancode to the connected Techno AI instance.
 
         Args:
             scancode (int): The scancode of the pressed key.

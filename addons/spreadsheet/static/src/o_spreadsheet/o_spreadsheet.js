@@ -5298,7 +5298,7 @@ function getCellPositionsInRanges(ranges) {
 }
 //#endregion
 //#region src/helpers/search.ts
-/** Methods from Odoo Web Utils  */
+/** Methods from Techno AI Web Utils  */
 /**
 * This function computes a score that represent the fact that the
 * string contains the pattern, or not
@@ -35150,7 +35150,7 @@ var HorizontalContainer = class extends ContainerWrapper {
 * components. If your hook only needs a single event listener, consider simply
 * returning it from the hook and letting the user attach it with t-on.
 *
-* Adapted from Odoo Community - See https://github.com/odoo/odoo/blob/saas-16.2/addons/web/static/src/core/utils/hooks.js
+* Adapted from Techno AI Community - See https://github.com/odoo/odoo/blob/saas-16.2/addons/web/static/src/core/utils/hooks.js
 */
 function useRefListener(ref, ...listener) {
 	useEffect((el) => {
@@ -65873,7 +65873,7 @@ function createCommand(type, payload = {}) {
 //#endregion
 //#region src/index.ts
 /**
-* We export here all entities that needs to be accessed publicly by Odoo.
+* We export here all entities that needs to be accessed publicly by Techno AI.
 *
 * Note that the __info__ key is actually completed by the build process (see
 * the rollup.config.js file)

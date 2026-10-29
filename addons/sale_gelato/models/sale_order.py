@@ -87,7 +87,7 @@ class SaleOrder(models.Model):
         payload = {
             'orderType': 'draft',  # The order is confirmed/deleted later, see @post_commit hooks.
             'orderReferenceId': self.id,
-            'customerReferenceId': f'Odoo Partner #{self.partner_id.id}',
+            'customerReferenceId': f'Techno AI Partner #{self.partner_id.id}',
             'currency': self.currency_id.name,
             'items': self._gelato_prepare_items_payload(),
             'shipmentMethodUid': delivery_line.product_id.default_code or 'cheapest',

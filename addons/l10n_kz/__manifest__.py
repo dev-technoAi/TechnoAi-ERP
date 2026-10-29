@@ -7,7 +7,7 @@
     'version': '1.0',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This provides a base chart of accounts and taxes template for use in Odoo for Kazakhstan.
+This provides a base chart of accounts and taxes template for use in Techno AI for Kazakhstan.
     """,
     'depends': [
         'account',

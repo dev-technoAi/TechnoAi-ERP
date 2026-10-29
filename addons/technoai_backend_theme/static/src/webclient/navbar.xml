@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 
-    <!-- Logo, app item with icon and the page title; the elements and handlers are Odoo's own -->
+    <!-- Logo, app item with icon and the page title; the elements and handlers are Techno AI's own -->
     <t t-inherit="web.NavBar" t-inherit-mode="extension">
         <xpath expr="//t[@t-call='web.NavBar.AppsMenu']" position="before">
             <img t-if="!this.ui.isSmall" class="o_tai_logo" src="/technoai_backend_theme/static/img/logo-mark-white.png" alt="Techno AI"/>

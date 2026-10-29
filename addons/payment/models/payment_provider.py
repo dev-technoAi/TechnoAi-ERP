@@ -59,7 +59,7 @@ class PaymentProvider(models.Model):
              "provider's database, allowing the customer to reuse it for a next purchase.")
     capture_manually = fields.Boolean(
         string="Capture Amount Manually",
-        help="Capture the amount from Odoo, when the delivery is completed.\n"
+        help="Capture the amount from Techno AI, when the delivery is completed.\n"
              "Use this if you want to charge your customers cards only when\n"
              "you are sure you can ship the goods to them.")
     allow_express_checkout = fields.Boolean(
@@ -162,7 +162,7 @@ class PaymentProvider(models.Model):
     )
     support_refund = fields.Selection(
         string="Refund",
-        help="Refund is a feature allowing to refund customers directly from the payment in Odoo.",
+        help="Refund is a feature allowing to refund customers directly from the payment in Techno AI.",
         selection=[
             ('none', "Unsupported"),
             ('full_only', "Full Only"),
@@ -180,7 +180,7 @@ class PaymentProvider(models.Model):
     # Module-related fields
     module_id = fields.Many2one(string="Corresponding Module", comodel_name='ir.module.module')
     module_state = fields.Selection(string="Installation State", related='module_id.state')
-    module_to_buy = fields.Boolean(string="Odoo Enterprise Module", related='module_id.to_buy')
+    module_to_buy = fields.Boolean(string="Techno AI Enterprise Module", related='module_id.to_buy')
 
     #=== COMPUTE METHODS ===#
 

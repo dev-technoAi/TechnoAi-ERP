@@ -26,7 +26,7 @@ class MyInvoisDocument(models.Model):
     """
     Represents a single document on the MyInvois platform.
 
-    In Odoo, a document will represent a group of PoS order.
+    In Techno AI, a document will represent a group of PoS order.
     In later versions, we will also link them to invoices to reduce the duplicated logic.
     """
     _name = 'myinvois.document'
@@ -83,7 +83,7 @@ class MyInvoisDocument(models.Model):
         readonly=True,
         export_string_translation=False,
     )
-    # Odoo Implementation fields
+    # Techno AI Implementation fields
     myinvois_state = fields.Selection(
         string='MyInvois State',
         help='State of this document on the MyInvois portal.\nA document awaiting validation will be automatically updated once the validation status is available.',
@@ -583,7 +583,7 @@ class MyInvoisDocument(models.Model):
 
         # Once invalid, an invoice is not acceptable by the platform.
         # An invalid invoice will never be visible by a customer and should, from my understanding, be considered void.
-        # In Odoo, the best way to represent that is by cancelling the invoice.
+        # In Techno AI, the best way to represent that is by cancelling the invoice.
         if state in CANCELLED_STATES and self.invoice_ids:
             self.invoice_ids._l10n_my_edi_cancel_moves()
 
@@ -593,7 +593,7 @@ class MyInvoisDocument(models.Model):
             return
 
         # We receive a timezone_aware datetime, but it should always be in UTC.
-        # Odoo expect a timezone unaware datetime in UTC, so we can safely remove the info without any more work needed.
+        # Techno AI expect a timezone unaware datetime in UTC, so we can safely remove the info without any more work needed.
         utc_tz_aware_datetime = dateutil.parser.isoparse(validation_result['valid_datetime'])
         self.write({
             'myinvois_validation_time': utc_tz_aware_datetime.replace(tzinfo=None),
@@ -696,7 +696,7 @@ class MyInvoisDocument(models.Model):
 
     def _myinvois_update_document(self, status, reason):
         """
-        This method will try to update the status of a document on the platform, and if needed also the status in Odoo.
+        This method will try to update the status of a document on the platform, and if needed also the status in Techno AI.
 
         There is no "Rejected" status on the platform. The document stays as 'valid' until action is taken by the vendor.
         At that point, the invoice will be cancelled if need be by the call to _myinvois_set_state.
@@ -840,11 +840,11 @@ class MyInvoisDocument(models.Model):
         error_map = {
             # These errors should be returned when we send malformed request to the EDI, ... tldr; this should never happen unless we have bugs.
             "internal_server_error": self.env._(
-                "Server error; If the problem persists, please contact the Odoo support."
+                "Server error; If the problem persists, please contact the Techno AI support."
             ),
-            # The proxy user credentials are either incorrect, or Odoo does not have the permission to invoice on their behalf.
+            # The proxy user credentials are either incorrect, or Techno AI does not have the permission to invoice on their behalf.
             "invalid_tin": self.env._(
-                "Please make sure that your company TIN is correct, and that you gave Odoo sufficient permissions on the MyInvois platform."
+                "Please make sure that your company TIN is correct, and that you gave Techno AI sufficient permissions on the MyInvois platform."
             ),
             # The api rate limit has been reached. If this happens, we need to ask the user to wait. This is also handled proxy side to be safe
             "rate_limit_exceeded": self.env._(
@@ -892,7 +892,7 @@ class MyInvoisDocument(models.Model):
             "search_date_invalid": self.env._("The search params are invalid."),  # Should never happen
             'document_not_found': self.env._('The document provided in the request does not exist.'),  # Should never happen
             'submission_too_large': self.env._('The submission is too large, try to send fewer invoices at once.'),
-            'action_forbidden': self.env._('Permission to do this action has not been granted. Please ensure that Odoo has sufficient permissions on the MyInvois platform.'),
+            'action_forbidden': self.env._('Permission to do this action has not been granted. Please ensure that Techno AI has sufficient permissions on the MyInvois platform.'),
         }
 
         if error.get('target'):

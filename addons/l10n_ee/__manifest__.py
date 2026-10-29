@@ -7,7 +7,7 @@
     'countries': ['ee'],
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Estonia in Odoo.
+This is the base module to manage the accounting chart for Estonia in Techno AI.
     """,
     'author': 'Odoo SA',
     'depends': [

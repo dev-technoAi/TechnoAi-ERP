@@ -5,7 +5,7 @@
     'name': 'DIN 5008',
     'version': '1.0',
     'category': 'Accounting/Localizations',
-    'description': "This is the base module that defines the DIN 5008 standard in Odoo.",
+    'description': "This is the base module that defines the DIN 5008 standard in Techno AI.",
     'depends': ['account'],
     'auto_install': True,
     'countries': ['de', 'ch'],

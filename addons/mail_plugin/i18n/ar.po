@@ -1,13 +1,13 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # 	* mail_plugin
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2026-10-20 10:41+0000\n"
@@ -71,7 +71,7 @@ msgstr "الإيراد السنوي "
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid ""
-"Attachments could not be logged in Odoo because their total size exceeded "
+"Attachments could not be logged in Techno AI because their total size exceeded "
 "the allowed maximum."
 msgstr ""
 "تعذر تسجيل المرفقات في أودو لأن إجمالي حجمها يتعدى الحد الأقصة المسموح بك. "
@@ -457,7 +457,7 @@ msgstr "لم نتمكن من إثراء أي شركة مرتبطة بجهة ال
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "No company linked to this contact could be enriched or found in Odoo"
+msgid "No company linked to this contact could be enriched or found in Techno AI"
 msgstr "لم نتمكن من إثراء أو إيجاد أي شركة مرتبطة بجهة الاتصال هذه في أودو "
 
 #. module: mail_plugin
@@ -505,13 +505,13 @@ msgstr "إشعار "
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Access Token"
+msgid "Techno AI Access Token"
 msgstr "رمز وصول أودو "
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Server URL"
+msgid "Techno AI Server URL"
 msgstr "رابط URL لخادم أودو "
 
 #. module: mail_plugin
@@ -591,7 +591,7 @@ msgstr "الإيرادات "
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Save in Odoo"
+msgid "Save in Techno AI"
 msgstr "الحفظ في أودو "
 
 #. module: mail_plugin
@@ -622,7 +622,7 @@ msgstr "البحث في قاعدة البيانات "
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search In Odoo"
+msgid "Search In Techno AI"
 msgstr "البحث في أودو "
 
 #. module: mail_plugin
@@ -634,7 +634,7 @@ msgstr "البحث عن جهة الاتصال "
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search contact in Odoo..."
+msgid "Search contact in Techno AI..."
 msgstr "البحث عن جهة الاتصال في أودو "
 
 #. module: mail_plugin
@@ -665,7 +665,7 @@ msgstr "ليس لهذه الشركة عنوان بريد إلكتروني ولا
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "This contact does not exist in the Odoo database."
+msgid "This contact does not exist in the Techno AI database."
 msgstr "جهة الاتصال هذه غير موجودة في قاعدة بيانات أودو. "
 
 #. module: mail_plugin
@@ -694,7 +694,7 @@ msgstr "هذا الشريك غير موجود "
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid ""
-"Warning: Attachments could not be logged in Odoo because their total size "
+"Warning: Attachments could not be logged in Techno AI because their total size "
 "exceeded the allowed maximum."
 msgstr "تحذير: تعذر تسجيل المرفقات في أودو بسبب تخطي الحجم الأقصى المسموح به. "
 
@@ -735,7 +735,7 @@ msgstr "عليك تحديد partner_id على الأقل أو الاسم وال�
 
 #. module: mail_plugin
 #: model_terms:ir.ui.view,arch_db:mail_plugin.app_auth
-msgid "access your Odoo database?"
+msgid "access your Techno AI database?"
 msgstr "الوصول إلى قاعدة بيانتك في أودو؟ "
 
 #. module: mail_plugin

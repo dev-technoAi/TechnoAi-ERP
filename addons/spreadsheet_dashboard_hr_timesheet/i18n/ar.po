@@ -1,13 +1,13 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # 	* spreadsheet_dashboard_hr_timesheet
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:38+0000\n"
 "PO-Revision-Date: 2026-10-20 12:47+0000\n"

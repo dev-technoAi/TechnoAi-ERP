@@ -8,7 +8,7 @@
     'website': 'https://www.odoo.com/documentation/master/applications/finance/fiscal_localizations/vietnam.html',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the module to manage the accounting chart, bank information for Vietnam in Odoo.
+This is the module to manage the accounting chart, bank information for Vietnam in Techno AI.
 ========================================================================================
 
 - This module applies to companies based in Vietnamese Accounting Standard (VAS)

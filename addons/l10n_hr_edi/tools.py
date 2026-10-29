@@ -1,7 +1,7 @@
 """
 MojEracun version of the proxy user model, set up as an AbstractModel as the data is held on res_company.
 The integration requires a lot of adjustments to work directly with an extrenal service provier and the original
-edi_proxy_user cannot be used as a basis as it is too closely tied to Odoo's own IAP server structure.
+edi_proxy_user cannot be used as a basis as it is too closely tied to Techno AI's own IAP server structure.
 """
 
 import logging

@@ -297,7 +297,7 @@ browser.addEventListener("popstate", (ev) => {
 /**
  * When the user navigates the history using the back/forward button, some browsers (Safari iOS and
  * Safari MacOS) can restore the page using the `bfcache` (especially when we come back from an
- * external website). Unfortunately, Odoo wasn't designed to be compatible with this cache, which
+ * external website). Unfortunately, Techno AI wasn't designed to be compatible with this cache, which
  * leads to inconsistencies. When the `bfcache` is used to restore a page, we reload the current
  * page, to be sure that all the elements have been rendered correctly.
  */

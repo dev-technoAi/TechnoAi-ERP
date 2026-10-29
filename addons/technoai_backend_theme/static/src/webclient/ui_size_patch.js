@@ -7,7 +7,7 @@ const XXL_MIN_WIDTH = 1534;
 
 // Views pick their XXL layout (e.g. the chatter beside the form) from the window
 // width. The sidebar takes part of that width, so only call it XXL when the space
-// next to the sidebar is XXL; narrower windows get Odoo's own XL layout.
+// next to the sidebar is XXL; narrower windows get Techno AI's own XL layout.
 patch(utils, {
     getSize() {
         const size = super.getSize();

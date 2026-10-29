@@ -23,7 +23,7 @@ class MailRenderMixin(models.AbstractModel):
     @api.model
     def _shorten_links(self, html, link_tracker_vals, blacklist=None, base_url=None):
         """ Shorten links in an html content. It uses the '/r' short URL routing
-        introduced in this module. Using the standard Odoo regex local links are
+        introduced in this module. Using the standard Techno AI regex local links are
         found and replaced by global URLs (not including mailto, tel, sms).
 
         TDE FIXME: could be great to have a record to enable website-based URLs

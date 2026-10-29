@@ -14,9 +14,9 @@ import { _t } from "@web/core/l10n/translation";
  */
 
 const CHART_PLACEHOLDER_DISPLAY_NAME = {
-    odoo_bar: _t("Odoo Bar Chart"),
-    odoo_line: _t("Odoo Line Chart"),
-    odoo_pie: _t("Odoo Pie Chart"),
+    odoo_bar: _t("Techno AI Bar Chart"),
+    odoo_line: _t("Techno AI Line Chart"),
+    odoo_pie: _t("Techno AI Pie Chart"),
 };
 
 export class OdooChartCorePlugin extends OdooCorePlugin {

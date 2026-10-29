@@ -1,14 +1,14 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * im_livechat
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-03 18:39+0000\n"
 "PO-Revision-Date: 2026-10-20 10:38+0000\n"
@@ -1298,7 +1298,7 @@ msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.livechat_email_template
-msgid "Odoo"
+msgid "Techno AI"
 msgstr "أودو"
 
 #. module: im_livechat
@@ -1352,7 +1352,7 @@ msgstr "موظفي الدعم"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid ""
-"Operators that do not show any activity In Odoo for more than 30 minutes "
+"Operators that do not show any activity In Techno AI for more than 30 minutes "
 "will be considered as disconnected."
 msgstr ""
 "سيتم اعتبار موظفي الدعم غير متصلين إذا لم يقوموا بأي إجراء في أودو لأكثر من "

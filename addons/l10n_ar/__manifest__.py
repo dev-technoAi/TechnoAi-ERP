@@ -34,7 +34,7 @@ Demo data for testing:
   * Gritti (Monotributo)
   * Montana Sur. IVA Liberado in Zona Franca
   * Barcelona food (Cliente del Exterior)
-  * Odoo (Proveedor del Exterior)
+  * Techno AI (Proveedor del Exterior)
 
 Highlights:
 

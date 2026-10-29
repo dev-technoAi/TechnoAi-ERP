@@ -6,7 +6,7 @@
     'version': '1.3',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Türkiye in Odoo
+This is the base module to manage the accounting chart for Türkiye in Techno AI
 ==========================================================================
 
 Türkiye accounting basic charts and localizations

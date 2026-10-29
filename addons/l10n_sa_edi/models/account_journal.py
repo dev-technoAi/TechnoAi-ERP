@@ -116,7 +116,7 @@ class AccountJournal(models.Model):
 
     def _l10n_sa_edi_set_csr_fields(self):
         '''
-            Sets default values for CSR generation fields in Odoo, if their values do not exist
+            Sets default values for CSR generation fields in Techno AI, if their values do not exist
         '''
         self.ensure_one()
         # Avoid unnecessary write calls

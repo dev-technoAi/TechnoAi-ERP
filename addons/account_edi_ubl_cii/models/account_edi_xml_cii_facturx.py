@@ -160,7 +160,7 @@ class AccountEdiXmlCII(models.AbstractModel):
         tax_details = invoice._prepare_invoice_aggregated_taxes(grouping_key_generator=grouping_key_generator)
 
         # Fixed Taxes: filter them on the document level, and adapt the totals
-        # Fixed taxes are not supposed to be taxes in real live. However, this is the way in Odoo to manage recupel
+        # Fixed taxes are not supposed to be taxes in real live. However, this is the way in Techno AI to manage recupel
         # taxes in Belgium. Since only one tax is allowed, the fixed tax is removed from totals of lines but added
         # as an extra charge/allowance.
         fixed_taxes_keys = [k for k in tax_details['tax_details'] if k['amount_type'] == 'fixed']

@@ -158,7 +158,7 @@
 </template>
 <template id="web_editor.tests">
     <t t-call="web.layout">
-        <t t-set="title">Odoo Editor Tests</t>
+        <t t-set="title">Techno AI Editor Tests</t>
         <t t-set="head">
             <t t-call-assets="web_editor.assets_tests_styles" t-js="false"/>
             <link rel="stylesheet" href="/web_editor/static/src/js/editor/odoo-editor/test/lib/mocha.css"/>

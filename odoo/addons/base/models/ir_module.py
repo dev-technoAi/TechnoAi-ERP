@@ -193,7 +193,7 @@ class Module(models.Model):
                     if doc.startswith(XML_DECLARATION):
                         warnings.warn(
                             f"XML declarations in HTML module descriptions are "
-                            f"deprecated since Odoo 17, {module.name} can just "
+                            f"deprecated since Techno AI 17, {module.name} can just "
                             f"have a UTF8 description with not need for a "
                             f"declaration.",
                             category=DeprecationWarning,
@@ -204,7 +204,7 @@ class Module(models.Model):
                         except UnicodeDecodeError:
                             warnings.warn(
                                 f"Non-UTF8 module descriptions are deprecated "
-                                f"since Odoo 17 ({module.name}'s description "
+                                f"since Techno AI 17 ({module.name}'s description "
                                 f"is not utf-8)",
                                 category=DeprecationWarning,
                             )
@@ -325,8 +325,8 @@ class Module(models.Model):
         ('AGPL-3', 'Affero GPL-3'),
         ('LGPL-3', 'LGPL Version 3'),
         ('Other OSI approved licence', 'Other OSI Approved License'),
-        ('OEEL-1', 'Odoo Enterprise Edition License v1.0'),
-        ('OPL-1', 'Odoo Proprietary License v1.0'),
+        ('OEEL-1', 'Techno AI Enterprise Edition License v1.0'),
+        ('OPL-1', 'Techno AI Proprietary License v1.0'),
         ('Other proprietary', 'Other Proprietary')
     ], string='License', default='LGPL-3', readonly=True)
     menus_by_module = fields.Text(string='Menus', compute='_get_views', store=True)
@@ -336,7 +336,7 @@ class Module(models.Model):
     icon = fields.Char('Icon URL')
     icon_image = fields.Binary(string='Icon', compute='_get_icon_image')
     icon_flag = fields.Char(string='Flag', compute='_get_icon_image')
-    to_buy = fields.Boolean('Odoo Enterprise Module', default=False)
+    to_buy = fields.Boolean('Techno AI Enterprise Module', default=False)
     has_iap = fields.Boolean(compute='_compute_has_iap')
 
     _sql_constraints = [
@@ -615,7 +615,7 @@ class Module(models.Model):
             # during execution, the lock won't be released until timeout.
             self._cr.execute("SELECT * FROM ir_cron FOR UPDATE NOWAIT")
         except psycopg2.OperationalError:
-            raise UserError(_("Odoo is currently processing a scheduled action.\n"
+            raise UserError(_("Techno AI is currently processing a scheduled action.\n"
                               "Module operations are not possible at this time, "
                               "please try again later or contact your system administrator."))
         function(self)

@@ -60,7 +60,7 @@ class Certificate(models.Model):
                 "name": _("Locality Name"),
             },
             "egs_serial": {
-                "value": f"1-Odoo|2-{version_info['server_serie']}|3-{journal.l10n_sa_serial_number}",
+                "value": f"1-Techno AI|2-{version_info['server_serie']}|3-{journal.l10n_sa_serial_number}",
                 "name": _("Journal Serial Number"),
             },
             "org_uid": {

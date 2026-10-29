@@ -7,7 +7,7 @@
     'countries': ['be'],
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Belgium in Odoo.
+This is the base module to manage the accounting chart for Belgium in Techno AI.
 ==============================================================================
 
 After installing this module, the Configuration wizard for accounting is launched.

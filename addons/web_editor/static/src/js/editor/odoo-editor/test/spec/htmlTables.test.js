@@ -64,7 +64,7 @@ describe('Paste HTML tables', () => {
                 font-weight: 400;
                 font-style: italic;
                 text-decoration: none;
-                font-family: "Odoo Unicode Support Noto";
+                font-family: "Techno AI Unicode Support Noto";
                 mso-generic-font-family: auto;
                 mso-font-charset: 0;
             }
@@ -75,7 +75,7 @@ describe('Paste HTML tables', () => {
                 font-weight: 700;
                 font-style: italic;
                 text-decoration: none;
-                font-family: "Odoo Unicode Support Noto";
+                font-family: "Techno AI Unicode Support Noto";
                 mso-generic-font-family: auto;
                 mso-font-charset: 0;
             }
@@ -86,7 +86,7 @@ describe('Paste HTML tables', () => {
                 font-weight: 700;
                 font-style: normal;
                 text-decoration: none;
-                font-family: "Odoo Unicode Support Noto";
+                font-family: "Techno AI Unicode Support Noto";
                 mso-generic-font-family: auto;
                 mso-font-charset: 0;
             }
@@ -103,7 +103,7 @@ describe('Paste HTML tables', () => {
                 color: #495057;
                 font-size: 10.0pt;
                 font-style: italic;
-                font-family: "Odoo Unicode Support Noto";
+                font-family: "Techno AI Unicode Support Noto";
                 mso-generic-font-family: auto;
                 mso-font-charset: 0;
                 text-align: center;
@@ -123,7 +123,7 @@ describe('Paste HTML tables', () => {
                 color: #495057;
                 font-size: 10.0pt;
                 font-weight: 700;
-                font-family: "Odoo Unicode Support Noto";
+                font-family: "Techno AI Unicode Support Noto";
                 mso-generic-font-family: auto;
                 mso-font-charset: 0;
                 text-align: center;
@@ -164,7 +164,7 @@ describe('Paste HTML tables', () => {
             .xl94 {
                 color: #495057;
                 font-size: 10.0pt;
-                font-family: "Odoo Unicode Support Noto";
+                font-family: "Techno AI Unicode Support Noto";
                 mso-generic-font-family: auto;
                 mso-font-charset: 1;
                 text-align: center;
@@ -276,7 +276,7 @@ describe('Paste HTML tables', () => {
         </colgroup>
         <tbody>
             <tr style="height:21px;">
-                <td style="overflow:hidden;padding:2px 3px 2px 3px;vertical-align:bottom;font-family:Odoo Unicode Support Noto;font-weight:normal;font-style:italic;color:#495057;"
+                <td style="overflow:hidden;padding:2px 3px 2px 3px;vertical-align:bottom;font-family:Techno AI Unicode Support Noto;font-weight:normal;font-style:italic;color:#495057;"
                     data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Italic then also BOLD&quot;}"
                     data-sheets-textstyleruns="{&quot;1&quot;:0,&quot;2&quot;:{&quot;3&quot;:&quot;Arial&quot;}}{&quot;1&quot;:17,&quot;2&quot;:{&quot;3&quot;:&quot;Arial&quot;,&quot;5&quot;:1}}">
                     <span style="font-size:10pt;font-family:Arial;font-style:italic;color:#495057;">Italic then also
@@ -287,7 +287,7 @@ describe('Paste HTML tables', () => {
                     data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Italic strike&quot;}">Italic strike</td>
             </tr>
             <tr style="height:21px;">
-                <td style="overflow:hidden;padding:2px 3px 2px 3px;vertical-align:bottom;font-family:Odoo Unicode Support Noto;font-weight:bold;color:#495057;"
+                <td style="overflow:hidden;padding:2px 3px 2px 3px;vertical-align:bottom;font-family:Techno AI Unicode Support Noto;font-weight:bold;color:#495057;"
                     data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Just bold Just italic&quot;}"
                     data-sheets-textstyleruns="{&quot;1&quot;:0,&quot;2&quot;:{&quot;3&quot;:&quot;Arial&quot;}}{&quot;1&quot;:10,&quot;2&quot;:{&quot;3&quot;:&quot;Arial&quot;,&quot;5&quot;:0,&quot;6&quot;:1}}">
                     <span
@@ -306,7 +306,7 @@ describe('Paste HTML tables', () => {
                     strike and underline</td>
             </tr>
             <tr style="height:21px;">
-                <td style="overflow:hidden;padding:2px 3px 2px 3px;vertical-align:bottom;background-color:#ffff00;font-family:Odoo Unicode Support Noto;font-weight:normal;color:#495057;"
+                <td style="overflow:hidden;padding:2px 3px 2px 3px;vertical-align:bottom;background-color:#ffff00;font-family:Techno AI Unicode Support Noto;font-weight:normal;color:#495057;"
                     data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Color background&quot;}">Color background
                 </td>
                 <td style="overflow:hidden;padding:2px 3px 2px 3px;vertical-align:bottom;background-color:#ffff00;color:#ff0000;"

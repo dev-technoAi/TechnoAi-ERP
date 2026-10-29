@@ -1,16 +1,16 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * web
 #
 # Translators:
 # Martin Trigaux, 2024
-# Wil Odoo, 2025
+# Wil Techno AI, 2025
 # Malaz Abuidris <msea@odoo.com>, 2025
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:38+0000\n"
 "PO-Revision-Date: 2026-10-20 13:33+0000\n"
@@ -1362,7 +1362,7 @@ msgstr "تحقق من أذونات متصفحك "
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
 msgid ""
-"Check your network connection and come back here. Odoo will load as soon as "
+"Check your network connection and come back here. Techno AI will load as soon as "
 "you're back online."
 msgstr ""
 "تحقق من اتصالك بالانترنت ثم عد مجدداً. سيقوم أودو بالتحميل بمجرد أن تتصل "
@@ -2907,7 +2907,7 @@ msgstr "احصل على نافذة العرض "
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Get this feature and much more with Odoo Enterprise!"
+msgid "Get this feature and much more with Techno AI Enterprise!"
 msgstr "احصل على هذه الميزة وأكثر بكثير مع نسخة أودو للمؤسسات! "
 
 #. module: web
@@ -4199,7 +4199,7 @@ msgstr "مسلم "
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.js:0
-msgid "My Odoo.com account"
+msgid "My Techno AI.com account"
 msgstr "حسابي على أودو"
 
 #. module: web
@@ -4588,38 +4588,38 @@ msgstr "الكائنات "
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
 #: model_terms:ir.ui.view,arch_db:web.brand_promotion_message
-msgid "Odoo"
+msgid "Techno AI"
 msgstr "أودو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Client Error"
+msgid "Techno AI Client Error"
 msgstr "خطأ بعميل أودو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Odoo Enterprise"
+msgid "Techno AI Enterprise"
 msgstr "أودو للمؤسسات "
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Error"
+msgid "Techno AI Error"
 msgstr "خطأ بأودو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Network Error"
+msgid "Techno AI Network Error"
 msgstr "خطأ في شبكة أودو "
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/widgets/notification_alert/notification_alert.xml:0
 msgid ""
-"Odoo Push notifications have been blocked. Go to your browser settings to "
+"Techno AI Push notifications have been blocked. Go to your browser settings to "
 "allow them."
 msgstr ""
 "تم حظر الإشعارات المنبثقة لأودو. اذهب إلى إعدادات المتصفح الخاص بك للسماح بها. "
@@ -4647,18 +4647,18 @@ msgstr "انتهت صلاحية جلسة أودو"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Warning"
+msgid "Techno AI Warning"
 msgstr "تحذير من أودو"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
-msgid "Odoo logo"
+msgid "Techno AI logo"
 msgstr "شعار أودو "
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
-msgid "Odoo needs your authorization first."
+msgid "Techno AI needs your authorization first."
 msgstr "يحتاج أودو إلى تفويضك أولاً. "
 
 #. module: web
@@ -5014,7 +5014,7 @@ msgstr "مشغل بواسطة %s%s "
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_layout
-msgid "Powered by <span>Odoo</span>"
+msgid "Powered by <span>Techno AI</span>"
 msgstr "مشغل بواسطة<span>أودو</span> "
 
 #. module: web
@@ -7431,7 +7431,7 @@ msgstr "عليك تحديد نموذج قبل فتح أداة تحديد الع�
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/reports/utils.js:0
 msgid ""
-"You need to start Odoo with at least two workers to print a pdf version of "
+"You need to start Techno AI with at least two workers to print a pdf version of "
 "the reports."
 msgstr ""
 "يجب أن تبدأ أودو بعاملين على الأقل لتتمكن من طباعة نسخة pdf من التقارير."
@@ -7451,7 +7451,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Your Odoo session expired. The current page is about to be refreshed."
+msgid "Your Techno AI session expired. The current page is about to be refreshed."
 msgstr "لقد انتهت صلاحية جلستك في أودو. الصفحة الحالية على وشك أن يتم تحديثها. "
 
 #. module: web

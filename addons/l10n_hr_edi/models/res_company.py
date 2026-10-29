@@ -24,7 +24,7 @@ class ResCompany(models.Model):
     l10n_hr_mer_username = fields.Char("MojEracun username", groups="account.group_account_manager")
     l10n_hr_mer_password = fields.Char("MojEracun password", groups="account.group_account_manager")
     l10n_hr_mer_company_ident = fields.Char("MojEracun CompanyId", groups="account.group_account_manager")
-    l10n_hr_mer_software_ident = fields.Char("MojEracun SoftwareId", default='Saodoo-001', help="Default SoftwareID for Odoo is 'Saodoo-001'")
+    l10n_hr_mer_software_ident = fields.Char("MojEracun SoftwareId", default='Saodoo-001', help="Default SoftwareID for Techno AI is 'Saodoo-001'")
     l10n_hr_mer_connection_state = fields.Selection(
         selection=[
             ('inactive', 'Inactive'),

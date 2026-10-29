@@ -65,7 +65,7 @@ export class OdooChart extends AbstractChart {
     }
 
     static getDefinitionFromContextCreation() {
-        throw new Error("It's not possible to convert an Odoo chart to a native chart");
+        throw new Error("It's not possible to convert a Techno AI chart to a native chart");
     }
 
     /**

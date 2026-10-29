@@ -32,7 +32,7 @@ class SmsTwilioController(Controller):
 
     @route('/sms_twilio/status/<string:uuid>', type='http', auth='public', methods=['POST'], csrf=False)
     def update_sms_status(self, uuid, SmsStatus=None, ErrorCode=None, ErrorMessage=None, **kwargs):
-        # Verify Odoo Sms Uuid Validity
+        # Verify Techno AI Sms Uuid Validity
         if not re.match(r'^[0-9a-f]{32}$', uuid):
             _logger.warning("Twilio SMS: update_sms_status received a non-valid uuid='%s'", uuid)
             raise request.not_found()

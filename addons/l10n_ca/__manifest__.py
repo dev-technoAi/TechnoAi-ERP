@@ -8,7 +8,7 @@
     'website': 'https://www.odoo.com/documentation/master/applications/finance/fiscal_localizations.html',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the module to manage the Canadian accounting chart in Odoo.
+This is the module to manage the Canadian accounting chart in Techno AI.
 ===========================================================================================
 
 Canadian accounting charts and localizations.

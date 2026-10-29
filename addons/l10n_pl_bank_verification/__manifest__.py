@@ -3,7 +3,7 @@
     'name': 'Poland - Accounting - Bank Account Verification',
     'version': '1.0',
     'description': """
-This is the module to manage the accounting bank account verification for Poland in Odoo.
+This is the module to manage the accounting bank account verification for Poland in Techno AI.
 ==========================================================================================
 
 This module checks the VAT/Bank account number combination for PL to PL payments over

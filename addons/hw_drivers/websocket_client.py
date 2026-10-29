@@ -17,7 +17,7 @@ websocket.enableTrace(True, level=logging.getLevelName(_logger.getEffectiveLevel
 
 def send_to_controller(device_type, params):
     """
-    Confirm the operation's completion by sending a response back to the Odoo server
+    Confirm the operation's completion by sending a response back to the Techno AI server
     """
     routes = {
         "printer": "/iot/printer/status",

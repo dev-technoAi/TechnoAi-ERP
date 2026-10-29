@@ -139,7 +139,7 @@ class ResPartner(models.Model):
 
     @api.model
     def _nemhandel_lookup_participant(self, edi_identification):
-        """NAPTR DNS nemhandel participant lookup through Odoo's Nemhandel proxy"""
+        """NAPTR DNS nemhandel participant lookup through Techno AI's Nemhandel proxy"""
         if (edi_mode := self.env.company._get_nemhandel_edi_mode()) == 'demo':
             return
 
@@ -209,7 +209,7 @@ class ResPartner(models.Model):
             if services := participant_info.get('services', []):
                 service_href = services[0].get('href', '')
         else:
-            # DEPRECATED: we now use Odoo peppol API to fetch participant info and get a json response
+            # DEPRECATED: we now use Techno AI peppol API to fetch participant info and get a json response
             # keeping this branch for compatibility
             participant_identifier = participant_info.findtext('{*}ParticipantIdentifier') or ''
             service_metadata = participant_info.find('.//{*}ServiceMetadataReference')

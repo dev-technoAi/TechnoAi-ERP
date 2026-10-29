@@ -1,4 +1,4 @@
-"""Overrides to Odoo's sequence.mixin for Croatian fiscal invoice format.
+"""Overrides to Techno AI's sequence.mixin for Croatian fiscal invoice format.
 
 This logic shapes the generated `name` for Croatian sales invoices and credit
 notes into the legally required pattern that embeds two journal-level fields:

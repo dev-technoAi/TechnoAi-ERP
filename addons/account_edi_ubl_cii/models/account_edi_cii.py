@@ -478,7 +478,7 @@ class AccountEdiCii(models.AbstractModel):
         }
 
     def _cii_is_vat_void(self, vat):
-        """Whether `vat` is one of Odoo's conventional values meaning "not subject to VAT"
+        """Whether `vat` is one of Techno AI's conventional values meaning "not subject to VAT"
         (as opposed to a real, missing, or invalid VAT number)."""
         return not vat or vat in ['/', 'na', 'NA']
 

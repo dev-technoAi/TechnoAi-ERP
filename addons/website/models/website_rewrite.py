@@ -106,7 +106,7 @@ class WebsiteRewrite(models.Model):
 
                 if any(
                     rule for rule in self.env['ir.http'].routing_map().iter_rules()
-                    # Odoo routes are normally always defined without trailing
+                    # Techno AI routes are normally always defined without trailing
                     # slashes + strict_slashes=False, but there are exceptions.
                     if rule.rule.rstrip('/') == rewrite.url_to.rstrip('/')
                 ):

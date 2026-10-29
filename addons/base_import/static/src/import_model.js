@@ -807,7 +807,7 @@ export class BaseImportModel {
             },
             date_format: {
                 help: _t(
-                    "Use YYYY to represent the year, MM for the month and DD for the day. Include separators such as a dot, forward slash or dash. You can use a custom format in addition to the suggestions provided. Leave empty to let Odoo guess the format (recommended)"
+                    "Use YYYY to represent the year, MM for the month and DD for the day. Include separators such as a dot, forward slash or dash. You can use a custom format in addition to the suggestions provided. Leave empty to let Techno AI guess the format (recommended)"
                 ),
                 label: _t("Date Format:"),
                 type: "input",
@@ -823,7 +823,7 @@ export class BaseImportModel {
             },
             datetime_format: {
                 help: _t(
-                    "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h system. You can use a custom format in addition to the suggestions provided. Leave empty to let Odoo guess the format (recommended)"
+                    "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h system. You can use a custom format in addition to the suggestions provided. Leave empty to let Techno AI guess the format (recommended)"
                 ),
                 label: _t("Datetime Format:"),
                 type: "input",

@@ -3,7 +3,7 @@
     "countries": ["lb"],
     "version": "1.0",
     "description": """
-This is the base module to manage the accounting chart for Lebanon in Odoo.
+This is the base module to manage the accounting chart for Lebanon in Techno AI.
 ==============================================================================
 Lebanon accounting basic charts,taxes and localization.
 Activates:

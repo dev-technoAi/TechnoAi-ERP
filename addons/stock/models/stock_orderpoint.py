@@ -57,12 +57,12 @@ class StockWarehouseOrderpoint(models.Model):
     product_min_qty = fields.Float(
         'Min Quantity', digits='Product Unit of Measure', required=True, default=0.0,
         compute='_compute_product_min_qty', readonly=False, store=True,
-        help="When the virtual stock goes below the Min Quantity specified for this field, Odoo generates "
+        help="When the virtual stock goes below the Min Quantity specified for this field, Techno AI generates "
              "a procurement to bring the forecasted quantity above of this Min Quantity.")
     product_max_qty = fields.Float(
         'Max Quantity', digits='Product Unit of Measure', required=True, default=0.0,
         compute='_compute_product_max_qty', readonly=False, store=True,
-        help="When the virtual stock goes below the Min Quantity, Odoo generates "
+        help="When the virtual stock goes below the Min Quantity, Techno AI generates "
              "a procurement to bring the forecasted quantity up to (or near to) the Max Quantity specified for this field (or to Min Quantity, whichever is bigger).")
     qty_multiple = fields.Float(
         'Multiple Quantity', digits='Product Unit of Measure',

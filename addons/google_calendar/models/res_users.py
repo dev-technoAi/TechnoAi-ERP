@@ -54,14 +54,14 @@ class User(models.Model):
         if not results or (not results.get('events') and not self._check_pending_odoo_records()):
             return False
         events, default_reminders, full_sync = results.values()
-        # Google -> Odoo
+        # Google -> Techno AI
         send_updates = not full_sync
         events.clear_type_ambiguity(self.env)
         recurrences = events.filter(lambda e: e.is_recurrence())
 
-        # We apply Google updates only if their write date is later than the write date in Odoo.
+        # We apply Google updates only if their write date is later than the write date in Techno AI.
         # It's possible that multiple updates affect the same record, maybe not directly.
-        # To handle this, we preserve the write dates in Odoo before applying any updates,
+        # To handle this, we preserve the write dates in Techno AI before applying any updates,
         # and use these dates instead of the current live dates.
         odoo_events = self.env['calendar.event'].browse((events - recurrences).odoo_ids(self.env))
         odoo_recurrences = self.env['calendar.recurrence'].browse(recurrences.odoo_ids(self.env))
@@ -70,7 +70,7 @@ class User(models.Model):
         synced_recurrences = self.env['calendar.recurrence']._sync_google2odoo(recurrences, recurrences_write_dates)
         synced_events = self.env['calendar.event']._sync_google2odoo(events - recurrences, events_write_dates, default_reminders=default_reminders)
 
-        # Odoo -> Google
+        # Techno AI -> Google
         recurrences = self.env['calendar.recurrence']._get_records_to_sync(full_sync=full_sync)
         recurrences -= synced_recurrences
         recurrences.with_context(send_updates=send_updates)._sync_odoo2google(calendar_service)
@@ -87,11 +87,11 @@ class User(models.Model):
         if not results or not results.get('events'):
             return False
         event, default_reminders, full_sync = results.values()
-        # Google -> Odoo
+        # Google -> Techno AI
         send_updates = not full_sync
         event.clear_type_ambiguity(self.env)
         synced_events = self.env['calendar.event']._sync_google2odoo(event, default_reminders=default_reminders)
-        # Odoo -> Google
+        # Techno AI -> Google
         odoo_event.with_context(send_updates=send_updates)._sync_odoo2google(calendar_service)
         return bool(odoo_event | synced_events)
 

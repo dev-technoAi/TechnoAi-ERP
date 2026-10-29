@@ -47,7 +47,7 @@ class MassSMSTest(models.TransientModel):
         for sent_sms, db_sms in zip(sent_sms_list, new_sms_messages_sudo):
             recipient = db_sms.number or sent_sms.get('res_id')
             # 'success' and 'sent' IAP/Twilio both resolve to 'pending' SMS state
-            # (= send for Odoo) via IAP_TO_SMS_STATE_SUCCESS
+            # (= send for Techno AI) via IAP_TO_SMS_STATE_SUCCESS
             if sent_sms.get('state') in ('success', 'sent'):
                 notification_messages.append(
                     _('Test SMS successfully sent to %s', recipient))

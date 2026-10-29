@@ -13,11 +13,11 @@
                             <field name="l10n_my_edi_mode" widget="radio"/>
                         </div>
                         <div class="mt8 content-group col-9" invisible="l10n_my_edi_mode == 'prod'">
-                            <span invisible="l10n_my_edi_mode != 'test'">• In Pre-Production mode Odoo will send the invoices to a non-production service.</span>
+                            <span invisible="l10n_my_edi_mode != 'test'">• In Pre-Production mode Techno AI will send the invoices to a non-production service.</span>
                         </div>
                         <!-- No need to show the button if there is already a user for the selected mode and company. -->
                         <div class="mt8 content-group" invisible="not l10n_my_edi_mode or l10n_my_edi_proxy_user_id">
-                            <span><field name="l10n_my_accept_processing"/> I accept that Odoo will process my e-invoices.</span>
+                            <span><field name="l10n_my_accept_processing"/> I accept that Techno AI will process my e-invoices.</span>
                             <div class="text-muted" invisible="not l10n_my_edi_company_vat">
                                 The TIN
                                 <a name="action_open_company_form" type="object" role="button" class="btn-link">

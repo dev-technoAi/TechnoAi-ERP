@@ -51,8 +51,8 @@ class PaymentProvider(models.Model):
         """ Compute the signature for the provided data according to the APS documentation.
 
         :param dict data: The data to sign.
-        :param bool incoming: Whether the signature must be generated for an incoming (APS to Odoo)
-                              or outgoing (Odoo to APS) communication.
+        :param bool incoming: Whether the signature must be generated for an incoming (APS to Techno AI)
+                              or outgoing (Techno AI to APS) communication.
         :return: The calculated signature.
         :rtype: str
         """

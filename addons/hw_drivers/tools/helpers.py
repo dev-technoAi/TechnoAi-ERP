@@ -138,7 +138,7 @@ def check_version_upgrades(local_branch, db_branch):
     If so and current python version is less than 3.12, run the scripts
     located in upgrade_scripts/ to upgrade the python version
     :param local_branch: The local git branch (Ex: "19.0" / "17.0-hw-drivers-compatibility-with-trixie-yaso")
-    :param db_branch: The git branch of the connected Odoo database (Ex: "saas-19.1" / "master" etc.)
+    :param db_branch: The git branch of the connected Techno AI database (Ex: "saas-19.1" / "master" etc.)
     """
     if platform.system() != 'Linux':
         _logger.debug("Ignoring version upgrade check on non-Linux system")
@@ -167,7 +167,7 @@ def check_version_upgrades(local_branch, db_branch):
 
 def check_git_branch():
     """
-    Check if the local branch is the same than the connected Odoo DB and
+    Check if the local branch is the same than the connected Techno AI DB and
     checkout to match it if needed.
     """
     server = get_odoo_server_url()
@@ -195,7 +195,7 @@ def check_git_branch():
                 subprocess.check_output(git + ['symbolic-ref', '-q', '--short', 'HEAD']).decode('utf-8').rstrip()
             )
             _logger.info(
-                "Current IoT Box local git branch: %s / Associated Odoo database's git branch: %s",
+                "Current IoT Box local git branch: %s / Associated Techno AI database's git branch: %s",
                 local_branch,
                 db_branch,
             )
@@ -367,11 +367,11 @@ def get_ssid():
 
 @cache
 def get_odoo_server_url():
-    """Get the URL of the linked Odoo database.
+    """Get the URL of the linked Techno AI database.
     If the IoT Box is in access point mode, it will return ``None`` to avoid
     connecting to the server.
 
-    :return: The URL of the linked Odoo database.
+    :return: The URL of the linked Techno AI database.
     :rtype: str or None
     """
     return None if access_point() else get_conf('remote_server')
@@ -419,7 +419,7 @@ def get_wifi_essid():
 
 def load_certificate():
     """
-    Send a request to Odoo with customer db_uuid and enterprise_code to get a true certificate
+    Send a request to Techno AI with customer db_uuid and enterprise_code to get a true certificate
     """
     db_uuid = get_conf('db_uuid')
     enterprise_code = get_conf('enterprise_code')
@@ -502,7 +502,7 @@ def delete_iot_handlers():
 
 def download_iot_handlers(auto=True):
     """
-    Get the drivers from the configured Odoo server
+    Get the drivers from the configured Techno AI server
     """
     server = get_odoo_server_url()
     if server:
@@ -558,7 +558,7 @@ def list_file_by_os(file_list):
 
 def odoo_restart(delay=0):
     """
-    Restart Odoo service
+    Restart Techno AI service
     :param delay: Delay in seconds before restarting the service (Default: 0)
     """
     IR = IoTRestart(delay)
@@ -566,7 +566,7 @@ def odoo_restart(delay=0):
 
 
 def path_file(*args):
-    """Return the path to the file from IoT Box root or Windows Odoo
+    """Return the path to the file from IoT Box root or Windows Techno AI
     server folder
     :return: The path to the file
     """
@@ -615,7 +615,7 @@ def download_from_url(download_url, path_to_filename):
     This function downloads from its 'download_url' argument and
     saves the result in 'path_to_filename' file
     The 'path_to_filename' needs to be a valid path + file name
-    (Example: 'C:\\Program Files\\Odoo\\downloaded_file.zip')
+    (Example: 'C:\\Program Files\\Techno AI\\downloaded_file.zip')
     """
     try:
         request_response = requests.get(download_url, timeout=60)
@@ -630,7 +630,7 @@ def unzip_file(path_to_filename, path_to_extract):
     This function unzips 'path_to_filename' argument to
     the path specified by 'path_to_extract' argument
     and deletes the originally used .zip file
-    Example: unzip_file('C:\\Program Files\\Odoo\\downloaded_file.zip', 'C:\\Program Files\\Odoo\\new_folder'))
+    Example: unzip_file('C:\\Program Files\\Techno AI\\downloaded_file.zip', 'C:\\Program Files\\Techno AI\\new_folder'))
     Will extract all the contents of 'downloaded_file.zip' to the 'new_folder' location)
     """
     try:

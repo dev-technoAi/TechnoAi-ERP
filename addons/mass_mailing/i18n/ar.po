@@ -1,15 +1,15 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * mass_mailing
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Mustafa J. Kadhem <safi2266@gmail.com>, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-10-20 10:55+0000\n"
@@ -539,7 +539,7 @@ msgstr "<span style=\"font-size: 48px;\">8</span>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_call_to_action
-msgid "<span style=\"font-weight: bolder;\">50,000+ companies</span> run Odoo."
+msgid "<span style=\"font-weight: bolder;\">50,000+ companies</span> run Techno AI."
 msgstr "<span style=\"font-weight: bolder;\">50,000+ شركة</span> تستخدم أودو. "
 
 #. module: mass_mailing
@@ -3481,7 +3481,7 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailing_lists
 msgid ""
 "No need to import mailing lists, you can send mailings to contacts saved in "
-"other Odoo apps."
+"other Techno AI apps."
 msgstr ""
 "لا داعي لاستيراد قوائم بريدية. بوسعك إرسال المراسلات إلى جهات الاتصال المحفوظة "
 "في تطبيقات أودو الأخرى. "
@@ -4666,7 +4666,7 @@ msgstr "شكرا لك على الانضمام إلينا!"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_text_block
-msgid "That way, Odoo evolves much faster than any other solution."
+msgid "That way, Techno AI evolves much faster than any other solution."
 msgstr "هكذا، يتطور أودو بشكل أسرع من أي شركة أخرى. "
 
 #. module: mass_mailing
@@ -4702,7 +4702,7 @@ msgstr ""
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_text_block
 msgid ""
-"The open source model of Odoo has allowed us to leverage thousands of "
+"The open source model of Techno AI has allowed us to leverage thousands of "
 "developers and\n"
 "                    business experts to build hundreds of apps in just a few "
 "years."
@@ -4714,7 +4714,7 @@ msgstr ""
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_text_image
 msgid ""
-"The open source model of Odoo has allowed us to leverage thousands of "
+"The open source model of Techno AI has allowed us to leverage thousands of "
 "developers and business experts to build hundreds of apps in just a few "
 "years."
 msgstr ""
@@ -4993,7 +4993,7 @@ msgstr "رفع ملف"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_text_block
 msgid ""
-"Usability improvements made on Odoo will automatically apply to all\n"
+"Usability improvements made on Techno AI will automatically apply to all\n"
 "                    of our fully integrated apps."
 msgstr ""
 "ستُطبق تحسينات سهولة الأداء التي تم إجراؤها على أودو تلقائيًا\n"
@@ -5004,7 +5004,7 @@ msgstr ""
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__mass_mailing_outgoing_mail_server
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid ""
-"Use a specific mail server in priority. Otherwise Odoo relies on the first "
+"Use a specific mail server in priority. Otherwise Techno AI relies on the first "
 "outgoing mail server available (based on their sequencing) as it does for "
 "normal mails."
 msgstr ""
@@ -5192,7 +5192,7 @@ msgstr "اختيار الفائز "
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_text_block
 msgid ""
-"With strong technical foundations, Odoo's framework is unique.\n"
+"With strong technical foundations, Techno AI's framework is unique.\n"
 "                    It provides top notch usability that scales across all "
 "apps."
 msgstr ""
@@ -5202,7 +5202,7 @@ msgstr ""
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_picture
 msgid ""
-"With strong technical foundations, Odoo's framework is unique. It provides "
+"With strong technical foundations, Techno AI's framework is unique. It provides "
 "<span style=\"font-weight: bolder;\">top notch usability that scales across "
 "all apps</span>."
 msgstr ""
@@ -5307,7 +5307,7 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailings_from_campaign
 msgid ""
 "You don't need to import your mailing lists, you can easily\n"
-"                send emails<br> to any contact saved in other Odoo apps."
+"                send emails<br> to any contact saved in other Techno AI apps."
 msgstr ""
 "لست بحاجة إلى استيراد قوائمك البريدية، إذ أنه بمقدورك إرسال رسائل\n"
 "                البريد الإلكتروني <br>إلى أي جهة اتصال محفوظة في تطبيقات أودو "

@@ -5,7 +5,7 @@
     'name': 'Web Editor',
     'category': 'Hidden',
     'description': """
-Odoo Web Editor widget.
+Techno AI Web Editor widget.
 ==========================
 
 """,

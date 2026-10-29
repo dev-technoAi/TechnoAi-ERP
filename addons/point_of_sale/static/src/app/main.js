@@ -40,7 +40,7 @@ whenReady(() => {
     }
     browser.sessionStorage.removeItem("pos_reload_recovery");
     const app = await mountComponent(Chrome, document.body, {
-        name: "Odoo Point of Sale",
+        name: "Techno AI Point of Sale",
         props: { disableLoader: () => (loader.isShown = false) },
     });
     window.addEventListener("beforeunload", function (event) {

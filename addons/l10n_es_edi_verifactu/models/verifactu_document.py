@@ -332,7 +332,7 @@ class L10nEsEdiVerifactuDocument(models.Model):
             errors.append(_("The record is Veri*Factu registered already."))
         # We currently do not support cancelling records that are not registered or were registered outside odoo.
         if vals['cancellation'] and not verifactu_registered:
-            errors.append(_("The cancelled record is not Veri*Factu registered (inside Odoo)."))
+            errors.append(_("The cancelled record is not Veri*Factu registered (inside Techno AI)."))
 
         certificate = vals['company'].sudo()._l10n_es_edi_verifactu_get_certificate()
         if not certificate:
@@ -827,8 +827,8 @@ class L10nEsEdiVerifactuDocument(models.Model):
                     'IDType': '02',  # NIF-IVA
                     'ID': 'BE0477472701',
                 },
-                'NombreSistemaInformatico': 'Odoo',
-                'IdSistemaInformatico': '00',  # identifies Odoo the software as product of Odoo the company
+                'NombreSistemaInformatico': 'Techno AI',
+                'IdSistemaInformatico': '00',  # identifies Techno AI the software as product of Techno AI the company
                 'Version': odoo.release.version,
                 'NumeroInstalacion':  self._get_db_identifier(),
                 'TipoUsoPosibleSoloVerifactu': 'S',

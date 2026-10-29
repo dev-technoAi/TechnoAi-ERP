@@ -12,7 +12,7 @@ class ResCompany(models.Model):
     sms_provider = fields.Selection(
         string='SMS Provider',
         selection=[
-            ('iap', 'Send via Odoo'),
+            ('iap', 'Send via Techno AI'),
             ('twilio', 'Send via Twilio'),
         ],
         default='iap',

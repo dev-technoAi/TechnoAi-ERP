@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <!--
-    Odoo QWeb template for generating a Polish KSeF e-invoice in FA(3) XML format.
-    This template maps Odoo's invoice data model to the official XML structure required by the Polish tax authorities.
-    The `t-` attributes are Odoo's template directives for rendering dynamic content.
+    Techno AI QWeb template for generating a Polish KSeF e-invoice in FA(3) XML format.
+    This template maps Techno AI's invoice data model to the official XML structure required by the Polish tax authorities.
+    The `t-` attributes are Techno AI's template directives for rendering dynamic content.
   -->
   <template id="l10n_pl_edi.fa3_xml_template" name="Polish FA(3) XML Template">
     <Faktura xmlns:etd="http://crd.gov.pl/xml/schematy/dziedzinowe/mf/2022/01/05/eD/DefinicjeTypy/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://crd.gov.pl/wzor/2025/06/25/13775/">
@@ -22,7 +22,7 @@
         <!-- Timestamp of the XML file generation. -->
         <DataWytworzeniaFa t-out="DataWytworzeniaFa"/>
         <!-- Information about the system that generated the file. -->
-        <SystemInfo>Odoo</SystemInfo>
+        <SystemInfo>Techno AI</SystemInfo>
       </Naglowek>
 
       <!--
@@ -135,7 +135,7 @@
           <!-- OkresFa: Element containing the period to which the invoice relates contains P_6_Od and P_6_Do. TO-CHECK -->
         <!--
           Tax Summary section: Aggregates net and tax amounts by VAT rate.
-          The logic uses Odoo tax tags (e.g., 'K_19', 'K_17') which correspond to specific boxes in the Polish JPK_V7 declaration.
+          The logic uses Techno AI tax tags (e.g., 'K_19', 'K_17') which correspond to specific boxes in the Polish JPK_V7 declaration.
           'P_13_x' fields are for net amounts, 'P_14_x' are for tax amounts.
           'P_14_xW' fields are for tax amounts converted to PLN (required for foreign currency invoices).
         -->

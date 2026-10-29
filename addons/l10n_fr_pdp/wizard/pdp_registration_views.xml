@@ -32,11 +32,11 @@
                     <!-- edi mode info -->
                     <div colspan="2" class="row" invisible="account_peppol_proxy_state">
                         <div class="text-muted col" invisible="edi_mode != 'prod'">
-                            By clicking the button below I accept that Odoo may process my e-invoices.
+                            By clicking the button below I accept that Techno AI may process my e-invoices.
                         </div>
                         <div class="text-muted col" invisible="edi_mode != 'test'">
                             Test mode allows sending e-invoices through the test French e-Invoicing network.
-                            By clicking the button below I accept that Odoo may process my e-invoices.
+                            By clicking the button below I accept that Techno AI may process my e-invoices.
                         </div>
                         <div class="text-muted col" invisible="edi_mode != 'demo'">
                             In demo mode sending invoices is simulated.
@@ -77,15 +77,15 @@
                             invisible="pdp_kyc_status != 'success'">
                         <span invisible="edi_mode != 'prod'">
                             <span invisible="'company_pdp_annuaire_warning' in warnings">Validate Registration</span>
-                            <span invisible="'company_pdp_annuaire_warning' not in warnings">Migrate to Odoo</span>
+                            <span invisible="'company_pdp_annuaire_warning' not in warnings">Migrate to Techno AI</span>
                         </span>
                         <span invisible="edi_mode != 'test'">
                             <span invisible="'company_pdp_annuaire_warning' in warnings">Validate Registration (Test)</span>
-                            <span invisible="'company_pdp_annuaire_warning' not in warnings">Migrate to Odoo (Test)</span>
+                            <span invisible="'company_pdp_annuaire_warning' not in warnings">Migrate to Techno AI (Test)</span>
                         </span>
                         <span invisible="edi_mode != 'demo'">
                             <span invisible="'company_pdp_annuaire_warning' in warnings">Validate Registration (Demo)</span>
-                            <span invisible="'company_pdp_annuaire_warning' not in warnings">Migrate to Odoo (Demo)</span>
+                            <span invisible="'company_pdp_annuaire_warning' not in warnings">Migrate to Techno AI (Demo)</span>
                         </span>
                     </button>
                     <button name="button_deregister_pdp_participant"

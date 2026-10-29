@@ -9,7 +9,7 @@ from odoo.addons.l10n_my_edi.models.account_edi_xml_ubl_my import E_164_REGEX
 
 class MyInvoisDocumentPoS(models.Model):
     """
-    Odoo's support for consolidated invoice is limited to PoS transactions (for now).
+    Techno AI's support for consolidated invoice is limited to PoS transactions (for now).
     For regular journal entries, they can easily be sent in batch to MyInvois without the need to group them into
     consolidated invoices.
 

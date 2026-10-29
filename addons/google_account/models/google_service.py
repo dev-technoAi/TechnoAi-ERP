@@ -44,7 +44,7 @@ class GoogleService(models.AbstractModel):
 
     @api.model
     def _get_authorize_uri(self, service, scope, redirect_uri, state=None, approval_prompt=None, access_type=None):
-        """ This method return the url needed to allow this instance of Odoo to access to the scope
+        """ This method return the url needed to allow this instance of Techno AI to access to the scope
             of gmail specified as parameters
         """
         params = {

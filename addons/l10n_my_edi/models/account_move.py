@@ -401,7 +401,7 @@ Customs form No. 1, 9, etc for Vendor Bills""",
         # cancelled invoice.
         if errors:
             # According to their documentation, you cannot cancel an already invalid invoice (they are considered cancelled by default)
-            # It makes sense to consider these cancelled in Odoo too, for simplicity.
+            # It makes sense to consider these cancelled in Techno AI too, for simplicity.
             invalid_moves._l10n_my_edi_cancel_moves()
 
         # Invalid or in progress invoices must return errors to stop the email sending/...
@@ -410,7 +410,7 @@ Customs form No. 1, 9, etc for Vendor Bills""",
     def _l10n_my_edi_update_document(self, status, reason):
         """ Sent invoices can be cancelled, and received bills can be rejected up to 72h after validation.
 
-        This method will try to update the status of a document on the platform, and if needed also the status in Odoo.
+        This method will try to update the status of a document on the platform, and if needed also the status in Techno AI.
 
         There is no "Rejected" status on the platform. The document stays as 'valid' until action is taken by the vendor.
         At that point, the invoice will be cancelled if need be by the call to _l10n_my_edi_set_status.
@@ -582,7 +582,7 @@ Customs form No. 1, 9, etc for Vendor Bills""",
         """ Update a few important fields in self based on the data received when an invoice gets to the 'valid' state. """
         self.ensure_one()
         # We receive a timezone_aware datetime, but it should always be in UTC.
-        # Odoo expect a timezone unaware datetime in UTC, so we can safely remove the info without any more work needed.
+        # Techno AI expect a timezone unaware datetime in UTC, so we can safely remove the info without any more work needed.
         utc_tz_aware_datetime = dateutil.parser.isoparse(validation_result['valid_datetime'])
         self.l10n_my_edi_validation_time = utc_tz_aware_datetime.replace(tzinfo=None)
 
@@ -620,7 +620,7 @@ Customs form No. 1, 9, etc for Vendor Bills""",
 
         # Once invalid, an invoice is not acceptable by the platform.
         # An invalid invoice will never be visible by a customer and should, from my understanding, be considered void.
-        # In Odoo, the best way to represent that is by cancelling the invoice.
+        # In Techno AI, the best way to represent that is by cancelling the invoice.
         if state in CANCELLED_STATES:
             self._l10n_my_edi_cancel_moves()
 
@@ -644,9 +644,9 @@ Customs form No. 1, 9, etc for Vendor Bills""",
         """ This helper will take in an error code coming from the proxy, and return a translatable error message. """
         error_map = {
             # These errors should be returned when we send malformed request to the EDI, ... tldr; this should never happen unless we have bugs.
-            'internal_server_error': _('Server error; If the problem persists, please contact the Odoo support.'),
-            # The proxy user credentials are either incorrect, or Odoo does not have the permission to invoice on their behalf.
-            'invalid_tin': _('Please make sure that your company TIN is correct, and that you gave Odoo sufficient permissions on the MyInvois platform.'),
+            'internal_server_error': _('Server error; If the problem persists, please contact the Techno AI support.'),
+            # The proxy user credentials are either incorrect, or Techno AI does not have the permission to invoice on their behalf.
+            'invalid_tin': _('Please make sure that your company TIN is correct, and that you gave Techno AI sufficient permissions on the MyInvois platform.'),
             # The api rate limit has been reached. If this happens, we need to ask the user to wait. This is also handled proxy side to be safe
             'rate_limit_exceeded': _('The api request limit has been reached. Please wait until %(limit_reset_datetime)s to try again.',
                                      limit_reset_datetime=error.get('data')),  # Note, should be UTC. The TZ name is present in the formatted date.
@@ -675,7 +675,7 @@ Customs form No. 1, 9, etc for Vendor Bills""",
             'document_not_found': _('The document provided in the request does not exist.'),  # Should never happen
             'search_date_invalid': _('The search params are invalid.'),  # Should also never happen
             'submission_too_large': _('The submission is too large, try to send fewer invoices at once.'),
-            'action_forbidden': _('Permission to do this action has not been granted. Please ensure that Odoo has sufficient permissions on the MyInvois platform.'),
+            'action_forbidden': _('Permission to do this action has not been granted. Please ensure that Techno AI has sufficient permissions on the MyInvois platform.'),
         }
 
         if error.get('target'):
@@ -697,7 +697,7 @@ Customs form No. 1, 9, etc for Vendor Bills""",
                 move.with_context(no_new_invoice=True).message_post(
                     body=_(
                         'The invoice has been canceled on MyInvois, '
-                        'But the cancellation in Odoo failed with error: %(error)s\n'
+                        'But the cancellation in Techno AI failed with error: %(error)s\n'
                         'Please resolve the problem manually, and then cancel the invoice.', error=e
                     )
                 )

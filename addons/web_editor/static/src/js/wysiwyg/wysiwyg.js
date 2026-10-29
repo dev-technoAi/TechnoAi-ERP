@@ -1251,7 +1251,7 @@ export class Wysiwyg extends Component {
         return this.odooEditor.isSelectionInEditable();
     }
     /**
-     * Start or resume the Odoo field changes muation observers.
+     * Start or resume the Techno AI field changes muation observers.
      *
      * Necessary to keep all copies of a given field at the same value throughout the page.
      */

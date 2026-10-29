@@ -35,7 +35,7 @@ export const titleService = {
 
         function updateTitle() {
             const counter = Object.values(titleCounters).reduce((acc, count) => acc + count, 0);
-            let parts = Object.values(titleParts).map(p => typeof p === "string" ? p.replace(/Odoo/g, "Techno AI") : p);
+            let parts = Object.values(titleParts).map(p => typeof p === "string" ? p.replace(/Techno AI/g, "Techno AI") : p);
             if (!parts.includes("Techno AI")) {
                 parts.push("Techno AI");
             }

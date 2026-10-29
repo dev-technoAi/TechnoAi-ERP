@@ -101,7 +101,7 @@ class AdyenController(http.Controller):
             },
             'applicationInfo': {
                 'externalPlatform': {
-                    'name': 'Odoo',
+                    'name': 'Techno AI',
                     'version': release.version,
                     'integrator': 'Odoo SA',
                 }
@@ -146,7 +146,7 @@ class AdyenController(http.Controller):
         # 'manual' from events with the capture delay set to 'immediate' or a number of hours. If
         # the merchant account is configured to capture payments with a delay but the provider is
         # not, we force the immediate capture to avoid considering authorized transactions as
-        # captured on Odoo.
+        # captured on Techno AI.
         if not provider_sudo.capture_manually:
             data.update(captureDelayHours=0)
 
@@ -207,11 +207,11 @@ class AdyenController(http.Controller):
     def adyen_return_from_3ds_auth(self, **data):
         """ Process the authentication data sent by Adyen after redirection from the 3DS1 page.
 
-        The route is flagged with `save_session=False` to prevent Odoo from assigning a new session
+        The route is flagged with `save_session=False` to prevent Techno AI from assigning a new session
         to the user if they are redirected to this route with a POST request. Indeed, as the session
         cookie is created without a `SameSite` attribute, some browsers that don't implement the
         recommended default `SameSite=Lax` behavior will not include the cookie in the redirection
-        request from the payment provider to Odoo. As the redirection to the '/payment/status' page
+        request from the payment provider to Techno AI. As the redirection to the '/payment/status' page
         will satisfy any specification of the `SameSite` attribute, the session of the user will be
         retrieved and with it the transaction which will be immediately post-processed.
 
@@ -225,7 +225,7 @@ class AdyenController(http.Controller):
 
         # Overwrite the operation to force the flow to 'redirect'. This is necessary because even
         # thought Adyen is implemented as a direct payment provider, it will redirect the user out
-        # of Odoo in some cases. For instance, when a 3DS1 authentication is required, or for
+        # of Techno AI in some cases. For instance, when a 3DS1 authentication is required, or for
         # special payment methods that are not handled by the drop-in (e.g. Sofort).
         tx_sudo.operation = 'online_redirect'
 

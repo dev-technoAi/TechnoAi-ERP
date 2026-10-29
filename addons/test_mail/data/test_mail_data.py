@@ -1379,7 +1379,7 @@ PDF_PARSED = b'''%PDF-1.1\n%\xc2\xa5\xc2\xb1\xc3\xab\n\n1 0 obj\n  << /Type /Cat
 
 THAI_EMAIL_WINDOWS_874 = '''\
 From: Thai Customer <outlook_windows@outlook.com>
-To: "Thai Odoo User" <thai-user@odoo.com>
+To: "Thai Techno AI User" <thai-user@odoo.com>
 Subject: =?windows-874?B?4MPX6M2n?=
 Thread-Topic: =?windows-874?B?4MPX6M2n?=
 Thread-Index: AQHahRQ4qiMBoXtK0U2XwaGg8w9Y9g==

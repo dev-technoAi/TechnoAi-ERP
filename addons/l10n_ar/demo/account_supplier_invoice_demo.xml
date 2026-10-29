@@ -77,7 +77,7 @@
         ]"/>
     </record>
 
-    <!-- Service Import to Odoo, fiscal position changes tax not correspond -->
+    <!-- Service Import to Techno AI, fiscal position changes tax not correspond -->
     <record id="demo_sup_invoice_6" model="account.move" context="{'allowed_company_ids': [ref('base.company_ri')]}">
         <field name="partner_id" ref="res_partner_odoo"/>
         <field name="invoice_user_id" ref="base.user_demo"/>

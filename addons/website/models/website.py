@@ -1680,7 +1680,7 @@ class Website(models.Model):
             # everyone except for the website designer which receive `1,0,0,0`.
             # So the "Website/Site/Content/Pages" menu to reach the page manager
             # is not shown to the restricted users, as the action linked model
-            # (website.page) can't be access. It's how the Odoo framework works.
+            # (website.page) can't be access. It's how the Techno AI framework works.
             # Still, we let the restricted editor access this resource for
             # custos granting them read and/or write access on page.
             raise AccessError(_("Access Denied"))

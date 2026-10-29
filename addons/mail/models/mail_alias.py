@@ -17,8 +17,8 @@ dot_atom_text = re.compile(r"^%s+(\.%s+)*$" % (atext, atext))
 
 
 class Alias(models.Model):
-    """A Mail Alias is a mapping of an email address with a given Odoo Document
-       model. It is used by Odoo's mail gateway when processing incoming emails
+    """A Mail Alias is a mapping of an email address with a given Techno AI Document
+       model. It is used by Techno AI's mail gateway when processing incoming emails
        sent to the system. If the recipient address (To) of the message matches
        a Mail Alias, the message will be either processed following the rules
        of that alias. If the message is a reply it will be attached to the
@@ -27,7 +27,7 @@ class Alias(models.Model):
 
        This is meant to be used in combination with a catch-all email configuration
        on the company's mail server, so that as soon as a new mail.alias is
-       created, it becomes immediately usable and Odoo will accept email for it.
+       created, it becomes immediately usable and Techno AI will accept email for it.
      """
     _name = 'mail.alias'
     _description = "Email Aliases"
@@ -47,7 +47,7 @@ class Alias(models.Model):
     alias_domain = fields.Char('Alias domain name', related='alias_domain_id.name')
     # target: create / update
     alias_model_id = fields.Many2one('ir.model', 'Aliased Model', required=True, ondelete="cascade",
-                                     help="The model (Odoo Document Kind) to which this alias "
+                                     help="The model (Techno AI Document Kind) to which this alias "
                                           "corresponds. Any incoming email that does not reply to an "
                                           "existing record will cause the creation of a new record "
                                           "of this model (e.g. a Project Task)",

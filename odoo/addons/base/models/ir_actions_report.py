@@ -43,7 +43,7 @@ _logger = logging.getLogger(__name__)
 # A lock occurs when the user wants to print a report having multiple barcode while the server is
 # started in threaded-mode. The reason is that reportlab has to build a cache of the T1 fonts
 # before rendering a barcode (done in a C extension) and this part is not thread safe. We attempt
-# here to init the T1 fonts cache at the start-up of Odoo so that rendering of barcode in multiple
+# here to init the T1 fonts cache at the start-up of Techno AI so that rendering of barcode in multiple
 # thread does not lock the server.
 _DEFAULT_BARCODE_FONT = 'Courier'
 try:
@@ -88,7 +88,7 @@ def _split_table(tree, max_rows):
             prev.addnext(sibling)
             prev = sibling
 
-# Check the presence of Wkhtmltopdf and return its version at Odoo start-up
+# Check the presence of Wkhtmltopdf and return its version at Techno AI start-up
 wkhtmltopdf_state = 'install'
 wkhtmltopdf_dpi_zoom_ratio = False
 try:
@@ -112,7 +112,7 @@ else:
             wkhtmltopdf_dpi_zoom_ratio = True
 
         if config['workers'] == 1:
-            _logger.info('You need to start Odoo with at least two workers to print a pdf version of the reports.')
+            _logger.info('You need to start Techno AI with at least two workers to print a pdf version of the reports.')
             wkhtmltopdf_state = 'workers'
     else:
         _logger.info('Wkhtmltopdf seems to be broken.')
@@ -132,7 +132,7 @@ else:
     if match:
         wkhtmltoimage_version = parse_version(match.group(0).decode('ascii'))
         if config['workers'] == 1:
-            _logger.info('You need to start Odoo with at least two workers to convert images to html.')
+            _logger.info('You need to start Techno AI with at least two workers to convert images to html.')
     else:
         _logger.info('Wkhtmltoimage seems to be broken.')
 
@@ -776,7 +776,7 @@ class IrActionsReport(models.Model):
         return view_obj._render_template(template, values).encode()
 
     def _handle_merge_pdfs_error(self, error=None, error_stream=None):
-        raise UserError(_("Odoo is unable to merge the generated PDFs."))
+        raise UserError(_("Techno AI is unable to merge the generated PDFs."))
 
     @api.model
     def _merge_pdfs(self, streams, handle_error=None):
@@ -795,7 +795,7 @@ class IrActionsReport(models.Model):
         try:
             writer.write(result_stream)
         except PdfReadError:
-            raise UserError(_("Odoo is unable to merge the generated PDFs."))
+            raise UserError(_("Techno AI is unable to merge the generated PDFs."))
         return result_stream
 
     def _render_qweb_pdf_prepare_streams(self, report_ref, data, res_ids=None):
@@ -1074,7 +1074,7 @@ class IrActionsReport(models.Model):
                     'res_id': error_record_ids[0],
                 })
             raise RedirectWarning(
-                message=_('Odoo is unable to merge the generated PDFs because of %(num_errors)s corrupted file(s)', num_errors=num_errors),
+                message=_('Techno AI is unable to merge the generated PDFs because of %(num_errors)s corrupted file(s)', num_errors=num_errors),
                 action=action,
                 button_text=_('View Problematic Record(s)'),
             )

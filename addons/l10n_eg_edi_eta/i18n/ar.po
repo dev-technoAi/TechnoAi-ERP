@@ -1,4 +1,4 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * l10n_eg_edi_eta
 #
@@ -8,7 +8,7 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0+e\n"
+"Project-Id-Version: Techno AI Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 19:02+0000\n"
 "PO-Revision-Date: 2025-11-08 09:22+0000\n"
@@ -810,7 +810,7 @@ msgstr ""
 #. module: l10n_eg_edi_eta
 #. odoo-javascript
 #: code:addons/l10n_eg_edi_eta/static/src/client_action/sign_invoice.js:0
-msgid "Error trying to connect to Odoo. Check your internet connection"
+msgid "Error trying to connect to Techno AI. Check your internet connection"
 msgstr ""
 
 #. module: l10n_eg_edi_eta

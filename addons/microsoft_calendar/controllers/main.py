@@ -10,11 +10,11 @@ class MicrosoftCalendarController(CalendarController):
 
     @http.route('/microsoft_calendar/sync_data', type='json', auth='user')
     def microsoft_calendar_sync_data(self, model, **kw):
-        """ This route/function is called when we want to synchronize Odoo
+        """ This route/function is called when we want to synchronize Techno AI
             calendar with Microsoft Calendar.
             Function return a dictionary with the status :  need_config_from_admin, need_auth,
             need_refresh, sync_stopped, success if not calendar_event
-            The dictionary may contains an url, to allow Odoo Client to redirect user on
+            The dictionary may contains an url, to allow Techno AI Client to redirect user on
             this URL for authorization for example
         """
         if model == 'calendar.event':
@@ -33,7 +33,7 @@ class MicrosoftCalendarController(CalendarController):
                     "action": action_id
                 }
 
-            # Checking that user have already accepted Odoo to access his calendar !
+            # Checking that user have already accepted Techno AI to access his calendar !
             if not MicrosoftCal.is_authorized(request.env.user):
                 url = MicrosoftCal._microsoft_authentication_url(from_url=kw.get('fromurl'))
                 return {

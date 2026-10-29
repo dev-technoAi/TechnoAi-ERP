@@ -164,7 +164,7 @@ class PaymentTransaction(models.Model):
             payment_method_type, mapping=const.PAYMENT_METHODS_MAPPING
         )
         # Fall back to "unknown" if the payment method is not found (and if "unknown" is found), as
-        # the user might have picked a different payment method than on Odoo's payment form.
+        # the user might have picked a different payment method than on Techno AI's payment form.
         if not payment_method:
             payment_method = self.env['payment.method'].search([('code', '=', 'unknown')], limit=1)
         self.payment_method_id = payment_method or self.payment_method_id

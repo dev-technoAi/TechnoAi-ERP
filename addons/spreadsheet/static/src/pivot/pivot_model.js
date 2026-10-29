@@ -207,7 +207,7 @@ export class OdooPivotModel extends PivotModel {
     //--------------------------------------------------------------------------
 
     /**
-     * Get the Odoo domain corresponding to the given domain
+     * Get the Techno AI domain corresponding to the given domain
      * @param {PivotDomain} domain
      */
     getPivotCellDomain(domain) {

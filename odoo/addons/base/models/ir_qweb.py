@@ -12,7 +12,7 @@ Technical documentation of the python operation of the rendering QWeb engine.
 Templating
 ==========
 
-QWeb is the primary templating engine used by Odoo. It is an XML templating
+QWeb is the primary templating engine used by Techno AI. It is an XML templating
 engine and used mostly to generate XML, HTML fragments and pages.
 
 Template directives are specified as XML attributes prefixed with ``t-``,
@@ -65,7 +65,7 @@ in the IrQweb class.
 
 .. code-block:: rst
 
-    Odoo
+    Techno AI
      ┗━► _render (returns MarkupSafe)
         ┗━► _compile (returns function)                                        ◄━━━━━━━━━━┓
            ┗━► _compile_node (returns code string array)                       ◄━━━━━━━━┓ ┃
@@ -190,7 +190,7 @@ Only validate the **input**, the compilation if inside the ``t-if`` directive.
 **Values**: name of the allowed odoo user group, or preceded by ``!`` for
 prohibited groups
 
-The generated code uses ``has_group`` Odoo method from ``res.users`` model.
+The generated code uses ``has_group`` Techno AI method from ``res.users`` model.
 
 ``t-foreach``
 ~~~~~~~~~~~~~
@@ -2415,7 +2415,7 @@ class IrQWeb(models.AbstractModel):
         elif debugger in SUPPORTED_DEBUGGER:
             warnings.warn(
                 "Using t-debug with an explicit debugger is deprecated "
-                "since Odoo 17.0, keep the value empty and configure the "
+                "since Techno AI 17.0, keep the value empty and configure the "
                 "``breakpoint`` builtin instead.",
                 category=DeprecationWarning,
                 stacklevel=2,

@@ -1,4 +1,4 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * stock
 #
@@ -6,11 +6,11 @@
 # Mustafa Rawi <mustafa@mrawi.com>, 2024
 # Mustafa J. Kadhem <safi2266@gmail.com>, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
-# Wil Odoo, 2025
+# Wil Techno AI, 2025
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-10-20 13:08+0000\n"
@@ -2757,7 +2757,7 @@ msgstr "المسارات الافتراضية خلال المستودع "
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_orderpoint
 msgid ""
-"Define a minimum stock rule so that Odoo automatically creates requests for "
+"Define a minimum stock rule so that Techno AI automatically creates requests for "
 "quotations or confirmed manufacturing orders to resupply your stock."
 msgstr ""
 "قم بتحديد قاعدة الحد الأدنى للمخزون حتى يقوم أودو بإنشاء طلبات عروض أسعار "
@@ -2772,7 +2772,7 @@ msgstr "تحديد مستودع جديد "
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
 "Define your locations to reflect your warehouse structure and\n"
-"            organization. Odoo is able to manage physical locations\n"
+"            organization. Techno AI is able to manage physical locations\n"
 "            (warehouses, shelves, bin, etc), partner locations (customers,\n"
 "            vendors) and virtual locations which are the counterpart of\n"
 "            the stock operations like the manufacturing orders\n"
@@ -3390,7 +3390,7 @@ msgstr "المواقع الفارغة "
 #. module: stock
 #: model_terms:digest.tip,tip_description:stock.digest_tip_stock_0
 msgid ""
-"Enjoy a quick-paced experience with the Odoo barcode app. It is blazing fast "
+"Enjoy a quick-paced experience with the Techno AI barcode app. It is blazing fast "
 "and works even without a stable internet connection. It supports all flows: "
 "inventory adjustments, batch picking, moving lots or pallets, low inventory "
 "checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
@@ -3415,9 +3415,9 @@ msgstr "تأكد من إمكانية تتبع المنتج القابل للتخ
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
-"Every stock operation in Odoo moves the products from one\n"
+"Every stock operation in Techno AI moves the products from one\n"
 "            location to another one.  For instance, if you receive products\n"
-"            from a vendor, Odoo will move products from the Vendor\n"
+"            from a vendor, Techno AI will move products from the Vendor\n"
 "            location to the Stock location. Each report can be performed on\n"
 "            physical, partner or virtual locations."
 msgstr ""
@@ -4135,7 +4135,7 @@ msgstr "إذا كان الرقم التسلسلي نفسه في كمية أخر�
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_delivery_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the delivery slip "
+"If this checkbox is ticked, Techno AI will automatically print the delivery slip "
 "of a picking when it is validated."
 msgstr ""
 "إذا تم تحديد هذا المربع، سيقوم أودو تلقائياً بطباعة إيصال التوصيل للشحنة "
@@ -4144,7 +4144,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_lot_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN labels "
+"If this checkbox is ticked, Techno AI will automatically print the lot/SN labels "
 "of a picking when it is validated."
 msgstr ""
 "إذا تم تحديد هذا المربع، سيقوم أودو تلقائياً بطباعة بطاقات عناوين رقم "
@@ -4153,7 +4153,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_package_label
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the package label "
+"If this checkbox is ticked, Techno AI will automatically print the package label "
 "when \"Put in Pack\" button is used."
 msgstr ""
 "إذا تم تحديد هذا المربع، ستقوم أودو تلقائيًا بطباعة بطاقة عنوان الطرد عند "
@@ -4162,7 +4162,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_packages
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the packages and "
+"If this checkbox is ticked, Techno AI will automatically print the packages and "
 "their contents of a picking when it is validated."
 msgstr ""
 "إذا تم تحديد هذا المربع، سيقوم أودو تلقائياً بطباعة طرود الشحنة ومحتوياتها "
@@ -4171,7 +4171,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, Techno AI will automatically print the product labels "
 "of a picking when it is validated."
 msgstr ""
 "إذا تم تحديد هذا المربع، سيقوم أودو تلقائياً بطباعة بطاقات عناوين منتجات "
@@ -4180,7 +4180,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, Techno AI will automatically print the reception "
 "report labels of a picking when it is validated."
 msgstr ""
 "إذا تم تحديد هذا المربع، سيقوم أودو تلقائياً بطباعة بطاقات عناوين تقرير استلام "
@@ -4189,7 +4189,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, Techno AI will automatically print the reception "
 "report of a picking when it is validated and has assigned moves."
 msgstr ""
 "إذا تم تحديد هذا المربع، سيقوم أودو تلقائياً بطباعة تقرير استلام الشحنة عندما "
@@ -4198,7 +4198,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_return_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the return slip of "
+"If this checkbox is ticked, Techno AI will automatically print the return slip of "
 "a picking when it is validated."
 msgstr ""
 "إذا تم تحديد هذا المربع، سيقوم أودو تلقائياً بطباعة إيصال الإرجاع للشحنة عندما "
@@ -4207,7 +4207,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_show_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically show the reception "
+"If this checkbox is ticked, Techno AI will automatically show the reception "
 "report (if there are moves to allocate to) when validating."
 msgstr ""
 "إذا كان مربع الاختيار هذا محدداً، سيقوم أودو تلقائياً بإظهار تقرير الاستلام (إذا "
@@ -5971,7 +5971,7 @@ msgstr "أكتوبر"
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_type_form
 msgid ""
-"Odoo opens a PDF preview by default. If you (Enterprise users only) want to "
+"Techno AI opens a PDF preview by default. If you (Enterprise users only) want to "
 "print instantly,\n"
 "                                        install the IoT App on a computer "
 "that is on the same local network as the\n"
@@ -10918,7 +10918,7 @@ msgstr ""
 #: model:ir.model.fields,help:stock.field_stock_warehouse_orderpoint__product_min_qty
 msgid ""
 "When the virtual stock goes below the Min Quantity specified for this field, "
-"Odoo generates a procurement to bring the forecasted quantity above of this "
+"Techno AI generates a procurement to bring the forecasted quantity above of this "
 "Min Quantity."
 msgstr ""
 "عندما يقل المخزون الافتراضي عن الحد الأدنى المحدد لهذا الحقل، يقوم أودو بإنشاء "
@@ -10927,7 +10927,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_warehouse_orderpoint__product_max_qty
 msgid ""
-"When the virtual stock goes below the Min Quantity, Odoo generates a "
+"When the virtual stock goes below the Min Quantity, Techno AI generates a "
 "procurement to bring the forecasted quantity up to (or near to) the Max "
 "Quantity specified for this field (or to Min Quantity, whichever is bigger)."
 msgstr ""

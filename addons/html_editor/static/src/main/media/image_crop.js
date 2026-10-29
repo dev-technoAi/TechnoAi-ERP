@@ -139,7 +139,7 @@ export class ImageCrop extends Component {
             this.notification.add(
                 markup(
                     _t(
-                        "This type of image is not supported for cropping.<br/>If you want to crop it, please first download it from the original source and upload it in Odoo."
+                        "This type of image is not supported for cropping.<br/>If you want to crop it, please first download it from the original source and upload it in Techno AI."
                     )
                 ),
                 {

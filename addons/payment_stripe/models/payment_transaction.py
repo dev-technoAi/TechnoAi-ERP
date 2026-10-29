@@ -205,7 +205,7 @@ class PaymentTransaction(models.Model):
                 'address[line1]': self.partner_address or None,
                 'address[postal_code]': self.partner_zip or None,
                 'address[state]': self.partner_state_id.name or None,
-                'description': f'Odoo Partner: {self.partner_id.name} (id: {self.partner_id.id})',
+                'description': f'Techno AI Partner: {self.partner_id.name} (id: {self.partner_id.id})',
                 'email': self.partner_email or None,
                 'name': self.partner_name,
                 'phone': self.partner_phone and self.partner_phone[:20] or None,

@@ -57,9 +57,9 @@
         <field name='l10n_ar_afip_responsibility_type_id' ref="l10n_ar.res_IVAE"/>
     </record>
 
-    <!-- Odoo -->
+    <!-- Techno AI -->
     <record id="res_partner_odoo" model="res.partner">
-        <field name="name">Odoo Inc</field>
+        <field name="name">Techno AI Inc</field>
         <field name="is_company">1</field>
         <field name="city">San Francisco</field>
         <field name="zip">CA 94107</field>
@@ -83,7 +83,7 @@
         <field name='l10n_ar_afip_responsibility_type_id' ref="l10n_ar.res_IVARI"/>
     </record>
 
-    <!-- Odoo -->
+    <!-- Techno AI -->
     <record id="res_partner_expresso" model="res.partner">
         <field name="name">Barcelona Food</field>
         <field name="is_company">1</field>

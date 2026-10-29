@@ -7,7 +7,7 @@
     'category': 'Sales/CRM',
     'sequence': 5,
     'summary': 'Allows integration with mail plugins.',
-    'description': "Integrate Odoo with your mailbox, get information about contacts directly inside your mailbox, log content of emails as internal notes",
+    'description': "Integrate Techno AI with your mailbox, get information about contacts directly inside your mailbox, log content of emails as internal notes",
     'depends': [
         'web',
         'contacts',

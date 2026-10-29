@@ -120,7 +120,7 @@ class AccountChartTemplate(models.AbstractModel):
             },
             'res_partner_registered_supplier_2': {
                 **default_partner_dict,
-                'name': 'Odoo In Private Limited',
+                'name': 'Techno AI In Private Limited',
                 'category_id': 'res_partner_category_registered',
                 'l10n_in_gst_treatment': 'regular',
                 'street': '401, Fourth Floor, IT Tower 4',

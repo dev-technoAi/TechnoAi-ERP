@@ -11,11 +11,11 @@ APIs:
 
 This module uses the generic payment with redirection flow based on form submission provided by the
 `payment` module for every payment method, including `Card`: the customer is redirected to a
-Xendit-hosted payment link created through the Payment Sessions API, and Xendit notifies Odoo of the
+Xendit-hosted payment link created through the Payment Sessions API, and Xendit notifies Techno AI of the
 outcome through a webhook.
 
 For `Card` payments, if the customer opts to save the payment method, the Payment Tokens API token
-Xendit returns on a successful payment is saved in Odoo. Charging a saved token is done
+Xendit returns on a successful payment is saved in Techno AI. Charging a saved token is done
 server-to-server through the Payment Requests API; if that requires 3-D Secure authentication, the
 customer is redirected to the authentication URL Xendit returns.
 

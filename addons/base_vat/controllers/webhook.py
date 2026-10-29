@@ -12,7 +12,7 @@ class BaseVatWebhookController(http.Controller):
     def webhook_update_vies(self, webhook_token, status):
         """
         Webhook called by IAP when it updates a status from the pending state.
-        The webhook_token is computed by the Odoo db (in _compute_vies_valid) and stored
+        The webhook_token is computed by the Techno AI db (in _compute_vies_valid) and stored
         on IAP such that only IAP can call this webhook.
         """
         if not (vat := verify_hash_signed(request.env(su=True), 'vies_check', webhook_token)):

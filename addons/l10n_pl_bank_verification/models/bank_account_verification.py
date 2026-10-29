@@ -20,7 +20,7 @@ class BankAccountVerification(models.Model):
         selection=[
             ('valid', 'Valid'),
             ('invalid', 'Invalid'),  # Bank account not referenced (in gov files) for partner's vat number
-            ('incomplete_partner', 'Incomplete partner'),  # Inside Odoo, no API call
+            ('incomplete_partner', 'Incomplete partner'),  # Inside Techno AI, no API call
             ('not_found_partner', 'Partner not found'),  # API called, but cannot find the VAT number
             ('error', 'An error occurred during check with Government API'),  # API called -> error
         ],

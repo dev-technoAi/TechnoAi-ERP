@@ -16,7 +16,7 @@
                                     target="_blank"><i class="fa fa-fw fa-arrow-right"/>Installation Manual</a>
                             </div>
                         </setting>
-                        <setting string="Attendances from Backend" company_dependent="1" help="Allow Users to Check in/out from Odoo.">
+                        <setting string="Attendances from Backend" company_dependent="1" help="Allow Users to Check in/out from Techno AI.">
                             <field name="attendance_from_systray" required="1"/>
                         </setting>
                         <setting string="Automatic Check-Out" company_dependent="1" help="Automatically Check-Out Employees based on their working schedule with an additional tolerance. Does not apply to employees with a flexible working schedule.">

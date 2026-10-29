@@ -67,7 +67,7 @@ class IotBoxOwlHomePage(Home):
         helpers.odoo_restart(0)
         return json.dumps({
             'status': 'success',
-            'message': 'Odoo service restarted',
+            'message': 'Techno AI service restarted',
         })
 
     @http.route('/hw_posbox_homepage/iot_logs', auth='none', type='http', cors='*')
@@ -216,7 +216,7 @@ class IotBoxOwlHomePage(Home):
         interfaces_list = helpers.list_file_by_os(
             file_path('hw_drivers/iot_handlers/interfaces'))
         return json.dumps({
-            'title': "Odoo's IoT Box - Handlers list",
+            'title': "Techno AI's IoT Box - Handlers list",
             'breadcrumb': 'Handlers list',
             'drivers_list': drivers_list,
             'interfaces_list': interfaces_list,
@@ -291,7 +291,7 @@ class IotBoxOwlHomePage(Home):
             'message': 'Connecting to ' + essid,
             'server': {
                 'url': server or 'http://' + helpers.get_ip() + ':8069',
-                'message': 'Redirect to Odoo Server' if server else 'Redirect to IoT Box'
+                'message': 'Redirect to Techno AI Server' if server else 'Redirect to IoT Box'
             }
         }
 
@@ -405,7 +405,7 @@ class IotBoxOwlHomePage(Home):
         return handlers_loggers_level
 
     def _update_logger_level(self, logger_name, new_level, available_log_levels, handler_folder=False):
-        """Update (if necessary) Odoo's configuration and logger to the given logger_name to the given level.
+        """Update (if necessary) Techno AI's configuration and logger to the given logger_name to the given level.
         The responsibility of saving the config file is not managed here.
 
         :param logger_name: name of the logging logger to change level
@@ -472,7 +472,7 @@ class IotBoxOwlHomePage(Home):
 
     def _get_iot_handler_logger(self, handler_name, handler_folder_name):
         """
-        Get Odoo Iot logger given an IoT handler name
+        Get Techno AI Iot logger given an IoT handler name
         :param handler_name: name of the IoT handler
         :param handler_folder_name: IoT handler folder name (interfaces or drivers)
         :return: logger if any, False otherwise

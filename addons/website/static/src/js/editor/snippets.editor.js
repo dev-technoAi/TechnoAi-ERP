@@ -427,8 +427,8 @@ export class WebsiteSnippetsMenu extends weSnippetEditor.SnippetsMenu {
      * @override
      */
     _getDragAndDropOptions(options = {}) {
-        // TODO: This is currently not in use by Odoo's D&D
-        // There is currently no way in Odoo D&D to offset the edge scrolling.
+        // TODO: This is currently not in use by Techno AI's D&D
+        // There is currently no way in Techno AI D&D to offset the edge scrolling.
         // When there is, this code should be adapted.
         const finalOptions = super._getDragAndDropOptions(...arguments);
         if (!options.offsetElements || !options.offsetElements.$top) {

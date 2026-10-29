@@ -11,7 +11,7 @@
 Swedish Accounting
 ------------------
 
-This is the base module to manage the accounting chart for Sweden in Odoo.
+This is the base module to manage the accounting chart for Sweden in Techno AI.
 It also includes the invoice OCR payment reference handling.
     """,
     'depends': [

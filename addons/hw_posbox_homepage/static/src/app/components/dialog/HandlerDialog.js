@@ -95,7 +95,7 @@ export class HandlerDialog extends Component {
                                 t-on-change="(ev) => this.onChange(ev.target.name, ev.target.value)"
                                 t-att-id="global[0]"
                                 t-att-value="global[1]">
-                                <option value="parent">Same as Odoo</option>
+                                <option value="parent">Same as Techno AI</option>
                                 <option value="info">Info</option>
                                 <option value="debug">Debug</option>
                                 <option value="warning">Warning</option>
@@ -114,7 +114,7 @@ export class HandlerDialog extends Component {
                                 t-on-change="(ev) => this.onChange(ev.target.name, ev.target.value)"
                                 t-att-id="interface[0]"
                                 t-att-value="interface[1].is_using_parent_level ? 'parent' : interface[1].level">
-                                <option value="parent">Same as Odoo</option>
+                                <option value="parent">Same as Techno AI</option>
                                 <option value="info">Info</option>
                                 <option value="debug">Debug</option>
                                 <option value="warning">Warning</option>
@@ -133,7 +133,7 @@ export class HandlerDialog extends Component {
                                 t-on-change="(ev) => this.onChange(ev.target.name, ev.target.value)"
                                 t-att-id="drivers[0]"
                                 t-att-value="drivers[1].is_using_parent_level ? 'parent' : drivers[1].level">
-                                <option value="parent">Same as Odoo</option>
+                                <option value="parent">Same as Techno AI</option>
                                 <option value="info">Info</option>
                                 <option value="debug">Debug</option>
                                 <option value="warning">Warning</option>

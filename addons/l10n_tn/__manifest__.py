@@ -7,7 +7,7 @@
     'countries': ['tn'],
     "category": 'Accounting/Localizations/Account Charts',
     "description": """
-This is the module to manage the accounting chart for Tunisia in Odoo.
+This is the module to manage the accounting chart for Tunisia in Techno AI.
 =======================================================================
 """,
     'depends': [

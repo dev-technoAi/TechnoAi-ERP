@@ -278,7 +278,7 @@ class CRMLeadMiningRequest(models.Model):
 
             template_values = data
             template_values.update({
-                'flavor_text': _("Opportunity created by Odoo Lead Generation"),
+                'flavor_text': _("Opportunity created by Techno AI Lead Generation"),
                 'people_data': data.get('people_data'),
                 'country': country.name,
                 'zip_code': data.get('zip'),

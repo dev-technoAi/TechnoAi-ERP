@@ -65,7 +65,7 @@ export function useKEProxy({onAllSent}) {
                         state.message = _t("Posting the invoice %s has failed with the message: \n %s", name, e.message);
                         break;
                     case 'updateInvoice':
-                        state.message = _t("Error trying to connect to Odoo. Check your internet connection. Error message: %s", e.message);
+                        state.message = _t("Error trying to connect to Techno AI. Check your internet connection. Error message: %s", e.message);
                         break;
                     default:
                         state.message = _t("Unexpected Error:\n %s", e.message);

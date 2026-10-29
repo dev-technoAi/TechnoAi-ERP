@@ -8,7 +8,7 @@ Moves the main navigation (apps, app sections and their submenus) from the
 top bar into a dark left sidebar and applies the Techno AI colours.
 
 Only the presentation changes: every menu, submenu, hotkey, systray item and
-view keeps its behaviour. Phones keep Odoo's own burger menu. Uninstall the
+view keeps its behaviour. Phones keep Techno AI's own burger menu. Uninstall the
 module to get the previous layout back.
 """,
     'website': 'https://technoai.ae',

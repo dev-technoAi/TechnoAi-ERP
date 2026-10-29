@@ -173,10 +173,10 @@ export const CLIPBOARD_WHITELISTS = {
         'table-bordered',
         /^padding-/,
         /^shadow/,
-        // Odoo colors
+        // Techno AI colors
         /^text-o-/,
         /^bg-o-/,
-        // Odoo lists
+        // Techno AI lists
         'o_checked',
         'o_checklist',
         'oe-nested',

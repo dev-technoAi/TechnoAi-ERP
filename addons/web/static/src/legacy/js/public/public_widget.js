@@ -224,7 +224,7 @@ const EventDispatcherMixin = Object.assign({}, ParentedMixin, {
      *
      * Other methods will fix the bound method to what it is when creating the
      * binding/proxy, which is fine in most javascript code but problematic in
-     * Odoo where developers may want to replace existing callbacks with theirs.
+     * Techno AI where developers may want to replace existing callbacks with theirs.
      *
      * The semantics of this precisely replace closing over the method call.
      *

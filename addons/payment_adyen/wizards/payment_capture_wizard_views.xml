@@ -13,7 +13,7 @@
                      class="alert alert-info mb-2"
                      invisible="not has_adyen_tx">
                     The capture or void of the transaction might take a few minutes to be
-                    processed by Adyen and reflected in Odoo.
+                    processed by Adyen and reflected in Techno AI.
                 </div>
             </footer>
         </field>

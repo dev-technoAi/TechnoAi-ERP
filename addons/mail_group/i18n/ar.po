@@ -1,14 +1,14 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # 	* mail_group
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Malaz Abuidris <msea@odoo.com>, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:38+0000\n"
 "PO-Revision-Date: 2026-10-20 10:42+0000\n"
@@ -1376,7 +1376,7 @@ msgstr "وصف الإرشادات مفقود. "
 #. module: mail_group
 #: model:ir.model.fields,help:mail_group.field_mail_group__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (Techno AI Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""

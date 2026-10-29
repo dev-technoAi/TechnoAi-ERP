@@ -156,7 +156,7 @@ export class PaymentStripe extends PaymentInterface {
         const collectPaymentMethod = await this.terminal.collectPaymentMethod(clientSecret, {
             config_override: {
                 enable_customer_cancellation: true,
-                // Odoo does not record a tip chosen on the reader, so Stripe would charge it unseen
+                // Techno AI does not record a tip chosen on the reader, so Stripe would charge it unseen
                 skip_tipping: true,
             },
         });

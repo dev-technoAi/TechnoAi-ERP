@@ -7,7 +7,7 @@
     'description': """
 Accounting Module for the Republic of Korea
 ===========================================
-This provides a base chart of accounts and taxes template for use in Odoo.
+This provides a base chart of accounts and taxes template for use in Techno AI.
     """,
     'depends': ['account'],
     'auto_install': ['account'],

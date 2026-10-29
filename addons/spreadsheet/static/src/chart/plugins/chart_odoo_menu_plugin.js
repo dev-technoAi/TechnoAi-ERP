@@ -5,7 +5,7 @@ import { coreTypes, helpers } from "@odoo/o-spreadsheet";
 import { omit } from "@web/core/utils/objects";
 const { deepEquals } = helpers;
 
-/** Plugin that link charts with Odoo menus. It can contain either the Id of the odoo menu, or its xml id. */
+/** Plugin that link charts with Techno AI menus. It can contain either the Id of the odoo menu, or its xml id. */
 export class ChartOdooMenuPlugin extends OdooCorePlugin {
     static getters = /** @type {const} */ (["getChartOdooMenu"]);
     constructor(config) {

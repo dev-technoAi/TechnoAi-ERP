@@ -48,11 +48,11 @@
                     <!-- edi mode info -->
                     <div colspan="2" class="row" invisible="l10n_dk_nemhandel_proxy_state != 'not_registered'">
                         <div class="text-muted col" invisible="edi_mode != 'prod'">
-                            By clicking the button below I accept that Odoo may process my e-invoices.
+                            By clicking the button below I accept that Techno AI may process my e-invoices.
                         </div>
                         <div class="text-muted col" invisible="edi_mode != 'test'">
                             Test mode allows sending e-invoices through the test Nemhandel network.
-                            By clicking the button below I accept that Odoo may process my e-invoices.
+                            By clicking the button below I accept that Techno AI may process my e-invoices.
                         </div>
                         <div class="text-muted col" invisible="edi_mode != 'demo'">
                             In demo mode sending invoices is simulated.

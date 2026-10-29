@@ -1,16 +1,16 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # 	* pos_hr
 #
 # Translators:
 # Martin Trigaux, 2024
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Tiffany Chang, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2026-10-20 11:27+0000\n"
@@ -370,7 +370,7 @@ msgstr ""
 "لا يمكنك حذف موظف قد يكون مستخدَماً في جلسة نقطة بيع نشطة. قم بإغلاق الجلسة "
 "(الجلسات) أولاً: \n"
 
-#~ msgid "If left empty, only Odoo users have extended rights in PoS"
+#~ msgid "If left empty, only Techno AI users have extended rights in PoS"
 #~ msgstr ""
 #~ "إذا تم تركه فارغاً، سيكون لدى مستخدمي أودو فقط صلاحيات إضافية في نقطة "
 #~ "البيع "

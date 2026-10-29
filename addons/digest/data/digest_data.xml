@@ -396,7 +396,7 @@
                                                 </div>
                                                 <div class="by_odoo" style="margin-bottom: 15px;">
                                                     Sent by <a href="https://www.odoo.com" target="_blank">
-                                                    <span class="odoo_link_text">Odoo</span></a>
+                                                    <span class="odoo_link_text">Techno AI</span></a>
                                                     <t t-if="unsubscribe_token">
                                                         –
                                                         <a t-attf-href="/digest/#{object.id}/unsubscribe?token=#{unsubscribe_token}&amp;user_id=#{user.id}" target="_blank"
@@ -434,7 +434,7 @@
                                 <p style="font-weight: bold;" t-esc="company.name" />
                                 <p class="by_odoo" id="powered">
                                     Powered by <a href="https://www.odoo.com" target="_blank" class="odoo_link">
-                                        <span class="odoo_link_text">Odoo</span></a>
+                                        <span class="odoo_link_text">Techno AI</span></a>
                                 </p>
                             </div>
                         </tr>
@@ -455,14 +455,14 @@
         <tbody>
             <tr>
                 <td align="right" style="width: 33%;">
-                    <img src="https://www.odoo.com/web/image/38874595-16ef5349/odoo-mobile.png" alt="Odoo Mobile" />
+                    <img src="https://www.odoo.com/web/image/38874595-16ef5349/odoo-mobile.png" alt="Techno AI Mobile" />
                 </td>
                 <td align="left" style="width: 66%;">
                     <table>
                         <tbody>
                             <tr>
                                 <td>
-                                    <p class="run_business">Run your business from anywhere with <b>Odoo Mobile</b>.</p>
+                                    <p class="run_business">Run your business from anywhere with <b>Techno AI Mobile</b>.</p>
                                 </td>
                             </tr>
                             <tr>

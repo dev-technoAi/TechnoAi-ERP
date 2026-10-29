@@ -1,15 +1,15 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * mrp
 #
 # Translators:
 # Mustafa J. Kadhem <safi2266@gmail.com>, 2024
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-10-20 11:12+0000\n"
@@ -1763,7 +1763,7 @@ msgstr "قم بإنشاء أوراق عمل قابلة للتخصيص لعملي
 msgid ""
 "Create operation level dependencies that will influence both planning and "
 "the status of work orders upon MO confirmation. If this feature is ticked, "
-"and nothing is specified, Odoo will assume that all operations can be "
+"and nothing is specified, Techno AI will assume that all operations can be "
 "started simultaneously."
 msgstr ""
 "قم بإنشاء تبعيات مهام على مستوى العمليات والتي ستؤثر على كل من التخطيط وحالة "
@@ -2684,46 +2684,46 @@ msgstr ""
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_mrp_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the allocation "
+"If this checkbox is ticked, Techno AI will automatically print the allocation "
 "report labels of a MO when it is done."
 msgstr ""
-"إذا تم تحديد خانة الاختيار هذه، فسيقوم Odoo تلقائيًا بطباعة تسميات تقرير "
+"إذا تم تحديد خانة الاختيار هذه، فسيقوم Techno AI تلقائيًا بطباعة تسميات تقرير "
 "التخصيص الخاص بالمنظمة عند الانتهاء. "
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_mrp_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the allocation "
+"If this checkbox is ticked, Techno AI will automatically print the allocation "
 "report of a MO when it is done and has assigned moves."
 msgstr ""
-"إذا تم تحديد خانة الاختيار هذه، فسيقوم Odoo تلقائيًا بطباعة تقرير التخصيص "
+"إذا تم تحديد خانة الاختيار هذه، فسيقوم Techno AI تلقائيًا بطباعة تقرير التخصيص "
 "الخاص بالمنظمة عند الانتهاء من ذلك وتعيين التحركات. "
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_mrp_lot
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN label "
+"If this checkbox is ticked, Techno AI will automatically print the lot/SN label "
 "of a MO when it is done."
 msgstr ""
-"إذا تم تحديد خانة الاختيار هذه، فسيقوم Odoo تلقائيًا بطباعة ملصق الدفعة/الرقم "
+"إذا تم تحديد خانة الاختيار هذه، فسيقوم Techno AI تلقائيًا بطباعة ملصق الدفعة/الرقم "
 "التسلسلي الخاص بـ MO عند الانتهاء. "
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_mrp_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, Techno AI will automatically print the product labels "
 "of a MO when it is done."
 msgstr ""
-"إذا تم تحديد خانة الاختيار هذه، فسيقوم Odoo تلقائيًا بطباعة ملصقات المنتج "
+"إذا تم تحديد خانة الاختيار هذه، فسيقوم Techno AI تلقائيًا بطباعة ملصقات المنتج "
 "الخاصة بالمنظمة عند الانتهاء. "
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_production_order
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the production "
+"If this checkbox is ticked, Techno AI will automatically print the production "
 "order of a MO when it is done."
 msgstr ""
-"إذا تم تحديد خانة الاختيار هذه، فسيقوم Odoo تلقائيًا بطباعة أمر إنتاج MO عند "
+"إذا تم تحديد خانة الاختيار هذه، فسيقوم Techno AI تلقائيًا بطباعة أمر إنتاج MO عند "
 "الانتهاء. "
 
 #. module: mrp
@@ -3820,13 +3820,13 @@ msgstr "الفاعلية الشاملة المستهدفة للمعدات "
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.view_picking_type_form_inherit_mrp
 msgid ""
-"Odoo opens a PDF preview by default. If you want to print instantly,\n"
+"Techno AI opens a PDF preview by default. If you want to print instantly,\n"
 "                                install the IoT App on a computer that is on "
 "the same local network as the\n"
 "                                barcode operator and configure the routing "
 "of the reports."
 msgstr ""
-"يفتح Odoo معاينة PDF بشكل افتراضي. إذا كنت تريد الطباعة على الفور،\n"
+"يفتح Techno AI معاينة PDF بشكل افتراضي. إذا كنت تريد الطباعة على الفور،\n"
 "                                قم بتثبيت تطبيق IoT على جهاز كمبيوتر متصل "
 "بنفس الشبكة المحلية مثل\n"
 "                                مشغل الباركود وتكوين توجيه التقارير. "
@@ -6349,7 +6349,7 @@ msgid ""
 "When activated, then the registration of consumption for that component is "
 "recorded manually exclusively.\n"
 "If not activated, and any of the components consumption is edited manually "
-"on the manufacturing order, Odoo assumes manual consumption also."
+"on the manufacturing order, Techno AI assumes manual consumption also."
 msgstr ""
 "عندما تكون مفعلة، ثم يتم تسجيل استهلاك ذلك المكون يدوياً فقط. \n"
 "إذا لم تكن مفعلة، ويتم تحرير استهلاك المكونات يدوياً في أمر التصنيع، يفترض "
@@ -6379,7 +6379,7 @@ msgstr ""
 #. module: mrp
 #: model_terms:digest.tip,tip_description:mrp.digest_tip_mrp_0
 msgid ""
-"With the Odoo work center control panel, your worker can start work orders "
+"With the Techno AI work center control panel, your worker can start work orders "
 "in the shop and follow instructions of the worksheet. Quality tests are "
 "perfectly integrated into the process. Workers can trigger feedback loops, "
 "maintenance alerts, scrap products, etc."

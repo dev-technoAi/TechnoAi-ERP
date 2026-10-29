@@ -496,7 +496,7 @@
             data-img="/website/static/src/img/snippets_thumbs/s_mega_menu_menu_image_menu.svg"
             t-out="_label"
         />
-        <t t-set="_label">Odoo Menu</t>
+        <t t-set="_label">Techno AI Menu</t>
         <we-button
             t-att-data-select-label="_label"
             data-dependencies="fetch_ecom_categories_opt"

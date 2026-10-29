@@ -20,7 +20,7 @@ const { functionRegistry } = spreadsheet.registries;
 const ODOO_FILTER_VALUE = /** @satisfies {CustomFunctionDescription} */ ({
     description: _t("Return the current value of a spreadsheet filter."),
     args: [arg("filter_name (string)", _t("The label of the filter whose value to return."))],
-    category: "Odoo",
+    category: "Techno AI",
     /**
      * @param {FPayload} filterName
      */

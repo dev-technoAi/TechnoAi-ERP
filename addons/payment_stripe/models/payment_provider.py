@@ -33,7 +33,7 @@ class PaymentProvider(models.Model):
     stripe_webhook_secret = fields.Char(
         string="Webhook Signing Secret",
         help="If a webhook is enabled on your Stripe account, this signing secret must be set to "
-             "authenticate the messages sent from Stripe to Odoo.",
+             "authenticate the messages sent from Stripe to Techno AI.",
         groups='base.group_system')
 
     #=== COMPUTE METHODS ===#
@@ -122,7 +122,7 @@ class PaymentProvider(models.Model):
 
         If the provider is already enabled, close the current window. Otherwise, generate a Stripe
         Connect onboarding link and redirect the user to it. If provided, the menu id is included in
-        the URL the user is redirected to when coming back on Odoo after the onboarding. If the link
+        the URL the user is redirected to when coming back on Techno AI after the onboarding. If the link
         generation failed, redirect the user to the provider form.
 
         Note: This method serves as a hook for modules that would fully implement Stripe Connect.

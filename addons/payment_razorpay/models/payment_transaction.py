@@ -328,7 +328,7 @@ class PaymentTransaction(models.Model):
         if self.provider_code != 'razorpay':
             return child_void_tx
 
-        raise UserError(_("Transactions processed by Razorpay can't be manually voided from Odoo."))
+        raise UserError(_("Transactions processed by Razorpay can't be manually voided from Techno AI."))
 
     def _get_tx_from_notification_data(self, provider_code, notification_data):
         """ Override of `payment` to find the transaction based on razorpay data.
@@ -352,7 +352,7 @@ class PaymentTransaction(models.Model):
         else:  # 'refund'
             notes = notification_data.get('notes')
             reference = isinstance(notes, dict) and notes.get('reference')
-            if reference:  # The refund was initiated from Odoo.
+            if reference:  # The refund was initiated from Techno AI.
                 tx = self.search([('reference', '=', reference), ('provider_code', '=', 'razorpay')])
             else:  # The refund was initiated from Razorpay.
                 # Find the source transaction based on its provider reference.

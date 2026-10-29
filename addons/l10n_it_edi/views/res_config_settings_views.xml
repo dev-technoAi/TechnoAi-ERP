@@ -16,8 +16,8 @@
                             </span>
                             <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."/>
                             <div class="text-muted">
-                                In demo mode Odoo will just simulate the sending of invoices to the government.<br/>
-                                In test mode (experimental) Odoo will send the invoices to a non-production service.
+                                In demo mode Techno AI will just simulate the sending of invoices to the government.<br/>
+                                In test mode (experimental) Techno AI will send the invoices to a non-production service.
                                 Saving this change will direct all companies on this database to this use this configuration.
                                 Once registered for testing or official, the mode cannot be changed.
                             </div>
@@ -26,9 +26,9 @@
                                     options="{'horizontal': true}"/>
                         </div>
                         <div class="mt8 content-group" invisible="l10n_it_edi_proxy_current_state == 'active' or l10n_it_edi_proxy_current_state == 'demo' and l10n_it_edi_demo_mode == 'demo'">
-                            <span class="o_form_label">Allow Odoo to process invoices</span>
+                            <span class="o_form_label">Allow Techno AI to process invoices</span>
                             <div class="text-muted">
-                                By checking this box, I accept that Odoo may process my invoices.
+                                By checking this box, I accept that Techno AI may process my invoices.
                             </div>
                             <div class="content-group">
                                 <field name="l10n_it_edi_register"/>

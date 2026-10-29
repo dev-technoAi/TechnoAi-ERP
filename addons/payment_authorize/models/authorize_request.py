@@ -94,7 +94,7 @@ class AuthorizeAPI:
         """ Create an Auth.net payment/customer profile from an existing transaction.
 
         Creates a customer profile for the partner/credit card combination and links
-        a corresponding payment profile to it. Note that a single partner in the Odoo
+        a corresponding payment profile to it. Note that a single partner in the Techno AI
         database can have multiple customer profiles in Authorize.net (i.e. a customer
         profile is created for every res.partner/payment.token couple).
 

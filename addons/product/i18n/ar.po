@@ -1,4 +1,4 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * product
 #
@@ -6,12 +6,12 @@
 # Martin Trigaux, 2024
 # Tiffany Chang, 2024
 # Mustafa J. Kadhem <safi2266@gmail.com>, 2024
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:38+0000\n"
 "PO-Revision-Date: 2026-10-20 11:49+0000\n"
@@ -4350,7 +4350,7 @@ msgstr "مثال: مصابيح "
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_variant_easy_edit_view
-msgid "e.g. Odoo Enterprise Subscription"
+msgid "e.g. Techno AI Enterprise Subscription"
 msgstr "مثال: الاشتراك في نسخة أودو للمؤسسات "
 
 #. module: product

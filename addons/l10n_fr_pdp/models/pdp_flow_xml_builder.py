@@ -492,7 +492,7 @@ class PdpFlow10XMLBuilder(models.AbstractModel):
                 tax = taxes_by_id[tax_item['id']]
                 tax_amount = tax_item['amount']
                 if tax.amount_type == 'fixed':
-                    # Odoo has already added this charge to an affected VAT tax's base.
+                    # Techno AI has already added this charge to an affected VAT tax's base.
                     if not vat_tax_ids.intersection(tax_item['tax_ids']):
                         summary['subtotals'][FIXED_CHARGE_SUBTOTAL]['taxable_amount'] += tax_amount
                         summary['taxable_amount_total'] += tax_amount

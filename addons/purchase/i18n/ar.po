@@ -1,15 +1,15 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * purchase
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-10-20 12:04+0000\n"
@@ -1418,7 +1418,7 @@ msgstr "مسودات طلبات عروض الأسعار "
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in Techno AI. Enjoy the automation!"
 msgstr ""
 "قم بسحب ملف PDF لطلب عرض السعر وإفلاته في قائمة عروض الأسعار في أودو. استمتع "
 "بالتشغيل الآلي في كافة تفاصيل عملك! "
@@ -2008,7 +2008,7 @@ msgstr "غير معترف به "
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Not using Odoo?"
+msgid "Not using Techno AI?"
 msgstr "لا تستخدم أودو؟ "
 
 #. module: purchase
@@ -2055,7 +2055,7 @@ msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Odoo"
+msgid "Techno AI"
 msgstr "أودو"
 
 #. module: purchase
@@ -3073,7 +3073,7 @@ msgstr "معلم بنجمة "
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Start on Odoo"
+msgid "Start on Techno AI"
 msgstr "ابدأ باستخدام أودو "
 
 #. module: purchase
@@ -3642,7 +3642,7 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                    orders or receipts. This allows you to control bills\n"
 "                    you receive from your vendor according to the draft\n"
-"                    document in Odoo."
+"                    document in Techno AI."
 msgstr ""
 "يمكن إنشاء فواتير الموردين مسبقاً حسب أوامر\n"
 "                    الشراء أو الإيصالات. يتيح لك ذلك التحكم في الفواتير\n"
@@ -3696,7 +3696,7 @@ msgstr "طلبات عروض الأسعار قيد النتظار "
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Want to import this document in Odoo?"
+msgid "Want to import this document in Techno AI?"
 msgstr "أترغب في استيراد هذا المستند إلى أودو؟ "
 
 #. module: purchase
@@ -3747,7 +3747,7 @@ msgid ""
 "When creating a purchase order, have a look at the vendor's <i>On Time "
 "Delivery</i> rate: the percentage of products shipped on time. If it is too "
 "low, activate the <i>automated reminders</i>. A few days before the due "
-"shipment, Odoo will send the vendor an email to ask confirmation of shipment "
+"shipment, Techno AI will send the vendor an email to ask confirmation of shipment "
 "dates and keep you informed in case of any delays. To get the vendor's "
 "performance statistics, click on the OTD rate."
 msgstr ""
@@ -3761,7 +3761,7 @@ msgstr ""
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
 msgid ""
-"When sending a purchase order by email, Odoo asks the vendor to acknowledge "
+"When sending a purchase order by email, Techno AI asks the vendor to acknowledge "
 "the reception of the order. When the vendor acknowledges the order by "
 "clicking on a button in the email, the information is added on the purchase "
 "order. Use filters to track orders that have not been acknowledged."

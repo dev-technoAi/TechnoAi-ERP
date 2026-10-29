@@ -5,7 +5,7 @@
     'countries': ['mu'],
     "category": "Accounting/Localizations/Account Charts",
     "description": """
-This is the base module to manage the accounting chart for the Republic of Mauritius in Odoo.
+This is the base module to manage the accounting chart for the Republic of Mauritius in Techno AI.
 ==============================================================================================
     - Chart of accounts
     - Taxes

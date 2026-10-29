@@ -6,7 +6,7 @@
     'version': '1.3',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the latest Indonesian Odoo localisation necessary to run Odoo accounting for SMEs with:
+This is the latest Indonesian Techno AI localisation necessary to run Techno AI accounting for SMEs with:
 =================================================================================================
     - generic Indonesian chart of accounts
     - tax structure""",

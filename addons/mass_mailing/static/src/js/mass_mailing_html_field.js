@@ -462,7 +462,7 @@ export class MassMailingHtmlField extends HtmlField {
             $editable.filter(':empty').attr('contenteditable', false);
 
             // Wait the next tick because some mutation have to be processed by
-            // the Odoo editor before resetting the history.
+            // the Techno AI editor before resetting the history.
             setTimeout(() => {
                 this.wysiwyg.historyReset();
                 // Update undo/redo buttons

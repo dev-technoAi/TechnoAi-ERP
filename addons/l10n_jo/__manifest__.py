@@ -3,7 +3,7 @@
     'name': 'Jordan - Accounting',
     'countries': ['jo'],
     'description': """
-This is the base module to manage the accounting chart for Jordan in Odoo.
+This is the base module to manage the accounting chart for Jordan in Techno AI.
 ==============================================================================
 
 Jordan accounting basic charts and localization.

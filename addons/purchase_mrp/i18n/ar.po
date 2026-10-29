@@ -1,13 +1,13 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # 	* purchase_mrp
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2026-10-20 12:00+0000\n"
@@ -93,7 +93,7 @@ msgstr "مصدر التصنيع لـ %s "
 #. odoo-python
 #: code:addons/purchase_mrp/models/stock_move.py:0
 msgid ""
-"Odoo is not able to generate the anglo saxon entries. The total valuation of "
+"Techno AI is not able to generate the anglo saxon entries. The total valuation of "
 "%s is zero."
 msgstr ""
 "لم يتمكن أودو من إنشاء القيود الأنجلو ساكسونية. التقييم الإجمالي لـ %s هو صفر. "

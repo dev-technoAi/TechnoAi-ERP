@@ -17,7 +17,7 @@ class ResUsersSettings(models.Model):
     google_calendar_token_validity = fields.Datetime('Token Validity', copy=False, groups='base.group_system')
     google_calendar_sync_token = fields.Char('Next Sync Token', copy=False, groups='base.group_system')
     google_calendar_cal_id = fields.Char('Calendar ID', copy=False, groups='base.group_system',
-        help='Last Calendar ID who has been synchronized. If it is changed, we remove all links between GoogleID and Odoo Google Internal ID')
+        help='Last Calendar ID who has been synchronized. If it is changed, we remove all links between GoogleID and Techno AI Google Internal ID')
     google_synchronization_stopped = fields.Boolean('Google Synchronization stopped', copy=False, groups='base.group_system')
 
     @api.model

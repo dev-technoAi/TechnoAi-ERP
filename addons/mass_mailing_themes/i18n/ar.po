@@ -1,14 +1,14 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * mass_mailing_themes
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Malaz Abuidris <msea@odoo.com>, 2024
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-10-20 11:02+0000\n"
@@ -198,7 +198,7 @@ msgstr "<font style=\"color: rgb(255, 255, 255);\">مرحباً!</font> "
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
 "<font style=\"color: rgb(255, 255, 255);\">The next edition of <span "
-"style=\"font-weight: bolder;\">Odoo Experience Online</span> is coming "
+"style=\"font-weight: bolder;\">Techno AI Experience Online</span> is coming "
 "soon!\n"
 "                    <br/>To stir up your curiosity, have a look at all the "
 "great talks scheduled and highlighted in our agenda!</font>"
@@ -212,7 +212,7 @@ msgstr ""
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
-"<font style=\"color: rgb(255, 255, 255);\">Zero, zilch, nada! Odoo "
+"<font style=\"color: rgb(255, 255, 255);\">Zero, zilch, nada! Techno AI "
 "Experience is free for everyone!</font>"
 msgstr ""
 "<font style=\"color: rgb(255, 255, 255);\">صفر، لا شيئ! أودو إكسبيريانس مجاني "
@@ -846,7 +846,7 @@ msgstr ""
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
 msgid ""
-"Discover Odoo, the all-in-one management platform, and its apps designed to "
+"Discover Techno AI, the all-in-one management platform, and its apps designed to "
 "improve employees' daily tasks. From sales and deliveries, to logistics, "
 "marketing and accounting ; learn what are the best available options to "
 "digitize your company."
@@ -862,7 +862,7 @@ msgstr "أترغب في أن تصبح شريكاً؟ "
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "Do you wish to use Odoo?"
+msgid "Do you wish to use Techno AI?"
 msgstr "أترغب في استخدام أودو؟ "
 
 #. module: mass_mailing_themes
@@ -1050,7 +1050,7 @@ msgstr "إذا أردت أن تصبح شريكاً وأن تعرض خدماتك 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
 msgid ""
-"If you wish to evaluate Odoo while taking into account your company's "
+"If you wish to evaluate Techno AI while taking into account your company's "
 "specific needs, you can book a free appointment with one of our"
 msgstr ""
 "إذا أردت تقييم أودو مع أخذ احتياجات شركتك الخاصة بعين الاعتبار، يمكنك حجز "
@@ -1085,8 +1085,8 @@ msgstr "In 2013, we had 2,000,000 users worldwide"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "In May 2014, we renamed the company and product to Odoo."
-msgstr "In May 2014, we renamed the company and product to Odoo."
+msgid "In May 2014, we renamed the company and product to Techno AI."
+msgstr "In May 2014, we renamed the company and product to Techno AI."
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_coffeebreak_template
@@ -1103,7 +1103,7 @@ msgstr "Instagram"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
-msgid "Interactive Odoo demo"
+msgid "Interactive Techno AI demo"
 msgstr "عرض أودو التوضيحي التفاعلي "
 
 #. module: mass_mailing_themes
@@ -1146,7 +1146,7 @@ msgstr "اعرف المزيد عن الأسعار "
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
-"Learn through workshops, product demos, and inspiring talks from Odoo "
+"Learn through workshops, product demos, and inspiring talks from Techno AI "
 "Experts and Partners."
 msgstr ""
 "تعلم من خلال ورش العمل وعروض المنتجات التوضيحية والحوارات الملهمة من خبراء "
@@ -1240,13 +1240,13 @@ msgstr "النشرة الأخبارية "
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "Odoo Experts"
+msgid "Techno AI Experts"
 msgstr "خبراء أودو "
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
 msgid ""
-"Odoo invites you on <span class=\"font-weight: bolder\">[date]</span> at "
+"Techno AI invites you on <span class=\"font-weight: bolder\">[date]</span> at "
 "<span class=\"font-weight: bolder\">[time]</span> for their infamous "
 "roadshow in <span class=\"font-weight: bolder\">[city]</span>: an event that "
 "combines learning and networking in a casual afterwork-like atmosphere."
@@ -1435,8 +1435,8 @@ msgstr "The Pivot"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "The Rise of Odoo"
-msgstr "The Rise of Odoo"
+msgid "The Rise of Techno AI"
+msgstr "The Rise of Techno AI"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_blogging_template
@@ -1479,8 +1479,8 @@ msgstr ""
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "The story of Odoo"
-msgstr "The story of Odoo"
+msgid "The story of Techno AI"
+msgstr "The story of Techno AI"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
@@ -1774,9 +1774,9 @@ msgstr "لقد كانت فعالية الأمس في [المكان] in [المد
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
 msgid ""
-"You had the chance to discover Odoo during a full 3 hours, how great is "
+"You had the chance to discover Techno AI during a full 3 hours, how great is "
 "that?\n"
-"                    <br/>Now that you've seen Odoo in action and asked some "
+"                    <br/>Now that you've seen Techno AI in action and asked some "
 "questions, you likely need more information to move forward in your project "
 "and to work with us. You'll find additional points just below."
 msgstr ""
@@ -1787,7 +1787,7 @@ msgstr ""
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "You may test Odoo for free by clicking"
+msgid "You may test Techno AI for free by clicking"
 msgstr "يمكتك تجربة أودو مجاناً عن طريق الضغط على "
 
 #. module: mass_mailing_themes

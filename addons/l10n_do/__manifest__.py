@@ -67,7 +67,7 @@ Estructura de Codificación del Catálogo de Cuentas:
 210101 - Proveedores locales
 
 **Ocho dígitos** son para las cuentas de tercer orden (las visualizadas
-en Odoo):
+en Techno AI):
 1101- Efectivo y Equivalentes
 110101- Caja
 11010101 Caja General

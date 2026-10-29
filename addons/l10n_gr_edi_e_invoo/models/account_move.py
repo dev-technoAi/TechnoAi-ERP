@@ -88,7 +88,7 @@ class AccountMove(models.Model):
         return errors
 
     def _l10n_gr_edi_get_provider_invoice_id(self):
-        """Return an invoice ID that is unique across Odoo databases."""
+        """Return an invoice ID that is unique across Techno AI databases."""
         self.ensure_one()
         database_uuid = self.env['ir.config_parameter'].sudo().get_param('database.uuid')
         return f'{database_uuid}-{self.id}'
@@ -308,7 +308,7 @@ class AccountMove(models.Model):
                             'state': 'invoice_error',
                             'message': error.message or self.env._(
                                 "The electronic invoice request could not be processed. "
-                                "Please contact Odoo support if the problem persists."
+                                "Please contact Techno AI support if the problem persists."
                             ),
                         })
                     elif error.code == 'e_invoo_request_failed':

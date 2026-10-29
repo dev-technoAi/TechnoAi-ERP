@@ -151,7 +151,7 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
         # Debit/Credit note original invoice ref.
         # Applies to credit notes, debit notes, refunds for both invoices and self-billed invoices.
         # The original document is mandatory; but in some specific cases it will be empty (sending a credit note for an invoice
-        # managed outside Odoo/...)
+        # managed outside Techno AI/...)
         if document_type_code in ('02', '03', '04', '12', '13', '14'):
             original_document_id = None
             if original_document:
@@ -261,7 +261,7 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
         vals.pop('additional_street_name', None)
 
         # The API expects the iso3166-2 code for the state, in the same way as it expects the iso3166 code for the countries.
-        # In Odoo, we mostly use these (although there is no standard format) so we'll try to use what Odoo gives us.
+        # In Techno AI, we mostly use these (although there is no standard format) so we'll try to use what Techno AI gives us.
         # For malaysia, the codes where updated, but we use a mapping to ensure that outdated data will still end up correct.
 
         subentity_code = ''

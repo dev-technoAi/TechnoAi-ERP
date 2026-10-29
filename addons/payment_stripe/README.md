@@ -45,7 +45,7 @@ The module also offers a quick onboarding thanks to the Stripe Connect platform 
   - The responses of webhook notifications are sent with the proper HTTP code. odoo/odoo#117940
 - `16.0`
   - Stripe uses the payment methods set up on the account when none are assigned to the payment
-    provider in Odoo, instead of only offering the "Card" payment method. odoo/odoo#107647
+    provider in Techno AI, instead of only offering the "Card" payment method. odoo/odoo#107647
   - The support for express checkout is added. odoo/odoo#88374
 - `15.4`
   - The support for full and partial refunds is added. odoo/odoo#92235

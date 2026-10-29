@@ -13,7 +13,7 @@ from urllib.parse import quote
 
 # +--------+ 3. search_read ir.attachments with cloud urls +---------+
 # |        | --------------------------------------------> |         |
-# |        | <-------------------------------------------- |  Odoo   |
+# |        | <-------------------------------------------- |  Techno AI   |
 # |        | 4. used urls                                  |         |
 # |        |                                               |         |
 # | Script |                                               +---------+
@@ -32,7 +32,7 @@ from urllib.parse import quote
 # 1, 2, 3, 4 are done in batch
 # 5, 6 are done with threadpool
 
-# Odoo
+# Techno AI
 odoo_url = 'http://localhost:8069'
 odoo_db = 'odoo_db'
 odoo_username = 'admin'

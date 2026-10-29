@@ -79,7 +79,7 @@ class PaymentProvider(models.Model):
 
         :param dict data: The data to sign.
         :param bool incoming: Whether the signature must be generated for an incoming (AsiaPay to
-                              Odoo) or outgoing (Odoo to AsiaPay) communication.
+                              Techno AI) or outgoing (Techno AI to AsiaPay) communication.
         :return: The calculated signature.
         :rtype: str
         """

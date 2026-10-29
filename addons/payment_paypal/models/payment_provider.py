@@ -91,7 +91,7 @@ class PaymentProvider(models.Model):
         url = self._paypal_get_api_url() + endpoint
         headers = {
             'Content-Type': 'application/json',  # PayPal always wants JSON content-type.
-            # PayPal requires a reference specific to Odoo to be able to track Odoo customers.
+            # PayPal requires a reference specific to Techno AI to be able to track Techno AI customers.
             'PayPal-Partner-Attribution-Id': 'OdooInc_SP_EC',
         }
         if idempotency_key:

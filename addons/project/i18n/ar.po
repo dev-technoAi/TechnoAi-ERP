@@ -1,15 +1,15 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * project
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Mustafa J. Kadhem <safi2266@gmail.com>, 2024
 # Malaz Abuidris <msea@odoo.com>, 2025
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:36+0000\n"
 "PO-Revision-Date: 2026-10-20 11:58+0000\n"
@@ -1867,7 +1867,7 @@ msgstr "حالة تقييمات العملاء "
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid ""
-"Customers propose feedbacks by email; Odoo creates tasks automatically, and "
+"Customers propose feedbacks by email; Techno AI creates tasks automatically, and "
 "you can\n"
 "      communicate on the task directly."
 msgstr ""
@@ -5030,7 +5030,7 @@ msgstr "يجب أن تكون الفترة أكبر من 0 "
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (Techno AI Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
@@ -5883,7 +5883,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid ""
-"You have unsaved changes - no worries! Odoo will automatically save it as "
+"You have unsaved changes - no worries! Techno AI will automatically save it as "
 "you navigate.<br/> You can discard these changes from here or manually save "
 "your task.<br/>Let's save it manually."
 msgstr ""

@@ -1,14 +1,14 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # 	* website_links
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 # Malaz Abuidris <msea@odoo.com>, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-29 17:39+0000\n"
 "PO-Revision-Date: 2026-10-20 13:40+0000\n"
@@ -245,7 +245,7 @@ msgstr "هذا الكود مُستخدَم بالفعل"
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid ""
 "Those trackers can be used in Google Analytics to track clicks and visitors, "
-"or in Odoo reports to track opportunities and related revenues."
+"or in Techno AI reports to track opportunities and related revenues."
 msgstr ""
 "يمكن استخدام أدوات التتبع هذه في Google Analytics لتتبع النقرات والزوار، أو "
 "في تقارير أودو لتتبع الفرص والإيرادات ذات الصلة."

@@ -6,7 +6,7 @@
     'version': '1.0',
     'description':
         """
-Odoo Web Hierarchy view
+Techno AI Web Hierarchy view
 =======================
 
 This module adds a new view called to be able to define a view to display

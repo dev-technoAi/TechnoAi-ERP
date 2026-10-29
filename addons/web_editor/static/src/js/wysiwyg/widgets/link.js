@@ -297,8 +297,8 @@ export class Link extends Component {
         const urlObj = new URL(url, window.location.origin);
         return urlObj.origin === window.location.origin
             // Chosen heuristic to detect someone trying to enter a link using
-            // its Odoo instance domain. We just suppose it should be a relative
-            // URL (if unexpected behavior, the user can just not enter its Odoo
+            // its Techno AI instance domain. We just suppose it should be a relative
+            // URL (if unexpected behavior, the user can just not enter its Techno AI
             // instance domain but its real domain, or opt-out from the domain
             // stripping). Mentioning an .odoo.com domain, especially its own
             // one, is always a bad practice anyway.

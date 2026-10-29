@@ -31,7 +31,7 @@ class PosVivaWalletController(http.Controller):
                     payment_method_sudo = request.env['pos.payment.method'].sudo().search([('viva_wallet_terminal_id', '=', terminal_id)], limit=1)
                     payment_method_sudo._retrieve_session_id(data_webhook)
                 else:
-                    _logger.error(_('received a message for a terminal not registered in Odoo: %s', terminal_id))
+                    _logger.error(_('received a message for a terminal not registered in Techno AI: %s', terminal_id))
             return json.dumps({'Key': payment_method_sudo.viva_wallet_webhook_verification_key})
         else:
             _logger.error(_('received a message for a pos payment provider not registered.'))

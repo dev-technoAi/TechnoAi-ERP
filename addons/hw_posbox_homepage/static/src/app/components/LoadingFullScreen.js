@@ -12,7 +12,7 @@ export class LoadingFullScreen extends Component {
     setup() {
         this.store = useStore();
 
-        // We delay the RPC verification for 10 seconds to be sure that the Odoo service
+        // We delay the RPC verification for 10 seconds to be sure that the Techno AI service
         // was already restarted
         onMounted(() => {
             setTimeout(() => {
@@ -23,7 +23,7 @@ export class LoadingFullScreen extends Component {
                         });
                         window.location.reload();
                     } catch {
-                        console.warn("Odoo service is probably rebooting.");
+                        console.warn("Techno AI service is probably rebooting.");
                     }
                 }, 750);
             }, 10000);

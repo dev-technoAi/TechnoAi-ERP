@@ -74,11 +74,11 @@ class Home(web_home.Home):
                         httponly=True,
                         samesite='Lax'
                     )
-                # Crapy workaround for unupdatable Odoo Mobile App iOS (Thanks Apple :@)
+                # Crapy workaround for unupdatable Techno AI Mobile App iOS (Thanks Apple :@)
                 request.session.touch()
                 return response
 
-        # Crapy workaround for unupdatable Odoo Mobile App iOS (Thanks Apple :@)
+        # Crapy workaround for unupdatable Techno AI Mobile App iOS (Thanks Apple :@)
         request.session.touch()
         return request.render('auth_totp.auth_totp_form', {
             'user': user,

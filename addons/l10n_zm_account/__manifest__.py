@@ -7,7 +7,7 @@
     "category": "Accounting/Localizations/Account Charts",
     "license": "LGPL-3",
     "description": """
-This is the basic Zambian localization necessary to run Odoo in ZM:
+This is the basic Zambian localization necessary to run Techno AI in ZM:
 ================================================================================
     - Chart of Accounts
     - Taxes

@@ -178,7 +178,7 @@ class OAuthController(http.Controller):
 
     @http.route('/auth_oauth/oea', type='http', auth='none', readonly=False)
     def oea(self, **kw):
-        """login user via Odoo Account provider"""
+        """login user via Techno AI Account provider"""
         dbname = kw.pop('db', None)
         if not dbname:
             dbname = request.db

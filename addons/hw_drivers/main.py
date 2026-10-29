@@ -83,7 +83,7 @@ class Manager(Thread):
 
     def send_alldevices(self, iot_client=None):
         """
-        This method send IoT Box and devices information to Odoo database
+        This method send IoT Box and devices information to Techno AI database
         """
         if self.server_url:
             iot_box = {

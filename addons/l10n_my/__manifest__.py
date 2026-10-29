@@ -8,7 +8,7 @@
     'version': '1.1',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Malaysia in Odoo.
+This is the base module to manage the accounting chart for Malaysia in Techno AI.
 ==============================================================================
     """,
     'depends': [

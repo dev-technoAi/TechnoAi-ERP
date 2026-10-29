@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<template id="s_mega_menu_odoo_menu" name="Odoo Menu" groups="base.group_user">
+<template id="s_mega_menu_odoo_menu" name="Techno AI Menu" groups="base.group_user">
     <section class="s_mega_menu_odoo_menu pt16 o_colored_level o_cc o_cc1">
         <div class="container">
             <div class="row">
@@ -90,7 +90,7 @@
     </section>
 </template>
 
-<asset id="website.s_mega_menu_odoo_menu_000_scss" name="Odoo Menu 000 SCSS">
+<asset id="website.s_mega_menu_odoo_menu_000_scss" name="Techno AI Menu 000 SCSS">
     <bundle>web.assets_frontend</bundle>
     <path>website/static/src/snippets/s_mega_menu_odoo_menu/000.scss</path>
 </asset>

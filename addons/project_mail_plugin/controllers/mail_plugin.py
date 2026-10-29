@@ -16,7 +16,7 @@ class MailPluginController(mail_plugin.MailPluginController):
         """
         Overrides the base module's get_contact_data method by Adding the "tasks" key within the initial contact
         information dict loaded when opening an email on Outlook.
-        This is structured this way to enable the "project" feature on the Outlook side only if the Odoo version
+        This is structured this way to enable the "project" feature on the Outlook side only if the Techno AI version
         supports it.
 
         Return the tasks key only if the current user can create tasks. So, if they can not

@@ -154,7 +154,7 @@
                                 </group>
                                 <group string="">
                                     <div colspan="2">
-                                        Odoo opens a PDF preview by default. If you (Enterprise users only) want to print instantly,
+                                        Techno AI opens a PDF preview by default. If you (Enterprise users only) want to print instantly,
                                         install the IoT App on a computer that is on the same local network as the
                                         barcode operator and configure the routing of the reports.
                                         <br/>

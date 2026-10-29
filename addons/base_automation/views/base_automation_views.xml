@@ -127,7 +127,7 @@
                                 <div invisible="trigger != 'on_webhook'">
                                     <field name="record_getter" string="Target Record"/>
                                     <div>
-                                        <div  class="text-muted"><i class="fa fa-info-circle"/> The default target record getter will work out-of-the-box for any webhook coming from another Odoo instance.</div>
+                                        <div  class="text-muted"><i class="fa fa-info-circle"/> The default target record getter will work out-of-the-box for any webhook coming from another Techno AI instance.</div>
                                         <span class="text-muted"> Available variables: </span>
                                         <ul class="text-muted">
                                             <li><code>env</code>: environment on which the action is triggered</li>

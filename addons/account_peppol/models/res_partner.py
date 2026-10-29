@@ -25,7 +25,7 @@ class ResPartner(models.Model):
     invoice_sending_method = fields.Selection(
         selection_add=[('peppol', 'by Peppol')],
     )
-    peppol_eas = fields.Selection(selection_add=[('odemo', 'Odoo Demo ID')])  # Not a real EAS, used for demonstration.
+    peppol_eas = fields.Selection(selection_add=[('odemo', 'Techno AI Demo ID')])  # Not a real EAS, used for demonstration.
     available_peppol_sending_methods = fields.Json(compute='_compute_available_peppol_sending_methods')
     available_peppol_edi_formats = fields.Json(compute='_compute_available_peppol_edi_formats')
     peppol_verification_state = fields.Selection(
@@ -135,7 +135,7 @@ class ResPartner(models.Model):
             if services := participant_info.get('services', []):
                 service_href = services[0].get('href', '')
         else:
-            # DEPRECATED: we now use Odoo peppol API to fetch participant info and get a json response
+            # DEPRECATED: we now use Techno AI peppol API to fetch participant info and get a json response
             # keeping this branch for compatibility
             participant_identifier = participant_info.findtext('{*}ParticipantIdentifier') or ''
             service_metadata = participant_info.find('.//{*}ServiceMetadataReference')
@@ -170,7 +170,7 @@ class ResPartner(models.Model):
 
     @api.model
     def _peppol_lookup_participant_formats_accepted(self, edi_identification, formats):
-        """NAPTR DNS peppol participant lookup through Odoo's Peppol proxy"""
+        """NAPTR DNS peppol participant lookup through Techno AI's Peppol proxy"""
         company = self.env.company
         if (edi_mode := company._get_peppol_edi_mode()) == 'demo':
             return

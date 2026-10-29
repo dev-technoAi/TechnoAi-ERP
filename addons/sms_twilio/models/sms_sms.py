@@ -84,8 +84,8 @@ class SmsSms(models.Model):
         """
         Store the sid of Twilio on the SMS tracking record (as SMS will be deleted)
         :param results: a list of dict in the form [{
-            'uuid': Odoo's id of the SMS,
-            'state': State of the SMS in Odoo,
+            'uuid': Techno AI's id of the SMS,
+            'state': State of the SMS in Techno AI,
             'sms_twilio_sid': Twilio's id of the SMS,
         }, ...]
         """

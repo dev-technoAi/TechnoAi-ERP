@@ -157,7 +157,7 @@ class ResPartner(models.Model):
                 'embed_attachments': True,
             },
             'xrechnung': {'countries': ['DE'], 'sequence': 200, 'on_peppol': True},
-            'ubl_a_nz': {'countries': ['NZ', 'AU'], 'on_peppol': False},  # Not yet available through Odoo's Access Point, although it's a Peppol valid format
+            'ubl_a_nz': {'countries': ['NZ', 'AU'], 'on_peppol': False},  # Not yet available through Techno AI's Access Point, although it's a Peppol valid format
             'nlcius': {'countries': ['NL'], 'on_peppol': True},
             'ubl_sg': {'countries': ['SG'], 'on_peppol': False},  # Same.
             'facturx': {'countries': ['FR'], 'on_peppol': False},

@@ -22,7 +22,7 @@ class Session(http.Controller):
 
     @http.route('/web/session/get_session_info', type='json', auth='user', readonly=True)
     def get_session_info(self):
-        # Crapy workaround for unupdatable Odoo Mobile App iOS (Thanks Apple :@)
+        # Crapy workaround for unupdatable Techno AI Mobile App iOS (Thanks Apple :@)
         request.session.touch()
         return request.env['ir.http'].session_info()
 
@@ -37,7 +37,7 @@ class Session(http.Controller):
         credential = {'login': login, 'password': password, 'type': 'password'}
         auth_info = request.session.authenticate(db, credential)
         if auth_info['uid'] != request.session.uid:
-            # Crapy workaround for unupdatable Odoo Mobile App iOS (Thanks Apple :@) and Android
+            # Crapy workaround for unupdatable Techno AI Mobile App iOS (Thanks Apple :@) and Android
             # Correct behavior should be to raise AccessError("Renewing an expired session for user that has multi-factor-authentication is not supported. Please use /web/login instead.")
             return {'uid': None}
 

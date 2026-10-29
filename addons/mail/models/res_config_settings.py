@@ -19,7 +19,7 @@ class ResConfigSettings(models.TransientModel):
     alias_domain_id = fields.Many2one(
         'mail.alias.domain', 'Alias Domain',
         readonly=False, related='company_id.alias_domain_id',
-        help="If you have setup a catch-all email domain redirected to the Odoo server, enter the domain name here.")
+        help="If you have setup a catch-all email domain redirected to the Techno AI server, enter the domain name here.")
     module_google_gmail = fields.Boolean('Support Gmail Authentication')
     module_microsoft_outlook = fields.Boolean('Support Outlook Authentication')
     restrict_template_rendering = fields.Boolean(

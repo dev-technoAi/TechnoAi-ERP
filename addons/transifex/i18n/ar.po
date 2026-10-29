@@ -1,13 +1,13 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # 	* transifex
 #
 # Translators:
-# Wil Odoo, 2024
+# Wil Techno AI, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Techno AI Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:38+0000\n"
 "PO-Revision-Date: 2026-10-20 13:01+0000\n"
@@ -82,7 +82,7 @@ msgstr "غير مترجم "
 
 #. module: transifex
 #: model:ir.model.fields,help:transifex.field_transifex_code_translation__transifex_url
-msgid "Propose a modification in the official version of Odoo"
+msgid "Propose a modification in the official version of Techno AI"
 msgstr "اقتراح تعديل في النسخة الرسمية لأودو "
 
 #. module: transifex

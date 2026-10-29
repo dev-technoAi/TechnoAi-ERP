@@ -6,7 +6,7 @@
     'version': '1.1',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the latest basic Israelian localisation necessary to run Odoo in Israel:
+This is the latest basic Israelian localisation necessary to run Techno AI in Israel:
 ================================================================================
 
 This module consists of:

@@ -31,9 +31,9 @@ class PeppolIAPConnector:
             response.raise_for_status()
         except requests.exceptions.RequestException as e:
             if response_vals and 'code' in response_vals:
-                raise UserError(response_vals.get('message') or _("Failed to connect to Odoo Peppol Proxy."))
-            _logger.debug("Failed to connect to Odoo Peppol Proxy %s, %s", endpoint, e)
-            raise UserError(_("Failed to connect to Odoo Peppol Proxy."))
+                raise UserError(response_vals.get('message') or _("Failed to connect to Techno AI Peppol Proxy."))
+            _logger.debug("Failed to connect to Techno AI Peppol Proxy %s, %s", endpoint, e)
+            raise UserError(_("Failed to connect to Techno AI Peppol Proxy."))
         return response_vals
 
     def can_connect(self, *, peppol_identifier, db_uuid, callback_url, connect_token, contact_email=None, webhook_url=None):

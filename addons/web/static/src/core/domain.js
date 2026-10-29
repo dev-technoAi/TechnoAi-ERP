@@ -13,7 +13,7 @@ import { escapeRegExp } from "@web/core/utils/strings";
 export class InvalidDomainError extends Error {}
 
 /**
- * Javascript representation of an Odoo domain
+ * Javascript representation of a Techno AI domain
  */
 export class Domain {
     /**

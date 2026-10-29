@@ -144,7 +144,7 @@ class AccountEdiXmlUBLHR(models.AbstractModel):
             return
 
         # HR-BT-1: Copy indicator - is the invoice the original or already sent
-        #   This doesn't appear to be currently supported in Odoo, and is set to 'false' in TR localization using a similar format
+        #   This doesn't appear to be currently supported in Techno AI, and is set to 'false' in TR localization using a similar format
         vals['document_node']['cbc:CopyIndicator']['_text'] = 'false'
 
     def _ubl_add_issue_date_node(self, vals):

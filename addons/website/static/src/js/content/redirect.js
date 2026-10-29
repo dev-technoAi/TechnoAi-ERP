@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Multiple reasons to do this:
         // - It seems like DOMContentLoaded doesn't always trigger when
         //   listened from the parent window
-        // - Having an event that's fire only when the page is from Odoo avoids
+        // - Having an event that's fire only when the page is from Techno AI avoids
         //   weird behaviours. (e.g. if we want to clear out the iframe, it might
         //   fire an DOMContentLoaded on a non odoo page)
         window.frameElement.dispatchEvent(new CustomEvent('OdooFrameContentLoaded'));

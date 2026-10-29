@@ -3,7 +3,7 @@
 
     <template
         id="website_sale.s_mega_menu_odoo_menu"
-        name="eCommerce: Odoo Menu"
+        name="eCommerce: Techno AI Menu"
         groups="base.group_user"
     >
         <section class="s_mega_menu_odoo_menu pt16 o_colored_level o_cc o_cc1">

@@ -63,11 +63,11 @@ export class ServerDialog extends Component {
 
         <BootstrapDialog identifier="'server-configuration'" btnName="'Configure'">
             <t t-set-slot="header">
-                Configure Odoo Server
+                Configure Techno AI Server
             </t>
             <t t-set-slot="body">
                 <div class="alert alert-warning fs-6" role="alert">
-                    Paste the token from the Connect wizard in your Odoo instance in the Server Token field.
+                    Paste the token from the Connect wizard in your Techno AI instance in the Server Token field.
                     If you change the IoT Box Name, your IoT Box will need a reboot.
                 </div>
                 <div class="mt-3">

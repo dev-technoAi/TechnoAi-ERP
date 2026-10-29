@@ -33,7 +33,7 @@ registry.category("web_tour.tours").add('event_tour', {
 }, {
     trigger: '.o_event_form_view div[name="name"] textarea',
     content: markup(_t("This is the <b>name</b> your guests will see when registering.")),
-    run: "edit Odoo Experience 2020",
+    run: "edit Techno AI Experience 2020",
 }, {
     trigger: '.o_event_form_view div[name="date_begin"]',
     run: function () {

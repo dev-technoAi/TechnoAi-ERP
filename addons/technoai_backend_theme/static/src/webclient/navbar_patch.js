@@ -2,7 +2,7 @@ import { onMounted, onWillUnmount } from "@odoo/owl";
 import { patch } from "@web/core/utils/patch";
 import { NavBar } from "@web/webclient/navbar/navbar";
 
-// Odoo menus carry no icon, so the sidebar picks one per app and per section
+// Techno AI menus carry no icon, so the sidebar picks one per app and per section
 const APP_ICONS = {
     "sale.sale_menu_root": "fa-shopping-bag",
     "purchase.menu_purchase_root": "fa-shopping-basket",

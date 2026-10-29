@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Odoo Vendor Certification -->
+        <!-- Techno AI Vendor Certification -->
         <record model="survey.survey" id="vendor_certification">
             <field name="title">MyCompany Vendor Certification</field>
             <field name="access_token">4ead4bc8-b8f2-4760-a682-1fde8ddb95ac</field>

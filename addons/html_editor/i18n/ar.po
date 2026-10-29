@@ -1,16 +1,16 @@
-# Translation of Odoo Server.
+# Translation of Techno AI Server.
 # This file contains the translation of the following modules:
 # * html_editor
 #
 # Translators:
 # Martin Trigaux, 2024
 # Tiffany Chang, 2024
-# Wil Odoo, 2025
+# Wil Techno AI, 2025
 # Malaz Abuidris <msea@odoo.com>, 2025
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Techno AI Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:38+0000\n"
 "PO-Revision-Date: 2026-10-20 10:32+0000\n"
@@ -1718,7 +1718,7 @@ msgstr "هذه الصورة خارجية"
 #: code:addons/html_editor/static/src/main/media/image_crop.js:0
 msgid ""
 "This type of image is not supported for cropping.<br/>If you want to crop "
-"it, please first download it from the original source and upload it in Odoo."
+"it, please first download it from the original source and upload it in Techno AI."
 msgstr ""
 "هذا النوع من الصور لا يدعم خاصية القص.<br/> إذا أردت قصها، يرجى تنزيلها أولاً "
 "من المصدر الأصلي ثم رفعها في أودو. "

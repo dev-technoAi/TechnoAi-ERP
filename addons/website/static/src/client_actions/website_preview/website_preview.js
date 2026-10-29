@@ -81,7 +81,7 @@ export class WebsitePreview extends Component {
             this.backendWebsiteId = unslugHtmlDataObject(backendWebsiteRepr).id;
 
             const encodedPath = encodeURIComponent(this.path);
-            if (!session.website_bypass_domain_redirect // Used by the Odoo support (bugs to be expected)
+            if (!session.website_bypass_domain_redirect // Used by the Techno AI support (bugs to be expected)
                     // As a stable fix, we chose to never redirect to the right
                     // domain anymore in this case. We still do when using the
                     // website switcher, but not when reaching the "default"
@@ -173,7 +173,7 @@ export class WebsitePreview extends Component {
         });
 
         /**
-         * This removes the 'Odoo' prefix of the title service to display
+         * This removes the 'Techno AI' prefix of the title service to display
          * cleanly the frontend's document title (see _replaceBrowserUrl), and
          * replaces the backend favicon with the frontend's one.
          * These changes are reverted when the component is unmounted.

@@ -5,7 +5,7 @@
     'version': '1.0',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Bahrain in Odoo.
+This is the base module to manage the accounting chart for Bahrain in Techno AI.
 ===========================================================================
 Bahrain accounting basic charts and localization.
 

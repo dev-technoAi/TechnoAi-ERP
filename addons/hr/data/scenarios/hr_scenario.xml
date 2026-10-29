@@ -37,7 +37,7 @@
             <field name="name">Chief Executive Officer</field>
             <field name="department_id" ref="dep_management"/>
             <field name="description">
-                Demonstration of different Odoo services for each client and convincing the client about functionality of
+                Demonstration of different Techno AI services for each client and convincing the client about functionality of
                 the application.
                 The candidate should have excellent communication skills.
                 Relationship building and influencing skills
