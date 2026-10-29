@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- the standard templates of the original Task Hub; kept when Task Hub data is reset -->
+    <data noupdate="1">
+        <record id="template_it_1" model="taskhub.template">
+            <field name="name">Server &amp; Backup Health Check</field>
+            <field name="description" type="html"><p>Inspect cloud instances, database backups, and server resource usage</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_it"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">10</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Verify automated database snapshots&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Check server CPU/RAM memory utilization&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Review security firewall error logs&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_it_2" model="taskhub.template">
+            <field name="name">Cybersecurity Logs &amp; Firewall Audit</field>
+            <field name="description" type="html"><p>Review firewall, authentication logs, and detect abnormal network traffic</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_it"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">20</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Scan VPN session logs for unusual IPs&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Verify SSL certificate renewal status&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Rotate elevated admin credentials &amp; tokens&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_it_3" model="taskhub.template">
+            <field name="name">Support Ticket Resolution Queue</field>
+            <field name="description" type="html"><p>Review and close outstanding departmental IT helpdesk tickets</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_it"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">30</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Address urgent workstation hardware issues&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Assign pending network access requests&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Update antivirus definitions on client machines&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_it_4" model="taskhub.template">
+            <field name="name">Production Deployment &amp; Smoke Test</field>
+            <field name="description" type="html"><p>Deploy code updates, run migrations and monitor health metrics</p></field>
+            <field name="priority">urgent</field>
+            <field name="department_id" ref="dept_it"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">40</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Execute database schema migration scripts&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Deploy production release bundle&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Verify zero-downtime healthcheck endpoints&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_admin_1" model="taskhub.template">
+            <field name="name">Office Facility &amp; Workplace Safety Inspection</field>
+            <field name="description" type="html"><p>Inspect air conditioning, electrical fixtures, lighting, and emergency exits</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_admin"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">10</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Inspect AC/HVAC cooling, electrical panels &amp; lighting&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Check fire extinguishers &amp; emergency exit pathways&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Audit meeting rooms cleanliness &amp; AV display setup&quot;, &quot;sequence&quot;: 30}),
+                Command.create({&quot;name&quot;: &quot;Review security reception log &amp; visitor gate passes&quot;, &quot;sequence&quot;: 40}),
+            ]"/>
+        </record>
+        <record id="template_admin_2" model="taskhub.template">
+            <field name="name">Office Supplies &amp; Stationery Reorder Audit</field>
+            <field name="description" type="html"><p>Audit consumables inventory, printer supplies, and office stationery</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_admin"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">20</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Audit physical stock of printer toner &amp; A4 paper reams&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Check pantry supplies, coffee/tea &amp; drinking water cans&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Issue reorder request for depleted stationery supplies&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_admin_3" model="taskhub.template">
+            <field name="name">Utility Bills &amp; Building Maintenance Coordination</field>
+            <field name="description" type="html"><p>Collect utility statements, meter readings, and coordinate technician visits</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_admin"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">30</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Collect electricity, water, internet &amp; telecom invoices&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Verify meter readings against invoiced consumption&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Schedule preventive HVAC servicing with contractor&quot;, &quot;sequence&quot;: 30}),
+                Command.create({&quot;name&quot;: &quot;Forward verified invoices to Accounts for payment&quot;, &quot;sequence&quot;: 40}),
+            ]"/>
+        </record>
+        <record id="template_admin_4" model="taskhub.template">
+            <field name="name">Company Fleet &amp; Transport Asset Audit</field>
+            <field name="description" type="html"><p>Inspect company transport vehicles, mileage logs, and shared hardware assets</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_admin"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">40</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Audit vehicle driver logbooks, mileage &amp; fuel receipts&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Verify vehicle road registration &amp; insurance validity&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Schedule vehicle oil change &amp; mechanical inspection&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_hr_1" model="taskhub.template">
+            <field name="name">Daily Attendance &amp; Leave Request Processing</field>
+            <field name="description" type="html"><p>Review staff clock-in records, overtime, and leave applications</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_hr"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">10</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Review biometric / portal check-in anomalies&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Approve pending annual or sick leave requests&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Calculate overtime hours for shift workers&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_hr_2" model="taskhub.template">
+            <field name="name">Employee Onboarding &amp; Documentation Follow-up</field>
+            <field name="description" type="html"><p>Coordinate badge, contracts, and equipment with new hires</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_hr"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">20</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Send welcome kit &amp; signed employment contracts&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Coordinate IT laptop and access provisioning&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Conduct day-one company policy orientation&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_hr_3" model="taskhub.template">
+            <field name="name">Interview &amp; Candidate Assessment Pipeline</field>
+            <field name="description" type="html"><p>Review candidate interview feedback with department heads</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_hr"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">30</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Screen incoming candidate resumes for open vacancies&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Collect scoring rubric from hiring managers&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Send offer letter or status updates to applicants&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_hr_4" model="taskhub.template">
+            <field name="name">Monthly Payroll Reconciliation &amp; Disbursal Audit</field>
+            <field name="description" type="html"><p>Verify employee attendance, deductions, bonuses and salary sheet</p></field>
+            <field name="priority">urgent</field>
+            <field name="department_id" ref="dept_hr"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">40</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Audit leave deductions and unpaid absence records&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Verify health insurance and labor compliance additions&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Submit signed monthly payroll sheet to Accounts&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_accounts_1" model="taskhub.template">
+            <field name="name">Daily Bank &amp; Ledger Reconciliation</field>
+            <field name="description" type="html"><p>Match bank statements and update daily financial ledger transactions</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_accounts"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">10</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Download morning bank statement files&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Match ledger payments with bank entries&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Flag unrecorded deposits or transaction fees&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_accounts_2" model="taskhub.template">
+            <field name="name">Vendor Invoice Verification &amp; Approvals</field>
+            <field name="description" type="html"><p>Audit incoming supplier bills and approve scheduled disbursements</p></field>
+            <field name="priority">urgent</field>
+            <field name="department_id" ref="dept_accounts"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">20</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Cross-check supplier invoices against PO and GRN&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Verify tax breakdown and VAT compliance&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Queue disbursements for approval in bank portal&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_accounts_3" model="taskhub.template">
+            <field name="name">Petty Cash &amp; Daily Expense Audit</field>
+            <field name="description" type="html"><p>Review receipts and reconcile petty cash vouchers</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_accounts"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">30</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Count physical petty cash drawer balance&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;File physical expense receipts with signed vouchers&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+        <record id="template_accounts_4" model="taskhub.template">
+            <field name="name">Client Invoicing &amp; Accounts Receivable Follow-up</field>
+            <field name="description" type="html"><p>Generate customer invoices and follow up on overdue receivables</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_accounts"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">40</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Generate tax invoices for milestone deliverables&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Send customer statement of account for 30+ day aging&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Record received customer wire payments&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_procurement_1" model="taskhub.template">
+            <field name="name">RFQ &amp; Supplier Quotation Comparison</field>
+            <field name="description" type="html"><p>Compare supplier price quotations for incoming RFQ product list</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_procurement"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">10</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Review RFQ product specifications &amp; quantities&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Request pricing from top 3 registered vendors&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Prepare comparative quotation evaluation sheet&quot;, &quot;sequence&quot;: 30}),
+                Command.create({&quot;name&quot;: &quot;Verify delivery timeline &amp; payment terms&quot;, &quot;sequence&quot;: 40}),
+            ]"/>
+        </record>
+        <record id="template_procurement_2" model="taskhub.template">
+            <field name="name">Purchase Orders &amp; Quotation Review</field>
+            <field name="description" type="html"><p>Review pending PO approvals and supplier quotation comparisons</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_procurement"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">20</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Confirm product part numbers &amp; specs&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Obtain department head sign-off&quot;, &quot;sequence&quot;: 20}),
+                Command.create({&quot;name&quot;: &quot;Issue finalized Purchase Order to vendor&quot;, &quot;sequence&quot;: 30}),
+            ]"/>
+        </record>
+        <record id="template_procurement_3" model="taskhub.template">
+            <field name="name">Critical Inventory Stock Level Audit</field>
+            <field name="description" type="html"><p>Check minimum threshold stock and expedite open purchase requests</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_procurement"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">30</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Identify out-of-stock items in warehouse&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Reorder critical consumable inventory&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+        <record id="template_procurement_4" model="taskhub.template">
+            <field name="name">Vendor Shipment Tracking &amp; Delivery Follow-up</field>
+            <field name="description" type="html"><p>Track in-transit consignments with logistics partners</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_procurement"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">40</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Contact freight carrier for tracking updates&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Verify Goods Receipt Note (GRN) upon arrival&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+        <record id="template_operations_1" model="taskhub.template">
+            <field name="name">Daily Facility &amp; Safety Inspection</field>
+            <field name="description" type="html"><p>Walkthrough operational floor, safety compliance, and premises check</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_operations"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">10</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Inspect fire extinguishers &amp; emergency exits&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Check workspace HVAC and lighting systems&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+        <record id="template_operations_2" model="taskhub.template">
+            <field name="name">Shift Handover &amp; Daily Briefing</field>
+            <field name="description" type="html"><p>Summarize shift metrics, handovers, and operational bottlenecks</p></field>
+            <field name="priority">medium</field>
+            <field name="department_id" ref="dept_operations"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">20</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Log pending items for upcoming shift team&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Review completed daily dispatch goals&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+        <record id="template_operations_3" model="taskhub.template">
+            <field name="name">Equipment Maintenance Status Audit</field>
+            <field name="description" type="html"><p>Verify operational uptime and scheduled preventive maintenance</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_operations"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">30</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Review preventive maintenance logs&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Inspect machinery safety guards and calibration&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+        <record id="template_executive_1" model="taskhub.template">
+            <field name="name">Daily Executive KPI &amp; Operations Review</field>
+            <field name="description" type="html"><p>Review daily revenue, deliverables, and departmental KPI reports</p></field>
+            <field name="priority">urgent</field>
+            <field name="department_id" ref="dept_executive"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">10</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Inspect departmental daily output metrics&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Review high-value RFQ deals &amp; procurement spend&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+        <record id="template_executive_2" model="taskhub.template">
+            <field name="name">Strategic Priorities &amp; Cross-Department Briefing</field>
+            <field name="description" type="html"><p>Follow up on high-impact initiatives with unit managers</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_executive"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">20</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Hold sync with Operations, IT &amp; Procurement leads&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Review unblocking requirements for key initiatives&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+        <record id="template_executive_3" model="taskhub.template">
+            <field name="name">Client &amp; Stakeholder Communications Briefing</field>
+            <field name="description" type="html"><p>Address critical enterprise partner updates and communications</p></field>
+            <field name="priority">high</field>
+            <field name="department_id" ref="dept_executive"/>
+            <field name="is_standard" eval="True"/>
+            <field name="sequence">30</field>
+            <field name="check_ids" eval="[Command.clear()] + [
+                Command.create({&quot;name&quot;: &quot;Review major partner proposals and deliverable milestones&quot;, &quot;sequence&quot;: 10}),
+                Command.create({&quot;name&quot;: &quot;Sign approved commercial contracts &amp; service agreements&quot;, &quot;sequence&quot;: 20}),
+            ]"/>
+        </record>
+    </data>
+</odoo>

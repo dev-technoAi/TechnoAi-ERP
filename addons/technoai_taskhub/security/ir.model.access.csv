@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_taskhub_task_user,taskhub.task user,model_taskhub_task,group_taskhub_user,1,1,1,1
+access_taskhub_task_check_user,taskhub.task.check user,model_taskhub_task_check,group_taskhub_user,1,1,1,1
+access_taskhub_template_user,taskhub.template user,model_taskhub_template,group_taskhub_user,1,1,1,1
+access_taskhub_template_check_user,taskhub.template.check user,model_taskhub_template_check,group_taskhub_user,1,1,1,1
+access_taskhub_team_member_admin,taskhub.team.member admin,model_taskhub_team_member,group_taskhub_admin,1,1,1,1
+access_taskhub_reset_admin,taskhub.reset admin,model_taskhub_reset,group_taskhub_admin,1,1,1,1

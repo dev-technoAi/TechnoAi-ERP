@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="taskhub_department_action" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">hr.department</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_taskhub_root"
+              name="Task Hub"
+              web_icon="technoai_taskhub,static/description/icon.png"
+              groups="group_taskhub_user"
+              sequence="4"/>
+
+    <!-- the overview opens the list, kanban and calendar of all tasks from its view buttons -->
+    <menuitem id="menu_taskhub_tasks" name="Tasks" parent="menu_taskhub_root" action="taskhub_overview_action" sequence="10"/>
+
+    <menuitem id="menu_taskhub_templates" name="Templates" parent="menu_taskhub_root" action="taskhub_template_action" sequence="60"/>
+    <menuitem id="menu_taskhub_team" name="Team" parent="menu_taskhub_root" action="taskhub_team_action" sequence="70"/>
+
+    <menuitem id="menu_taskhub_config" name="Configuration" parent="menu_taskhub_root" sequence="90"/>
+    <menuitem id="menu_taskhub_alert_sounds" name="Alert sounds" parent="menu_taskhub_config" action="taskhub_alert_sound_action" sequence="10"/>
+    <menuitem id="menu_taskhub_departments" name="Departments" parent="menu_taskhub_config" action="taskhub_department_action"
+              groups="group_taskhub_admin" sequence="20"/>
+    <menuitem id="menu_taskhub_reset" name="Reset Task Hub data" parent="menu_taskhub_config" action="taskhub_reset_action"
+              groups="group_taskhub_admin" sequence="90"/>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="taskhub_reset_view_form" model="ir.ui.view">
+        <field name="name">taskhub.reset.form</field>
+        <field name="model">taskhub.reset</field>
+        <field name="arch" type="xml">
+            <form string="Reset Task Hub data">
+                <div class="alert alert-danger" role="alert">
+                    <p class="mb-1"><strong>This permanently deletes all Task Hub tasks and custom templates.</strong></p>
+                    <p class="mb-0">Standard templates, departments, the team and everything outside Task Hub
+                        (customers, sales, purchases, invoices) are kept. Take a database backup first if you may need the data again.</p>
+                </div>
+                <group>
+                    <field name="confirm" placeholder="RESET"/>
+                </group>
+                <footer>
+                    <button name="action_reset" string="Reset Task Hub data" type="object" class="btn-danger"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="taskhub_reset_action" model="ir.actions.act_window">
+        <field name="name">Reset Task Hub data</field>
+        <field name="res_model">taskhub.reset</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

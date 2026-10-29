@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="technoai_taskhub.Overview">
+        <div class="o_action o_taskhub_overview">
+            <div class="o_control_panel d-flex align-items-center gap-2 px-3">
+                <button class="btn btn-primary" t-on-click="newTask"><i class="fa fa-plus me-1"/>New Task</button>
+                <button class="btn btn-secondary" t-on-click="useTemplate">Use Template</button>
+                <span class="o_taskhub_title ms-1">Tasks</span>
+                <div class="o_taskhub_search ms-auto">
+                    <i class="fa fa-search"/>
+                    <input type="text" placeholder="Search tasks..." t-on-input="onSearch"/>
+                </div>
+                <div class="btn-group ms-2">
+                    <button class="btn btn-secondary active" title="Overview"><i class="fa fa-th-list"/></button>
+                    <button class="btn btn-secondary" title="List" t-on-click="() => this.openViews('list')"><i class="oi oi-view-list"/></button>
+                    <button class="btn btn-secondary" title="Kanban" t-on-click="() => this.openViews('kanban')"><i class="oi oi-view-kanban"/></button>
+                    <button class="btn btn-secondary" title="Calendar" t-on-click="() => this.openViews('calendar')"><i class="fa fa-calendar"/></button>
+                </div>
+            </div>
+
+            <div class="o_content" t-if="state.data">
+                <t t-set="data" t-value="state.data"/>
+                <div class="o_taskhub_hello">
+                    <h2 t-esc="greeting"/>
+                    <small t-esc="today"/>
+                </div>
+
+                <div class="o_taskhub_kpis">
+                    <div class="o_taskhub_kpi" t-on-click="() => this.state.tab = 'today'">
+                        <small>Due today</small><b t-esc="data.counts.due_today"/>
+                    </div>
+                    <div class="o_taskhub_kpi" t-att-class="{ 'o_taskhub_kpi_bad': data.counts.overdue }" t-on-click="() => this.state.tab = 'overdue'">
+                        <small>Overdue</small><b t-esc="data.counts.overdue"/>
+                    </div>
+                    <div class="o_taskhub_kpi">
+                        <small>Open email RFQs</small><b t-esc="data.counts.open_rfqs"/>
+                    </div>
+                    <div class="o_taskhub_kpi" t-on-click="() => this.state.tab = 'done'">
+                        <small>Completed this week</small><b t-esc="data.counts.done_week"/>
+                    </div>
+                </div>
+
+                <div t-if="data.alert" class="o_taskhub_alert">
+                    <t t-set="alert" t-value="data.alert"/>
+                    <span class="o_taskhub_alert_bell"><i class="fa fa-bell"/></span>
+                    <div class="flex-grow-1 min-w-0">
+                        <span class="o_taskhub_tag">DUE ALERT · <t t-esc="alertTime(alert)"/></span>
+                        <span class="o_taskhub_tag o_taskhub_tag_soft">Priority: <t t-esc="alert.priority_label"/></span>
+                        <h3 class="o_taskhub_alert_title" t-on-click="() => this.openTask(alert)" t-esc="alert.name"/>
+                        <p t-if="alert.description" t-esc="alert.description"/>
+                    </div>
+                    <button class="btn btn-sm o_taskhub_snooze" t-on-click="() => this.snooze(5)"><i class="fa fa-moon-o me-1"/>Snooze 5m</button>
+                    <button class="btn btn-sm o_taskhub_snooze o_taskhub_snooze_long" t-on-click="() => this.snooze(10)"><i class="fa fa-moon-o me-1"/>Snooze 10m</button>
+                    <button class="btn btn-sm btn-secondary" t-on-click="dismiss">Dismiss Alert</button>
+                </div>
+
+                <div class="o_taskhub_tabs_row">
+                    <div class="o_taskhub_tabs">
+                        <t t-foreach="tabs" t-as="tab" t-key="tab.key">
+                            <button class="o_taskhub_tab" t-att-class="{ 'active': state.tab === tab.key }" t-on-click="() => this.state.tab = tab.key">
+                                <t t-esc="tab.label"/> <b t-esc="tab.count"/>
+                            </button>
+                        </t>
+                    </div>
+                    <label t-if="data.is_admin" class="o_taskhub_show ms-auto">
+                        Show
+                        <select class="form-select form-select-sm" t-on-change="setShow">
+                            <option value="everyone" t-att-selected="state.show === 'everyone'">Everyone</option>
+                            <option value="mine" t-att-selected="state.show === 'mine'">Only me</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="o_taskhub_list">
+                    <t t-foreach="tasks" t-as="task" t-key="task.id">
+                        <div class="o_taskhub_row" t-on-click="() => this.openTask(task)">
+                            <span class="o_taskhub_check" t-att-class="{ 'o_done': task.state === 'done' }"
+                                  t-on-click.stop="() => this.toggleDone(task)" title="Mark done">
+                                <i t-if="task.state === 'done'" class="fa fa-check"/>
+                            </span>
+                            <div class="flex-grow-1 min-w-0">
+                                <div class="o_taskhub_row_title" t-att-class="{ 'o_done': task.state === 'done' }" t-esc="task.name"/>
+                                <div class="o_taskhub_meta">
+                                    <span class="o_taskhub_dot" t-attf-class="o_taskhub_dot_{{ task.priority }}"/>
+                                    <span t-esc="task.priority_label"/>
+                                    <t t-if="task.department"> · <span t-esc="task.department"/></t>
+                                    <t t-if="task.user"> · <span t-esc="task.user"/></t>
+                                    <t t-if="task.steps"> · <span t-esc="task.steps"/></t>
+                                    <t t-if="task.linked"> · <span class="o_taskhub_link"><i class="fa fa-link me-1"/><t t-esc="task.linked"/></span></t>
+                                </div>
+                            </div>
+                            <span class="o_taskhub_due" t-att-class="{ 'o_late': task.overdue }" t-esc="dueLabel(task)"/>
+                            <i class="fa fa-angle-right o_taskhub_chevron"/>
+                        </div>
+                    </t>
+                    <div t-if="!tasks.length" class="o_taskhub_empty">
+                        <i class="fa fa-check-circle-o"/>
+                        <p>Nothing here. Enjoy the calm, or start a new task.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

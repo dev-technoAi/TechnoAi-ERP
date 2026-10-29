@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="taskhub_team_member_view_form" model="ir.ui.view">
+        <field name="name">taskhub.team.member.form</field>
+        <field name="model">taskhub.team.member</field>
+        <field name="arch" type="xml">
+            <form string="Add a team member">
+                <group>
+                    <group>
+                        <field name="name" placeholder="e.g. Ali Raza"/>
+                        <field name="email" placeholder="name@technoai.ae" widget="email"/>
+                        <field name="phone" placeholder="+971 55 000 0000" widget="phone"/>
+                    </group>
+                    <group>
+                        <field name="department_id"/>
+                        <field name="job_title"/>
+                        <field name="role" widget="radio" options="{'horizontal': true}"/>
+                    </group>
+                </group>
+                <div class="alert alert-info mb-0" role="alert">
+                    One step creates the Techno AI login, the employee record and the Task Hub role.
+                    The welcome email with the sign-in link goes out once outgoing email is set up.
+                </div>
+                <footer>
+                    <button name="action_create" string="Create member" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="taskhub_team_member_action" model="ir.actions.act_window">
+        <field name="name">Add a team member</field>
+        <field name="res_model">taskhub.team.member</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

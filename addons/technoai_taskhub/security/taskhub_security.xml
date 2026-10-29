@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_taskhub" model="ir.module.category">
+        <field name="name">Task Hub</field>
+        <field name="sequence">15</field>
+    </record>
+
+    <record id="group_taskhub_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_taskhub"/>
+        <field name="comment">Sees the tasks assigned to, created by or followed by the user.</field>
+    </record>
+
+    <record id="group_taskhub_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_category_taskhub"/>
+        <field name="implied_ids" eval="[(4, ref('group_taskhub_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="comment">Sees every task, manages the team and standard templates, and can reset Task Hub data.</field>
+    </record>
+
+    <!-- every internal user can use Task Hub -->
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_taskhub_user'))]"/>
+    </record>
+
+    <record id="rule_taskhub_task_user" model="ir.rule">
+        <field name="name">Task Hub: own, assigned and followed tasks</field>
+        <field name="model_id" ref="model_taskhub_task"/>
+        <field name="groups" eval="[(4, ref('group_taskhub_user'))]"/>
+        <field name="domain_force">['|', '|', '|', ('user_id', '=', user.id), ('create_uid', '=', user.id), ('assigned_by_id', '=', user.id), ('message_partner_ids', 'in', [user.partner_id.id])]</field>
+    </record>
+
+    <record id="rule_taskhub_task_admin" model="ir.rule">
+        <field name="name">Task Hub: all tasks for administrators</field>
+        <field name="model_id" ref="model_taskhub_task"/>
+        <field name="groups" eval="[(4, ref('group_taskhub_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_taskhub_task_company" model="ir.rule">
+        <field name="name">Task Hub: multi-company</field>
+        <field name="model_id" ref="model_taskhub_task"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+
+    <record id="rule_taskhub_template_user_edit" model="ir.rule">
+        <field name="name">Task Hub: users edit only their own custom templates</field>
+        <field name="model_id" ref="model_taskhub_template"/>
+        <field name="groups" eval="[(4, ref('group_taskhub_user'))]"/>
+        <field name="domain_force">[('is_standard', '=', False), ('create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="False"/>
+    </record>
+
+    <record id="rule_taskhub_template_check_user_edit" model="ir.rule">
+        <field name="name">Task Hub: users edit only the steps of their own custom templates</field>
+        <field name="model_id" ref="model_taskhub_template_check"/>
+        <field name="groups" eval="[(4, ref('group_taskhub_user'))]"/>
+        <field name="domain_force">[('template_id.is_standard', '=', False), ('template_id.create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="False"/>
+    </record>
+
+    <record id="rule_taskhub_template_check_admin" model="ir.rule">
+        <field name="name">Task Hub: administrators edit every template step</field>
+        <field name="model_id" ref="model_taskhub_template_check"/>
+        <field name="groups" eval="[(4, ref('group_taskhub_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_taskhub_template_admin" model="ir.rule">
+        <field name="name">Task Hub: administrators edit every template</field>
+        <field name="model_id" ref="model_taskhub_template"/>
+        <field name="groups" eval="[(4, ref('group_taskhub_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+</odoo>

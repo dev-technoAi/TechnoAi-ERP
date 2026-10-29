@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dept_it" model="hr.department">
+            <field name="name">IT</field>
+            <field name="color">4</field>
+        </record>
+        <record id="dept_admin" model="hr.department">
+            <field name="name">Admin</field>
+            <field name="color">2</field>
+        </record>
+        <record id="dept_hr" model="hr.department">
+            <field name="name">HR</field>
+            <field name="color">9</field>
+        </record>
+        <record id="dept_accounts" model="hr.department">
+            <field name="name">Accounts</field>
+            <field name="color">10</field>
+        </record>
+        <record id="dept_procurement" model="hr.department">
+            <field name="name">Procurement</field>
+            <field name="color">3</field>
+        </record>
+        <record id="dept_operations" model="hr.department">
+            <field name="name">Operations</field>
+            <field name="color">7</field>
+        </record>
+        <record id="dept_executive" model="hr.department">
+            <field name="name">Executive / Head</field>
+            <field name="color">1</field>
+        </record>
+    </data>
+</odoo>

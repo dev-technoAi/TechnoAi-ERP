@@ -1,0 +1,323 @@
+// Tasks overview, laid out like the original Task Hub dashboard
+
+.o_taskhub_overview {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    > .o_control_panel {
+        min-height: 62px;
+        flex: none;
+    }
+
+    .o_taskhub_title {
+        font-size: 1.15rem;
+        font-weight: 500;
+    }
+
+    .o_taskhub_search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 340px;
+        height: 34px;
+        padding: 0 10px;
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        background: $white;
+
+        input {
+            flex: 1;
+            border: 0;
+            outline: 0;
+            background: transparent;
+        }
+    }
+
+    > .o_content {
+        flex: 1;
+        overflow: auto;
+        background: transparent;
+    }
+
+    .o_taskhub_hello {
+        margin-bottom: 14px;
+
+        h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        small {
+            color: $text-muted;
+        }
+    }
+
+    .o_taskhub_kpis {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 14px;
+    }
+
+    .o_taskhub_kpi {
+        padding: 14px 18px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        background: $white;
+        cursor: pointer;
+
+        small {
+            display: block;
+            color: $text-muted;
+        }
+
+        b {
+            display: block;
+            margin-top: 4px;
+            font-size: 1.9rem;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        &.o_taskhub_kpi_bad {
+            border-color: #F6C9C4;
+            background: #FDECEA;
+            color: #C2453B;
+
+            small {
+                color: #C2453B;
+            }
+        }
+    }
+
+    .o_taskhub_alert {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 16px;
+        padding: 14px 18px;
+        border: 2px solid #F3A79F;
+        border-radius: 12px;
+        background: #FFF4F3;
+        box-shadow: 0 0 0 4px rgba(194, 69, 59, 0.06);
+
+        p {
+            margin: 2px 0 0;
+            color: $text-muted;
+        }
+    }
+
+    .o_taskhub_alert_bell {
+        display: grid;
+        flex: none;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: #E11D48;
+        color: $white;
+        font-size: 20px;
+        animation: o_taskhub_ring 1.2s ease-in-out infinite;
+    }
+
+    .o_taskhub_tag {
+        display: inline-block;
+        margin-right: 4px;
+        padding: 2px 7px;
+        border-radius: 4px;
+        background: #FDE2DF;
+        color: #C2453B;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+    }
+
+    .o_taskhub_tag_soft {
+        background: #FFE4E6;
+    }
+
+    .o_taskhub_alert_title {
+        margin: 4px 0 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .o_taskhub_snooze {
+        background: #F59E0B;
+        color: $white;
+
+        &.o_taskhub_snooze_long {
+            background: #D97706;
+        }
+
+        &:hover {
+            color: $white;
+            filter: brightness(0.95);
+        }
+    }
+
+    .o_taskhub_tabs_row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .o_taskhub_tabs {
+        display: flex;
+        gap: 6px;
+    }
+
+    .o_taskhub_tab {
+        height: 30px;
+        padding: 0 12px;
+        border: 1px solid $border-color;
+        border-radius: 15px;
+        background: $white;
+        color: $body-color;
+        font-size: 0.85rem;
+
+        b {
+            margin-left: 4px;
+            color: $text-muted;
+            font-weight: 500;
+        }
+
+        &.active {
+            border-color: #101F23;
+            background: #101F23;
+            color: $white;
+
+            b {
+                color: #9FE7E7;
+            }
+        }
+    }
+
+    .o_taskhub_show {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: $text-muted;
+
+        select {
+            width: auto;
+        }
+    }
+
+    .o_taskhub_list {
+        overflow: hidden;
+        border-radius: 10px;
+        background: $white;
+    }
+
+    .o_taskhub_row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 18px;
+        border-bottom: 1px solid #F1F4F7;
+        cursor: pointer;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        &:hover {
+            background: #F8FBFC;
+        }
+    }
+
+    .o_taskhub_check {
+        display: grid;
+        flex: none;
+        place-items: center;
+        width: 18px;
+        height: 18px;
+        border: 1.5px solid #C7D0D6;
+        border-radius: 4px;
+        color: $white;
+        font-size: 11px;
+
+        &.o_done {
+            border-color: $o-success;
+            background: $o-success;
+        }
+    }
+
+    .o_taskhub_row_title {
+        font-weight: 500;
+
+        &.o_done {
+            color: $text-muted;
+            text-decoration: line-through;
+        }
+    }
+
+    .o_taskhub_meta {
+        margin-top: 2px;
+        color: $text-muted;
+        font-size: 0.82rem;
+    }
+
+    .o_taskhub_dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-right: 5px;
+        border-radius: 50%;
+        background: #22C55E;
+    }
+
+    .o_taskhub_dot_urgent { background: #E11D48; }
+    .o_taskhub_dot_high { background: #F97316; }
+    .o_taskhub_dot_medium { background: #EAB308; }
+
+    .o_taskhub_link {
+        color: $o-brand-primary;
+    }
+
+    .o_taskhub_due {
+        flex: none;
+        color: $text-muted;
+        font-size: 0.85rem;
+
+        &.o_late {
+            color: #C2453B;
+            font-weight: 500;
+        }
+    }
+
+    .o_taskhub_chevron {
+        color: #A3AFB7;
+    }
+
+    .o_taskhub_empty {
+        padding: 48px 0;
+        color: $text-muted;
+        text-align: center;
+
+        .fa {
+            font-size: 32px;
+            color: $o-success;
+        }
+    }
+}
+
+@keyframes o_taskhub_ring {
+    0%, 60%, 100% { transform: rotate(0); }
+    10%, 30% { transform: rotate(-12deg); }
+    20%, 40% { transform: rotate(12deg); }
+}
+
+// templates library cards
+.o_taskhub_template_kanban .o_taskhub_checklist_hint {
+    padding: 6px 10px;
+    border: 1px solid #E3EEEE;
+    border-radius: 8px;
+    background: #F6FAFA;
+    color: $o-success;
+}

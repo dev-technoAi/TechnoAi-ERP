@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Team: the Techno AI employees who have a login, shown the Task Hub way -->
+    <record id="taskhub_team_view_list" model="ir.ui.view">
+        <field name="name">hr.employee.taskhub.team.list</field>
+        <field name="model">hr.employee</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="Team" create="0">
+                <header>
+                    <button name="%(technoai_taskhub.taskhub_team_member_action)d" type="action" string="Add Member"
+                            class="btn-primary" display="always" groups="technoai_taskhub.group_taskhub_admin"/>
+                </header>
+                <field name="name" string="Member"/>
+                <field name="work_email" string="Email"/>
+                <field name="department_id"/>
+                <field name="job_title" optional="hide"/>
+                <field name="taskhub_is_admin" string="Admin" widget="boolean_toggle" readonly="1"/>
+                <field name="mobile_phone" string="Phone / WhatsApp"/>
+                <field name="taskhub_open_task_count"/>
+                <button name="action_open_taskhub_tasks" type="object" icon="fa-tasks" title="Open tasks"/>
+                <field name="user_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="taskhub_team_action" model="ir.actions.act_window">
+        <field name="name">Team</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('user_id', '!=', False)]</field>
+        <field name="view_ids" eval="[Command.clear(),
+            Command.create({'view_mode': 'list', 'view_id': ref('taskhub_team_view_list')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add your first team member</p>
+            <p>One step creates the Techno AI login and the employee record.</p>
+        </field>
+    </record>
+</odoo>

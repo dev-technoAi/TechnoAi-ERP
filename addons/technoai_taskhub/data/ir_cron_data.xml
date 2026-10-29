@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_taskhub_due_reminders" model="ir.cron">
+        <field name="name">Task Hub: due reminders</field>
+        <field name="model_id" ref="model_taskhub_task"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_send_due_reminders()</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

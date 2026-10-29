@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="taskhub_task_view_form" model="ir.ui.view">
+        <field name="name">taskhub.task.form</field>
+        <field name="model">taskhub.task</field>
+        <field name="arch" type="xml">
+            <form string="Task">
+                <header>
+                    <button name="action_start" string="Start" type="object" class="btn-primary" invisible="state != 'todo'"/>
+                    <button name="action_mark_done" string="Mark Done" type="object" class="btn-primary" invisible="state == 'done'"/>
+                    <button name="action_reopen" string="Reopen" type="object" invisible="state != 'done'"/>
+                    <button name="action_save_as_template" string="Save as Template" type="object"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Overdue" bg_color="text-bg-danger" invisible="not is_overdue"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="e.g. Prepare quotation for Gulf Survey Systems"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="department_id"/>
+                            <field name="priority" widget="selection_badge"/>
+                        </group>
+                        <group>
+                            <field name="date_deadline"/>
+                            <field name="partner_id"/>
+                            <field name="linked_ref"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Checklist" name="checklist">
+                            <field name="check_progress" class="text-muted" invisible="not check_count"/>
+                            <field name="check_ids">
+                                <list editable="bottom" decoration-muted="status == 'completed'">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="quantity" optional="hide"/>
+                                    <field name="supplier" optional="hide"/>
+                                    <field name="link" widget="url" optional="hide"/>
+                                    <field name="note" optional="hide"/>
+                                    <field name="status" widget="badge"
+                                           decoration-success="status == 'completed'"
+                                           decoration-warning="status == 'working'"/>
+                                    <button name="action_toggle" type="object" icon="fa-check-square-o" title="Mark done / pending"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Details, instructions, links..."/>
+                        </page>
+                        <page string="Other Info" name="other">
+                            <group>
+                                <group>
+                                    <field name="assigned_by_id"/>
+                                    <field name="assigned_at"/>
+                                    <field name="template_id"/>
+                                </group>
+                                <group>
+                                    <field name="date_done"/>
+                                    <field name="company_id" groups="base.group_multi_company"/>
+                                    <field name="is_overdue" invisible="1"/>
+                                    <field name="check_count" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="taskhub_task_view_list" model="ir.ui.view">
+        <field name="name">taskhub.task.list</field>
+        <field name="model">taskhub.task</field>
+        <field name="arch" type="xml">
+            <list string="Tasks" decoration-danger="is_overdue" decoration-muted="state == 'done'" multi_edit="1">
+                <field name="name"/>
+                <field name="priority" widget="badge"
+                       decoration-danger="priority == 'urgent'" decoration-warning="priority == 'high'"
+                       decoration-info="priority == 'medium'"/>
+                <field name="department_id"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="check_progress" string="Steps"/>
+                <field name="partner_id" optional="hide"/>
+                <field name="linked_ref" optional="show"/>
+                <field name="date_deadline"/>
+                <field name="activity_ids" widget="list_activity" optional="hide"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'done'" decoration-info="state == 'in_progress'"/>
+                <field name="is_overdue" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="taskhub_task_view_kanban" model="ir.ui.view">
+        <field name="name">taskhub.task.kanban</field>
+        <field name="model">taskhub.task</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column" quick_create="false">
+                <field name="state"/>
+                <field name="is_overdue"/>
+                <field name="priority"/>
+                <templates>
+                    <t t-name="card">
+                        <field name="name" class="fw-bold fs-5"/>
+                        <div class="text-muted small">
+                            <field name="priority"/> · <field name="department_id"/>
+                        </div>
+                        <field name="check_progress" class="small text-muted"/>
+                        <footer class="pt-1">
+                            <field name="date_deadline" widget="remaining_days" invisible="state == 'done'"/>
+                            <field name="activity_ids" widget="kanban_activity" class="ms-2"/>
+                            <field name="user_id" widget="many2one_avatar_user" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="taskhub_task_view_calendar" model="ir.ui.view">
+        <field name="name">taskhub.task.calendar</field>
+        <field name="model">taskhub.task</field>
+        <field name="arch" type="xml">
+            <calendar string="Tasks" date_start="date_deadline" color="user_id" mode="month" quick_create="0">
+                <field name="user_id" avatar_field="avatar_128"/>
+                <field name="priority"/>
+                <field name="department_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="taskhub_task_view_search" model="ir.ui.view">
+        <field name="name">taskhub.task.search</field>
+        <field name="model">taskhub.task</field>
+        <field name="arch" type="xml">
+            <search string="Tasks">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="department_id"/>
+                <field name="partner_id"/>
+                <filter name="my_tasks" string="My Tasks" domain="[('user_id', '=', uid)]"/>
+                <filter name="my_department" string="My Department" domain="[('department_id.member_ids.user_id', '=', uid)]"/>
+                <separator/>
+                <filter name="open" string="Open" domain="[('state', '!=', 'done')]"/>
+                <filter name="overdue" string="Overdue" domain="[('is_overdue', '=', True)]"/>
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <filter name="urgent" string="Urgent / High" domain="[('priority', 'in', ('urgent', 'high'))]"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_user" string="Assigned to" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_department" string="Department" context="{'group_by': 'department_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_priority" string="Priority" context="{'group_by': 'priority'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="taskhub_task_action" model="ir.actions.act_window">
+        <field name="name">All Tasks</field>
+        <field name="res_model">taskhub.task</field>
+        <field name="view_mode">list,kanban,calendar,form</field>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first task</p>
+            <p>Plan departmental work with due times, checklists and alerts.</p>
+        </field>
+    </record>
+
+    <record id="taskhub_overview_action" model="ir.actions.client">
+        <field name="name">Tasks</field>
+        <field name="tag">technoai_taskhub.overview</field>
+    </record>
+</odoo>

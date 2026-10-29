@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="taskhub_template_view_form" model="ir.ui.view">
+        <field name="name">taskhub.template.form</field>
+        <field name="model">taskhub.template</field>
+        <field name="arch" type="xml">
+            <form string="Template">
+                <header>
+                    <button name="action_use_template" string="Use Template Now" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Standard" bg_color="text-bg-info" invisible="not is_standard"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="e.g. Supplier Price Comparison"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="priority" widget="selection_badge"/>
+                        </group>
+                        <group>
+                            <field name="is_standard"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="What is this template for?"/>
+                    <field name="check_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="taskhub_template_view_kanban" model="ir.ui.view">
+        <field name="name">taskhub.template.kanban</field>
+        <field name="model">taskhub.template</field>
+        <field name="arch" type="xml">
+            <kanban class="o_taskhub_template_kanban" create="1">
+                <field name="priority"/>
+                <field name="is_standard"/>
+                <templates>
+                    <t t-name="card" class="o_taskhub_template_card">
+                        <div class="d-flex gap-1 mb-2">
+                            <field name="department_id" class="badge rounded-pill text-bg-info"/>
+                            <field name="priority" widget="badge"
+                                   decoration-danger="priority == 'urgent'" decoration-warning="priority == 'high'"
+                                   decoration-info="priority == 'medium'" decoration-success="priority == 'low'"/>
+                            <span class="badge rounded-pill text-bg-light ms-auto" t-if="record.is_standard.raw_value">Standard</span>
+                            <span class="badge rounded-pill text-bg-light ms-auto" t-else="">Custom</span>
+                        </div>
+                        <field name="name" class="fw-bold fs-5"/>
+                        <field name="description" class="text-muted small o_text_overflow"/>
+                        <div class="o_taskhub_checklist_hint small mt-2">
+                            <i class="fa fa-check-square-o me-1"/>Checklist: <field name="check_count"/> subtasks
+                        </div>
+                        <footer class="mt-2">
+                            <button name="action_use_template" type="object" class="btn btn-primary btn-sm w-100">
+                                <i class="fa fa-check me-1"/>Use Template Now
+                            </button>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="taskhub_template_view_list" model="ir.ui.view">
+        <field name="name">taskhub.template.list</field>
+        <field name="model">taskhub.template</field>
+        <field name="arch" type="xml">
+            <list string="Templates">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="priority" widget="badge"/>
+                <field name="check_count"/>
+                <field name="is_standard"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="taskhub_template_view_search" model="ir.ui.view">
+        <field name="name">taskhub.template.search</field>
+        <field name="model">taskhub.template</field>
+        <field name="arch" type="xml">
+            <search string="Templates">
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="check_ids" string="Subtask"/>
+                <filter name="standard" string="Standard" domain="[('is_standard', '=', True)]"/>
+                <filter name="custom" string="Custom" domain="[('is_standard', '=', False)]"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_department" string="Department" context="{'group_by': 'department_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="taskhub_template_action" model="ir.actions.act_window">
+        <field name="name">Task Templates Library</field>
+        <field name="res_model">taskhub.template</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a reusable template</p>
+            <p>Save recurring work with its checklist, then start it in one click.</p>
+        </field>
+    </record>
+</odoo>
