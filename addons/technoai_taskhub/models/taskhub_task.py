@@ -21,6 +21,7 @@ LINKABLE_MODELS = [
     ('purchase.order', 'RFQ / Purchase Order'),
     ('account.move', 'Invoice / Bill'),
     ('project.task', 'Project Task'),
+    ('taskhub.rfq', 'Email RFQ'),
 ]
 
 
@@ -236,8 +237,7 @@ class TaskhubTask(models.Model):
 
     @api.model
     def _overview_open_rfq_count(self):
-        # filled in by the Email RFQs part of Task Hub
-        return 0
+        return self.env['taskhub.rfq'].search_count([('is_open', '=', True)])
 
     def _overview_values(self, now):
         priority_labels = dict(PRIORITIES)

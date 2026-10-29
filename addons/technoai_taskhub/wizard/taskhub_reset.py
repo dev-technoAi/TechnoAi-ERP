@@ -13,6 +13,9 @@ class TaskhubReset(models.TransientModel):
         return [
             ('taskhub.task', [('active', 'in', [True, False])]),
             ('taskhub.template', [('is_standard', '=', False), ('active', 'in', [True, False])]),
+            ('taskhub.quotation', []),
+            ('taskhub.rfq', []),
+            ('taskhub.sourcing', []),
         ]
 
     def action_reset(self):

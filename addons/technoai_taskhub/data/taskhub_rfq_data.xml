@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_taskhub_rfq" model="ir.sequence">
+            <field name="name">Task Hub RFQ</field>
+            <field name="code">taskhub.rfq</field>
+            <field name="prefix">RFQ-</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_taskhub_quotation" model="ir.sequence">
+            <field name="name">Task Hub Draft Quotation</field>
+            <field name="code">taskhub.quotation</field>
+            <field name="prefix">DQ-</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- one generic product carries the lines of quotations sent to the Sales app -->
+        <record id="product_quoted_item" model="product.product">
+            <field name="name">Quoted item</field>
+            <field name="type">service</field>
+            <field name="sale_ok" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">0</field>
+            <field name="invoice_policy">order</field>
+            <field name="taxes_id" eval="[Command.clear()]"/>
+        </record>
+
+        <!-- emails to rfq@<alias domain> become Email RFQs once incoming email is set up -->
+        <record id="mail_alias_taskhub_rfq" model="mail.alias">
+            <field name="alias_name">rfq</field>
+            <field name="alias_model_id" ref="model_taskhub_rfq"/>
+            <field name="alias_contact">everyone</field>
+        </record>
+    </data>
+</odoo>

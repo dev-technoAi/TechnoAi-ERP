@@ -15,6 +15,16 @@
     <!-- the overview opens the list, kanban and calendar of all tasks from its view buttons -->
     <menuitem id="menu_taskhub_tasks" name="Tasks" parent="menu_taskhub_root" action="taskhub_overview_action" sequence="10"/>
 
+    <menuitem id="menu_taskhub_rfqs" name="Email RFQs" parent="menu_taskhub_root" action="taskhub_rfq_action" sequence="20"/>
+    <menuitem id="menu_taskhub_rfq_inbox" name="RFQ Inbox" parent="menu_taskhub_root" action="taskhub_rfq_inbox_action"
+              groups="group_taskhub_admin" sequence="30"/>
+
+    <menuitem id="menu_taskhub_suppliers_root" name="Suppliers" parent="menu_taskhub_root" sequence="40"/>
+    <menuitem id="menu_taskhub_suppliers" name="Suppliers" parent="menu_taskhub_suppliers_root" action="taskhub_supplier_action" sequence="10"/>
+    <menuitem id="menu_taskhub_sourcing" name="Products" parent="menu_taskhub_suppliers_root" action="taskhub_sourcing_action" sequence="20"/>
+    <menuitem id="menu_taskhub_purchases" name="Purchases" parent="menu_taskhub_suppliers_root" action="taskhub_purchase_line_action" sequence="30"/>
+    <menuitem id="menu_taskhub_quotations" name="Draft Quotations" parent="menu_taskhub_suppliers_root" action="taskhub_quotation_action" sequence="40"/>
+
     <menuitem id="menu_taskhub_templates" name="Templates" parent="menu_taskhub_root" action="taskhub_template_action" sequence="60"/>
     <menuitem id="menu_taskhub_team" name="Team" parent="menu_taskhub_root" action="taskhub_team_action" sequence="70"/>
 

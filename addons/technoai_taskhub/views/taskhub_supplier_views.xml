@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Suppliers: Techno AI contacts marked as Task Hub suppliers -->
+    <record id="taskhub_supplier_view_list" model="ir.ui.view">
+        <field name="name">res.partner.taskhub.supplier.list</field>
+        <field name="model">res.partner</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="Suppliers">
+                <field name="name" string="Supplier"/>
+                <field name="taskhub_supplier_category" string="Category"/>
+                <field name="country_id"/>
+                <field name="email" optional="hide"/>
+                <field name="phone" optional="show"/>
+                <field name="taskhub_product_count"/>
+                <field name="taskhub_last_bought"/>
+                <field name="taskhub_last_price"/>
+                <field name="taskhub_currency_id" column_invisible="1"/>
+                <field name="taskhub_rating" widget="priority"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="taskhub_supplier_view_form" model="ir.ui.view">
+        <field name="name">res.partner.taskhub.supplier.form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form string="Supplier">
+                <sheet>
+                    <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'avatar_128'}"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="e.g. Dell Technologies Direct UAE"/></h1>
+                        <field name="taskhub_rating" widget="priority"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="is_company" invisible="1"/>
+                            <field name="taskhub_is_supplier" invisible="1"/>
+                            <field name="taskhub_supplier_category" string="Category"/>
+                            <field name="country_id"/>
+                            <field name="website" widget="url"/>
+                            <field name="taskhub_payment_terms"/>
+                        </group>
+                        <group>
+                            <field name="email" widget="email"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone" string="WhatsApp"/>
+                            <field name="comment" placeholder="Notes"/>
+                        </group>
+                    </group>
+                    <field name="taskhub_sourcing_ids" readonly="1">
+                        <list>
+                            <field name="name"/>
+                            <field name="part_number"/>
+                            <field name="unit_cost"/>
+                            <field name="currency_id" column_invisible="1"/>
+                            <field name="status" widget="badge" decoration-success="status == 'confirmed'"/>
+                            <field name="rfq_id"/>
+                            <field name="write_date" string="Updated"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="taskhub_supplier_action" model="ir.actions.act_window">
+        <field name="name">Suppliers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">['|', ('taskhub_is_supplier', '=', True), ('supplier_rank', '>', 0)]</field>
+        <field name="context">{'default_taskhub_is_supplier': True, 'default_is_company': True, 'res_partner_search_mode': 'supplier'}</field>
+        <field name="view_ids" eval="[Command.clear(),
+            Command.create({'view_mode': 'list', 'view_id': ref('taskhub_supplier_view_list')}),
+            Command.create({'view_mode': 'form', 'view_id': ref('taskhub_supplier_view_form')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add your first supplier</p>
+            <p>Who you buy from, what they sell and what you paid.</p>
+        </field>
+    </record>
+
+    <!-- Products: the sourcing history, quoted, inquired and confirmed -->
+    <record id="taskhub_sourcing_view_list" model="ir.ui.view">
+        <field name="name">taskhub.sourcing.list</field>
+        <field name="model">taskhub.sourcing</field>
+        <field name="arch" type="xml">
+            <list string="Products" editable="top">
+                <field name="name"/>
+                <field name="part_number" optional="show"/>
+                <field name="supplier_id" context="{'default_taskhub_is_supplier': True}"/>
+                <field name="url" widget="url" optional="show"/>
+                <field name="unit_cost"/>
+                <field name="currency_id" optional="hide"/>
+                <field name="rfq_id" optional="show"/>
+                <field name="client_id" optional="hide"/>
+                <field name="status" widget="badge" decoration-success="status == 'confirmed'" decoration-info="status == 'quoted'"/>
+                <field name="write_date" string="Updated" readonly="1" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="taskhub_sourcing_view_search" model="ir.ui.view">
+        <field name="name">taskhub.sourcing.search</field>
+        <field name="model">taskhub.sourcing</field>
+        <field name="arch" type="xml">
+            <search string="Products">
+                <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('part_number', 'ilike', self), ('specifications', 'ilike', self)]"/>
+                <field name="supplier_id"/>
+                <field name="rfq_id"/>
+                <filter name="confirmed" string="Confirmed orders" domain="[('status', '=', 'confirmed')]"/>
+                <filter name="unconfirmed" string="Not confirmed" domain="[('status', '!=', 'confirmed')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_supplier" string="Supplier" context="{'group_by': 'supplier_id'}"/>
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="taskhub_sourcing_action" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">taskhub.sourcing</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No sourced products yet</p>
+            <p>Prices and links from quotations land here, so the next request can reuse them.</p>
+        </field>
+    </record>
+
+    <!-- Purchases: what Techno AI actually bought, from the Purchase app -->
+    <record id="taskhub_purchase_line_action" model="ir.actions.act_window">
+        <field name="name">Purchases</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('order_id.state', 'in', ('purchase', 'done')), ('display_type', '=', False)]</field>
+        <field name="context">{'create': False}</field>
+    </record>
+</odoo>

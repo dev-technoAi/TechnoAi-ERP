@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="taskhub_quotation_view_form" model="ir.ui.view">
+        <field name="name">taskhub.quotation.form</field>
+        <field name="model">taskhub.quotation</field>
+        <field name="arch" type="xml">
+            <form string="Draft Quotation">
+                <header>
+                    <button name="action_send_email" string="Email to client &amp; mark Quoted" type="object" class="btn-primary"/>
+                    <button name="action_print_pdf" string="PDF" type="object" icon="fa-file-pdf-o"/>
+                    <button name="action_download_excel" string="Excel" type="object" icon="fa-file-excel-o"/>
+                    <button name="action_create_sale_order" string="Create quotation in Sales" type="object" icon="fa-share"
+                            invisible="sale_order_id"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_create_sale_order" type="object" class="oe_stat_button" icon="fa-file-text-o" invisible="not sale_order_id">
+                            <div class="o_stat_info"><span class="o_stat_text">Sales</span><field name="sale_order_id" class="o_stat_value" readonly="1"/></div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="rfq_id"/>
+                            <field name="partner_id"/>
+                            <field name="client_name"/>
+                            <field name="client_email" widget="email"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="valid_until"/>
+                            <field name="vat_rate"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="supplier_id" context="{'default_taskhub_is_supplier': True}"/>
+                            <field name="source_url" widget="url" optional="show"/>
+                            <field name="quantity"/>
+                            <field name="uom"/>
+                            <field name="cost"/>
+                            <field name="price_unit"/>
+                            <field name="subtotal"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+                    <group>
+                        <group>
+                            <field name="notes" nolabel="1" colspan="2" placeholder="Terms, delivery, warranty..."/>
+                        </group>
+                        <group class="oe_subtotal_footer">
+                            <field name="amount_untaxed"/>
+                            <field name="amount_tax"/>
+                            <field name="amount_total" class="oe_subtotal_footer_separator"/>
+                            <field name="amount_cost"/>
+                            <field name="margin_percent" string="Margin %"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="taskhub_quotation_view_list" model="ir.ui.view">
+        <field name="name">taskhub.quotation.list</field>
+        <field name="model">taskhub.quotation</field>
+        <field name="arch" type="xml">
+            <list string="Draft Quotations">
+                <field name="name"/>
+                <field name="rfq_id"/>
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="valid_until"/>
+                <field name="amount_total" sum="Total"/>
+                <field name="margin_percent" string="Margin %"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge" decoration-success="state == 'sent'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="taskhub_quotation_action" model="ir.actions.act_window">
+        <field name="name">Draft Quotations</field>
+        <field name="res_model">taskhub.quotation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

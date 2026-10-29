@@ -5,3 +5,9 @@ access_taskhub_template_user,taskhub.template user,model_taskhub_template,group_
 access_taskhub_template_check_user,taskhub.template.check user,model_taskhub_template_check,group_taskhub_user,1,1,1,1
 access_taskhub_team_member_admin,taskhub.team.member admin,model_taskhub_team_member,group_taskhub_admin,1,1,1,1
 access_taskhub_reset_admin,taskhub.reset admin,model_taskhub_reset,group_taskhub_admin,1,1,1,1
+access_taskhub_rfq_user,taskhub.rfq user,model_taskhub_rfq,group_taskhub_user,1,1,1,0
+access_taskhub_rfq_admin,taskhub.rfq admin,model_taskhub_rfq,group_taskhub_admin,1,1,1,1
+access_taskhub_rfq_line_user,taskhub.rfq.line user,model_taskhub_rfq_line,group_taskhub_user,1,1,1,1
+access_taskhub_quotation_user,taskhub.quotation user,model_taskhub_quotation,group_taskhub_user,1,1,1,1
+access_taskhub_quotation_line_user,taskhub.quotation.line user,model_taskhub_quotation_line,group_taskhub_user,1,1,1,1
+access_taskhub_sourcing_user,taskhub.sourcing user,model_taskhub_sourcing,group_taskhub_user,1,1,1,1

@@ -46,7 +46,8 @@ export function playAlertSound(sound = "industrial-siren", volume = 80) {
         if (!ctx) {
             return;
         }
-        if (navigator.vibrate) {
+        // browsers only allow vibration after the user has interacted with the page
+        if (navigator.vibrate && navigator.userActivation?.hasBeenActive) {
             navigator.vibrate([220, 80, 220, 80, 420]);
         }
         const now = ctx.currentTime;

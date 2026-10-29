@@ -6,9 +6,10 @@
         <field name="arch" type="xml">
             <form string="Reset Task Hub data">
                 <div class="alert alert-danger" role="alert">
-                    <p class="mb-1"><strong>This permanently deletes all Task Hub tasks and custom templates.</strong></p>
-                    <p class="mb-0">Standard templates, departments, the team and everything outside Task Hub
-                        (customers, sales, purchases, invoices) are kept. Take a database backup first if you may need the data again.</p>
+                    <p class="mb-1"><strong>This permanently deletes all Task Hub tasks, custom templates, email RFQs,
+                        draft quotations and sourcing records.</strong></p>
+                    <p class="mb-0">Standard templates, departments, the team, suppliers and everything outside Task Hub
+                        (customers, sales quotations, purchases, invoices) are kept. Take a database backup first if you may need the data again.</p>
                 </div>
                 <group>
                     <field name="confirm" placeholder="RESET"/>
