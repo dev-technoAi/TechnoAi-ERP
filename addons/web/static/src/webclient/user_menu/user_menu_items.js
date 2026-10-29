@@ -9,7 +9,7 @@ import { browser } from "../../core/browser/browser";
 import { registry } from "../../core/registry";
 
 function documentationItem(env) {
-    const documentationURL = "https://www.odoo.com/documentation/18.0";
+    const documentationURL = "https://technoai.ae";
     return {
         type: "item",
         id: "documentation",
@@ -23,7 +23,7 @@ function documentationItem(env) {
 }
 
 function supportItem(env) {
-    const url = session.support_url;
+    const url = session.support_url || "https://technoai.ae";
     return {
         type: "item",
         id: "support",
@@ -92,15 +92,9 @@ export function odooAccountItem(env) {
     return {
         type: "item",
         id: "account",
-        description: _t("My Odoo.com account"),
+        description: _t("Techno AI Portal"),
         callback: () => {
-            rpc("/web/session/account")
-                .then((url) => {
-                    browser.open(url, "_blank");
-                })
-                .catch(() => {
-                    browser.open("https://accounts.odoo.com/account", "_blank");
-                });
+            browser.open("https://technoai.ae", "_blank");
         },
         sequence: 60,
     };

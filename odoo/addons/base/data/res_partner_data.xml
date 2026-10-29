@@ -13,9 +13,9 @@
         </record>
 
         <record model="res.partner" id="base.partner_root">
-            <field name="name">System</field>
+            <field name="name">Techno AI</field>
             <field name="company_id" ref="main_company"/>
-            <field name="email">odoobot@example.com</field>
+            <field name="email">bot@technoai.ae</field>
             <field name="active" eval="False"/>
         </record>
 

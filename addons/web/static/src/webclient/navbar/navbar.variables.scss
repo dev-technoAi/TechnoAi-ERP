@@ -4,22 +4,22 @@ $o-navbar-height: 46px !default;
 $o-navbar-padding-v: 0px !default;
 $o-navbar-font-size: $o-font-size-base !default;
 
-$o-navbar-background: $o-brand-odoo !default;
-$o-navbar-border-bottom: 1px solid darken($o-brand-odoo, 10%) !default;
+$o-navbar-background: #0d1417 !default;
+$o-navbar-border-bottom: 1px solid rgba(40, 159, 183, 0.25) !default;
 
 $o-navbar-entry-margin-h: 0 !default;
 $o-navbar-entry-padding-h: .63em !default;
-$o-navbar-entry-border-radius: 0 !default;
-$o-navbar-entry-color: rgba($o-white, .9) !default;
-$o-navbar-entry-color--hover: $o-white !default;
+$o-navbar-entry-border-radius: 6px !default;
+$o-navbar-entry-color: rgba(159, 231, 231, 0.85) !default;
+$o-navbar-entry-color--hover: #ffffff !default;
 $o-navbar-entry-font-size: 1em !default;
-$o-navbar-entry-bg--hover: rgba($o-black, .08) !default;
+$o-navbar-entry-bg--hover: rgba(40, 159, 183, 0.2) !default;
 
-$o-navbar-entry-color--active: $o-navbar-entry-color--hover !default;
-$o-navbar-entry-bg--active: $o-navbar-entry-bg--hover !default;
+$o-navbar-entry-color--active: #289fb7 !default;
+$o-navbar-entry-bg--active: rgba(20, 107, 140, 0.4) !default;
 
 $o-navbar-brand-font-size: 1.2em !default;
-$o-navbar-brand-color: $o-navbar-entry-color !default;
+$o-navbar-brand-color: #ffffff !default;
 
 $o-navbar-badge-size: 11px !default;
 $o-navbar-badge-padding: 4px !default;

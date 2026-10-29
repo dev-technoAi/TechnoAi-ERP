@@ -16,22 +16,17 @@ version_info = (18, 0, 0, FINAL, 0, '')
 version = '.'.join(str(s) for s in version_info[:2]) + RELEASE_LEVELS_DISPLAY[version_info[3]] + str(version_info[4] or '') + version_info[5]
 series = serie = major_version = '.'.join(str(s) for s in version_info[:2])
 
-product_name = 'Odoo'
-description = 'Odoo Server'
-long_desc = '''Odoo is a complete ERP and CRM. The main features are accounting (analytic
-and financial), stock management, sales and purchases management, tasks
-automation, marketing campaigns, help desk, POS, etc. Technical features include
-a distributed server, an object database, a dynamic GUI,
-customizable reports, and XML-RPC interfaces.
-'''
+product_name = 'Techno AI'
+description = 'Techno AI Enterprise'
+long_desc = '''Techno AI is an Enterprise ERP and CRM solution.'''
 classifiers = """Development Status :: 5 - Production/Stable
 License :: OSI Approved :: GNU Lesser General Public License v3
 
 Programming Language :: Python
 """
-url = 'https://www.odoo.com'
-author = 'OpenERP S.A.'
-author_email = 'info@odoo.com'
+url = 'https://technoai.ae'
+author = 'Techno AI FZE'
+author_email = 'contact@technoai.ae'
 license = 'LGPL-3'
 
 nt_service_name = "odoo-server-" + series.replace('~','-')

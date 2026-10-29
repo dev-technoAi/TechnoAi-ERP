@@ -4,14 +4,13 @@
         <Setting addLabel="false">
                 <div class="user-heading">
                     <h3 class="px-0">
-                        Odoo <t t-esc="serverVersion"/>
-                        (Community Edition)
+                        Techno AI Enterprise <t t-esc="serverVersion"/>
                     </h3>
                 </div>
                 <div>
                     <div class="tab-content">
                         <div role="tabpanel" id="settings" class="tab-pane active text-muted o_web_settings_compact_subtitle">
-                            <small>Copyright © 2004 <a target="_blank" href="https://www.odoo.com" style="text-decoration: underline;">Odoo S.A.</a> <a id="license" target="_blank" href="http://www.gnu.org/licenses/lgpl.html" style="text-decoration: underline;">GNU LGPL Licensed</a></small>
+                            <small>Techno AI FZE &#8226; <a target="_blank" href="https://technoai.ae" style="text-decoration: underline; color: #289fb7; font-weight: 600;">technoai.ae</a></small>
                         </div>
                     </div>
                 </div>

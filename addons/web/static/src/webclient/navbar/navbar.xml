@@ -14,7 +14,7 @@
 
         <!-- App Brand -->
         <DropdownItem
-          t-if="!this.ui.isSmall and currentApp"
+          t-if="!this.ui.isSmall and currentApp and !state.isHomeMenuOpened"
           t-esc="currentApp.name"
           class="'o_menu_brand d-flex'"
           onSelected="() => this.onNavBarDropdownItemSelection(currentApp)"
@@ -23,7 +23,7 @@
 
         <div class="o_navbar_breadcrumbs d-contents"/>
 
-        <t t-if="!this.ui.isSmall">
+        <t t-if="!this.ui.isSmall and !state.isHomeMenuOpened">
           <!-- Current App Sections -->
           <t t-if="currentAppSections.length" t-call="web.NavBar.SectionsMenu">
             <t t-set="sections" t-value="currentAppSections" />
@@ -41,6 +41,70 @@
           </t>
         </div>
       </nav>
+
+      <!-- Full-screen Enterprise Apps Launcher Grid (Techno AI Home Menu) -->
+      <t t-if="state.isHomeMenuOpened" t-portal="'body'">
+        <div class="o_techno_home_menu">
+          <!-- Top Utility Badge -->
+          <div class="d-flex align-items-center justify-content-between w-100 px-4 pt-3 pb-2" style="max-width: 900px;">
+            <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill" style="background: rgba(18, 28, 33, 0.85); border: 1px solid rgba(40, 159, 183, 0.35);">
+              <span class="rounded-circle" style="width: 8px; height: 8px; background-color: #9fe7e7;"></span>
+              <span style="font-family: monospace; font-size: 12px; font-weight: 700; color: #ffffff;">technoai.ae</span>
+              <span class="badge rounded-pill" style="background: #146b8c; color: #9fe7e7; font-size: 10px;">Enterprise Apps</span>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary text-white rounded-pill px-3" t-on-click="() => this.toggleHomeMenu(false)">
+              <i class="oi oi-close me-1"></i> Close
+            </button>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="o_home_search my-4">
+            <i class="oi oi-search" style="color: #289fb7;" />
+            <input 
+              type="text" 
+              t-model="state.searchQuery" 
+              placeholder="Search applications..." 
+              autofocus="autofocus"
+            />
+            <button t-if="state.searchQuery" class="btn btn-sm btn-link text-muted p-0" t-on-click="() => state.searchQuery = ''">
+              <i class="oi oi-close" />
+            </button>
+          </div>
+
+          <!-- Apps Grid matching screenshot -->
+          <div class="o_apps_grid my-auto">
+            <t t-foreach="filteredApps" t-as="app" t-key="app.id">
+              <a 
+                class="o_app_item" 
+                t-att-href="getMenuItemHref(app)"
+                t-on-click.prevent="() => this.onAppClick(app)"
+              >
+                <div class="o_app_icon_box">
+                  <img 
+                    t-if="app.webIconData" 
+                    t-att-src="app.webIconData" 
+                    t-att-alt="app.name" 
+                  />
+                  <img 
+                    t-elif="app.webIcon" 
+                    t-attf-src="/{{app.webIcon.replace(',', '/')}}" 
+                    t-att-alt="app.name" 
+                  />
+                  <div t-else="" class="text-white fw-bold fs-3">
+                    <t t-esc="app.name ? app.name[0] : 'A'"/>
+                  </div>
+                </div>
+                <span class="o_app_label" t-esc="app.name"/>
+              </a>
+            </t>
+          </div>
+
+          <!-- Footer Legal -->
+          <div class="mt-auto pt-4 text-center small" style="color: #94a3b8;">
+            Techno AI FZE &#8226; Dubai, UAE &#8226; Redefining Intelligness
+          </div>
+        </div>
+      </t>
     </header>
   </t>
 
@@ -80,22 +144,14 @@
     </t>
     <t t-else="">
       <div t-if="!isScopedApp" class="o_navbar_apps_menu">
-        <Dropdown>
-          <button data-hotkey="h" title="Home Menu">
-            <i class="oi oi-apps" />
-          </button>
-          <t t-set-slot="content">
-            <DropdownItem
-              t-foreach="apps"
-              t-as="app"
-              t-key="app.id"
-              class="{ 'o_app': true, focus: menuService.getCurrentApp() === app }"
-              onSelected="() => this.onNavBarDropdownItemSelection(app)"
-              t-esc="app.name"
-              attrs="{ href: getMenuItemHref(app), 'data-menu-xmlid': app.xmlid, 'data-section': app.id }"
-            />
-          </t>
-        </Dropdown>
+        <button 
+          data-hotkey="h" 
+          title="Home Menu (Apps Launcher)" 
+          class="btn btn-link text-white p-2 d-flex align-items-center"
+          t-on-click="() => this.toggleHomeMenu()"
+        >
+          <i class="oi oi-apps" style="font-size: 1.25rem;" />
+        </button>
       </div>
       <div t-else="" class="mx-2"/>
     </t>
@@ -146,7 +202,7 @@
 
   <t t-name="web.NavBar.SectionsMenu">
     <div class="o_menu_sections d-flex flex-grow-1 flex-shrink-1 w-0" t-ref="appSubMenus" role="menu">
-        <t t-if="!this.ui.isSmall">
+        <t t-if="!this.ui.isSmall and !state.isHomeMenuOpened">
             <DropdownGroup>
                 <t t-foreach="sections" t-as="section" t-key="section.id">
                     <t

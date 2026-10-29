@@ -4,6 +4,7 @@ import { DropdownGroup } from "@web/core/dropdown/dropdown_group";
 import { Transition } from "@web/core/transition";
 import { useService } from "@web/core/utils/hooks";
 import { registry } from "@web/core/registry";
+import { router } from "@web/core/browser/router";
 import { debounce } from "@web/core/utils/timing";
 import { ErrorHandler } from "@web/core/utils/components";
 
@@ -63,11 +64,22 @@ export class NavBar extends Component {
             () => [adaptCounter]
         );
 
+        // only open the launcher on the bare root URL (/technoai), not on deep links
+        const { action, actionStack, model, menu_id } = router.current;
+        const isRootHome = !action && !actionStack?.length && !model && !menu_id;
         this.state = useState({
             isAllAppsMenuOpened: false,
             isAppMenuSidebarOpened: false,
+            isHomeMenuOpened: isRootHome,
+            searchQuery: "",
         });
         this.ui = useState(useService("ui"));
+
+        useExternalListener(window, "keydown", (ev) => {
+            if (ev.key === "Escape" && this.state.isHomeMenuOpened) {
+                this.state.isHomeMenuOpened = false;
+            }
+        });
     }
 
     handleItemError(error, item) {
@@ -202,7 +214,30 @@ export class NavBar extends Component {
     }
 
     getMenuItemHref(payload) {
-        return `/odoo/${payload.actionPath || "action-" + payload.actionID}`;
+        return `/technoai/${payload.actionPath || "action-" + payload.actionID}`;
+    }
+
+    toggleHomeMenu(force) {
+        if (typeof force === "boolean") {
+            this.state.isHomeMenuOpened = force;
+        } else {
+            this.state.isHomeMenuOpened = !this.state.isHomeMenuOpened;
+        }
+    }
+
+    get filteredApps() {
+        const q = (this.state.searchQuery || "").trim().toLowerCase();
+        const apps = this.menuService.getApps() || [];
+        if (!q) {
+            return apps;
+        }
+        return apps.filter((app) => (app.name || "").toLowerCase().includes(q));
+    }
+
+    onAppClick(app) {
+        this.state.isHomeMenuOpened = false;
+        this.state.searchQuery = "";
+        this.onNavBarDropdownItemSelection(app);
     }
 
     _closeAppMenuSidebar() {

@@ -150,7 +150,7 @@ export function stateToUrl(state) {
         pathKeysToOmit.splice(pathKeysToOmit.indexOf("resId"), 1);
     }
     const search = objectToUrlEncodedString(omit(state, ...pathKeysToOmit));
-    const start_url = isScopedApp() ? "scoped_app" : "odoo";
+    const start_url = isScopedApp() ? "scoped_app" : "technoai";
     return `/${start_url}${path}${search ? `?${search}` : ""}`;
 }
 
@@ -181,7 +181,7 @@ export function urlToState(urlObj) {
 
     const [prefix, ...splitPath] = urlObj.pathname.split("/").filter(Boolean);
 
-    if (["odoo", "scoped_app"].includes(prefix)) {
+    if (["technoai", "odoo", "scoped_app"].includes(prefix)) {
         const actionParts = [...splitPath.entries()].filter(
             ([_, part]) => !isNumeric(part) && part !== "new"
         );
@@ -227,7 +227,7 @@ export function urlToState(urlObj) {
             state.actionStack = actions;
         }
         if (prefix === "scoped_app" && !isDisplayStandalone()) {
-            // make sure /scoped_app are redirected to /odoo when using the browser instead of the PWA
+            // make sure /scoped_app are redirected to /technoai when using the browser instead of the PWA
             const url = browser.location.origin + router.stateToUrl(state);
             urlObj.href = url;
         }
@@ -327,13 +327,13 @@ browser.addEventListener("click", (ev) => {
         }
         if (
             browser.location.host === url.host &&
-            browser.location.pathname.startsWith("/odoo") &&
-            (["/web", "/odoo"].includes(url.pathname) || url.pathname.startsWith("/odoo/")) &&
+            (browser.location.pathname.startsWith("/technoai") || browser.location.pathname.startsWith("/odoo")) &&
+            (["/web", "/odoo", "/technoai"].includes(url.pathname) || url.pathname.startsWith("/technoai/") || url.pathname.startsWith("/odoo/")) &&
             ev.target.target !== "_blank"
         ) {
             ev.preventDefault();
             state = router.urlToState(url);
-            if (url.pathname.startsWith("/odoo") && url.hash) {
+            if ((url.pathname.startsWith("/technoai") || url.pathname.startsWith("/odoo")) && url.hash) {
                 browser.history.pushState({}, "", url.href);
             }
             new Promise((res) => setTimeout(res, 0)).then(() => routerBus.trigger("ROUTE_CHANGE"));

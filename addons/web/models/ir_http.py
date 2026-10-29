@@ -109,7 +109,7 @@ class Http(models.AbstractModel):
             "user_settings": self.env['res.users.settings']._find_or_create_for_user(user)._res_users_settings_format(),
             "server_version": version_info.get('server_version'),
             "server_version_info": version_info.get('server_version_info'),
-            "support_url": "https://www.odoo.com/buy",
+            "support_url": "https://technoai.ae",
             "name": user.name,
             "username": user.login,
             "quick_login": str2bool(IrConfigSudo.get_param('web.quick_login', default=True), True),

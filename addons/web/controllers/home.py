@@ -35,14 +35,18 @@ class Home(http.Controller):
     def index(self, s_action=None, db=None, **kw):
         if request.db and request.session.uid and not is_user_internal(request.session.uid):
             return request.redirect_query('/web/login_successful', query=request.params)
-        return request.redirect_query('/odoo', query=request.params)
+        return request.redirect_query('/technoai', query=request.params)
 
     def _web_client_readonly(self):
         return False
 
     # ideally, this route should be `auth="user"` but that don't work in non-monodb mode.
-    @http.route(['/web', '/odoo', '/odoo/<path:subpath>', '/scoped_app/<path:subpath>'], type='http', auth="none", readonly=_web_client_readonly)
+    @http.route(['/web', '/technoai', '/technoai/<path:subpath>', '/odoo', '/odoo/<path:subpath>', '/scoped_app/<path:subpath>'], type='http', auth="none", readonly=_web_client_readonly)
     def web_client(self, s_action=None, **kw):
+        if request.httprequest.path.startswith('/odoo'):
+            new_path = request.httprequest.path.replace('/odoo', '/technoai', 1)
+            query = {k: v for k, v in request.params.items() if k != 'subpath'}
+            return request.redirect_query(new_path, query=query, code=301)
 
         # Ensure we have both a database and a user
         ensure_db()

@@ -169,7 +169,7 @@ export class WebClient extends Component {
     registerServiceWorker() {
         if (navigator.serviceWorker) {
             navigator.serviceWorker
-                .register("/web/service-worker.js", { scope: "/odoo" })
+                .register("/web/service-worker.js", { scope: "/" })
                 .then((registration) => {
                     if (registration.active && registration.active.state === "activated") {
                         this.serviceWorkerActivatedDeferred.resolve();

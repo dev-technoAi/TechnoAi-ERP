@@ -295,7 +295,7 @@
                 </div>
                 <t t-if="entries" t-out="entries"/>
                 <div class="d-none d-lg-block mt-5 small text-center text-muted">
-                    Powered by <a target="_blank" href="http://www.odoo.com?utm_source=db&amp;utm_medium=portal" title="odoo"><img src="/web/static/img/logo.png" alt="Odoo Logo" height="15"/></a>
+                    Powered by <a target="_blank" href="https://technoai.ae" title="Techno AI" class="text-decoration-none fw-bold" style="color: #289fb7;">Techno AI</a>
                 </div>
             </div>
             <div class="vr d-none d-lg-block bg-300"/>
@@ -618,7 +618,7 @@
             <section t-if="debug and allow_api_keys">
                 <h4>
                 Developer API Keys
-                    <a href="https://www.odoo.com/documentation/master/developer/misc/api/external_api.html#api-keys" target="_blank">
+                    <a href="https://technoai.ae" target="_blank">
                         <i title="Documentation" class="fa fa-fw o_button_icon fa-info-circle"></i>
                     </a>
                 </h4>

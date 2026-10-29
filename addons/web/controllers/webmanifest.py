@@ -41,14 +41,14 @@ class WebManifest(http.Controller):
         return shortcuts
 
     def _get_webmanifest(self):
-        web_app_name = request.env['ir.config_parameter'].sudo().get_param('web.web_app_name', 'Odoo')
+        web_app_name = request.env['ir.config_parameter'].sudo().get_param('web.web_app_name', 'Techno AI')
         manifest = {
             'name': web_app_name,
-            'scope': '/odoo',
-            'start_url': '/odoo',
+            'scope': '/technoai',
+            'start_url': '/technoai',
             'display': 'standalone',
-            'background_color': '#714B67',
-            'theme_color': '#714B67',
+            'background_color': '#0d1417',
+            'theme_color': '#289fb7',
             'prefer_related_applications': False,
         }
         icon_sizes = ['192x192', '512x512']
@@ -76,7 +76,7 @@ class WebManifest(http.Controller):
             self._get_service_worker_content(),
             [
                 ('Content-Type', 'text/javascript'),
-                ('Service-Worker-Allowed', '/odoo'),
+                ('Service-Worker-Allowed', '/'),
             ]
         )
         return response
