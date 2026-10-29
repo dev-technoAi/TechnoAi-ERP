@@ -44,6 +44,7 @@ const SECTION_ICONS = {
     "technoai_taskhub.menu_taskhub_rfqs": "fa-envelope",
     "technoai_taskhub.menu_taskhub_rfq_inbox": "fa-inbox",
     "technoai_taskhub.menu_taskhub_suppliers_root": "fa-building-o",
+    "technoai_taskhub.menu_taskhub_reports": "fa-bar-chart",
     "technoai_taskhub.menu_taskhub_templates": "fa-clone",
     "technoai_taskhub.menu_taskhub_team": "fa-users",
     "hr.menu_hr_main": "fa-sitemap",

@@ -6,10 +6,12 @@
         <field name="target">new</field>
     </record>
 
+    <!-- hidden: Task Hub now runs inside Techno AI (technoai_taskhub); the external one stays reachable at /technoai/taskhub -->
     <menuitem id="menu_taskhub_root"
-              name="Task Hub"
+              name="Task Hub (web)"
               action="action_open_taskhub"
               web_icon="technoai_sso,static/description/icon.png"
               groups="base.group_user"
+              active="False"
               sequence="5"/>
 </odoo>
