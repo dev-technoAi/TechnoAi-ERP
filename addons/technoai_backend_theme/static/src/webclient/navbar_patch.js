@@ -20,6 +20,7 @@ const APP_ICONS = {
     "base.menu_management": "fa-th",
     "base.menu_administration": "fa-sliders",
     "technoai_sso.menu_taskhub_root": "fa-check-square-o",
+    "technoai_taskhub.menu_taskhub_root": "fa-check-square-o",
 };
 
 const SECTION_ICONS = {
@@ -39,6 +40,9 @@ const SECTION_ICONS = {
     "project.menu_projects_group_stage": "fa-folder-open",
     "project.menu_project_management": "fa-tasks",
     "contacts.res_partner_menu_contacts": "fa-address-book",
+    "technoai_taskhub.menu_taskhub_tasks": "fa-check-square-o",
+    "technoai_taskhub.menu_taskhub_templates": "fa-clone",
+    "technoai_taskhub.menu_taskhub_team": "fa-users",
     "hr.menu_hr_main": "fa-sitemap",
     "hr.menu_hr_employee_payroll": "fa-users",
     "hr.menu_hr_employee": "fa-address-card-o",
