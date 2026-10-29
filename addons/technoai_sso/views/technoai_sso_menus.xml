@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_open_taskhub" model="ir.actions.act_url">
+        <field name="name">Task Hub</field>
+        <field name="url">/technoai/taskhub</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_taskhub_root"
+              name="Task Hub"
+              action="action_open_taskhub"
+              web_icon="technoai_sso,static/description/icon.png"
+              groups="base.group_user"
+              sequence="5"/>
+</odoo>
