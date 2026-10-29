@@ -224,7 +224,27 @@ class TaskhubRfq(models.Model):
         }
 
     def action_fetch_emails(self):
-        """ Check the incoming mail servers now instead of waiting for the next run. """
+        """ Read the RFQ mailbox (or the incoming mail servers) now instead of waiting for the next run. """
+        mailbox = self.env['taskhub.mailbox']
+        if mailbox.is_configured():
+            try:
+                result = mailbox.fetch_rfq_emails()
+            except Exception as error:
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {'type': 'danger', 'title': _('RFQ mailbox'), 'message': str(error), 'sticky': True},
+                }
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'type': 'success' if result['created'] else 'info',
+                    'title': _('%s new RFQ(s)', result['created']),
+                    'message': _('%(known)s already imported, %(skipped)s not RFQs.', known=result['known'], skipped=result['skipped']),
+                    'next': {'type': 'ir.actions.client', 'tag': 'soft_reload'},
+                },
+            }
         servers = self.env['fetchmail.server'].sudo().search([('state', '=', 'done')])
         if not servers:
             return {

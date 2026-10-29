@@ -9,4 +9,14 @@
         <field name="interval_type">minutes</field>
         <field name="active" eval="True"/>
     </record>
+
+    <record id="ir_cron_taskhub_fetch_rfq_emails" model="ir.cron">
+        <field name="name">Task Hub: read RFQ emails</field>
+        <field name="model_id" ref="model_taskhub_mailbox"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_fetch_rfq_emails()</field>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
 </odoo>

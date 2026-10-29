@@ -8,6 +8,19 @@
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <app data-string="Task Hub" string="Task Hub" name="technoai_taskhub" groups="base.group_system">
+                    <block title="RFQ mailbox" name="taskhub_rfq_mailbox">
+                        <setting string="Read RFQ emails from a mailbox"
+                                 help="Every 10 minutes, quotation requests in this inbox become Email RFQs. The inbox is only read: nothing is marked as read, moved or deleted, and newsletters, OTPs and other non-RFQ emails are ignored.">
+                            <field name="taskhub_rfq_mailbox"/>
+                            <div class="content-group" invisible="not taskhub_rfq_mailbox">
+                                <div class="row mt8"><label for="taskhub_imap_host" class="col-lg-4 o_light_label"/><field name="taskhub_imap_host"/></div>
+                                <div class="row"><label for="taskhub_imap_port" class="col-lg-4 o_light_label"/><field name="taskhub_imap_port"/></div>
+                                <div class="row"><label for="taskhub_imap_user" class="col-lg-4 o_light_label"/><field name="taskhub_imap_user"/></div>
+                                <div class="row"><label for="taskhub_imap_password" class="col-lg-4 o_light_label"/><field name="taskhub_imap_password" password="True"/></div>
+                                <button name="action_taskhub_test_mailbox" type="object" string="Test connection" icon="fa-plug" class="btn-link mt8"/>
+                            </div>
+                        </setting>
+                    </block>
                     <block title="WhatsApp dispatch" name="taskhub_whatsapp">
                         <setting string="Provider" help="How Dispatch sends WhatsApp messages. Without an account, WhatsApp opens with the message ready to send.">
                             <field name="taskhub_whatsapp_provider" widget="radio"/>
