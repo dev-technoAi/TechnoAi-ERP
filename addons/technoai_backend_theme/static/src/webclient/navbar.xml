@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Logo, app item with icon and the page title; the elements and handlers are Odoo's own -->
+    <t t-inherit="web.NavBar" t-inherit-mode="extension">
+        <xpath expr="//t[@t-call='web.NavBar.AppsMenu']" position="before">
+            <img t-if="!this.ui.isSmall" class="o_tai_logo" src="/technoai_backend_theme/static/img/logo-mark-white.png" alt="Techno AI"/>
+        </xpath>
+        <xpath expr="//DropdownItem[contains(@class, 'o_menu_brand')]" position="replace">
+            <DropdownItem
+                t-if="!this.ui.isSmall and currentApp and !state.isHomeMenuOpened"
+                class="'o_menu_brand o_tai_nav_item o_tai_active d-flex'"
+                onSelected="() => this.onNavBarDropdownItemSelection(currentApp)"
+                attrs="{ href: getMenuItemHref(currentApp), 'data-menu-xmlid': currentApp.xmlid, 'data-section': currentApp.id }"
+            >
+                <i t-attf-class="fa fa-fw {{ taiAppIcon(currentApp) }}"/>
+                <span t-esc="currentApp.name"/>
+            </DropdownItem>
+        </xpath>
+        <xpath expr="//div[hasclass('o_menu_systray')]" position="before">
+            <div t-if="!this.ui.isSmall and currentApp and !state.isHomeMenuOpened" class="o_tai_app_title" t-esc="currentApp.name"/>
+        </xpath>
+    </t>
+
+    <!-- The apps launcher button becomes the sidebar's "Dashboard" entry -->
+    <t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension">
+        <xpath expr="//button[@data-hotkey='h']" position="replace">
+            <button
+                data-hotkey="h"
+                title="Home Menu (Apps Launcher)"
+                class="o_tai_nav_item btn"
+                t-on-click="() => this.toggleHomeMenu()"
+            >
+                <i class="fa fa-fw fa-home"/>
+                <span>Dashboard</span>
+            </button>
+        </xpath>
+    </t>
+
+    <!-- Sections get an icon; submenus open beside the sidebar instead of below it -->
+    <t t-inherit="web.NavBar.SectionsMenu" t-inherit-mode="extension">
+        <xpath expr="//DropdownItem[contains(@class, 'o_nav_entry')]" position="replace">
+            <DropdownItem
+                class="'o_nav_entry o_tai_nav_item'"
+                onSelected="() => this.onNavBarDropdownItemSelection(section)"
+                attrs="{
+                    href: getMenuItemHref(section),
+                    'data-hotkey': hotkey,
+                    'data-menu-xmlid': section.xmlid,
+                    'data-section': section.id,
+                }"
+            >
+                <i t-attf-class="fa fa-fw {{ taiSectionIcon(section) }}"/>
+                <span t-esc="section.name"/>
+            </DropdownItem>
+        </xpath>
+        <xpath expr="//Dropdown" position="attributes">
+            <attribute name="position">'right-start'</attribute>
+            <attribute name="menuClass">'o_tai_flyout'</attribute>
+        </xpath>
+        <xpath expr="//Dropdown/button" position="attributes">
+            <attribute name="class">o_tai_nav_item</attribute>
+        </xpath>
+        <xpath expr="//Dropdown/button/span" position="before">
+            <i t-attf-class="fa fa-fw {{ taiSectionIcon(section) }}"/>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,195 @@
+// = Techno AI left sidebar
+// ============================================================================
+// Desktop only: phones keep Odoo's own burger menu. The navbar keeps its DOM and
+// behaviour; it is only laid out as a fixed column, with the app title and the
+// systray placed in the band above the action.
+
+$tai-sidebar-width: 199px; // keep in sync with SIDEBAR_WIDTH in ui_size_patch.js
+$tai-header-height: 66px;
+$tai-side-bg: #101F23;
+$tai-side-active: #114958;
+$tai-side-text: #C5D3DA;
+$tai-side-icon: #A0B2C3;
+$tai-page-bg: #F5F9FC;
+$tai-text: #1E2B33;
+$tai-head: #3C4F5B;
+$tai-badge: #0FAD98;
+
+@include media-breakpoint-up(md) {
+    body.o_tai_sidebar {
+        padding-left: $tai-sidebar-width;
+        padding-top: $tai-header-height;
+        background-color: $tai-page-bg;
+
+        .o_action_manager {
+            background-color: $tai-page-bg;
+        }
+
+        // the control panel and the view content sit on the page as rounded cards
+        .o_action_manager > .o_action {
+            padding: 0 22px 22px;
+            background-color: transparent;
+
+            > .o_control_panel,
+            > .o_form_view_container > .o_control_panel {
+                margin-bottom: 18px;
+                border: 0;
+                border-radius: 10px;
+                background-color: #FFFFFF;
+            }
+
+            > .o_content {
+                border-radius: 10px;
+            }
+        }
+
+        .o_action_manager > .o_list_view > .o_content,
+        .o_action_manager > .o_action > .o_content > .o_list_renderer {
+            background-color: #FFFFFF;
+        }
+
+        > .o_navbar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: $tai-sidebar-width;
+            z-index: $zindex-fixed;
+        }
+
+        .o_main_navbar {
+            flex-direction: column;
+            align-items: stretch;
+            height: 100%;
+            min-width: 0;
+            padding: 16px 12px 14px;
+            border: 0;
+            background: $tai-side-bg;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .o_tai_logo {
+            align-self: flex-start;
+            height: 36px;
+            margin: 2px 12px 26px;
+        }
+
+        .o_navbar_apps_menu {
+            display: block;
+        }
+
+        // every sidebar entry: Dashboard, the current app and its sections
+        .o_tai_nav_item,
+        .o_main_navbar .o_menu_brand.o_tai_nav_item,
+        .o_menu_sections .o_tai_nav_item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            width: 100%;
+            min-height: 44px;
+            margin: 0 0 1px;
+            padding: 0 12px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: $tai-side-text;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.25;
+            text-align: left;
+            white-space: normal;
+
+            > .fa {
+                flex: 0 0 20px;
+                font-size: 17px;
+                color: $tai-side-icon;
+            }
+
+            &:hover,
+            &:focus-visible {
+                background: rgba(255, 255, 255, 0.06);
+                color: #FFFFFF;
+            }
+
+            &.show,
+            &.active,
+            &.o-dropdown--active {
+                background: rgba(255, 255, 255, 0.06);
+                color: #FFFFFF;
+            }
+        }
+
+        .o_main_navbar .o_menu_brand.o_tai_active {
+            background: $tai-side-active;
+            color: #FFFFFF;
+
+            > .fa {
+                color: #FFFFFF;
+            }
+        }
+
+        .o_menu_sections {
+            flex: 0 0 auto;
+            flex-direction: column;
+            width: auto !important;
+            min-width: 0;
+        }
+
+        .o_navbar_breadcrumbs {
+            display: none !important;
+        }
+
+        // = band above the action: app title on the left, systray on the right
+        .o_tai_app_title {
+            position: fixed;
+            top: 0;
+            left: $tai-sidebar-width + 22px;
+            height: $tai-header-height;
+            display: flex;
+            align-items: center;
+            color: $tai-text;
+            font-size: 25px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            pointer-events: none;
+        }
+
+        .o_menu_systray {
+            position: fixed;
+            top: 0;
+            right: 14px;
+            height: $tai-header-height;
+            align-items: center;
+            --NavBar-entry-color: #{$tai-head};
+            --NavBar-entry-color--hover: #{$tai-text};
+            --NavBar-entry-backgroundColor--hover: rgba(16, 31, 35, 0.06);
+            --NavBar-entry-backgroundColor--active: rgba(16, 31, 35, 0.08);
+            color: $tai-head;
+
+            .o_nav_entry,
+            .dropdown-toggle,
+            > div > button,
+            > div > .o-dropdown {
+                color: $tai-head;
+            }
+
+            .o-mail-MessagingMenu-counter,
+            .o-mail-ActivityMenu-counter,
+            .badge {
+                background-color: $tai-badge !important;
+                color: #FFFFFF !important;
+            }
+        }
+    }
+
+    // section submenus open beside the sidebar
+    .o_tai_flyout {
+        min-width: 230px;
+        margin-left: 8px !important;
+        padding: 6px;
+        border: 0;
+        border-radius: 10px;
+        box-shadow: 0 12px 32px rgba(16, 31, 35, 0.22), 0 0 0 1px rgba(16, 31, 35, 0.06);
+    }
+}
