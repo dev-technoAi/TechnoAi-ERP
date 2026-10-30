@@ -51,6 +51,9 @@
                     </group>
                     <notebook>
                         <page string="Requested items" name="items">
+                            <div class="mb-2" invisible="not email_body">
+                                <button name="action_extract_items" string="Extract items from email" type="object" icon="fa-magic" class="btn btn-secondary btn-sm"/>
+                            </div>
                             <field name="line_ids">
                                 <list editable="bottom">
                                     <field name="sequence" widget="handle"/>

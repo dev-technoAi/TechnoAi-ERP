@@ -108,15 +108,68 @@ class TaskhubRfq(models.Model):
             'partner_id': partner.id,
             'email_body': body,
             'source': 'email',
-            'line_ids': [(0, 0, item) for item in self._parse_items(html2plaintext(body))],
+            'line_ids': [(0, 0, item) for item in self._parse_items(body)],
         })
         return super().message_new(msg_dict, custom_values=values)
 
     @api.model
-    def _parse_items(self, text):
-        """ Best-effort list of requested items ("3 x laptop", "laptop x 3") from an email body. """
+    def _parse_items(self, text_or_html):
+        """ Extract requested items from an email body, handling HTML tables or plain text patterns. """
+        content = text_or_html or ''
         items = []
-        for line in (text or '').splitlines():
+
+        # 1. Try parsing HTML tables if present
+        if '<table' in content.lower():
+            try:
+                from bs4 import BeautifulSoup
+                soup = BeautifulSoup(content, 'html.parser')
+                for table in soup.find_all('table'):
+                    rows = table.find_all('tr')
+                    if not rows:
+                        continue
+                    desc_idx, qty_idx, uom_idx = -1, -1, -1
+                    data_start = 0
+                    for r_idx, row in enumerate(rows):
+                        cells = [c.get_text(strip=True).lower() for c in row.find_all(['th', 'td'])]
+                        for c_idx, cell_text in enumerate(cells):
+                            if any(k in cell_text for k in ['description', 'item', 'product', 'particulars']):
+                                desc_idx = c_idx
+                            elif any(k in cell_text for k in ['qty', 'quantity']):
+                                qty_idx = c_idx
+                            elif any(k in cell_text for k in ['uom', 'unit']):
+                                uom_idx = c_idx
+                        if desc_idx != -1 or qty_idx != -1:
+                            data_start = r_idx + 1
+                            break
+
+                    if desc_idx == -1 and qty_idx == -1:
+                        continue
+
+                    for row in rows[data_start:]:
+                        cells = [c.get_text(strip=True) for c in row.find_all(['td', 'th'])]
+                        if not cells or len(cells) <= max(desc_idx, qty_idx):
+                            continue
+                        name = cells[desc_idx] if desc_idx != -1 else ''
+                        if not name or len(name) < 2 or any(ignore in name.lower() for ignore in ['mailtrack', 'unsubscribe', 'opt out', 'privacy policy']):
+                            continue
+                        raw_qty = cells[qty_idx] if qty_idx != -1 else '1'
+                        qty_match = re.search(r'(\d+(?:\.\d+)?)', raw_qty.replace(',', ''))
+                        qty = float(qty_match.group(1)) if qty_match else 1.0
+                        uom = cells[uom_idx] if (uom_idx != -1 and len(cells) > uom_idx) else ''
+                        if not uom and qty_match:
+                            rem = raw_qty[qty_match.end():].strip()
+                            if rem and len(rem) <= 10:
+                                uom = rem
+                        items.append({'name': name, 'quantity': qty, 'uom': uom or 'EA'})
+            except Exception:
+                pass
+
+        if items:
+            return items[:100]
+
+        # 2. Fallback to line-by-line regex on plaintext
+        plain = html2plaintext(content) if '<' in content else content
+        for line in (plain or '').splitlines():
             line = line.strip()
             if not line or len(line) > 160:
                 continue
@@ -126,9 +179,19 @@ class TaskhubRfq(models.Model):
                     continue
                 first, second = match.groups()
                 qty, name = (first, second) if pattern is ITEM_PATTERNS[0] else (second, first)
-                items.append({'name': name.strip(' .:-'), 'quantity': float(qty)})
+                items.append({'name': name.strip(' .:-'), 'quantity': float(qty), 'uom': 'EA'})
                 break
         return items[:50]
+
+    def action_extract_items(self):
+        """ Re-parse items from the email body. """
+        self.ensure_one()
+        items = self._parse_items(self.email_body)
+        if not items:
+            raise UserError(_('No items could be extracted from the email body.'))
+        self.line_ids.unlink()
+        self.write({'line_ids': [(0, 0, item) for item in items]})
+        return True
 
     # ------------------------------------------------------------------
     # Pipeline
