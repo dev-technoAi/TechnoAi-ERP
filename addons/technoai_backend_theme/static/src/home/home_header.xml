@@ -16,19 +16,19 @@
                 </div>
                 <div class="o_tai_home_actions">
                     <t t-if="!state.isEditingApps">
-                        <button class="btn o_tai_home_btn o_accent" title="Customize apps layout and order" t-on-click="() => this.toggleEditApps(true)">
+                        <button class="btn o_tai_home_btn o_accent" title="Customize apps layout and order" aria-label="Edit Apps" t-on-click="() => this.toggleEditApps(true)">
                             <i class="fa fa-pencil"/><span>Edit Apps</span>
                         </button>
                     </t>
                     <t t-else="">
-                        <button class="btn o_tai_home_btn o_done" t-on-click="() => this.toggleEditApps(false)">
+                        <button class="btn o_tai_home_btn o_done" title="Done" aria-label="Done" t-on-click="() => this.toggleEditApps(false)">
                             <i class="fa fa-check"/><span>Done</span>
                         </button>
-                        <button class="btn o_tai_home_btn" title="Reset to default order" t-on-click="() => this.resetAppsOrder()">
+                        <button class="btn o_tai_home_btn" title="Reset to default order" aria-label="Reset" t-on-click="() => this.resetAppsOrder()">
                             <i class="fa fa-undo"/><span>Reset</span>
                         </button>
                     </t>
-                    <button class="btn o_tai_home_btn" t-on-click="() => this.toggleHomeMenu(false)">
+                    <button class="btn o_tai_home_btn" title="Close" aria-label="Close" t-on-click="() => this.toggleHomeMenu(false)">
                         <i class="oi oi-close"/><span>Close</span>
                     </button>
                     <span class="o_tai_home_sep"/>

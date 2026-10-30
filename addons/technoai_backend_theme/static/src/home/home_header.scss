@@ -153,6 +153,216 @@
             display: none;
         }
     }
+
+    // ========================================================================
+    // Responsive Mobile & Tablet Layout
+    // ========================================================================
+    @media (max-width: 767.98px) {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        padding-bottom: 24px !important;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+
+        .o_tai_home_bar {
+            width: calc(100% + 32px);
+            margin: 0 -16px 14px;
+            height: 52px;
+            padding: 0 14px;
+            gap: 10px;
+
+            .o_tai_home_logo {
+                height: 22px;
+            }
+
+            .o_tai_home_badge {
+                display: none !important;
+            }
+
+            .o_tai_home_actions {
+                gap: 6px;
+            }
+
+            .o_tai_home_btn {
+                height: 30px;
+                padding: 0 10px;
+                font-size: 11px;
+                gap: 4px;
+            }
+
+            .o_tai_home_sep {
+                margin: 0 3px;
+                height: 20px;
+            }
+
+            .o_tai_home_systray {
+                gap: 0;
+                button, .dropdown-toggle, .btn {
+                    padding: 4px 6px;
+                }
+                .o_user_menu img {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+        }
+
+        .o_home_search {
+            max-width: 100%;
+            margin-top: 6px !important;
+            margin-bottom: 12px !important;
+            padding: 8px 14px;
+
+            input {
+                font-size: 16px; // Prevents iOS Safari auto-zoom on input focus
+            }
+        }
+
+        .o_edit_mode_banner {
+            border-radius: 10px !important;
+            font-size: 11px !important;
+            padding: 6px 12px !important;
+            text-align: center;
+            line-height: 1.4;
+            max-width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .o_apps_grid {
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 22px 14px;
+            padding: 12px 0;
+            width: 100%;
+
+            .o_app_icon_box {
+                width: 64px;
+                height: 64px;
+                border-radius: 16px;
+                margin-bottom: 8px;
+
+                img {
+                    width: 44px;
+                    height: 44px;
+                }
+            }
+
+            .o_app_label {
+                font-size: 12px;
+            }
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        padding-bottom: 20px !important;
+
+        .o_tai_home_bar {
+            width: calc(100% + 24px);
+            margin: 0 -12px 10px;
+            height: 48px;
+            padding: 0 10px;
+            gap: 6px;
+
+            .o_tai_home_logo {
+                height: 20px;
+            }
+
+            .o_tai_home_actions {
+                gap: 4px;
+            }
+
+            .o_tai_home_btn {
+                width: 30px;
+                height: 30px;
+                padding: 0;
+                justify-content: center;
+                border-radius: 50%;
+
+                span {
+                    display: none;
+                }
+
+                .fa, .oi {
+                    font-size: 12px;
+                    margin: 0;
+                }
+            }
+
+            .o_tai_home_sep {
+                margin: 0 2px;
+                height: 18px;
+            }
+
+            .o_tai_home_systray {
+                button, .dropdown-toggle, .btn {
+                    padding: 4px 4px;
+                }
+
+                .o_user_menu img {
+                    width: 26px;
+                    height: 26px;
+                }
+
+                .o_switch_company_menu span {
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .o_home_search {
+            padding: 6px 12px;
+            border-radius: 10px;
+            margin-top: 4px !important;
+            margin-bottom: 10px !important;
+        }
+
+        .o_apps_grid {
+            grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+            gap: 16px 6px;
+            padding: 8px 0;
+            margin-top: 6px;
+            margin-bottom: auto;
+
+            .o_app_icon_box {
+                width: 56px;
+                height: 56px;
+                border-radius: 14px;
+                margin-bottom: 6px;
+
+                img {
+                    width: 38px;
+                    height: 38px;
+                }
+            }
+
+            .o_app_label {
+                font-size: 11px;
+                line-height: 1.25;
+                max-width: 100%;
+                word-break: break-word;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .o_app_item {
+                &:active {
+                    transform: scale(0.94);
+                }
+            }
+
+            .o_app_reorder_controls {
+                .o_btn_shift {
+                    width: 22px;
+                    height: 22px;
+                    font-size: 9px;
+                }
+            }
+        }
+    }
 }
 
 // menus opened from the launcher, and the AI panel, must show above it (z-index 1100)
@@ -165,5 +375,11 @@ body:has(.o_techno_home_menu) {
     }
     .o_notification_manager {
         z-index: 1130;
+    }
+
+    @media (max-width: 767.98px) {
+        .o-dropdown--menu {
+            max-width: calc(100vw - 20px) !important;
+        }
     }
 }
