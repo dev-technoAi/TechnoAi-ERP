@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.technoai.edition</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='integration']" position="before">
+                <block title="Techno AI edition" name="technoai_edition">
+                    <setting string="Show paid features"
+                             help="Paid options are hidden: Enterprise-only settings, paid apps, and the services that use paid credits (SMS, lead generation, lead enrichment, company autocomplete). Tick to see them again; untick to hide them.">
+                        <field name="group_technoai_paid_features"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

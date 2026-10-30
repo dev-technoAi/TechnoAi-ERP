@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Implied by Internal User when "Show paid features" is ticked in Settings -->
+    <record id="group_paid_features" model="res.groups">
+        <field name="name">Show paid features</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>
