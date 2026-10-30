@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sign-in, password reset and other account pages in the Task Hub's dark sign-in look -->
+    <template id="login_layout" inherit_id="web.login_layout" name="Techno AI sign-in layout" priority="50">
+        <xpath expr="//t[@t-set='body_classname']" position="attributes">
+            <attribute name="t-value">'o_tai_login'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('container')]" position="replace">
+            <t t-set="tai_path" t-value="request.httprequest.path"/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&amp;display=swap"/>
+            <div class="o_tai_login_page">
+                <div class="o_tai_login_dots"/>
+                <div class="o_tai_login_glow o_left"/>
+                <div class="o_tai_login_glow o_right"/>
+
+                <div class="o_tai_login_head">
+                    <a href="/" class="o_tai_login_logo" aria-label="TechnoAI home">
+                        <img src="/technoai_portal/static/src/img/logo-white.png" alt="TechnoAI //:ai" width="70" height="34"/>
+                    </a>
+                    <div class="o_tai_login_domain">
+                        <a href="https://technoai.ae" target="_blank" rel="noopener noreferrer">technoai.ae</a>
+                        <span class="o_sep">•</span>
+                        <span>Techno AI</span>
+                    </div>
+                    <h2 t-if="tai_path == '/web/reset_password'">Reset Your Password</h2>
+                    <h2 t-elif="tai_path == '/web/signup'">Set Up Your Account</h2>
+                    <h2 t-else="">Enterprise Employee Sign In</h2>
+                    <p t-if="tai_path == '/web/reset_password'">We will email you a link to choose a new password</p>
+                    <p t-else="">Access your departmental workspace &amp; private alert stream</p>
+                </div>
+
+                <div class="o_tai_login_card_wrap">
+                    <div t-attf-class="o_tai_login_card o_database_list {{login_card_classes or ''}}">
+                        <t t-out="0"/>
+                        <div class="o_tai_login_card_foot" t-if="not disable_footer">
+                            <p>Techno AI Enterprise • Employee accounts provisioned by Administrator</p>
+                            <a t-if="not disable_database_manager" href="/web/database/manager">Manage Databases</a>
+                        </div>
+                    </div>
+                    <div class="o_tai_login_badges">
+                        <span class="o_badge_brand">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                            Techno AI
+                        </span>
+                        <span>•</span>
+                        <span>Dubai, UAE • Lahore</span>
+                        <span>•</span>
+                        <a href="https://technoai.ae" target="_blank" rel="noopener noreferrer">technoai.ae</a>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- The sign-in form: Task Hub labels, icons, show-password and button; the form itself is unchanged -->
+    <template id="login" inherit_id="web.login" name="Techno AI sign-in form" priority="50">
+        <xpath expr="//label[@for='login']" position="replace">
+            <label for="login" class="form-label o_tai_label">Work Email <span class="o_req">*</span></label>
+        </xpath>
+        <xpath expr="//input[@name='login']" position="attributes">
+            <attribute name="placeholder">name@technoai.ae</attribute>
+            <attribute name="class">form-control o_tai_input</attribute>
+        </xpath>
+        <xpath expr="//input[@name='login']" position="before">
+            <svg class="o_tai_input_icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </xpath>
+        <xpath expr="//input[@name='login']/.." position="attributes">
+            <attribute name="class">mb-3 field-login o_tai_field</attribute>
+        </xpath>
+
+        <xpath expr="//label[@for='password']" position="attributes">
+            <attribute name="class">form-label o_tai_label d-flex align-items-center</attribute>
+        </xpath>
+        <xpath expr="//input[@name='password']" position="attributes">
+            <attribute name="placeholder">••••••••</attribute>
+            <attribute name="class">form-control o_tai_input o_tai_input_pw</attribute>
+        </xpath>
+        <xpath expr="//input[@name='password']" position="before">
+            <svg class="o_tai_input_icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </xpath>
+        <xpath expr="//input[@name='password']" position="after">
+            <button type="button" class="o_tai_eye" title="Show password" aria-label="Show password"
+                    onclick="var i=this.parentNode.querySelector('input[name=password]');i.type=i.type==='password'?'text':'password';this.classList.toggle('o_shown');">
+                <svg class="o_eye_open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="o_eye_closed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+            </button>
+        </xpath>
+        <xpath expr="//input[@name='password']/.." position="attributes">
+            <attribute name="class">mb-3 o_tai_field</attribute>
+        </xpath>
+
+        <xpath expr="//button[@type='submit'][hasclass('btn-primary')]" position="replace">
+            <button type="submit" class="btn btn-primary o_tai_submit">
+                <span>Sign In to Hub</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+        </xpath>
+    </template>
+
+    <!-- "Reset Password" reads "Forgot Password?" like on the Task Hub -->
+    <template id="login_reset_link" inherit_id="auth_signup.login" name="Techno AI forgot password link" priority="50">
+        <xpath expr="//label[@for='password']/a" position="replace">
+            <span class="o_req me-auto ms-1">*</span>
+            <a t-if="reset_password_enabled" class="o_tai_forgot" tabindex="1" t-attf-href="/web/reset_password?{{ keep_query() }}">Forgot Password?</a>
+        </xpath>
+    </template>
+</odoo>

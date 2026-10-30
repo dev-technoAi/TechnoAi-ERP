@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- lucide icons used by the Task Hub pages -->
+    <template id="icon_arrow_right">
+        <svg t-att-width="size or 18" t-att-height="size or 18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </template>
+    <template id="icon_external_link">
+        <svg t-att-width="size or 17" t-att-height="size or 17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+    </template>
+
+    <!-- Public landing page at the site root, ported from the Task Hub home page -->
+    <template id="landing" name="Techno AI Landing">
+        <t t-set="features" t-value="[
+            ('shield', 'Your own workspace', 'Keep your tasks and priorities organized in a personal workspace.'),
+            ('bookmark', 'Reusable templates', 'Start recurring work with saved templates. Adjust the details and go.'),
+            ('bell', 'Timely reminders', 'Set a due time and receive alerts to help you stay on schedule.'),
+            ('layers', 'Built for your department', 'Start with workflows for HR, Accounts, Procurement, IT, Operations, and leadership.'),
+        ]"/>
+        &lt;!DOCTYPE html&gt;
+        <html lang="en">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>TechnoAI //:ai - Enterprise Departmental Task Hub</title>
+                <meta name="description" content="One place to plan your tasks, reuse daily workflows, and keep track of what comes next. Built for the people behind Techno AI."/>
+                <link rel="icon" type="image/png" href="/technoai_portal/static/src/img/favicon.png"/>
+                <link rel="preconnect" href="https://fonts.googleapis.com"/>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;400;500;600;700&amp;display=swap"/>
+                <link rel="stylesheet" href="/technoai_portal/static/src/css/portal.css"/>
+            </head>
+            <body>
+                <div class="portal-home">
+                    <a class="portal-skip" href="#portal-main">Skip to content</a>
+                    <div class="portal-cover">
+                        <header class="portal-header">
+                            <a href="/" aria-label="TechnoAI home" class="portal-logo">
+                                <img src="/technoai_portal/static/src/img/logo-white.png" alt="TechnoAI //:ai" width="53" height="26"/>
+                            </a>
+                            <details class="hub-navigation">
+                                <summary class="hub-menu-toggle" aria-label="Open navigation">
+                                    <span class="hub-menu-lines" aria-hidden="true"><span/><span/><span/></span>
+                                </summary>
+                                <nav class="hub-menu-panel" aria-label="Main navigation">
+                                    <a href="/web/login">Sign in <t t-call="technoai_portal.icon_arrow_right"/></a>
+                                    <a href="https://technoai.ae/" target="_blank" rel="noopener noreferrer">Official website <t t-call="technoai_portal.icon_external_link"/></a>
+                                </nav>
+                            </details>
+                        </header>
+                        <main id="portal-main" class="portal-hero portal-container">
+                            <div class="portal-hero-row">
+                                <div class="portal-hero-copy">
+                                    <p class="portal-eyebrow">TECHNOAI EMPLOYEE WORKSPACE</p>
+                                    <h1>
+                                        <span class="portal-title-main">Departmental Task Hub</span>
+                                        <span>A clearer way to work.</span>
+                                    </h1>
+                                    <p class="portal-description">One place to plan your tasks, reuse daily workflows, and keep track of what comes next. Built for the people behind Techno AI.</p>
+                                    <div class="portal-actions">
+                                        <a href="/web/login" class="portal-button portal-button-primary">Sign in <t t-call="technoai_portal.icon_arrow_right"/></a>
+                                        <a href="https://technoai.ae/" target="_blank" rel="noopener noreferrer" class="portal-button portal-button-secondary">Official website <t t-call="technoai_portal.icon_external_link"/></a>
+                                    </div>
+                                    <p class="portal-hero-note">Redefining Intelligence <span aria-hidden="true">/</span> Shaping Tomorrow</p>
+                                </div>
+                                <div class="portal-orb-wrap">
+                                    <div class="portal-orb" id="portal-orb"><div class="portal-orb-aura"/><canvas/></div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                    <section class="portal-features portal-container" aria-labelledby="features-title">
+                        <div class="portal-section-heading">
+                            <div><p class="portal-eyebrow">EVERYDAY WORK, SIMPLIFIED</p><h2 id="features-title">Everything you need to stay on track.</h2></div>
+                            <p>Less repetition. Clearer priorities.<br/>More space for the work that matters.</p>
+                        </div>
+                        <div class="portal-feature-grid">
+                            <t t-foreach="features" t-as="feature">
+                                <article class="portal-feature">
+                                    <div class="portal-feature-top">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <t t-if="feature[0] == 'shield'"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></t>
+                                            <t t-elif="feature[0] == 'bookmark'"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/><path d="m9 10 2 2 4-4"/></t>
+                                            <t t-elif="feature[0] == 'bell'"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M22 8c0-2.3-.8-4.3-2-6"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/><path d="M4 2C2.8 3.7 2 5.7 2 8"/></t>
+                                            <t t-else=""><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></t>
+                                        </svg>
+                                        <span>0<t t-out="feature_index + 1"/></span>
+                                    </div>
+                                    <h3 t-out="feature[1]"/>
+                                    <p t-out="feature[2]"/>
+                                </article>
+                            </t>
+                        </div>
+                    </section>
+                    <footer class="portal-footer portal-container">
+                        <span>© <t t-out="datetime.date.today().year"/> Techno AI</span>
+                        <span>Dubai, UAE • Lahore</span>
+                        <a href="https://technoai.ae/" target="_blank" rel="noopener noreferrer">technoai.ae <t t-call="technoai_portal.icon_external_link"><t t-set="size" t-value="14"/></t></a>
+                    </footer>
+                </div>
+                <script src="/technoai_portal/static/src/js/orb.js" defer="defer"/>
+            </body>
+        </html>
+    </template>
+</odoo>
