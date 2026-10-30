@@ -102,3 +102,9 @@ h1, h2, h3, p { margin: 0; }
 .portal-orb canvas { position:relative; z-index:1; width:100%; height:100%; cursor:grab; filter:drop-shadow(0 0 35px rgba(40,159,183,.35)); }
 .portal-orb canvas:active { cursor:grabbing; }
 .portal-home button:focus-visible { outline:3px solid #9fe7e7; outline-offset:5px; }
+
+/* the header bar and buttons glow under the mouse too, like the feature cards */
+.portal-header { transition:border-color .3s ease, box-shadow .3s ease; }
+.portal-header:hover { border-color:rgba(159,231,231,.6); box-shadow:0 14px 36px -12px rgba(40,159,183,.45); }
+.portal-button { transition:background .15s, border-color .15s, box-shadow .25s, transform .25s; }
+.portal-button:hover { transform:translateY(-2px); box-shadow:0 14px 30px -10px rgba(40,159,183,.6); }

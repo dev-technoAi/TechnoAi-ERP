@@ -11,18 +11,18 @@
     <!-- Public landing page at the site root, ported from the Task Hub home page -->
     <template id="landing" name="Techno AI Landing">
         <t t-set="features" t-value="[
-            ('shield', 'Your own workspace', 'Keep your tasks and priorities organized in a personal workspace.'),
-            ('bookmark', 'Reusable templates', 'Start recurring work with saved templates. Adjust the details and go.'),
-            ('bell', 'Timely reminders', 'Set a due time and receive alerts to help you stay on schedule.'),
-            ('layers', 'Built for your department', 'Start with workflows for HR, Accounts, Procurement, IT, Operations, and leadership.'),
+            ('layers', 'Everything connected', 'A quotation becomes an order, a delivery and an invoice, without typing anything twice.'),
+            ('check', 'Task Hub &amp; RFQs', 'Tasks, email RFQs and draft quotations for every department, with timely reminders.'),
+            ('bot', 'AI assistant built in', 'Ask in plain words for records, totals and charts, or have it create a task for you.'),
+            ('shield', 'Built for every department', 'Sales, Procurement, Accounts, HR, IT and Operations, each with the right access.'),
         ]"/>
         &lt;!DOCTYPE html&gt;
         <html lang="en">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <title>TechnoAI //:ai - Enterprise Departmental Task Hub</title>
-                <meta name="description" content="One place to plan your tasks, reuse daily workflows, and keep track of what comes next. Built for the people behind Techno AI."/>
+                <title>Techno AI ERP - Your whole business, one workspace</title>
+                <meta name="description" content="Sales, purchasing, invoicing, inventory, projects and people, connected in one secure system, with the Task Hub and an AI assistant built in."/>
                 <link rel="icon" type="image/png" href="/technoai_portal/static/src/img/favicon.png"/>
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;400;500;600;700&amp;display=swap"/>
@@ -49,12 +49,12 @@
                         <main id="portal-main" class="portal-hero portal-container">
                             <div class="portal-hero-row">
                                 <div class="portal-hero-copy">
-                                    <p class="portal-eyebrow">TECHNOAI EMPLOYEE WORKSPACE</p>
+                                    <p class="portal-eyebrow">TECHNO AI ENTERPRISE PLATFORM</p>
                                     <h1>
-                                        <span class="portal-title-main">Departmental Task Hub</span>
-                                        <span>A clearer way to work.</span>
+                                        <span class="portal-title-main">Techno AI ERP</span>
+                                        <span>Your whole business, one workspace.</span>
                                     </h1>
-                                    <p class="portal-description">One place to plan your tasks, reuse daily workflows, and keep track of what comes next. Built for the people behind Techno AI.</p>
+                                    <p class="portal-description">Sales, purchasing, invoicing, inventory, projects and people, connected in one secure system, with the Task Hub and an AI assistant built in.</p>
                                     <div class="portal-actions">
                                         <a href="/web/login" class="portal-button portal-button-primary">Sign in <t t-call="technoai_portal.icon_arrow_right"/></a>
                                         <a href="https://technoai.ae/" target="_blank" rel="noopener noreferrer" class="portal-button portal-button-secondary">Official website <t t-call="technoai_portal.icon_external_link"/></a>
@@ -69,8 +69,8 @@
                     </div>
                     <section class="portal-features portal-container" aria-labelledby="features-title">
                         <div class="portal-section-heading">
-                            <div><p class="portal-eyebrow">EVERYDAY WORK, SIMPLIFIED</p><h2 id="features-title">Everything you need to stay on track.</h2></div>
-                            <p>Less repetition. Clearer priorities.<br/>More space for the work that matters.</p>
+                            <div><p class="portal-eyebrow">ONE SYSTEM, EVERY DEPARTMENT</p><h2 id="features-title">Everything your team needs, connected.</h2></div>
+                            <p>Less re-typing. Clearer numbers.<br/>More time for the work that matters.</p>
                         </div>
                         <div class="portal-feature-grid">
                             <t t-foreach="features" t-as="feature">
@@ -78,8 +78,8 @@
                                     <div class="portal-feature-top">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                             <t t-if="feature[0] == 'shield'"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></t>
-                                            <t t-elif="feature[0] == 'bookmark'"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/><path d="m9 10 2 2 4-4"/></t>
-                                            <t t-elif="feature[0] == 'bell'"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M22 8c0-2.3-.8-4.3-2-6"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/><path d="M4 2C2.8 3.7 2 5.7 2 8"/></t>
+                                            <t t-elif="feature[0] == 'check'"><path d="M21 10.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5"/><path d="m9 11 3 3L22 4"/></t>
+                                            <t t-elif="feature[0] == 'bot'"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></t>
                                             <t t-else=""><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></t>
                                         </svg>
                                         <span>0<t t-out="feature_index + 1"/></span>

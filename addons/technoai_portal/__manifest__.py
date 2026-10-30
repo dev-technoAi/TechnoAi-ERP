@@ -2,7 +2,7 @@
     'name': 'Techno AI Portal',
     'version': '1.0',
     'category': 'Hidden/Tools',
-    'summary': 'Task Hub landing page at the site root and the Task Hub sign-in look',
+    'summary': 'Landing page at the site root and the animated robot sign-in page',
     'description': """
 Brings the Task Hub's public pages into Techno AI:
 

@@ -1,61 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Sign-in, password reset and other account pages in the Task Hub's dark sign-in look -->
+    <!-- Sign-in, password reset and other account pages: landing-page panel, 3D background and the Techno AI robot -->
     <template id="login_layout" inherit_id="web.login_layout" name="Techno AI sign-in layout" priority="50">
         <xpath expr="//t[@t-set='body_classname']" position="attributes">
             <attribute name="t-value">'o_tai_login'</attribute>
         </xpath>
         <xpath expr="//div[hasclass('container')]" position="replace">
             <t t-set="tai_path" t-value="request.httprequest.path"/>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&amp;display=swap"/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;400;500;600;700&amp;display=swap"/>
+            <div class="o_tai_scene" aria-hidden="true"><div class="o_tai_halo"/><canvas id="o_tai_terrain"/></div>
+
             <div class="o_tai_login_page">
-                <div class="o_tai_login_dots"/>
-                <div class="o_tai_login_glow o_left"/>
-                <div class="o_tai_login_glow o_right"/>
+                <!-- left: the landing page's message -->
+                <section class="o_tai_brand">
+                    <p class="o_tai_eyebrow">TECHNO AI ENTERPRISE PLATFORM</p>
+                    <h1>Techno AI ERP<span>Your whole business, one workspace.</span></h1>
+                    <p class="o_tai_lead">Sales, purchasing, invoicing, inventory, projects and people, connected in one secure system, with the Task Hub and an AI assistant built in.</p>
+                    <ul class="o_tai_points">
+                        <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg><div><b>Everything connected</b><small>A quotation becomes an order, a delivery and an invoice, without typing anything twice.</small></div></li>
+                        <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5"/><path d="m9 11 3 3L22 4"/></svg><div><b>Task Hub &amp; RFQs</b><small>Tasks, email RFQs and draft quotations for every department, with timely reminders.</small></div></li>
+                        <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg><div><b>AI assistant built in</b><small>Ask in plain words for records, totals and charts, or have it create a task for you.</small></div></li>
+                    </ul>
+                    <p class="o_tai_note">Redefining Intelligence <span>/</span> Shaping Tomorrow</p>
+                </section>
 
-                <div class="o_tai_login_head">
-                    <a href="/" class="o_tai_login_logo" aria-label="TechnoAI home">
-                        <img src="/technoai_portal/static/src/img/logo-white.png" alt="TechnoAI //:ai" width="70" height="34"/>
-                    </a>
-                    <div class="o_tai_login_domain">
-                        <a href="https://technoai.ae" target="_blank" rel="noopener noreferrer">technoai.ae</a>
-                        <span class="o_sep">•</span>
-                        <span>Techno AI</span>
+                <!-- right: the robot and the card -->
+                <div class="o_tai_login_side">
+                    <div class="o_tai_bot_zone">
+                        <div class="o_tai_bubble" id="o_tai_bubble">Hi! I'm Techno AI 👋 Sign in to continue.</div>
+                        <a class="o_tai_bot_link" href="/" title="Go to the home page" aria-label="Go to the home page">
+                            <svg class="o_tai_bot" id="o_tai_bot" viewBox="0 0 120 120" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="o_tai_shell" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4fbfc"/><stop offset="1" stop-color="#c7dde3"/></linearGradient>
+                                    <radialGradient id="o_tai_eyeglow"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#9fe7e7"/><stop offset="1" stop-color="#289fb7"/></radialGradient>
+                                </defs>
+                                <line x1="60" y1="18" x2="60" y2="8" stroke="#9ab8c1" stroke-width="3" stroke-linecap="round"/>
+                                <circle class="o_antenna" cx="60" cy="7" r="4.5" fill="#9fe7e7"/>
+                                <rect x="12" y="38" width="10" height="20" rx="5" fill="#289fb7"/>
+                                <rect x="98" y="38" width="10" height="20" rx="5" fill="#289fb7"/>
+                                <rect x="18" y="18" width="84" height="62" rx="26" fill="url(#o_tai_shell)"/>
+                                <rect x="27" y="29" width="66" height="38" rx="17" fill="#0b1418"/>
+                                <g class="o_eyes" id="o_tai_eyes">
+                                    <ellipse class="o_eye" cx="47" cy="47" rx="7" ry="8.5" fill="url(#o_tai_eyeglow)"/>
+                                    <ellipse class="o_eye" cx="73" cy="47" rx="7" ry="8.5" fill="url(#o_tai_eyeglow)"/>
+                                </g>
+                                <path id="o_tai_mouth" d="M53 60 Q60 64 67 60" stroke="#9fe7e7" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                                <rect x="38" y="82" width="44" height="28" rx="12" fill="url(#o_tai_shell)"/>
+                                <text x="60" y="101" text-anchor="middle" font-family="Noto Sans,Arial" font-weight="700" font-size="12" fill="#146b8c">ai</text>
+                                <g class="o_hand o_l"><ellipse cx="30" cy="96" rx="9" ry="11" fill="#289fb7"/></g>
+                                <g class="o_hand o_r"><ellipse cx="90" cy="96" rx="9" ry="11" fill="#289fb7"/></g>
+                            </svg>
+                        </a>
                     </div>
-                    <h2 t-if="tai_path == '/web/reset_password'">Reset Your Password</h2>
-                    <h2 t-elif="tai_path == '/web/signup'">Set Up Your Account</h2>
-                    <h2 t-else="">Enterprise Employee Sign In</h2>
-                    <p t-if="tai_path == '/web/reset_password'">We will email you a link to choose a new password</p>
-                    <p t-else="">Access your departmental workspace &amp; private alert stream</p>
-                </div>
 
-                <div class="o_tai_login_card_wrap">
                     <div t-attf-class="o_tai_login_card o_database_list {{login_card_classes or ''}}">
+                        <p class="o_tai_kicker">TECHNO AI WORKSPACE</p>
+                        <t t-if="tai_path == '/web/reset_password'">
+                            <h2>Reset your password</h2>
+                            <p class="o_tai_sub">Enter your work email and we will send you a link to choose a new one.</p>
+                        </t>
+                        <t t-elif="tai_path == '/web/signup'">
+                            <h2>Set up your account</h2>
+                            <p class="o_tai_sub">Choose your password to finish setting up your workspace.</p>
+                        </t>
+                        <t t-else="">
+                            <h2>Welcome back</h2>
+                            <p class="o_tai_sub">Sign in with your work email to pick up where you left off.</p>
+                        </t>
                         <t t-out="0"/>
-                        <div class="o_tai_login_card_foot" t-if="not disable_footer">
-                            <p>Techno AI Enterprise • Employee accounts provisioned by Administrator</p>
-                            <a t-if="not disable_database_manager" href="/web/database/manager">Manage Databases</a>
+                        <div class="o_tai_secure">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            Secure, encrypted sign-in
                         </div>
+                        <a t-if="not disable_footer and not disable_database_manager" class="o_tai_dbm" href="/web/database/manager">Manage Databases</a>
                     </div>
-                    <div class="o_tai_login_badges">
-                        <span class="o_badge_brand">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-                            Techno AI
-                        </span>
-                        <span>•</span>
-                        <span>Dubai, UAE • Lahore</span>
-                        <span>•</span>
-                        <a href="https://technoai.ae" target="_blank" rel="noopener noreferrer">technoai.ae</a>
-                    </div>
+                    <p class="o_tai_help">New to the team? Your administrator creates your account.</p>
                 </div>
             </div>
+            <script src="/technoai_portal/static/src/js/login_robot.js" defer="defer"/>
         </xpath>
     </template>
 
-    <!-- The sign-in form: Task Hub labels, icons, show-password and button; the form itself is unchanged -->
+    <!-- The sign-in form: labels, icons, show-password and button; the form itself is unchanged -->
     <template id="login" inherit_id="web.login" name="Techno AI sign-in form" priority="50">
         <xpath expr="//label[@for='login']" position="replace">
-            <label for="login" class="form-label o_tai_label">Work Email <span class="o_req">*</span></label>
+            <label for="login" class="form-label o_tai_label">Work email <span class="o_req">*</span></label>
         </xpath>
         <xpath expr="//input[@name='login']" position="attributes">
             <attribute name="placeholder">name@technoai.ae</attribute>
@@ -91,17 +120,17 @@
 
         <xpath expr="//button[@type='submit'][hasclass('btn-primary')]" position="replace">
             <button type="submit" class="btn btn-primary o_tai_submit">
-                <span>Sign In to Hub</span>
+                <span>Sign in</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
         </xpath>
     </template>
 
-    <!-- "Reset Password" reads "Forgot Password?" like on the Task Hub -->
+    <!-- "Reset Password" reads "Forgot password?" -->
     <template id="login_reset_link" inherit_id="auth_signup.login" name="Techno AI forgot password link" priority="50">
         <xpath expr="//label[@for='password']/a" position="replace">
             <span class="o_req me-auto ms-1">*</span>
-            <a t-if="reset_password_enabled" class="o_tai_forgot" tabindex="1" t-attf-href="/web/reset_password?{{ keep_query() }}">Forgot Password?</a>
+            <a t-if="reset_password_enabled" class="o_tai_forgot" tabindex="1" t-attf-href="/web/reset_password?{{ keep_query() }}">Forgot password?</a>
         </xpath>
     </template>
 </odoo>

@@ -1,183 +1,333 @@
-// Sign-in and account pages in the Task Hub's dark sign-in look (login/page.tsx)
+// Sign-in and account pages: the landing page's message and image, a 3D dot terrain,
+// and the Techno AI robot above the card (see login_robot.js)
+$tai-cyan: #289fb7;
+$tai-mint: #9fe7e7;
+$tai-teal: #146b8c;
+$tai-muted: #a9bcc5;
+
 body.o_tai_login {
-    background: #070d10 !important;
+    background: #071923 !important;
     color: #fff;
     min-height: 100vh;
+    font-family: "Noto Sans", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
 
     #wrapwrap, main {
         background: transparent;
     }
 
+    // ---------------------------------------------------------------- background
+    .o_tai_scene {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background:
+            linear-gradient(90deg, rgba(7, 25, 35, .55) 0%, rgba(7, 25, 35, .72) 45%, rgba(7, 25, 35, .93) 100%),
+            linear-gradient(180deg, rgba(7, 25, 35, .35) 0%, rgba(7, 25, 35, .85) 100%),
+            url('/technoai_portal/static/src/img/portal-hero.jpg') center / cover no-repeat;
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(159, 231, 231, .18) 1px, transparent 1px);
+            background-size: 32px 32px;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 60%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 60%);
+        }
+        canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .o_tai_halo {
+        position: absolute;
+        right: 12%;
+        top: 50%;
+        width: 620px;
+        height: 620px;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(40, 159, 183, .22), transparent 65%);
+        filter: blur(10px);
+    }
+
     .o_tai_login_page {
         position: relative;
+        z-index: 1;
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 48px 16px;
-        overflow: hidden;
-        font-family: "Noto Sans", "Noto Sans TC", Arial, sans-serif;
+        display: grid;
+        grid-template-columns: 1.1fr minmax(380px, 460px);
+        align-items: center;
+        gap: 64px;
+        width: 100%;
+        max-width: 1376px;
+        margin: 0 auto;
+        padding: 40px 48px;
     }
-    .o_tai_login_dots {
-        position: absolute;
-        inset: 0;
-        background-image: radial-gradient(#289fb7 1px, transparent 1px);
-        background-size: 28px 28px;
-        opacity: .1;
-        pointer-events: none;
-    }
-    .o_tai_login_glow {
-        position: absolute;
-        width: 320px;
-        height: 320px;
-        border-radius: 50%;
-        filter: blur(64px);
-        pointer-events: none;
-        &.o_left {
-            top: 25%;
-            left: -128px;
-            background: rgba(20, 107, 140, .2);
+
+    // ---------------------------------------------------------------- left panel
+    .o_tai_brand {
+        .o_tai_eyebrow {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .04em;
+            color: $tai-mint;
+            margin: 0 0 20px;
         }
-        &.o_right {
-            bottom: 25%;
-            right: -128px;
-            background: rgba(40, 159, 183, .15);
+        h1 {
+            margin: 0;
+            font-size: clamp(30px, 3.2vw, 50px);
+            font-weight: 600;
+            letter-spacing: -.035em;
+            line-height: 1.22;
+            color: #fff;
+            span {
+                display: block;
+                font-weight: 200;
+            }
+        }
+        .o_tai_lead {
+            max-width: 560px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #e0e9ec;
+            margin: 24px 0 0;
+        }
+        .o_tai_note {
+            margin: 34px 0 0;
+            font-size: 11px;
+            color: #b0c4cd;
+            letter-spacing: .055em;
+            span {
+                margin: 0 14px;
+                color: $tai-mint;
+            }
+        }
+    }
+    .o_tai_points {
+        list-style: none;
+        padding: 0;
+        margin: 30px 0 0;
+        display: grid;
+        gap: 14px;
+        max-width: 520px;
+        li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            border: 1px solid rgba(44, 69, 82, .9);
+            border-radius: 12px;
+            background: rgba(16, 38, 48, .55);
+            backdrop-filter: blur(6px);
+            transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease, background .3s ease;
+            &:hover {
+                transform: translateY(-4px);
+                border-color: $tai-cyan;
+                background: rgba(16, 38, 48, .8);
+                box-shadow: 0 18px 40px -12px rgba(40, 159, 183, .45);
+            }
+        }
+        svg {
+            flex: none;
+            color: $tai-mint;
+            margin-top: 2px;
+        }
+        b {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+        }
+        small {
+            display: block;
+            font-size: 12.5px;
+            color: $tai-muted !important;
+            margin-top: 3px;
+            line-height: 1.6;
         }
     }
 
-    .o_tai_login_head {
+    // ---------------------------------------------------------------- robot
+    .o_tai_login_side {
         position: relative;
-        z-index: 1;
-        text-align: center;
+        width: 100%;
+    }
+    .o_tai_bot_zone {
+        position: relative;
+        height: 178px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: -34px;
+        z-index: 2;
+    }
+    .o_tai_bubble {
+        position: relative;
+        background: #0f2a33;
+        border: 1px solid rgba(40, 159, 183, .35);
+        color: #e6f6f8;
+        font-size: 12.5px;
+        padding: 7px 13px;
+        border-radius: 12px;
+        margin-bottom: 8px;
+        white-space: nowrap;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, .35);
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -6px;
+            width: 10px;
+            height: 10px;
+            background: #0f2a33;
+            border-right: 1px solid rgba(40, 159, 183, .35);
+            border-bottom: 1px solid rgba(40, 159, 183, .35);
+            transform: translateX(-50%) rotate(45deg);
+        }
+        &.o_pop {
+            animation: o_tai_pop .28s ease;
+        }
+    }
+    .o_tai_bot_link {
+        display: block;
+        line-height: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        outline-offset: 6px;
+        &:focus-visible {
+            outline: 2px solid $tai-mint;
+        }
+        &:hover .o_tai_bot {
+            filter: drop-shadow(0 10px 26px rgba(159, 231, 231, .55));
+        }
+    }
+    .o_tai_bot {
+        width: 118px;
+        height: 118px;
+        animation: o_tai_float 3.2s ease-in-out infinite;
+        filter: drop-shadow(0 10px 22px rgba(40, 159, 183, .35));
+        &.o_shake {
+            animation: o_tai_shake .5s ease;
+        }
+        &.o_happy {
+            animation: o_tai_hop .6s ease;
+        }
+        .o_eyes {
+            transition: transform .12s ease-out;
+        }
+        .o_eye {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: o_tai_blink 4.5s infinite;
+        }
+        .o_hand {
+            transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+        }
+        &.o_cover .o_hand.o_l, &.o_peek .o_hand.o_l {
+            transform: translate(22px, -44px) rotate(-12deg);
+        }
+        &.o_cover .o_hand.o_r {
+            transform: translate(-22px, -44px) rotate(12deg);
+        }
+        &.o_peek .o_hand.o_r {
+            transform: translate(-4px, -30px) rotate(40deg);
+        }
+        .o_antenna {
+            animation: o_tai_pulse 1.8s ease-in-out infinite;
+        }
+    }
+
+    // ---------------------------------------------------------------- card
+    .o_tai_login_card {
+        background: rgba(10, 22, 29, .86);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(159, 231, 231, .18);
+        border-radius: 18px;
+        padding: 50px 34px 26px;
+        box-shadow: 0 30px 60px -15px rgba(0, 0, 0, .6);
+        transition: border-color .3s ease, box-shadow .3s ease;
+        &:hover {
+            border-color: rgba(40, 159, 183, .55);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, .6), 0 0 0 1px rgba(40, 159, 183, .25), 0 20px 60px -10px rgba(40, 159, 183, .35);
+        }
         h2 {
             margin: 0;
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -.01em;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -.02em;
             color: #fff;
         }
-        p {
-            margin: 4px 0 0;
-            font-size: 12px;
-            color: #94a3b8;
-        }
     }
-    .o_tai_login_logo {
-        display: inline-flex;
-        transition: transform .15s;
-        img {
-            height: 34px;
-            width: auto;
-        }
-        &:hover {
-            transform: scale(1.05);
-        }
+    .o_tai_kicker {
+        text-align: center;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .08em;
+        color: $tai-mint;
+        margin: 0 0 8px;
     }
-    .o_tai_login_domain {
-        margin: 12px 0 16px;
+    .o_tai_sub {
+        text-align: center;
+        margin: 6px 0 22px;
+        font-size: 13px;
+        color: $tai-muted;
+        line-height: 1.6;
+    }
+    .o_tai_secure {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 12px;
-        color: #94a3b8;
-        a {
-            color: #9fe7e7;
-            text-decoration: none;
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-        .o_sep {
-            color: #475569;
-        }
-    }
-
-    .o_tai_login_card_wrap {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        max-width: 448px;
-        margin: 24px auto 0;
-    }
-    .o_tai_login_card {
-        background: rgba(11, 20, 24, .95);
-        backdrop-filter: blur(24px);
-        padding: 32px 24px;
-        border: 1px solid rgba(40, 159, 183, .25);
-        border-radius: 16px;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .5);
-        @media (min-width: 576px) {
-            padding: 32px 40px;
-        }
-    }
-    .o_tai_login_card_foot {
-        margin-top: 20px;
+        margin-top: 18px;
         padding-top: 16px;
-        border-top: 1px solid rgba(30, 41, 59, .8);
+        border-top: 1px solid rgba(120, 150, 162, .18);
+        font-size: 12px;
+        color: $tai-muted;
+        svg {
+            color: $tai-mint;
+        }
+    }
+    .o_tai_dbm {
+        display: block;
+        margin-top: 8px;
         text-align: center;
         font-size: 12px;
-        color: #94a3b8;
-        p {
-            margin: 0;
-        }
-        a {
-            display: inline-block;
-            margin-top: 6px;
-            color: #9fe7e7;
-        }
+        color: $tai-mint;
     }
-    .o_tai_login_badges {
-        margin-top: 24px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 6px 14px;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 11px;
-        color: #64748b;
-        .o_badge_brand {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            svg {
-                color: #289fb7;
-            }
-        }
-        a {
-            color: #9fe7e7;
-            text-decoration: none;
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+    .o_tai_help {
+        text-align: center;
+        margin: 16px 0 0;
+        font-size: 12px;
+        color: #8fa6b0;
     }
 
-    // form
+    // ---------------------------------------------------------------- form
     .o_tai_label, .form-label, label {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        display: flex;
+        align-items: center;
         font-size: 12px;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: .05em;
-        color: #cbd5e1;
-        margin-bottom: 6px;
+        letter-spacing: .02em;
+        color: #d5e3e8;
+        margin-bottom: 7px;
     }
     .o_req {
-        color: #9fe7e7;
+        color: $tai-mint;
+        margin-left: 4px;
     }
     .o_tai_forgot, .o_login_auth a, .btn-link {
-        text-transform: none;
-        letter-spacing: 0;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 12px;
-        color: #9fe7e7;
+        color: $tai-mint;
         text-decoration: none;
         &:hover {
             text-decoration: underline;
-            color: #9fe7e7;
+            color: $tai-mint;
         }
     }
     .o_tai_forgot {
@@ -189,31 +339,34 @@ body.o_tai_login {
     .o_tai_input_icon {
         position: absolute;
         left: 14px;
-        bottom: 13px;
-        color: #64748b;
+        bottom: 14px;
+        color: #7d97a3;
         pointer-events: none;
         z-index: 1;
     }
     .form-control, .o_tai_input {
         border-radius: 12px;
-        border: 1px solid rgba(51, 65, 85, .8);
-        background: rgba(15, 23, 42, .9);
+        border: 1px solid rgba(120, 150, 162, .35);
+        background: rgba(7, 25, 35, .75);
         color: #fff;
-        padding: 10px 12px;
+        padding: 12px 12px;
         font-size: 14px;
         transition: border-color .15s, box-shadow .15s;
         &::placeholder {
-            color: #64748b;
+            color: #6f8792;
+        }
+        &:hover {
+            border-color: rgba(159, 231, 231, .45);
         }
         &:focus {
-            border-color: #289fb7;
-            box-shadow: 0 0 0 3px rgba(40, 159, 183, .3);
-            background: rgba(15, 23, 42, .9);
+            border-color: $tai-cyan;
+            box-shadow: 0 0 0 3px rgba(40, 159, 183, .28);
+            background: rgba(7, 25, 35, .75);
             color: #fff;
         }
         &:-webkit-autofill {
             -webkit-text-fill-color: #fff;
-            box-shadow: 0 0 0 1000px #0f172a inset;
+            box-shadow: 0 0 0 1000px #0b2029 inset;
         }
     }
     .o_tai_input {
@@ -225,11 +378,11 @@ body.o_tai_login {
     .o_tai_eye {
         position: absolute;
         right: 12px;
-        bottom: 9px;
+        bottom: 11px;
         padding: 2px;
         border: 0;
         background: transparent;
-        color: #94a3b8;
+        color: $tai-muted;
         line-height: 0;
         cursor: pointer;
         &:hover {
@@ -247,31 +400,30 @@ body.o_tai_login {
             }
         }
     }
-
     .btn-primary, .o_tai_submit {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
         width: 100%;
-        padding: 12px 16px;
+        padding: 13px 16px;
         border: 0;
-        border-radius: 12px;
-        background: linear-gradient(90deg, #289fb7, #146b8c);
+        border-radius: 999px;
+        background: $tai-cyan;
         color: #fff;
-        font-weight: 700;
+        font-weight: 600;
         font-size: 14px;
-        box-shadow: 0 10px 15px -3px rgba(40, 159, 183, .25);
-        transition: background .15s;
+        transition: background .15s, box-shadow .2s, transform .2s;
         &:hover, &:focus {
-            background: linear-gradient(90deg, #35b1cb, #177ea5);
+            background: #217f96;
             color: #fff;
+            box-shadow: 0 12px 28px -8px rgba(40, 159, 183, .6);
+            transform: translateY(-1px);
         }
     }
     .oe_login_buttons {
         padding-top: 4px !important;
     }
-
     .alert-danger {
         border-radius: 12px;
         background: rgba(69, 10, 10, .5);
@@ -286,17 +438,39 @@ body.o_tai_login {
         color: #bbf7d0;
         font-size: 13px;
     }
-
     // "Choose a user" list of the previous sign-ins
-    .o_user_switch, .list-group-item {
-        background: rgba(15, 23, 42, .9);
-        border-color: rgba(51, 65, 85, .8);
+    .list-group-item {
+        background: rgba(7, 25, 35, .75);
+        border-color: rgba(120, 150, 162, .35);
         color: #e2e8f0;
     }
-    .text-muted, small {
-        color: #94a3b8 !important;
+    .text-muted {
+        color: $tai-muted !important;
     }
-    em.text-muted {
-        color: #64748b !important;
+
+    @media (max-width: 980px) {
+        .o_tai_login_page {
+            grid-template-columns: 1fr;
+            max-width: 492px;
+            padding: 32px 16px;
+        }
+        .o_tai_brand {
+            display: none;
+        }
     }
+    @media (max-width: 575.98px) {
+        .o_tai_login_card {
+            padding: 48px 22px 22px;
+        }
+    }
+}
+
+@keyframes o_tai_pop { 0% { transform: scale(.85); opacity: .3; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes o_tai_float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes o_tai_shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px) rotate(-6deg); } 40% { transform: translateX(8px) rotate(6deg); } 60% { transform: translateX(-6px) rotate(-4deg); } 80% { transform: translateX(5px) rotate(3deg); } }
+@keyframes o_tai_hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-16px); } }
+@keyframes o_tai_blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@keyframes o_tai_pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) {
+    body.o_tai_login .o_tai_bot, body.o_tai_login .o_eye, body.o_tai_login .o_antenna { animation: none !important; }
 }
