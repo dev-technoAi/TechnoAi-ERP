@@ -9,32 +9,35 @@
             <t t-set="is_proforma" t-value="env.context.get('proforma', False) or is_pro_forma"/>
 
             <div class="header" style="font-family: Lato, Arial, sans-serif;">
-                <table style="width: 100%;">
-                    <tr>
-                        <td style="vertical-align: top; padding: 6px 0 0 8px;">
-                            <img t-att-src="doc._tai_letter_logo()" alt="Techno AI" style="width: 82px;"/>
+                <table style="width: 100%; border: 0 none !important; border-collapse: collapse;">
+                    <tbody style="border: 0 none !important;"><tr style="border: 0 none !important;">
+                        <td style="vertical-align: top; padding: 6px 0 0 8px; border: 0 none !important;">
+                            <img t-att-src="doc._tai_letter_logo()" alt="Techno AI" style="width: 68px; height: 76px; display: block; margin-bottom: 10px;"/>
                         </td>
-                        <td style="vertical-align: top; width: 250px; border-top: 3px solid #555; text-align: right; font-size: 20px; font-weight: bold; padding-top: 6px;">
+                        <td style="vertical-align: top; width: 250px; border: 0 none !important; text-align: right; font-size: 20px; font-weight: bold; padding: 0;">
+                            <div style="border-top: 3px solid #555; padding-top: 6px;">
                             <t t-if="is_proforma">Pro-Forma Invoice</t>
                             <t t-elif="doc.state in ('draft', 'sent')">Quotation</t>
                             <t t-else="">Sale Order</t>
+                            </div>
                         </td>
-                    </tr>
+                    </tr></tbody>
                 </table>
             </div>
 
             <div class="article o_report_layout_standard" t-att-data-oe-model="doc._name" t-att-data-oe-id="doc.id" t-att-data-oe-lang="doc.env.context.get('lang')">
                 <style>
                     .tai-letter { font-family: Lato, Arial, sans-serif; font-size: 11.5px; color: #111; }
-                    .tai-letter table { width: 100%; border-collapse: collapse; }
+                    .tai-letter table { width: 100%; border-collapse: collapse; border: 0 none !important; }
+                    .tai-letter thead, .tai-letter tbody, .tai-letter tfoot, .tai-letter tr, .tai-letter td, .tai-letter th { border: 0 none !important; }
                     .tai-letter .tai-lines { margin-top: 12px; }
                     .tai-letter .tai-lines th { background: #e3e3e3; font-weight: bold; padding: 6px 7px; text-align: left; }
-                    .tai-letter .tai-lines td { padding: 7px; vertical-align: top; border-bottom: 1px solid #d5d5d5; }
+                    .tai-letter .tai-lines td { padding: 7px; vertical-align: top; border-bottom: 1px solid #d5d5d5 !important; }
                     .tai-letter .c { text-align: center !important; }
                     .tai-letter .r { text-align: right !important; }
-                    .tai-letter .tai-doc td { padding: 7px 4px; border-bottom: 1px solid #d5d5d5; }
+                    .tai-letter .tai-doc td { padding: 7px 4px; border-bottom: 1px solid #d5d5d5 !important; }
                     .tai-letter .tai-band { background: #e3e3e3; font-weight: bold; padding: 5px 2px; }
-                    .tai-letter .tai-rule { border-bottom: 1px solid #111; }
+                    .tai-letter .tai-rule, .tai-letter tr.tai-rule td { border-bottom: 1px solid #111 !important; }
                 </style>
                 <div class="tai-letter">
                     <table>
@@ -54,14 +57,14 @@
                                 </div>
                             </td>
                             <td style="vertical-align: top;">
-                                <table class="tai-doc" style="border-top: 1px solid #111;">
+                                <div style="border-top: 1px solid #111;"><table class="tai-doc">
                                     <tr><td><b>Doc No:</b></td><td class="r" t-out="doc.name"/></tr>
                                     <tr><td><b>Date:</b></td><td class="r"><span t-field="doc.date_order"/></td></tr>
                                     <tr t-if="doc.validity_date and doc.state in ('draft', 'sent')"><td><b>Valid Until:</b></td><td class="r"><span t-field="doc.validity_date"/></td></tr>
                                     <tr t-if="doc.commitment_date"><td><b>Delivery Date:</b></td><td class="r"><span t-field="doc.commitment_date" t-options="{'widget': 'date'}"/></td></tr>
                                     <tr><td><b>Payment Terms:</b></td><td class="r" t-out="doc.payment_term_id.name or ''"/></tr>
                                     <tr><td><b>Currency:</b></td><td class="r" t-out="doc.currency_id.name"/></tr>
-                                </table>
+                                </table></div>
                             </td>
                         </tr>
                     </table>
@@ -102,22 +105,22 @@
                         <tr><td style="padding: 10px 2px 3px;"><b>VAT:</b></td><td class="r" t-out="money(doc.amount_tax)"/></tr>
                         <tr><td style="padding: 3px 2px 12px;"><b>Total:</b></td><td class="r" t-out="money(doc.amount_total)"/></tr>
                     </table>
-                    <table style="border-top: 1px solid #111; border-bottom: 1px solid #111; font-weight: bold;">
+                    <div style="border-top: 1px solid #111; border-bottom: 1px solid #111;"><table style="font-weight: bold;">
                         <tr>
                             <td style="width: 110px; padding: 12px 2px;">Grand Total:</td>
                             <td style="padding: 12px 2px;" t-out="doc.currency_id.amount_to_text(doc.amount_total)"/>
                             <td class="r" style="width: 120px; padding: 12px 2px;" t-out="money(doc.amount_total)"/>
                         </tr>
-                    </table>
+                    </table></div>
 
                     <div class="tai-band" style="margin-top: 28px;">Terms and Conditions:</div>
-                    <table class="tai-rule">
+                    <div class="tai-rule"><table>
                         <tr>
                             <td style="padding: 8px 2px; width: 33%;"><b>Availability:</b> <t t-out="doc.tai_availability or ''"/></td>
                             <td style="padding: 8px 2px; width: 33%;"><b>Incoterms :</b> <t t-out="doc.incoterm.code or ''"/><t t-if="doc.incoterm_location">-<t t-out="doc.incoterm_location"/></t></td>
                             <td style="padding: 8px 2px;"><b>Warranty:</b> <t t-out="doc.tai_warranty or ''"/></td>
                         </tr>
-                    </table>
+                    </table></div>
 
                     <div class="tai-band" style="margin-top: 14px;">Disclaimer:</div>
                     <div class="tai-rule" style="padding: 8px 2px 10px; line-height: 1.5;">Customer should notify TechnoAI FZE LLC once the payment is made. All financial/fund transfer/Tax charges are to be borne by the customer</div>

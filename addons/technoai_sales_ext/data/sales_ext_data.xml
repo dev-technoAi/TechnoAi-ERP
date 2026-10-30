@@ -8,23 +8,6 @@
     <function model="account.tax" name="_technoai_set_full_names"/>
     <function model="sale.order" name="_technoai_ensure_pricelists"/>
 
-    <!-- The letter's own page setup: room for the logo at the top and the address at the bottom -->
-    <record id="paperformat_letter" model="report.paperformat">
-        <field name="name">Techno AI Letter</field>
-        <field name="format">A4</field>
-        <field name="orientation">Portrait</field>
-        <field name="margin_top">40</field>
-        <field name="margin_bottom">30</field>
-        <field name="margin_left">9</field>
-        <field name="margin_right">9</field>
-        <field name="header_line" eval="False"/>
-        <field name="header_spacing">6</field>
-        <field name="dpi">96</field>
-    </record>
-    <record id="sale.action_report_saleorder" model="ir.actions.report">
-        <field name="paperformat_id" ref="paperformat_letter"/>
-    </record>
-    <record id="sale.action_report_pro_forma_invoice" model="ir.actions.report">
-        <field name="paperformat_id" ref="paperformat_letter"/>
-    </record>
+    <!-- The letter uses the standard A4 format again (an earlier version set its own) -->
+    <function model="ir.actions.report" name="write" eval="[[ref('sale.action_report_saleorder'), ref('sale.action_report_pro_forma_invoice')], {'paperformat_id': False}]"/>
 </odoo>
