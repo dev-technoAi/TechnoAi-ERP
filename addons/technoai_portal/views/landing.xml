@@ -41,7 +41,7 @@
                                     <span class="hub-menu-lines" aria-hidden="true"><span/><span/><span/></span>
                                 </summary>
                                 <nav class="hub-menu-panel" aria-label="Main navigation">
-                                    <a href="/web/login">Sign in <t t-call="technoai_portal.icon_arrow_right"/></a>
+                                    <a t-attf-href="{{ '/technoai' if request.session.uid else '/web/login' }}"><t t-if="request.session.uid">Workspace</t><t t-else="">Sign in</t> <t t-call="technoai_portal.icon_arrow_right"/></a>
                                     <a href="https://technoai.ae/" target="_blank" rel="noopener noreferrer">Official website <t t-call="technoai_portal.icon_external_link"/></a>
                                 </nav>
                             </details>
@@ -56,7 +56,7 @@
                                     </h1>
                                     <p class="portal-description">Sales, purchasing, invoicing, inventory, projects and people, connected in one secure system, with the Task Hub and an AI assistant built in.</p>
                                     <div class="portal-actions">
-                                        <a href="/web/login" class="portal-button portal-button-primary">Sign in <t t-call="technoai_portal.icon_arrow_right"/></a>
+                                        <a t-attf-href="{{ '/technoai' if request.session.uid else '/web/login' }}" class="portal-button portal-button-primary"><t t-if="request.session.uid">Workspace</t><t t-else="">Sign in</t> <t t-call="technoai_portal.icon_arrow_right"/></a>
                                         <a href="https://technoai.ae/" target="_blank" rel="noopener noreferrer" class="portal-button portal-button-secondary">Official website <t t-call="technoai_portal.icon_external_link"/></a>
                                     </div>
                                     <p class="portal-hero-note">Redefining Intelligence <span aria-hidden="true">/</span> Shaping Tomorrow</p>
