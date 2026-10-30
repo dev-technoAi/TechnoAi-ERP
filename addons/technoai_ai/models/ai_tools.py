@@ -176,7 +176,7 @@ def _record_card(model, record_id, display_name, values):
         'id': record_id,
         'name': display_name,
         'fields': [[labels.get(name, name), '' if value is None else str(value)]
-                   for name, value in values.items() if name not in ('display_name', 'name') and value not in (None, '')][:6],
+                   for name, value in values.items() if name not in ('id', 'display_name', 'name') and value not in (None, '')][:6],
     }
 
 
@@ -414,9 +414,10 @@ def run(env, name, args):
 
 
 def trim(result):
+    """ JSON-safe copy of a tool result (dates become strings), cut down when it is too long. """
     text = json.dumps(result, default=str)
     if len(text) <= MAX_RESULT_CHARS:
-        return result
+        return json.loads(text)
     return {'truncated': True, 'partial': text[:MAX_RESULT_CHARS]}
 
 

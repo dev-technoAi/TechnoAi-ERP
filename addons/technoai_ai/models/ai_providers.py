@@ -6,17 +6,18 @@ on the next request. A chat therefore stays on the provider it started with.
 """
 import json
 import logging
+import time
 
 import requests
 
 _logger = logging.getLogger(__name__)
 
-TIMEOUT = 180
+TIMEOUT = 120
 
 DEFAULT_MODELS = {
     'anthropic': 'claude-opus-5-5',
     'openai': 'gpt-5',
-    'gemini': 'gemini-2.5-flash',
+    'gemini': 'gemini-3.6-flash',
 }
 
 # Claude models that accept server-side refusal fallbacks ("default" routing)
@@ -59,10 +60,18 @@ class Provider:
         self.model = model or DEFAULT_MODELS[self.name]
 
     def _post(self, url, headers, payload):
-        try:
-            response = requests.post(url, headers=headers, json=payload, timeout=TIMEOUT)
-        except requests.RequestException as error:
-            raise AiProviderError('Could not reach the AI provider: %s' % error) from error
+        for attempt in range(3):
+            # busy providers (429/503) and dropped connections usually work again a moment later
+            if attempt:
+                time.sleep(2 * attempt)
+            try:
+                response = requests.post(url, headers=headers, json=payload, timeout=TIMEOUT)
+            except requests.RequestException as error:
+                if attempt == 2:
+                    raise AiProviderError('Could not reach the AI provider: %s' % error) from error
+                continue
+            if response.status_code not in (429, 500, 502, 503, 529):
+                break
         if response.status_code >= 400:
             try:
                 detail = response.json().get('error') or response.json()
@@ -70,6 +79,9 @@ class Provider:
             except ValueError:
                 detail = response.text[:300]
             _logger.warning('AI provider %s returned %s: %s', self.name, response.status_code, detail)
+            if response.status_code == 429:
+                raise AiProviderError('The AI usage limit was reached (free plans allow only a few requests per minute). '
+                                      'Wait a minute and ask again, or turn on billing in the AI provider account for higher limits.')
             raise AiProviderError('The AI provider returned an error (%s): %s' % (response.status_code, detail))
         return response.json()
 

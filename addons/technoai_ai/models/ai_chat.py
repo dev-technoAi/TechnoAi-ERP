@@ -23,7 +23,20 @@ The user then sees a confirmation card and approves or cancels it, so do not ask
 with complete, correct values (look up ids of related records before). After a cancel, ask what they want instead.
 - Reply in the user's language and script (English, Urdu, or Roman Urdu), short and to the point. Give amounts with their currency.
 - The system is called Techno AI. Do not mention any other product name, and do not show technical model or field names unless asked.
-- You can only see and do what this user is allowed to; if a tool says access is denied, say so plainly."""
+- You can only see and do what this user is allowed to; if a tool says access is denied, say so plainly.
+- Each tool call costs time, so call several tools at once when you can, and skip find_models and get_fields for the common models below.
+
+Common models and fields:
+- sale.order (sales orders/quotations): name, partner_id, date_order, amount_total, state (draft, sent, sale, cancel), user_id. Lines: sale.order.line (order_id, product_id, product_uom_qty, price_subtotal).
+- purchase.order: name, partner_id (vendor), date_order, amount_total, state (draft, sent, purchase, cancel), date_planned. Lines: purchase.order.line.
+- account.move (invoices and bills): name, partner_id, invoice_date, invoice_date_due, amount_total, amount_residual, move_type (out_invoice, in_invoice, out_refund, in_refund), state, payment_state.
+- res.partner (customers, vendors, contacts): name, email, phone, country_id, city, customer_rank, supplier_rank.
+- product.product / product.template: name, default_code, list_price, standard_price, qty_available, categ_id.
+- taskhub.task (Task Hub tasks): name, user_id, department_id, date_deadline, priority, state, partner_id.
+- taskhub.rfq (email RFQs): name, subject, partner_id, state, amount, user_id. taskhub.quotation (draft quotations).
+- hr.employee: name, job_title, department_id, work_email, parent_id. hr.expense: name, employee_id, total_amount, state.
+- crm.lead: name, partner_id, expected_revenue, stage_id, user_id, type (lead, opportunity).
+Group by a related field with a dot, e.g. partner_id.country_id."""
 
 
 class TechnoaiAiChat(models.Model):
@@ -56,7 +69,9 @@ class TechnoaiAiChat(models.Model):
     def _provider(self):
         self.ensure_one()
         params = self.env['ir.config_parameter'].sudo()
-        return PROVIDERS[self.provider](params.get_param('technoai_ai.%s_key' % self.provider), self.model_name)
+        # the model set in Settings wins, so retired models can be swapped without losing chats
+        model = params.get_param('technoai_ai.%s_model' % self.provider) or self.model_name
+        return PROVIDERS[self.provider](params.get_param('technoai_ai.%s_key' % self.provider), model)
 
     # ------------------------------------------------------------------
     # API used by the chat panel
@@ -107,6 +122,10 @@ class TechnoaiAiChat(models.Model):
         except AiProviderError as error:
             items.append({'type': 'error', 'text': str(error)})
             chat.write({'items': items})
+        except Exception:
+            _logger.exception('AI assistant request failed')
+            items.append({'type': 'error', 'text': _('Something went wrong while answering. Please try again.')})
+            chat.write({'items': items})
         return chat._panel_data()
 
     def ai_confirm(self, approve, change=False):
@@ -120,6 +139,9 @@ class TechnoaiAiChat(models.Model):
             self._resolve_pending(approve=approve, note=note)
         except AiProviderError as error:
             self.write({'items': (self.items or []) + [{'type': 'error', 'text': str(error)}]})
+        except Exception:
+            _logger.exception('AI assistant request failed')
+            self.write({'items': (self.items or []) + [{'type': 'error', 'text': _('Something went wrong while answering. Please try again.')}]})
         return self._panel_data()
 
     def ai_rename(self, name):
@@ -218,7 +240,7 @@ class TechnoaiAiChat(models.Model):
             try:
                 with self.env.cr.savepoint():
                     result, new_items = ai_tools.run(self.env, call.name, call.args)
-                results.append((call, result, False))
+                results.append((call, ai_tools.trim(result), False))
                 items.extend(new_items)
                 if card:
                     card['state'] = 'done'
