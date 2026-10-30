@@ -13,6 +13,9 @@ module to get the previous layout back.
 """,
     'website': 'https://technoai.ae',
     'depends': ['web'],
+    'data': [
+        'data/home_action.xml',
+    ],
     'assets': {
         'web._assets_primary_variables': [
             ('prepend', 'technoai_backend_theme/static/src/scss/primary_variables.scss'),
@@ -22,6 +25,9 @@ module to get the previous layout back.
             'technoai_backend_theme/static/src/webclient/navbar_patch.js',
             'technoai_backend_theme/static/src/webclient/ui_size_patch.js',
             'technoai_backend_theme/static/src/webclient/navbar.xml',
+            'technoai_backend_theme/static/src/home/home_action.js',
+            'technoai_backend_theme/static/src/home/home_header.xml',
+            'technoai_backend_theme/static/src/home/home_header.scss',
         ],
     },
     'installable': True,

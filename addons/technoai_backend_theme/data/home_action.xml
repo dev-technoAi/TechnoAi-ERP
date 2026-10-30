@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- The apps launcher as a page of its own: /technoai/home survives a refresh -->
+    <record id="action_home" model="ir.actions.client">
+        <field name="name">Home</field>
+        <field name="tag">technoai_home</field>
+        <field name="path">home</field>
+    </record>
+</odoo>
