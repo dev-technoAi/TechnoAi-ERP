@@ -8,10 +8,10 @@
         </xpath>
         <xpath expr="//div[hasclass('o_techno_home_menu')]/div[1]" position="replace">
             <div class="o_tai_home_bar">
-                <img class="o_tai_home_logo" src="/technoai_backend_theme/static/img/logo-mark-white.png" alt="Techno AI"/>
+                <a href="/landing" title="Go to the landing page" aria-label="Go to the landing page">
+                    <img class="o_tai_home_logo" src="/technoai_backend_theme/static/img/logo-mark-white.png" alt="Techno AI"/>
+                </a>
                 <div class="o_tai_home_badge">
-                    <span class="o_dot"/>
-                    <span class="o_domain">technoai.ae</span>
                     <span class="badge rounded-pill">Enterprise Apps</span>
                 </div>
                 <div class="o_tai_home_actions">

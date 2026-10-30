@@ -2,18 +2,28 @@ $tai-ai-grad: linear-gradient(135deg, #1F869E, #0FAD98);
 $tai-ai-line: #DDE4E9;
 
 .o_tai_ai_btn {
-    width: 32px;
-    height: 32px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px;
     border: 0;
-    border-radius: 9px;
-    background: $tai-ai-grad;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    transition: box-shadow .15s;
+    border-radius: 8px;
+    background: transparent;
+    color: #1F869E;
+    line-height: 0;
+    transition: background .15s;
     &:hover, &.active {
-        box-shadow: 0 0 0 3px rgba(31, 134, 158, .25);
+        background: rgba(31, 134, 158, .12);
+    }
+    .o_tai_ai_live {
+        position: absolute;
+        top: 2px;
+        right: 3px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #0FAD98;
     }
 }
 

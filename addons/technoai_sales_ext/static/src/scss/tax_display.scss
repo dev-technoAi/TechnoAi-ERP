@@ -1,0 +1,20 @@
+// Tax Excl. / Tax Incl. button above the lines
+.o_tai_tax_display {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+
+    .o_field_widget {
+        width: auto;
+    }
+    .o_selection_badge {
+        margin: 0 !important;
+        border-radius: 0;
+        &:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+        &:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+    }
+}

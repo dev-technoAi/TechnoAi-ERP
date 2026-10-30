@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.technoai.sales.ext</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <!-- left column -->
+            <xpath expr="//group[@name='partner_details']" position="inside">
+                <field name="tai_remarks" placeholder="Notes for this order, also shown on its delivery" rows="2"/>
+            </xpath>
+
+            <!-- right column, in the order of the reference screen -->
+            <xpath expr="//group[@name='order_details']/field[@name='validity_date']" position="after">
+                <field name="tai_recurring_plan"/>
+            </xpath>
+            <xpath expr="//group[@name='order_details']//field[@name='payment_term_id']" position="after">
+                <xpath expr="//label[@for='commitment_date']" position="move"/>
+                <xpath expr="//div[field[@name='commitment_date']]" position="move"/>
+                <field name="tai_availability" placeholder="1-2 weeks"/>
+                <xpath expr="//field[@name='incoterm']" position="move"/>
+                <xpath expr="//field[@name='incoterm_location']" position="move"/>
+                <field name="tai_warranty" placeholder="Manufacturer Warranty"/>
+            </xpath>
+
+            <!-- the order's total margin, under the totals, is for managers too -->
+            <xpath expr="//div[label[@for='margin']]" position="attributes">
+                <attribute name="groups">sales_team.group_sale_manager</attribute>
+            </xpath>
+
+            <!-- Tax Excl. / Tax Incl. button: decides which amount the Amount column shows -->
+            <xpath expr="//sheet/notebook" position="before">
+                <div class="o_tai_tax_display">
+                    <field name="tai_tax_display" widget="selection_badge" nolabel="1"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_subtotal'][@invisible='is_downpayment'][not(@optional)]" position="attributes">
+                <attribute name="column_invisible">parent.tai_tax_display == 'incl'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_total'][@invisible='is_downpayment'][not(@optional)]" position="attributes">
+                <attribute name="column_invisible">parent.tai_tax_display != 'incl'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_total'][@optional='hide']" position="attributes">
+                <attribute name="column_invisible">False</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_subtotal'][@optional='hide']" position="attributes">
+                <attribute name="column_invisible">False</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Cost and margin are for managers; salespeople do not see the buying price -->
+    <record id="view_order_form_margin" model="ir.ui.view">
+        <field name="name">sale.order.form.technoai.sales.ext.margin</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_margin.sale_margin_sale_order_line_form"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/list//field[@name='purchase_price']" position="attributes">
+                <attribute name="string">Unit Cost</attribute>
+                <attribute name="groups">sales_team.group_sale_manager</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list//field[@name='margin']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_manager</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list//field[@name='margin_percent']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_manager</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

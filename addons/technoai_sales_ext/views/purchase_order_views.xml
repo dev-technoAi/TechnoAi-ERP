@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form.technoai.sales.ext</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <!-- Payment terms next to the vendor -->
+            <xpath expr="//sheet/group//field[@name='partner_ref']" position="after">
+                <xpath expr="//group[@name='invoice_info']/field[@name='payment_term_id']" position="move"/>
+            </xpath>
+
+            <!-- Arrival confirmation -->
+            <xpath expr="//label[@for='receipt_reminder_email']" position="attributes">
+                <attribute name="class"/>
+                <attribute name="string">Arrival Confirmation</attribute>
+            </xpath>
+            <xpath expr="//div[@name='reminder']/span[1]" position="replace"/>
+
+            <!-- Tax Excl. / Tax Incl. button -->
+            <xpath expr="//sheet/notebook" position="before">
+                <div class="o_tai_tax_display">
+                    <field name="tai_tax_display" widget="selection_badge" nolabel="1"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_subtotal']" position="attributes">
+                <attribute name="column_invisible">parent.tai_tax_display == 'incl'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_subtotal']" position="after">
+                <field name="price_total" string="Amount" column_invisible="parent.tai_tax_display != 'incl'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
