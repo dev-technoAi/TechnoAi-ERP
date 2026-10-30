@@ -30,6 +30,24 @@ class TaskhubQuotation(models.Model):
     notes = fields.Html('Terms & notes')
     state = fields.Selection([('draft', 'Draft'), ('sent', 'Sent')], default='draft', tracking=True)
     sale_order_id = fields.Many2one('sale.order', 'Sales quotation', readonly=True, copy=False)
+    known_line_id = fields.Many2one('taskhub.quotation.line', 'Item chosen for Known suppliers', ondelete='set null', copy=False)
+    known_current_line_id = fields.Many2one('taskhub.quotation.line', compute='_compute_known_suppliers')
+    known_item_name = fields.Char(compute='_compute_known_suppliers')
+    known_source_ids = fields.Many2many('taskhub.sourcing', string='Known suppliers', compute='_compute_known_suppliers')
+    known_best_id = fields.Many2one('taskhub.sourcing', compute='_compute_known_suppliers')
+    known_selected_id = fields.Many2one('taskhub.sourcing', compute='_compute_known_suppliers')
+
+    @api.depends('known_line_id', 'line_ids.name', 'line_ids.supplier_id', 'line_ids.cost', 'currency_id')
+    def _compute_known_suppliers(self):
+        """ The list under the lines: the item that was picked, else the first with known suppliers. """
+        for quote in self:
+            line = quote.known_line_id or quote.line_ids.filtered('known_count')[:1]
+            quote.known_current_line_id = line
+            quote.known_item_name = line.name
+            quote.known_source_ids = line.known_source_ids
+            quote.known_best_id = line.known_source_ids[:1]
+            quote.known_selected_id = line.known_source_ids.filtered(
+                lambda r: r.supplier_id == line.supplier_id and r._cost_in(line.currency_id) == line.cost)[:1]
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -186,6 +204,27 @@ class TaskhubQuotationLine(models.Model):
     price_unit = fields.Monetary('Unit price')
     subtotal = fields.Monetary('Amount', compute='_compute_subtotal', store=True)
     cost_subtotal = fields.Monetary(compute='_compute_subtotal', store=True)
+    known_source_ids = fields.Many2many('taskhub.sourcing', compute='_compute_known_suppliers')
+    known_count = fields.Integer(compute='_compute_known_suppliers')
+    known_summary = fields.Char('Known suppliers', compute='_compute_known_suppliers')
+
+    @api.depends('name', 'quotation_id.currency_id')
+    def _compute_known_suppliers(self):
+        Sourcing = self.env['taskhub.sourcing']
+        for line in self:
+            known = Sourcing._known_for_item(line.name, line.currency_id)
+            line.known_source_ids = known
+            line.known_count = len(known)
+            if known:
+                line.known_summary = _('%(count)s, from %(cost)s', count=len(known),
+                                       cost='{:,.2f}'.format(known[0]._cost_in(line.currency_id)))
+            else:
+                line.known_summary = _('No supplier yet')
+
+    def action_show_known_suppliers(self):
+        self.ensure_one()
+        self.quotation_id.known_line_id = self
+        return True
 
     @api.depends('quantity', 'price_unit', 'cost')
     def _compute_subtotal(self):
@@ -195,14 +234,14 @@ class TaskhubQuotationLine(models.Model):
 
     @api.onchange('name', 'supplier_id')
     def _onchange_suggest_cost(self):
-        """ Suggest the last known cost of the item from the sourcing history. """
+        """ Suggest the best known price of the item from the sourcing history. """
         if not self.name or self.cost:
             return
-        domain = [('name', 'ilike', self.name), ('unit_cost', '>', 0)]
+        known = self.env['taskhub.sourcing']._known_for_item(self.name, self.currency_id)
         if self.supplier_id:
-            domain.append(('supplier_id', '=', self.supplier_id.id))
-        record = self.env['taskhub.sourcing'].search(domain, limit=1, order='status_rank desc, write_date desc')
+            known = known.filtered(lambda r: r.supplier_id == self.supplier_id)
+        record = known[:1]
         if record:
-            self.cost = record.unit_cost
+            self.cost = record._cost_in(self.currency_id)
             self.supplier_id = self.supplier_id or record.supplier_id
             self.source_url = self.source_url or record.url
