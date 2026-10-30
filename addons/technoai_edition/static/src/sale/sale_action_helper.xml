@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- No vendor video on the empty quotations page; a Techno AI video can go here later -->
+    <t t-inherit="sale.SaleActionHelper" t-inherit-mode="extension">
+        <xpath expr="//a[hasclass('o_sale_action_preview')]" position="replace"/>
+    </t>
+</templates>

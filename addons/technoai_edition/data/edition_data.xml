@@ -7,4 +7,11 @@
 
     <!-- Paid apps, menus and screens follow the "Show paid features" setting (hidden by default) -->
     <function model="res.config.settings" name="_technoai_apply_paid_visibility"/>
+    <!-- Empty quotations page: Techno AI wording instead of the vendor's marketing and sample link -->
+    <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first quotation</p>
+            <p>Add the customer and products, send it for approval, then confirm it into a sales order.</p>
+        </field>
+    </record>
 </odoo>

@@ -1,9 +1,10 @@
-import { Component, onMounted, onWillUnmount, useExternalListener, xml } from "@odoo/owl";
+import { Component, onMounted, onWillUnmount, useEffect, useExternalListener, xml } from "@odoo/owl";
 import { browser } from "@web/core/browser/browser";
 import { registry } from "@web/core/registry";
 import { useBus } from "@web/core/utils/hooks";
 import { patch } from "@web/core/utils/patch";
 import { NavBar } from "@web/webclient/navbar/navbar";
+import { startTerrain } from "./home_terrain";
 
 const HOME_TAG = "technoai_home";
 
@@ -44,6 +45,14 @@ patch(NavBar.prototype, {
                 super.toggleHomeMenu(open);
             }
         });
+        // 3D background while the launcher is open
+        useEffect(
+            (open) => {
+                const canvas = open && document.querySelector(".o_techno_home_menu .o_tai_home_terrain");
+                return canvas ? startTerrain(canvas) : undefined;
+            },
+            () => [this.state.isHomeMenuOpened]
+        );
         // Escape closes the launcher in the navbar itself; then leave the home page too
         useExternalListener(window, "keydown", (ev) => {
             if (ev.key === "Escape" && !this.state.isHomeMenuOpened && this.taiOnHomePage) {
