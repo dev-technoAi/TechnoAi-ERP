@@ -208,8 +208,9 @@ class TaskhubRfq(models.Model):
             if not rfq.user_id:
                 raise UserError(_('Assign %s to someone before approving it.', rfq.name))
             if not rfq.task_id:
-                rfq.task_id = self.env['taskhub.task'].create({
+                rfq.task_id = self.env['taskhub.task'].with_context(default_state=None).create({
                     'name': _('Prepare quotation: %(subject)s', subject=rfq.subject),
+                    'state': 'todo',
                     'priority': 'high',
                     'user_id': rfq.user_id.id,
                     'department_id': rfq.department_id.id,
@@ -249,8 +250,9 @@ class TaskhubRfq(models.Model):
     def action_new_quotation(self):
         """ Open a draft quotation prefilled from the RFQ items. """
         self.ensure_one()
-        quotation = self.quotation_ids[:1] or self.env['taskhub.quotation'].create({
+        quotation = self.quotation_ids[:1] or self.env['taskhub.quotation'].with_context(default_state=None).create({
             'rfq_id': self.id,
+            'state': 'draft',
             'partner_id': self.partner_id.id,
             'client_name': self.partner_id.name or self.client_name,
             'client_email': self.client_email,
