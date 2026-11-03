@@ -12,3 +12,4 @@ access_taskhub_quotation_user,taskhub.quotation user,model_taskhub_quotation,gro
 access_taskhub_quotation_line_user,taskhub.quotation.line user,model_taskhub_quotation_line,group_taskhub_user,1,1,1,1
 access_taskhub_sourcing_user,taskhub.sourcing user,model_taskhub_sourcing,group_taskhub_user,1,1,1,1
 access_taskhub_dispatch_user,taskhub.dispatch user,model_taskhub_dispatch,group_taskhub_user,1,1,1,1
+access_taskhub_online_result_user,taskhub.online.result user,model_taskhub_online_result,group_taskhub_user,1,1,1,1

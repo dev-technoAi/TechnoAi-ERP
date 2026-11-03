@@ -59,19 +59,44 @@ class TaskhubSourcing(models.Model):
             return self.unit_cost
         return self.currency_id._convert(self.unit_cost, currency, self.company_id or self.env.company, fields.Date.context_today(self))
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._flag_suppliers()
+        return records
+
+    def write(self, vals):
+        result = super().write(vals)
+        if vals.get('supplier_id'):
+            self._flag_suppliers()
+        return result
+
+    def _flag_suppliers(self):
+        """ Whoever we have a price from is listed under Task Hub > Suppliers. """
+        self.supplier_id.filtered(lambda p: not p.taskhub_is_supplier).sudo().taskhub_is_supplier = True
+
+    @api.model
+    def _flag_existing_suppliers(self):
+        """ Run on module update, for prices saved before suppliers were listed automatically. """
+        self.search([('supplier_id', '!=', False)])._flag_suppliers()
+
+    @api.model
+    def _matching_items(self, name, domain=None):
+        """ Every record of this item (see _matches_item), newest first. """
+        words = _item_words(name)
+        if not words:
+            return self.browse()
+        search = expression.OR([['|', ('name', 'ilike', word), ('part_number', 'ilike', word)] for word in words])
+        records = self.search(expression.AND([search, domain or []]), order='write_date desc, id desc', limit=500)
+        return records.filtered(lambda r: r._matches_item(words))
+
     @api.model
     def _known_for_item(self, name, currency=None):
         """ The suppliers we already have a price from for this item, cheapest first:
         each supplier once, with their most recent price. """
-        words = _item_words(name)
-        if not words:
-            return self.browse()
-        domain = expression.OR([['|', ('name', 'ilike', word), ('part_number', 'ilike', word)] for word in words])
-        domain = expression.AND([domain, [('unit_cost', '>', 0), ('supplier_id', '!=', False)]])
         known = {}
-        for record in self.search(domain, order='write_date desc, id desc', limit=500):
-            if record.supplier_id not in known and record._matches_item(words):
-                known[record.supplier_id] = record
+        for record in self._matching_items(name, [('unit_cost', '>', 0), ('supplier_id', '!=', False)]):
+            known.setdefault(record.supplier_id, record)
         return self.browse([r.id for r in sorted(known.values(), key=lambda r: r._cost_in(currency))])
 
     def _matches_item(self, words):

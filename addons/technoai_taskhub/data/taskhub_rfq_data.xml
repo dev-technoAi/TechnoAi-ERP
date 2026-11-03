@@ -28,6 +28,16 @@
             <field name="taxes_id" eval="[Command.clear()]"/>
         </record>
 
+        <!-- carries the lines of Purchase Orders made from draft quotations, when the catalog has no such product -->
+        <record id="product_sourced_item" model="product.product">
+            <field name="name">Sourced item</field>
+            <field name="type">consu</field>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="True"/>
+            <field name="standard_price">0</field>
+            <field name="supplier_taxes_id" eval="[Command.clear()]"/>
+        </record>
+
         <!-- emails to rfq@<alias domain> become Email RFQs once incoming email is set up -->
         <record id="mail_alias_taskhub_rfq" model="mail.alias">
             <field name="alias_name">rfq</field>
@@ -35,4 +45,7 @@
             <field name="alias_contact">everyone</field>
         </record>
     </data>
+
+    <!-- suppliers of prices saved before they were listed automatically -->
+    <function model="taskhub.sourcing" name="_flag_existing_suppliers"/>
 </odoo>

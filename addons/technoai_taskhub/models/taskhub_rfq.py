@@ -1,8 +1,11 @@
+import logging
 import re
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import html2plaintext, parse_contact_from_email
+
+_logger = logging.getLogger(__name__)
 
 RFQ_STATES = [
     ('new', 'New'),
@@ -162,7 +165,7 @@ class TaskhubRfq(models.Model):
                                 uom = rem
                         items.append({'name': name, 'quantity': qty, 'uom': uom or 'EA'})
             except Exception:
-                pass
+                _logger.warning("Task Hub could not read the item table of an RFQ email", exc_info=True)
 
         if items:
             return items[:100]
@@ -248,9 +251,9 @@ class TaskhubRfq(models.Model):
         self.write({'state': 'new' if not self.task_id else 'approved'})
 
     def action_new_quotation(self):
-        """ Open a draft quotation prefilled from the RFQ items. """
+        """ Open the latest draft quotation, or a new one prefilled from the RFQ items. """
         self.ensure_one()
-        quotation = self.quotation_ids[:1] or self.env['taskhub.quotation'].with_context(default_state=None).create({
+        quotation = self.quotation_ids.sorted('id', reverse=True)[:1] or self.env['taskhub.quotation'].with_context(default_state=None).create({
             'rfq_id': self.id,
             'state': 'draft',
             'partner_id': self.partner_id.id,
@@ -276,10 +279,11 @@ class TaskhubRfq(models.Model):
     def action_open_sourcing(self):
         """ Past prices and suppliers for the requested items. """
         self.ensure_one()
-        words = [line.name.split()[0] for line in self.line_ids if line.name]
-        domain = []
-        for word in words[:5]:
-            domain = ['|', ('name', 'ilike', word)] + domain if domain else [('name', 'ilike', word)]
+        Sourcing = self.env['taskhub.sourcing']
+        records = Sourcing.browse()
+        for line in self.line_ids:
+            records |= Sourcing._matching_items(line.name)
+        domain = [('id', 'in', records.ids)]
         return {
             'type': 'ir.actions.act_window',
             'name': _('Sourcing for %s', self.name),

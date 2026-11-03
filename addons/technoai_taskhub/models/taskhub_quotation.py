@@ -30,6 +30,14 @@ class TaskhubQuotation(models.Model):
     notes = fields.Html('Terms & notes')
     state = fields.Selection([('draft', 'Draft'), ('sent', 'Sent')], default='draft', tracking=True)
     sale_order_id = fields.Many2one('sale.order', 'Sales quotation', readonly=True, copy=False)
+    purchase_order_ids = fields.Many2many('purchase.order', string='Purchase Orders', readonly=True, copy=False)
+    purchase_count = fields.Integer(compute='_compute_purchase_count')
+    revision_of_id = fields.Many2one('taskhub.quotation', 'Revision of', readonly=True, copy=False, ondelete='set null')
+    rfq_email_body = fields.Html(related='rfq_id.email_body', string='Client email')
+    rfq_email_from = fields.Char(related='rfq_id.client_email', string='From')
+    rfq_date_received = fields.Datetime(related='rfq_id.date_received', string='Received')
+    online_result_ids = fields.One2many('taskhub.online.result', 'quotation_id', 'Online search results')
+    online_item_name = fields.Char(compute='_compute_online_item_name')
     known_line_id = fields.Many2one('taskhub.quotation.line', 'Item chosen for Known suppliers', ondelete='set null', copy=False)
     known_current_line_id = fields.Many2one('taskhub.quotation.line', compute='_compute_known_suppliers')
     known_item_name = fields.Char(compute='_compute_known_suppliers')
@@ -48,6 +56,16 @@ class TaskhubQuotation(models.Model):
             quote.known_best_id = line.known_source_ids[:1]
             quote.known_selected_id = line.known_source_ids.filtered(
                 lambda r: r.supplier_id == line.supplier_id and r._cost_in(line.currency_id) == line.cost)[:1]
+
+    @api.depends('purchase_order_ids')
+    def _compute_purchase_count(self):
+        for quote in self:
+            quote.purchase_count = len(quote.purchase_order_ids)
+
+    @api.depends('online_result_ids.item')
+    def _compute_online_item_name(self):
+        for quote in self:
+            quote.online_item_name = quote.online_result_ids[:1].item
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -137,23 +155,109 @@ class TaskhubQuotation(models.Model):
         if not self.partner_id:
             raise UserError(_('Choose the client (a contact) before creating the Sales quotation.'))
         product = self.env.ref('technoai_taskhub.product_quoted_item')
+        taxes = self._company_taxes('sale')
         order = self.env['sale.order'].create({
             'partner_id': self.partner_id.id,
             'validity_date': self.valid_until,
             'origin': ' / '.join(filter(None, [self.name, self.rfq_id.name])),
             'order_line': [(0, 0, {
-                'product_id': product.id,
+                'product_id': self._catalog_product(line.name).id or product.id,
                 'name': line.name,
                 'product_uom_qty': line.quantity,
                 'price_unit': line.price_unit,
-                'tax_id': [(6, 0, [])],
+                'tax_id': [(6, 0, taxes.ids)],
             }) for line in self.line_ids],
         })
+        if 'purchase_price' in order.order_line._fields:
+            # the buying price, so Sales shows the real margin (needs the Margins app)
+            for so_line, line in zip(order.order_line, self.line_ids):
+                so_line.purchase_price = line.cost
         self.sale_order_id = order
         self.message_post(body=_('Sales quotation %s created.', order._get_html_link()))
         if self.rfq_id.task_id:
             self.rfq_id.task_id.linked_ref = '%s,%s' % (order._name, order.id)
         return self._open_sale_order()
+
+    def _catalog_product(self, name, purchase=False):
+        """ The product of the catalog with exactly this name or internal reference, if there is one. """
+        name = (name or '').strip()
+        if not name:
+            return self.env['product.product']
+        return self.env['product.product'].search(
+            [('purchase_ok' if purchase else 'sale_ok', '=', True), '|', ('default_code', '=ilike', name), ('name', '=ilike', name)], limit=1)
+
+    def _company_taxes(self, use):
+        """ The sales or purchase tax ('sale' / 'purchase') for the quotation's VAT %: the company's default
+        tax when it has that rate, otherwise a plain tax with that rate (not reverse charge or tourist refund). """
+        self.ensure_one()
+        if not self.vat_rate:
+            return self.env['account.tax']
+        company = self.company_id or self.env.company
+        default = company.account_sale_tax_id if use == 'sale' else company.account_purchase_tax_id
+        if default.amount_type == 'percent' and default.amount == self.vat_rate:
+            return default
+        taxes = self.env['account.tax'].search([
+            *self.env['account.tax']._check_company_domain(company),
+            ('type_tax_use', '=', use), ('amount_type', '=', 'percent'), ('amount', '=', self.vat_rate),
+        ]).filtered(lambda t: not t.price_include and not any(
+            word in (t.name or '').lower() for word in ('reverse', 'tourist', 'refund')))
+        if not taxes:
+            kind = _('sales') if use == 'sale' else _('purchase')
+            raise UserError(_('No %(kind)s tax of %(rate)s%% was found. Add one in Invoicing > Configuration > Taxes, '
+                              'or change the VAT %% of %(quote)s.', kind=kind, rate=self.vat_rate, quote=self.name))
+        return taxes[:1]
+
+    def action_create_purchase_orders(self):
+        """ One draft Purchase Order per supplier of the lines, at each line's cost. """
+        self.ensure_one()
+        lines = self.line_ids.filtered('supplier_id')
+        if not lines:
+            raise UserError(_('Choose a supplier on the lines first.'))
+        done = self.purchase_order_ids.filtered(lambda o: o.state != 'cancel').partner_id
+        todo = lines.filtered(lambda l: l.supplier_id not in done)
+        if not todo:
+            return self.action_open_purchase_orders()
+        fallback = self.env.ref('technoai_taskhub.product_sourced_item')
+        taxes = self._company_taxes('purchase')
+        orders = self.env['purchase.order']
+        for supplier in todo.supplier_id:
+            orders |= self.env['purchase.order'].create({
+                'partner_id': supplier.id,
+                'currency_id': self.currency_id.id,
+                'origin': ' / '.join(filter(None, [self.name, self.rfq_id.name])),
+                'order_line': [(0, 0, {
+                    'product_id': (self._catalog_product(line.name, purchase=True) or fallback).id,
+                    'name': line.name,
+                    'product_qty': line.quantity,
+                    'price_unit': line.cost,
+                    'taxes_id': [(6, 0, taxes.ids)],
+                }) for line in todo.filtered(lambda l: l.supplier_id == supplier)],
+            })
+        self.purchase_order_ids |= orders
+        self.message_post(body=_('Purchase Orders created: %s', ', '.join(orders.mapped('name'))))
+        return self.action_open_purchase_orders()
+
+    def action_open_purchase_orders(self):
+        self.ensure_one()
+        action = {
+            'type': 'ir.actions.act_window',
+            'name': _('Purchase Orders'),
+            'res_model': 'purchase.order',
+            'domain': [('id', 'in', self.purchase_order_ids.ids)],
+            'view_mode': 'list,form',
+        }
+        if len(self.purchase_order_ids) == 1:
+            action.update(res_id=self.purchase_order_ids.id, view_mode='form')
+        return action
+
+    def action_new_revision(self):
+        """ A copy of this quotation for a revised offer; the RFQ keeps every revision. """
+        self.ensure_one()
+        revision = self.copy({'state': 'draft', 'revision_of_id': self.id, 'known_line_id': False,
+                              'date': fields.Date.context_today(self)})
+        revision.message_post(body=_('Revision of %s.', self._get_html_link()))
+        self.message_post(body=_('New revision: %s.', revision._get_html_link()))
+        return revision._open_form()
 
     def _open_sale_order(self):
         return {

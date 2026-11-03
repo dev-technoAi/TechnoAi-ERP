@@ -2,6 +2,7 @@ from . import taskhub_task
 from . import taskhub_template
 from . import taskhub_rfq
 from . import taskhub_quotation
+from . import taskhub_online
 from . import taskhub_sourcing
 from . import taskhub_report
 from . import taskhub_mailbox

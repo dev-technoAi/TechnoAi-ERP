@@ -25,6 +25,8 @@ module to get the previous layout back.
             'technoai_backend_theme/static/src/webclient/navbar_patch.js',
             'technoai_backend_theme/static/src/webclient/ui_size_patch.js',
             'technoai_backend_theme/static/src/webclient/navbar.xml',
+            'technoai_backend_theme/static/src/webclient/company_menu_patch.js',
+            'technoai_backend_theme/static/src/webclient/company_menu.xml',
             'technoai_backend_theme/static/src/home/home_terrain.js',
             'technoai_backend_theme/static/src/home/home_action.js',
             'technoai_backend_theme/static/src/home/home_header.xml',
