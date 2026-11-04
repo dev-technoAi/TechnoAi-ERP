@@ -140,7 +140,7 @@ class ClientPortal(http.Controller):
     # Pages
     # ------------------------------------------------------------------
 
-    @http.route(PORTAL + '/home', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/home', type='http', auth='public', sitemap=False)
     def home(self, **kw):
         if (redirect := self._guard()):
             return redirect
@@ -161,13 +161,13 @@ class ClientPortal(http.Controller):
             'updates': updates,
         })
 
-    @http.route(PORTAL + '/quotations', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/quotations', type='http', auth='public', sitemap=False)
     def quotations(self, **kw):
         if (redirect := self._guard()):
             return redirect
         return self._render('technoai_client_portal.quotations', 'quotations', {'quotations': self._quotations()})
 
-    @http.route(PORTAL + '/quotations/<int:order_id>/review', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/quotations/<int:order_id>/review', type='http', auth='public', sitemap=False)
     def review(self, order_id, **kw):
         if (redirect := self._guard()):
             return redirect
@@ -177,13 +177,13 @@ class ClientPortal(http.Controller):
         # Odoo's own quotation page: accept with signature (and payment when asked)
         return request.redirect(order.get_portal_url())
 
-    @http.route(PORTAL + '/orders', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/orders', type='http', auth='public', sitemap=False)
     def orders(self, **kw):
         if (redirect := self._guard()):
             return redirect
         return self._render('technoai_client_portal.orders', 'orders', {'orders': self._orders()})
 
-    @http.route(PORTAL + '/orders/<int:order_id>', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/orders/<int:order_id>', type='http', auth='public', sitemap=False)
     def order(self, order_id, **kw):
         if (redirect := self._guard()):
             return redirect
@@ -201,7 +201,7 @@ class ClientPortal(http.Controller):
             'sent': kw.get('sent'),
         })
 
-    @http.route(PORTAL + '/orders/<int:order_id>/message', type='http', auth='user', methods=['POST'], sitemap=False)
+    @http.route(PORTAL + '/orders/<int:order_id>/message', type='http', auth='public', methods=['POST'], sitemap=False)
     def order_message(self, order_id, message=None, **kw):
         if (redirect := self._guard()):
             return redirect
@@ -214,13 +214,13 @@ class ClientPortal(http.Controller):
                 order.message_subscribe(partner_ids=order.user_id.partner_id.ids)
         return request.redirect('%s/orders/%s?sent=1#messages' % (PORTAL, order_id))
 
-    @http.route(PORTAL + '/deliveries', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/deliveries', type='http', auth='public', sitemap=False)
     def deliveries(self, **kw):
         if (redirect := self._guard()):
             return redirect
         return self._render('technoai_client_portal.deliveries', 'deliveries', {'deliveries': self._deliveries()})
 
-    @http.route(PORTAL + '/invoices', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/invoices', type='http', auth='public', sitemap=False)
     def invoices(self, **kw):
         if (redirect := self._guard()):
             return redirect
@@ -238,7 +238,7 @@ class ClientPortal(http.Controller):
             'paid_totals': self._totals(paid, 'amount_total'),
         })
 
-    @http.route(PORTAL + '/statement', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/statement', type='http', auth='public', sitemap=False)
     def statement(self, **kw):
         if (redirect := self._guard()):
             return redirect
@@ -249,7 +249,7 @@ class ClientPortal(http.Controller):
             'balance_totals': self._totals(invoices.filtered(lambda m: m.payment_state in ('not_paid', 'partial')), 'amount_residual'),
         })
 
-    @http.route(PORTAL + '/pdf/<string:kind>/<int:record_id>', type='http', auth='user', sitemap=False)
+    @http.route(PORTAL + '/pdf/<string:kind>/<int:record_id>', type='http', auth='public', sitemap=False)
     def pdf(self, kind, record_id, **kw):
         if (redirect := self._guard()):
             return redirect
@@ -262,7 +262,7 @@ class ClientPortal(http.Controller):
         return request.make_response(pdf, headers=[('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                                                    ('Content-Disposition', 'attachment; filename="%s"' % name)])
 
-    @http.route(PORTAL + '/request', type='http', auth='user', methods=['GET', 'POST'], sitemap=False)
+    @http.route(PORTAL + '/request', type='http', auth='public', methods=['GET', 'POST'], sitemap=False)
     def request_quote(self, subject=None, details=None, **kw):
         if (redirect := self._guard()):
             return redirect
