@@ -144,7 +144,9 @@ class RfqNotifyMailbox(models.Model):
     def action_test_alert(self):
         """ Send this mailbox's owner a sample alert on every channel that is turned on. """
         self.ensure_one()
-        sample = self.env['rfq.notify.message'].create({
+        self.check_access('write')  # only the owner (or a manager) can test a mailbox
+        # alerts are created by the system, employees only read and open them
+        sample = self.env['rfq.notify.message'].sudo().create({
             'mailbox_id': self.id,
             'kind': 'rfq',
             'subject': _('Test alert: RFQ notifications work'),
@@ -194,7 +196,8 @@ class RfqNotifyMailbox(models.Model):
             validity = validity.decode() if isinstance(validity, bytes) else str(validity or '')
             _status, data = imap.uid('search', None, 'ALL')
             uids = [int(uid) for uid in (data[0] or b'').split()]
-            if not self.last_uid or validity != self.uid_validity:
+            # the UIDVALIDITY is kept from the first check on, so an empty inbox is not "first checked" forever
+            if not self.uid_validity or validity != self.uid_validity:
                 # first check (or the mailbox was rebuilt): start from now, without alerting about old emails
                 self.write({'last_uid': max(uids or [0]), 'uid_validity': validity})
                 uids = []
