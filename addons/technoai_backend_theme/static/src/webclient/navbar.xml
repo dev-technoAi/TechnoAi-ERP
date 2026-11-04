@@ -22,17 +22,17 @@
         </xpath>
     </t>
 
-    <!-- The apps launcher button becomes the sidebar's "Dashboard" entry -->
+    <!-- The apps launcher button becomes the sidebar's "Apps" entry -->
     <t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension">
         <xpath expr="//button[@data-hotkey='h']" position="replace">
             <button
                 data-hotkey="h"
-                title="Home Menu (Apps Launcher)"
+                title="All apps"
                 class="o_tai_nav_item btn"
                 t-on-click="() => this.toggleHomeMenu()"
             >
-                <i class="fa fa-fw fa-home"/>
-                <span>Dashboard</span>
+                <i class="fa fa-fw fa-th"/>
+                <span>Apps</span>
             </button>
         </xpath>
     </t>

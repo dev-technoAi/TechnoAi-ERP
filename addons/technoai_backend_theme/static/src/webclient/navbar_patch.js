@@ -103,6 +103,16 @@ patch(NavBar.prototype, {
         return super.adapt();
     },
 
+    /** A section that opens the same page as its app (Task Hub > Tasks) is shown once, as the app. */
+    get currentAppSections() {
+        const app = this.currentApp;
+        const sections = super.currentAppSections;
+        if (!app?.actionID) {
+            return sections;
+        }
+        return sections.filter((section) => section.actionID !== app.actionID || section.childrenTree?.length);
+    },
+
     taiAppIcon(app) {
         return APP_ICONS[app?.xmlid] || "fa-th-large";
     },
