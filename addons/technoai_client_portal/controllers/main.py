@@ -21,9 +21,27 @@ REPORTS = {
 MAX_UPLOAD = 15 * 1024 * 1024
 
 
+STAFF_REFUSED = "This sign-in is for clients and suppliers. Techno AI staff sign in at erp.technoai.ae/web/login."
+
+
 def _is_client():
     user = request.env.user
     return bool(request.session.uid) and user.share and not user._is_public()
+
+
+def _signed_in_staff():
+    """ The staff user signed in in this browser, if any: the portals show who it is instead of opening the ERP. """
+    user = request.env.user
+    return user if request.session.uid and not user.share and not user._is_public() else False
+
+
+def _is_staff_login(login):
+    """ Staff accounts never sign in through a portal; checked before the password, so a staff session stays as it is. """
+    login = (login or '').strip()
+    if not login:
+        return False
+    user = request.env['res.users'].sudo().with_context(active_test=False).search([('login', '=ilike', login)], limit=1)
+    return bool(user) and not user.share
 
 
 class ClientPortalHome(Home):
@@ -61,7 +79,8 @@ class ClientPortal(http.Controller):
         if not request.session.uid or request.env.user._is_public():
             return request.redirect(PORTAL)
         if not request.env.user.share:
-            return request.redirect('/odoo')
+            # a staff session in this browser: the portal's sign-in page explains it, never the ERP
+            return request.redirect(PORTAL)
         return None
 
     def _owned(self, model, record_id):
@@ -121,10 +140,14 @@ class ClientPortal(http.Controller):
     def login_page(self, **kw):
         if _is_client():
             return request.redirect(PORTAL + '/home')
-        return request.render('technoai_client_portal.login', {'error': kw.get('error'), 'login': kw.get('login', '')})
+        return request.render('technoai_client_portal.login', {'error': kw.get('error'), 'login': kw.get('login', ''),
+                                                                'staff': _signed_in_staff(), 'portal': PORTAL})
 
     @http.route(PORTAL + '/login', type='http', auth='public', methods=['POST'], sitemap=False)
     def login(self, login=None, password=None, **kw):
+        if _is_staff_login(login):
+            return request.render('technoai_client_portal.login', {'error': STAFF_REFUSED, 'login': login,
+                                                                    'staff': _signed_in_staff(), 'portal': PORTAL})
         try:
             request.session.authenticate(request.db, {'login': (login or '').strip(), 'password': password or '', 'type': 'password'})
         except AccessDenied:
@@ -132,8 +155,9 @@ class ClientPortal(http.Controller):
         except Exception as error:  # e.g. too many attempts
             _logger.info('Client portal sign-in refused for %s: %s', login, error)
             return request.render('technoai_client_portal.login', {'error': str(error), 'login': login})
-        if not request.env.user.share:
-            return request.redirect('/odoo')
+        if not request.env.user.share:  # cannot happen after _is_staff_login, kept as a safety net
+            request.session.logout(keep_db=True)
+            return request.render('technoai_client_portal.login', {'error': STAFF_REFUSED, 'login': login, 'portal': PORTAL})
         return request.redirect(PORTAL + '/home')
 
     # ------------------------------------------------------------------

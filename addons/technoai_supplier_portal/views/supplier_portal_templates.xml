@@ -27,6 +27,7 @@
                             <h2>Sign in</h2>
                             <div class="cp-muted">Techno AI Supplier Portal</div>
                             <div t-if="error" class="cp-alert" t-out="error"/>
+                            <t t-call="technoai_client_portal.staff_notice"/>
                             <label>Email<input type="email" name="login" t-att-value="login" required="required" autocomplete="username" autofocus="autofocus"/></label>
                             <label>Password<input type="password" name="password" required="required" autocomplete="current-password"/></label>
                             <button type="submit" class="cp-btn cp-primary cp-block">Sign in</button>

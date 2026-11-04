@@ -37,6 +37,7 @@
                             <h2>Sign in</h2>
                             <div class="cp-muted">Techno AI Client Portal</div>
                             <div t-if="error" class="cp-alert" t-out="error"/>
+                            <t t-call="technoai_client_portal.staff_notice"/>
                             <label>Email<input type="email" name="login" t-att-value="login" required="required" autocomplete="username" autofocus="autofocus"/></label>
                             <label>Password<input type="password" name="password" required="required" autocomplete="current-password"/></label>
                             <button type="submit" class="cp-btn cp-primary cp-block">Sign in</button>
@@ -50,6 +51,16 @@
                 </div>
             </body>
         </html>
+    </template>
+
+    <!-- a staff session in this browser: say so on the portal sign-in instead of opening the ERP -->
+    <template id="staff_notice">
+        <div t-if="staff" class="cp-staff">
+            You are signed in as staff (<b t-out="staff.name"/>) in this browser.
+            <a t-attf-href="/web/session/logout?redirect={{ portal }}">Sign out</a> to use this portal,
+            or <a href="/odoo">open the ERP</a>.
+            <div class="cp-muted cp-small">Tip: use a private (incognito) window to test the portal while you stay signed in to the ERP.</div>
+        </div>
     </template>
 
     <template id="layout" name="Client portal layout">

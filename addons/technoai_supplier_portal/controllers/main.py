@@ -4,7 +4,9 @@ from datetime import timedelta
 from markupsafe import Markup
 
 from odoo import _, fields, http
-from odoo.addons.technoai_client_portal.controllers.main import ClientPortal, ClientPortalHome, ClientPortalMy
+from odoo.addons.technoai_client_portal.controllers.main import (
+    STAFF_REFUSED, ClientPortal, ClientPortalHome, ClientPortalMy, _is_staff_login, _signed_in_staff,
+)
 from odoo.exceptions import AccessDenied
 from odoo.http import request
 from odoo.tools import plaintext2html
@@ -56,7 +58,8 @@ class SupplierPortal(http.Controller):
         if not request.session.uid or request.env.user._is_public():
             return request.redirect(PORTAL)
         if not request.env.user.share:
-            return request.redirect('/odoo')
+            # a staff session in this browser: the portal's sign-in page explains it, never the ERP
+            return request.redirect(PORTAL)
         return None
 
     def _owned_po(self, order_id):
@@ -91,10 +94,14 @@ class SupplierPortal(http.Controller):
     def supplier_login_page(self, **kw):
         if request.session.uid and request.env.user.share and not request.env.user._is_public():
             return request.redirect(PORTAL + '/home')
-        return request.render('technoai_supplier_portal.login', {'error': kw.get('error'), 'login': kw.get('login', '')})
+        return request.render('technoai_supplier_portal.login', {'error': kw.get('error'), 'login': kw.get('login', ''),
+                                                                  'staff': _signed_in_staff(), 'portal': PORTAL})
 
     @http.route(PORTAL + '/login', type='http', auth='public', methods=['POST'], sitemap=False)
     def supplier_login(self, login=None, password=None, **kw):
+        if _is_staff_login(login):
+            return request.render('technoai_supplier_portal.login', {'error': STAFF_REFUSED, 'login': login,
+                                                                      'staff': _signed_in_staff(), 'portal': PORTAL})
         try:
             request.session.authenticate(request.db, {'login': (login or '').strip(), 'password': password or '', 'type': 'password'})
         except AccessDenied:
@@ -102,8 +109,9 @@ class SupplierPortal(http.Controller):
         except Exception as error:
             _logger.info('Supplier portal sign-in refused for %s: %s', login, error)
             return request.render('technoai_supplier_portal.login', {'error': str(error), 'login': login})
-        if not request.env.user.share:
-            return request.redirect('/odoo')
+        if not request.env.user.share:  # cannot happen after _is_staff_login, kept as a safety net
+            request.session.logout(keep_db=True)
+            return request.render('technoai_supplier_portal.login', {'error': STAFF_REFUSED, 'login': login, 'portal': PORTAL})
         return request.redirect(PORTAL + '/home')
 
     # ------------------------------------------------------------------
