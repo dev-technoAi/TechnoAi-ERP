@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="login" name="Supplier portal sign in">
+        &lt;!DOCTYPE html&gt;
+        <html lang="en">
+            <head>
+                <t t-call="technoai_client_portal.head"/>
+                <link rel="stylesheet" href="/technoai_supplier_portal/static/src/css/supplier_portal.css"/>
+                <title>Sign in - Techno AI Supplier Portal</title>
+            </head>
+            <body class="sp">
+                <div class="cp-login">
+                    <div class="cp-login-left">
+                        <a href="/landing"><img src="/technoai_backend_theme/static/img/logo-mark-white.png" alt="Techno AI" class="cp-login-logo"/></a>
+                        <h1>Techno AI Supplier Portal</h1>
+                        <p>Quote our RFQs, confirm purchase orders and tell us when goods ship, all in one place, live with our team.</p>
+                        <ul>
+                            <li>Send your prices for our RFQs</li>
+                            <li>Accept purchase orders</li>
+                            <li>Update shipments with the tracking number</li>
+                            <li>Upload invoices and see your payments</li>
+                        </ul>
+                    </div>
+                    <div class="cp-login-right">
+                        <form class="cp-box" action="/supplierportal/login" method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <h2>Sign in</h2>
+                            <div class="cp-muted">Techno AI Supplier Portal</div>
+                            <div t-if="error" class="cp-alert" t-out="error"/>
+                            <label>Email<input type="email" name="login" t-att-value="login" required="required" autocomplete="username" autofocus="autofocus"/></label>
+                            <label>Password<input type="password" name="password" required="required" autocomplete="current-password"/></label>
+                            <button type="submit" class="cp-btn cp-primary cp-block">Sign in</button>
+                            <div class="cp-muted cp-small">
+                                <a href="/web/reset_password?redirect=/supplierportal/home">Forgot password?</a> ·
+                                No account? Ask your Techno AI buyer for an invitation.
+                            </div>
+                            <div class="cp-note">Separate from the client portal and the staff sign-in: a supplier only ever sees its own RFQs, orders and payments.</div>
+                        </form>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+
+    <template id="layout" name="Supplier portal layout">
+        &lt;!DOCTYPE html&gt;
+        <html lang="en">
+            <head>
+                <t t-call="technoai_client_portal.head"/>
+                <link rel="stylesheet" href="/technoai_supplier_portal/static/src/css/supplier_portal.css"/>
+                <title><t t-out="title or 'Supplier Portal'"/> - Techno AI</title>
+            </head>
+            <body class="sp">
+                <header class="cp-top">
+                    <a href="/supplierportal/home" class="cp-brand"><img src="/technoai_backend_theme/static/img/logo-mark-white.png" alt="Techno AI"/><span>Supplier Portal</span></a>
+                    <nav>
+                        <a href="/supplierportal/home" t-att-class="active == 'home' and 'on'">Home</a>
+                        <a href="/supplierportal/rfqs" t-att-class="active == 'rfqs' and 'on'">RFQs</a>
+                        <a href="/supplierportal/orders" t-att-class="active == 'orders' and 'on'">Purchase Orders</a>
+                        <a href="/supplierportal/shipments" t-att-class="active == 'shipments' and 'on'">Shipments</a>
+                        <a href="/supplierportal/payments" t-att-class="active == 'payments' and 'on'">Payments</a>
+                    </nav>
+                    <span class="cp-grow"/>
+                    <div class="cp-who">
+                        <span class="cp-avatar" t-out="(client.name or '?')[:2].upper()"/>
+                        <span><t t-out="client.name"/><br/><small t-out="company_partner.name"/></span>
+                        <a href="/web/session/logout?redirect=/supplierportal" class="cp-logout" title="Sign out"><i class="fa fa-sign-out"/></a>
+                    </div>
+                </header>
+                <main class="cp-wrap"><t t-out="0"/></main>
+                <footer class="cp-foot">Techno AI · Abu Dhabi, UAE · <a href="https://technoai.ae" target="_blank" rel="noopener noreferrer">technoai.ae</a></footer>
+            </body>
+        </html>
+    </template>
+
+    <template id="po_state">
+        <t t-if="o.state in ('draft', 'sent')"><span t-if="o.tai_vendor_quoted_date" class="cp-pill s-ready_to_ship">Prices sent</span><span t-else="" class="cp-pill s-in_transit">Waiting for your prices</span></t>
+        <t t-elif="o.state == 'done' or all(l.qty_received &gt;= l.product_qty for l in o.order_line.filtered(lambda l: not l.display_type))"><span class="cp-pill s-delivered">Received</span></t>
+        <t t-elif="any(l.tai_ship_status == 'shipped' for l in o.order_line)"><span class="cp-pill s-in_transit">Shipped</span></t>
+        <t t-elif="any(l.tai_ship_status == 'ready' for l in o.order_line)"><span class="cp-pill s-ready_to_ship">Ready to ship</span></t>
+        <t t-elif="o.tai_vendor_accepted_date"><span class="cp-pill s-in_inventory">Accepted</span></t>
+        <t t-else=""><span class="cp-pill s-late">To accept</span></t>
+    </template>
+
+    <template id="home" name="Supplier portal home">
+        <t t-call="technoai_supplier_portal.layout">
+            <t t-set="title" t-value="'Home'"/>
+            <h1>Welcome, <t t-out="(client.name or '').split(' ')[0]"/></h1>
+            <div class="cp-sub"><t t-out="company_partner.name"/></div>
+            <div class="cp-kpis">
+                <a class="cp-kpi" href="/supplierportal/rfqs"><b t-out="rfq_count"/><span>RFQs waiting for your prices</span></a>
+                <a class="cp-kpi" href="/supplierportal/orders"><b t-out="len(to_accept)"/><span>Purchase orders to accept</span></a>
+                <a class="cp-kpi" href="/supplierportal/shipments"><b t-out="due_count"/><span>Items to ship this week</span></a>
+                <a class="cp-kpi" href="/supplierportal/payments"><b><t t-call="technoai_client_portal.totals"><t t-set="totals" t-value="unpaid_totals"/></t></b><span>Payments due to you</span></a>
+            </div>
+            <div class="cp-grid2">
+                <div>
+                    <div class="cp-card">
+                        <h3>RFQs waiting for your prices<a href="/supplierportal/rfqs">All RFQs</a></h3>
+                        <table t-if="rfqs">
+                            <tr><th>RFQ</th><th>Items</th><th>Date</th><th/></tr>
+                            <tr t-foreach="rfqs" t-as="o">
+                                <td><b t-out="o.name"/></td>
+                                <td t-out="len(o.order_line.filtered(lambda l: not l.display_type))"/>
+                                <td t-out="fmt_date(o.date_order)"/>
+                                <td class="cp-r"><a class="cp-btn cp-accent" t-attf-href="/supplierportal/rfqs/{{ o.id }}">Send prices</a></td>
+                            </tr>
+                        </table>
+                        <div t-else="" class="cp-muted">No RFQs waiting. Thank you!</div>
+                    </div>
+                    <div class="cp-card">
+                        <h3>Purchase orders<a href="/supplierportal/orders">All orders</a></h3>
+                        <t t-call="technoai_supplier_portal.order_rows"><t t-set="rows" t-value="orders"/></t>
+                    </div>
+                </div>
+                <div>
+                    <div class="cp-card">
+                        <h3>Payments due to you</h3>
+                        <table t-if="unpaid">
+                            <tr t-foreach="unpaid[:6]" t-as="bill">
+                                <td><t t-out="bill.ref or bill.name"/><br/><small class="cp-muted">due <t t-out="fmt_date(bill.invoice_date_due)"/></small></td>
+                                <td class="cp-r" t-out="money(bill.amount_residual, bill.currency_id)"/>
+                            </tr>
+                        </table>
+                        <div t-else="" class="cp-muted">Nothing due.</div>
+                    </div>
+                    <div class="cp-card" t-if="payments">
+                        <h3>Latest payments</h3>
+                        <table>
+                            <tr t-foreach="payments" t-as="pay"><td t-out="fmt_date(pay.date)"/><td class="cp-r" t-out="money(pay.amount, pay.currency_id)"/></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="order_rows">
+        <table t-if="rows">
+            <tr><th>PO</th><th>Date</th><th>Expected</th><th class="cp-r">Total</th><th>Status</th></tr>
+            <tr t-foreach="rows" t-as="o" class="cp-link" t-attf-onclick="location.href='/supplierportal/orders/{{ o.id }}'">
+                <td><a t-attf-href="/supplierportal/orders/{{ o.id }}"><b t-out="o.name"/></a></td>
+                <td t-out="fmt_date(o.date_approve or o.date_order)"/>
+                <td t-out="fmt_date(o.date_planned)"/>
+                <td class="cp-r" t-out="money(o.amount_total, o.currency_id)"/>
+                <td><t t-call="technoai_supplier_portal.po_state"/></td>
+            </tr>
+        </table>
+        <div t-else="" class="cp-muted">No purchase orders yet.</div>
+    </template>
+
+    <template id="rfqs" name="Supplier portal RFQs">
+        <t t-call="technoai_supplier_portal.layout">
+            <t t-set="title" t-value="'RFQs'"/>
+            <h1>RFQs</h1>
+            <div class="cp-sub">Our requests for quotation. Open one to send your prices.</div>
+            <div class="cp-card">
+                <table t-if="rfqs">
+                    <tr><th>RFQ</th><th>Date</th><th>Items</th><th>Status</th><th/></tr>
+                    <tr t-foreach="rfqs" t-as="o">
+                        <td><b t-out="o.name"/></td>
+                        <td t-out="fmt_date(o.date_order)"/>
+                        <td t-out="len(o.order_line.filtered(lambda l: not l.display_type))"/>
+                        <td><t t-call="technoai_supplier_portal.po_state"/></td>
+                        <td class="cp-r">
+                            <a class="cp-btn" t-attf-href="/supplierportal/pdf/{{ o.id }}"><i class="fa fa-file-pdf-o"/> PDF</a>
+                            <a class="cp-btn cp-accent" t-attf-href="/supplierportal/rfqs/{{ o.id }}"><t t-if="o.tai_vendor_quoted_date">Change prices</t><t t-else="">Send prices</t></a>
+                        </td>
+                    </tr>
+                </table>
+                <div t-else="" class="cp-muted">No open RFQs.</div>
+            </div>
+        </t>
+    </template>
+
+    <template id="rfq" name="Supplier portal RFQ">
+        <t t-call="technoai_supplier_portal.layout">
+            <t t-set="title" t-value="order.name"/>
+            <h1>RFQ <t t-out="order.name"/> · send your prices</h1>
+            <div class="cp-sub">Prices in <b t-out="order.currency_id.name"/>, without VAT · delivery to <t t-out="order.picking_type_id.warehouse_id.partner_id.city or 'Techno AI warehouse'"/>
+                <a class="cp-btn" t-attf-href="/supplierportal/pdf/{{ order.id }}"><i class="fa fa-file-pdf-o"/> RFQ PDF</a></div>
+            <div t-if="sent" class="cp-ok-msg">Thank you. Your prices reached our buyer; you can still change them while the RFQ is open.</div>
+            <div t-if="error" class="cp-alert" t-out="error"/>
+            <form class="cp-card" t-attf-action="/supplierportal/rfqs/{{ order.id }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <table>
+                    <tr><th>Item</th><th>Qty</th><th>Your unit price</th><th>Lead time (days)</th><th>Your note</th><th>Can't quote</th></tr>
+                    <tr t-foreach="order.order_line.filtered(lambda l: not l.display_type)" t-as="line">
+                        <td t-out="line.name.split('\n')[0]"/>
+                        <td><t t-out="'%g' % line.product_qty"/> <t t-out="line.product_uom.name"/></td>
+                        <td><input class="sp-in" type="text" inputmode="decimal" t-attf-name="price_{{ line.id }}" t-att-value="line.price_unit and ('%.2f' % line.price_unit) or ''" placeholder="0.00"/></td>
+                        <td><input class="sp-in sp-small" type="number" min="0" t-attf-name="lead_{{ line.id }}" t-att-value="line.tai_vendor_lead_days or ''"/></td>
+                        <td><input class="sp-in" t-attf-name="note_{{ line.id }}" t-att-value="line.tai_vendor_note or ''" maxlength="250" placeholder="e.g. in stock"/></td>
+                        <td class="cp-r"><input type="checkbox" t-attf-name="cannot_{{ line.id }}" t-att-checked="line.tai_vendor_cannot_quote and 'checked'"/></td>
+                    </tr>
+                </table>
+                <div class="sp-row">
+                    <label class="cp-muted">Your quotation (PDF), optional <input type="file" name="attachments" multiple="multiple"/></label>
+                    <span class="cp-grow"/>
+                    <button type="submit" class="cp-btn cp-primary">Send prices to Techno AI</button>
+                </div>
+            </form>
+        </t>
+    </template>
+
+    <template id="orders" name="Supplier portal purchase orders">
+        <t t-call="technoai_supplier_portal.layout">
+            <t t-set="title" t-value="'Purchase Orders'"/>
+            <h1>Purchase Orders</h1>
+            <div class="cp-sub">Orders Techno AI placed with you.</div>
+            <div class="cp-card"><t t-call="technoai_supplier_portal.order_rows"><t t-set="rows" t-value="orders"/></t></div>
+        </t>
+    </template>
+
+    <template id="order" name="Supplier portal purchase order">
+        <t t-call="technoai_supplier_portal.layout">
+            <t t-set="title" t-value="order.name"/>
+            <h1>Purchase Order <t t-out="order.name"/></h1>
+            <div class="cp-sub">Ordered <t t-out="fmt_date(order.date_approve or order.date_order)"/> · expected <t t-out="fmt_date(order.date_planned)"/>
+                <t t-if="order.payment_term_id"> · <t t-out="order.payment_term_id.name"/></t> · <t t-out="money(order.amount_total, order.currency_id)"/></div>
+            <div class="cp-actions">
+                <a class="cp-btn" t-attf-href="/supplierportal/pdf/{{ order.id }}"><i class="fa fa-file-pdf-o"/> PO PDF</a>
+                <form t-if="not order.tai_vendor_accepted_date and order.state == 'purchase'" t-attf-action="/supplierportal/orders/{{ order.id }}/accept" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <button type="submit" class="cp-btn cp-accent"><i class="fa fa-check"/> Accept this order</button>
+                </form>
+                <span t-elif="order.tai_vendor_accepted_date" class="cp-btn cp-primary"><i class="fa fa-check"/> Accepted <t t-out="fmt_date(order.tai_vendor_accepted_date)"/></span>
+            </div>
+            <div t-if="saved" class="cp-ok-msg">Shipment saved. Our team and the client's order tracking are updated.</div>
+            <form class="cp-card" t-attf-action="/supplierportal/orders/{{ order.id }}/shipment" method="post">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <h3>Shipment</h3>
+                <table>
+                    <tr><th>Item</th><th>Qty</th><th>Received</th><th>Status</th><th>Ship date</th><th>Carrier</th><th>Tracking number or link</th></tr>
+                    <tr t-foreach="order.order_line.filtered(lambda l: not l.display_type)" t-as="line">
+                        <t t-set="done" t-value="line.qty_received &gt;= line.product_qty"/>
+                        <td t-out="line.name.split('\n')[0]"/>
+                        <td t-out="'%g' % line.product_qty"/>
+                        <td t-out="'%g' % line.qty_received"/>
+                        <td>
+                            <span t-if="done" class="cp-pill s-delivered">Received</span>
+                            <select t-else="" class="sp-in" t-attf-name="status_{{ line.id }}" t-att-disabled="order.state != 'purchase' and 'disabled'">
+                                <option value="">Not ready</option>
+                                <option value="ready" t-att-selected="line.tai_ship_status == 'ready' and 'selected'">Ready to ship</option>
+                                <option value="shipped" t-att-selected="line.tai_ship_status == 'shipped' and 'selected'">Shipped</option>
+                            </select>
+                        </td>
+                        <td><input t-if="not done" class="sp-in" type="date" t-attf-name="date_{{ line.id }}" t-att-value="line.tai_ship_date and line.tai_ship_date.isoformat() or ''"/></td>
+                        <td>
+                            <select t-if="not done" class="sp-in" t-attf-name="carrier_{{ line.id }}">
+                                <option value=""/>
+                                <option t-foreach="carriers" t-as="c" t-att-value="c[0]" t-att-selected="line.tai_carrier == c[0] and 'selected'" t-out="c[1]"/>
+                            </select>
+                        </td>
+                        <td>
+                            <input t-if="not done" class="sp-in" t-attf-name="ref_{{ line.id }}" t-att-value="line.tai_tracking_ref or ''" maxlength="300"/>
+                            <a t-if="line.tai_tracking_url" t-att-href="line.tai_tracking_url" target="_blank" rel="noopener noreferrer" class="cp-small"><i class="fa fa-external-link"/></a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="sp-row">
+                    <span class="sp-hint"><i class="fa fa-magic"/> Ready to ship and Shipped (with the tracking number) update the client's order tracking at once.</span>
+                    <span class="cp-grow"/>
+                    <button t-if="order.state == 'purchase'" type="submit" class="cp-btn cp-primary">Save shipment update</button>
+                </div>
+            </form>
+            <div class="cp-grid2">
+                <div class="cp-card" id="messages">
+                    <h3>Messages</h3>
+                    <div t-if="sent" class="cp-ok-msg">Sent. Your buyer has been told.</div>
+                    <div t-foreach="messages" t-as="m" class="cp-msg">
+                        <b t-out="m.author_id.name"/> <small class="cp-muted" t-out="m.date.strftime('%d %b %Y %H:%M')"/>
+                        <div t-out="m.body"/>
+                    </div>
+                    <form t-attf-action="/supplierportal/orders/{{ order.id }}/message" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <textarea name="message" rows="3" placeholder="Write to the buyer..." required="required"/>
+                        <button type="submit" class="cp-btn cp-primary">Send</button>
+                    </form>
+                </div>
+                <div class="cp-card">
+                    <h3>Documents</h3>
+                    <div t-if="uploaded" class="cp-ok-msg">Uploaded. Your buyer has been told.</div>
+                    <div t-foreach="attachments" t-as="a" class="cp-update"><a t-attf-href="/supplierportal/attachment/{{ a.id }}"><i class="fa fa-file-o"/> <t t-out="a.name"/></a></div>
+                    <div t-foreach="bills" t-as="bill" class="cp-update">Bill <t t-out="bill.ref or bill.name"/> · <span t-attf-class="cp-pill {{ 's-delivered' if bill.payment_state in ('paid', 'in_payment') else 's-ready_to_ship' }}" t-out="'Paid' if bill.payment_state in ('paid', 'in_payment') else 'Received'"/></div>
+                    <form t-attf-action="/supplierportal/orders/{{ order.id }}/upload" method="post" enctype="multipart/form-data" class="sp-upload">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="file" name="attachments" multiple="multiple" required="required"/>
+                        <button type="submit" class="cp-btn"><i class="fa fa-upload"/> Upload invoice / packing list</button>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="shipments" name="Supplier portal shipments">
+        <t t-call="technoai_supplier_portal.layout">
+            <t t-set="title" t-value="'Shipments'"/>
+            <h1>Shipments</h1>
+            <div class="cp-sub">Every ordered item we have not received yet, the earliest first.</div>
+            <div class="cp-card">
+                <table t-if="lines">
+                    <tr><th>PO</th><th>Item</th><th>Qty</th><th>Expected</th><th>Status</th><th>Tracking</th><th/></tr>
+                    <tr t-foreach="lines" t-as="line">
+                        <td><b t-out="line.order_id.name"/></td>
+                        <td t-out="line.name.split('\n')[0]"/>
+                        <td><t t-out="'%g' % (line.product_qty - line.qty_received)"/></td>
+                        <td t-att-class="line.date_planned and line.date_planned.date() &lt; today and 'cp-bad'" t-out="fmt_date(line.date_planned)"/>
+                        <td><span t-attf-class="cp-pill {{ {'shipped': 's-in_transit', 'ready': 's-ready_to_ship'}.get(line.tai_ship_status, 's-processing') }}" t-out="{'shipped': 'Shipped', 'ready': 'Ready to ship'}.get(line.tai_ship_status, 'Not ready')"/></td>
+                        <td><a t-if="line.tai_tracking_url" t-att-href="line.tai_tracking_url" target="_blank" rel="noopener noreferrer" t-out="line.tai_tracking_ref"/><t t-else="" t-out="line.tai_tracking_ref or '-'"/></td>
+                        <td class="cp-r"><a class="cp-btn" t-attf-href="/supplierportal/orders/{{ line.order_id.id }}">Update</a></td>
+                    </tr>
+                </table>
+                <div t-else="" class="cp-muted">Nothing to ship.</div>
+            </div>
+        </t>
+    </template>
+
+    <template id="payments" name="Supplier portal payments">
+        <t t-call="technoai_supplier_portal.layout">
+            <t t-set="title" t-value="'Payments'"/>
+            <h1>Payments</h1>
+            <div class="cp-sub">Your invoices as registered by Techno AI, each in its own currency.</div>
+            <div class="cp-kpis cp-kpis3">
+                <div class="cp-kpi"><b><t t-call="technoai_client_portal.totals"><t t-set="totals" t-value="unpaid_totals"/></t></b><span>Due to you</span></div>
+            </div>
+            <div class="cp-card">
+                <table t-if="bills">
+                    <tr><th>Your invoice</th><th>Our reference</th><th>Date</th><th>Due</th><th class="cp-r">Amount</th><th class="cp-r">Still due</th><th>Status</th></tr>
+                    <tr t-foreach="bills" t-as="bill">
+                        <td><b t-out="bill.ref or '-'"/></td>
+                        <td t-out="bill.name"/>
+                        <td t-out="fmt_date(bill.invoice_date)"/>
+                        <td t-out="fmt_date(bill.invoice_date_due)"/>
+                        <td class="cp-r" t-out="money(bill.amount_total, bill.currency_id)"/>
+                        <td class="cp-r" t-out="money(bill.amount_residual, bill.currency_id)"/>
+                        <td>
+                            <span t-if="bill.payment_state in ('paid', 'in_payment', 'reversed')" class="cp-pill s-delivered">Paid</span>
+                            <span t-elif="bill.payment_state == 'partial'" class="cp-pill s-in_transit">Partly paid</span>
+                            <span t-else="" class="cp-pill s-ready_to_ship">To be paid</span>
+                        </td>
+                    </tr>
+                </table>
+                <div t-else="" class="cp-muted">No invoices registered yet.</div>
+            </div>
+        </t>
+    </template>
+</odoo>

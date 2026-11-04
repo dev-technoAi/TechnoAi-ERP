@@ -1,0 +1,12 @@
+/* Techno AI supplier portal: the client portal's look, in the supplier colours */
+body.sp .cp-top { background: #1d2a3a; }
+body.sp .cp-top nav a.on, body.sp .cp-top nav a:hover { background: #2f4b6b; }
+body.sp .cp-login-left { background: radial-gradient(circle at 30% 30%, #2f4b6b 0, #1d2a3a 60%); }
+body.sp .cp-avatar { background: #e8a33d; }
+.sp-in { border: 1px solid #d8e2e6; border-radius: 7px; padding: 6px 9px; font: inherit; font-size: 13.5px; width: 100%; min-width: 90px; background: #fff; color: #1b2a30; }
+.sp-small { max-width: 90px; }
+.sp-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.sp-row label input { display: block; margin-top: 4px; }
+.sp-hint { font-size: 12.5px; color: #0b7a64; }
+.sp-upload { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.cp-actions form { display: inline; }

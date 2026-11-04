@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- what the supplier did in the supplier portal, on the purchase order -->
+    <record id="purchase_order_form_supplier_portal" model="ir.ui.view">
+        <field name="name">purchase.order.form.supplier.portal</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="tai_vendor_quoted_date" invisible="not tai_vendor_quoted_date"/>
+                <field name="tai_vendor_accepted_date" invisible="not tai_vendor_accepted_date"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list//field[@name='price_unit']" position="after">
+                <field name="tai_vendor_lead_days" optional="hide"/>
+                <field name="tai_vendor_note" optional="hide"/>
+                <field name="tai_vendor_cannot_quote" optional="hide"/>
+                <field name="tai_ship_status" optional="show" widget="badge" decoration-success="tai_ship_status == 'shipped'" decoration-info="tai_ship_status == 'ready'"/>
+                <field name="tai_carrier" optional="hide"/>
+                <field name="tai_tracking_ref" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
