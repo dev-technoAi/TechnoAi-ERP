@@ -185,7 +185,16 @@ class RfqNotifyMessage(models.Model):
                     email_layout_xmlid='mail.mail_notification_light',
                 )
                 message.browser_state = 'sent'
-            number = mailbox.whatsapp_number if not partners else (partners[:1].mobile or partners[:1].phone)
+                # an open ERP tab rings, shows the alert and refreshes the alert list without a page reload
+                for partner in recipients:
+                    partner._bus_send('technoai_rfq_notify/alert', {
+                        'id': message.id,
+                        'title': title,
+                        'subject': message.subject or '',
+                        'sender': message.email_from or '',
+                        'mailbox': mailbox.email,
+                    })
+            number =mailbox.whatsapp_number if not partners else (partners[:1].mobile or partners[:1].phone)
             if mailbox.notify_whatsapp and number:
                 sent, info = self.env['taskhub.dispatch'].sudo().new({'phone': number, 'message': text})._send_whatsapp()
                 message.write({'whatsapp_state': 'sent' if sent else 'failed',

@@ -8,5 +8,10 @@
               groups="technoai_rfq_notify.group_rfq_notify_manager"/>
     <menuitem id="menu_rfq_notify_settings" name="Settings" parent="menu_rfq_notify_root" action="rfq_notify_settings_action" sequence="40"
               groups="technoai_rfq_notify.group_rfq_notify_manager"/>
+    <record id="action_turn_on_notifications" model="ir.actions.client">
+        <field name="name">Turn on notifications</field>
+        <field name="tag">technoai_rfq_notify_turn_on</field>
+    </record>
+    <menuitem id="menu_rfq_notify_turn_on" name="Turn on notifications" parent="menu_rfq_notify_root" action="action_turn_on_notifications" sequence="25"/>
     <menuitem id="menu_rfq_notify_taskhub" name="Open Task Hub" parent="menu_rfq_notify_root" action="technoai_taskhub.taskhub_rfq_action" sequence="50"/>
 </odoo>
