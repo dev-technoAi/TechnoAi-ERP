@@ -1,0 +1,99 @@
+/* Techno AI client portal */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Noto Sans", Arial, sans-serif; color: #1b2a30; background: #F4F7F9; }
+a { color: #1F6E85; text-decoration: none; }
+.cp-muted { color: #5C6C76; }
+.cp-small { font-size: 12.5px; margin-top: 12px; line-height: 1.5; }
+.cp-bad { color: #b42828; }
+.cp-r { text-align: right; }
+.cp-mt { margin-top: 10px; }
+.cp-mb { margin-bottom: 12px; }
+.cp-grow { flex: 1; }
+
+/* sign in */
+.cp-login { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; }
+.cp-login-left { padding: 46px 56px; color: #fff; background: radial-gradient(circle at 30% 30%, #14606d 0, #0b2b33 60%); }
+.cp-login-logo { height: 34px; }
+.cp-login-left h1 { font-size: 34px; margin: 70px 0 10px; }
+.cp-login-left p { opacity: .85; max-width: 460px; line-height: 1.6; }
+.cp-login-left ul { margin-top: 24px; padding-left: 18px; line-height: 2; opacity: .9; }
+.cp-login-right { display: grid; place-items: center; padding: 24px; }
+.cp-box { width: 100%; max-width: 390px; background: #fff; border-radius: 14px; padding: 30px; box-shadow: 0 18px 50px rgba(0,0,0,.12); }
+.cp-box h2 { margin: 0 0 4px; }
+.cp-box > .cp-muted { margin-bottom: 18px; font-size: 13px; }
+.cp-box label, .cp-form label { display: block; font-size: 13px; color: #5C6C76; margin-bottom: 14px; }
+.cp-box input, .cp-form input, .cp-form textarea, .cp-card textarea {
+  display: block; width: 100%; margin-top: 5px; border: 1px solid #d8e2e6; border-radius: 8px; padding: 10px 12px; font: inherit; font-size: 14px; color: #1b2a30; }
+.cp-alert { background: #fde3e3; color: #b42828; border-radius: 8px; padding: 9px 12px; font-size: 13px; margin-bottom: 12px; }
+.cp-note { background: #fff8e8; border: 1px dashed #e8c27a; border-radius: 10px; padding: 10px 14px; font-size: 12.5px; color: #7a5a12; margin-top: 14px; }
+
+/* frame */
+.cp-top { background: #0b2b33; color: #fff; display: flex; align-items: center; gap: 18px; padding: 10px 28px; flex-wrap: wrap; }
+.cp-brand { display: flex; align-items: center; gap: 12px; color: #fff; }
+.cp-brand img { height: 26px; }
+.cp-brand span { opacity: .85; }
+.cp-top nav { display: flex; gap: 2px; flex-wrap: wrap; }
+.cp-top nav a { color: #cfe3e8; padding: 8px 13px; border-radius: 8px; font-size: 14px; }
+.cp-top nav a.on, .cp-top nav a:hover { background: #1F3A42; color: #fff; }
+.cp-who { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 1.25; }
+.cp-who small { opacity: .7; }
+.cp-avatar { width: 34px; height: 34px; border-radius: 50%; background: #0FAD98; display: grid; place-items: center; font-weight: 700; }
+.cp-logout { color: #cfe3e8; font-size: 18px; margin-left: 6px; }
+.cp-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 24px 40px; }
+.cp-foot { text-align: center; color: #8a99a1; font-size: 13px; padding: 10px 0 24px; }
+h1 { font-size: 24px; margin: 4px 0; }
+.cp-sub { color: #5C6C76; margin-bottom: 18px; font-size: 14px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+/* blocks */
+.cp-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+.cp-kpis3 { grid-template-columns: repeat(3, 1fr); }
+.cp-kpi { background: #fff; border: 1px solid #e1e8eb; border-radius: 12px; padding: 14px 16px; color: #1b2a30; display: block; }
+.cp-kpi > b { display: block; font-size: 24px; }
+.cp-kpi > span { color: #5C6C76; font-size: 13px; }
+.cp-total { font-size: 20px; line-height: 1.3; }
+.cp-total small { display: block; font-size: 12px; font-weight: 400; }
+.cp-card { background: #fff; border: 1px solid #e1e8eb; border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; overflow-x: auto; }
+.cp-card h3 { margin: 0 0 10px; font-size: 16px; display: flex; align-items: center; }
+.cp-card h3 a { margin-left: auto; font-size: 13px; font-weight: 400; }
+.cp-grid2 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; color: #5C6C76; font-weight: 600; padding: 9px 8px; border-bottom: 1px solid #e1e8eb; white-space: nowrap; }
+td { padding: 10px 8px; border-bottom: 1px solid #eef2f4; vertical-align: middle; }
+tr.cp-link { cursor: pointer; }
+tr.cp-link:hover td { background: #f7fafb; }
+.cp-btn { display: inline-block; border-radius: 7px; padding: 7px 13px; font-size: 13px; border: 1px solid #d8e2e6; background: #fff; color: #24323a; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.cp-primary { background: #1F869E; border-color: #1F869E; color: #fff; }
+.cp-accent { background: #e8a33d; border-color: #e8a33d; color: #fff; }
+.cp-block { display: block; width: 100%; text-align: center; padding: 11px; margin-bottom: 4px; }
+.cp-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.cp-bar { height: 9px; border-radius: 5px; background: #eef2f4; overflow: hidden; min-width: 120px; }
+.cp-bar i { display: block; height: 100%; background: #0FAD98; }
+.cp-pill { display: inline-block; border-radius: 12px; padding: 3px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.s-processing { background: #eef2f4; color: #5c6c76; }
+.s-ready_to_ship { background: #e3f1f6; color: #1F6E85; }
+.s-in_transit { background: #fff1d6; color: #9a6400; }
+.s-in_inventory { background: #ece6fb; color: #5b3fb0; }
+.s-ready_for_delivery { background: #dff1ff; color: #155f94; }
+.s-delivered, .s-closed { background: #dff5ef; color: #0b7a64; }
+.s-late { background: #fde3e3; color: #b42828; }
+.cp-update { font-size: 13px; padding: 4px 0; }
+.cp-msg { border-bottom: 1px solid #eef2f4; padding: 8px 0; font-size: 14px; }
+.cp-msg p { margin: 4px 0 0; }
+.cp-card form textarea { margin: 10px 0; }
+.cp-ok-msg { background: #dff5ef; color: #0b7a64; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+.cp-form { max-width: 760px; }
+.cp-statement-total { display: flex; justify-content: flex-end; gap: 16px; align-items: baseline; margin-top: 12px; }
+
+@media (max-width: 860px) {
+  .cp-login { grid-template-columns: 1fr; }
+  .cp-login-left { padding: 28px 22px; }
+  .cp-login-left h1 { margin-top: 30px; font-size: 26px; }
+  .cp-kpis, .cp-kpis3, .cp-grid2 { grid-template-columns: 1fr; }
+  .cp-top { padding: 10px 16px; }
+  .cp-wrap { padding: 18px 14px 30px; }
+}
+@media print {
+  .cp-top, .cp-foot, .cp-noprint { display: none !important; }
+  body { background: #fff; }
+  .cp-card { border: 0; }
+}
