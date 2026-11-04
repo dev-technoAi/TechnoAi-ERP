@@ -76,11 +76,11 @@ class RfqNotifyMailbox(models.Model):
         if self.provider == 'zoho':
             self.update({'imap_host': 'imap.zoho.com', 'imap_port': 993, 'smtp_host': 'smtp.zoho.com', 'smtp_port': 465})
 
-    @api.onchange('email')
+    @api.onchange('email', 'user_id')
     def _onchange_email(self):
         if self.email and not self.signature:
             user = self.user_id or self.env.user
-            self.signature = '<p><b>%s</b><br/>Techno AI<br/>%s</p>' % (user.name, self.email)
+            self.signature = user.signature or '<p><b>%s</b><br/>Techno AI<br/>%s</p>' % (user.name, self.email)
 
     # ------------------------------------------------------------------
     # Connections

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- on install and every update: users still on the plain default signature get the company one -->
+    <function model="res.users" name="_tai_apply_company_signature_to_all"/>
+
+    <record id="action_apply_company_signature" model="ir.actions.server">
+        <field name="name">Apply company email signature</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="binding_model_id" ref="base.model_res_users"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="groups_id" eval="[Command.link(ref('base.group_system'))]"/>
+        <field name="state">code</field>
+        <field name="code">records._tai_refresh_signature(force=True)</field>
+    </record>
+</odoo>

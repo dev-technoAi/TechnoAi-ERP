@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- the company signature; inline styles only, as email clients ignore style sheets -->
+    <template id="user_signature">
+        <div style="font-family: Arial, Helvetica, sans-serif; color: #000000;">
+            <p style="margin: 0 0 18px 0; font-size: 14px;"><b>Thanks &amp; Regards</b></p>
+            <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 0 34px 0 34px; vertical-align: middle;">
+                        <img t-att-src="logo_url" alt="Techno AI" width="120" style="width: 120px; height: auto; display: block;"/>
+                    </td>
+                    <td style="border-left: 1px solid #000000; padding: 2px 0 2px 10px; vertical-align: top; font-size: 14px; line-height: 1.6;">
+                        <div style="font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: bold;" t-out="name"/>
+                        <div t-if="job" style="font-family: Calibri, Arial, sans-serif; font-size: 17px;" t-out="job"/>
+                        <div t-if="mobile"><b>Mobile:</b> <t t-out="mobile"/></div>
+                        <div t-if="email"><b>Email: <a t-att-href="'mailto:%s' % email" style="color: #0000EE;" t-out="email"/></b></div>
+                        <div t-if="address_lines" style="margin-top: 14px;">
+                            <t t-foreach="address_lines" t-as="line"><div t-out="line"/></t>
+                        </div>
+                        <div t-if="website" style="margin-top: 14px;">
+                            <a t-att-href="website_url" style="color: #0000EE;" t-out="website"/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </template>
+</odoo>

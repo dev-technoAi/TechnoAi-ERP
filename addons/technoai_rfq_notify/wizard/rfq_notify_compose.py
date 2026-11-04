@@ -58,7 +58,7 @@ class RfqNotifyCompose(models.TransientModel):
             others = [formataddr((name, address)) for name, address in getaddresses([source.email_to or '', source.email_cc or ''])
                       if address and email_normalize(address) not in (own, email_normalize(source.email_from))]
             values['email_cc'] = ', '.join(others)
-        signature = source.mailbox_id.signature or ''
+        signature = source.mailbox_id.signature or source.mailbox_id.user_id.signature or ''
         values['body'] = Markup('<p><br/></p><div class="o_rfqn_signature">%s</div>%s') % (Markup(signature), source._quote_html())
         if mode == 'forward' and source.attachment_ids:
             values['attachment_ids'] = [(6, 0, source.attachment_ids.ids)]
