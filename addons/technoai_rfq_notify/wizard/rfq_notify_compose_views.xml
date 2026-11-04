@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rfq_notify_compose_view_form" model="ir.ui.view">
+        <field name="name">rfq.notify.compose.form</field>
+        <field name="model">rfq.notify.compose</field>
+        <field name="arch" type="xml">
+            <form string="Write email">
+                <field name="message_id" invisible="1"/>
+                <field name="mode" invisible="1"/>
+                <group>
+                    <field name="email_from" readonly="1"/>
+                    <field name="email_to" placeholder="client@example.com"/>
+                    <field name="email_cc"/>
+                    <field name="subject"/>
+                </group>
+                <field name="body" nolabel="1" options="{'height': 260}"/>
+                <group>
+                    <field name="attachment_ids" widget="many2many_binary" string="Attachments"/>
+                    <field name="quotation_id" invisible="1"/>
+                </group>
+                <div class="text-muted small">Sent from your own mailbox, with your signature; it also shows in your Zoho Sent folder.</div>
+                <footer>
+                    <button name="action_send" string="Send" type="object" class="btn-primary" icon="fa-paper-plane"/>
+                    <button name="action_attach_quotation" string="Attach Draft Quotation PDF" type="object" icon="fa-file-pdf-o" invisible="not quotation_id"/>
+                    <button string="Discard" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

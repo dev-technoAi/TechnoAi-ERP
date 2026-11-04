@@ -1,0 +1,62 @@
+// the email conversation of an RFQ alert, shown like a mail client
+.o_rfqn_conversation {
+    width: 100%;
+
+    .o_rfqn_mail {
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        background: $o-view-background-color;
+        overflow: hidden;
+
+        &.o_rfqn_sent {
+            border-left: 4px solid $primary;
+        }
+    }
+
+    .o_rfqn_head {
+        padding: 10px 14px;
+        border-bottom: 1px solid $border-color;
+
+        span {
+            float: right;
+            color: $text-muted;
+            font-size: 0.85em;
+        }
+
+        small {
+            color: $text-muted;
+        }
+    }
+
+    .o_rfqn_body {
+        padding: 12px 14px;
+        overflow-x: auto;
+
+        table td,
+        table th {
+            border: 1px solid $border-color;
+            padding: 3px 8px;
+        }
+    }
+
+    .o_rfqn_files {
+        padding: 0 14px 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .o_rfqn_file {
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        padding: 5px 10px;
+        font-size: 0.9em;
+    }
+}
+
+.o_rfqn_side {
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    padding: 12px 14px;
+}

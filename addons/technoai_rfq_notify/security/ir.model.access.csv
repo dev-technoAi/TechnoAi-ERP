@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rfq_notify_mailbox_user,rfq.notify.mailbox user,model_rfq_notify_mailbox,base.group_user,1,1,1,1
+access_rfq_notify_message_user,rfq.notify.message user,model_rfq_notify_message,base.group_user,1,1,0,0
+access_rfq_notify_message_manager,rfq.notify.message manager,model_rfq_notify_message,group_rfq_notify_manager,1,1,1,1
+access_rfq_notify_compose_user,rfq.notify.compose user,model_rfq_notify_compose,base.group_user,1,1,1,1

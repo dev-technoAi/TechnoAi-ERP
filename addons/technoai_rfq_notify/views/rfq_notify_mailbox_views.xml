@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rfq_notify_mailbox_view_list" model="ir.ui.view">
+        <field name="name">rfq.notify.mailbox.list</field>
+        <field name="model">rfq.notify.mailbox</field>
+        <field name="arch" type="xml">
+            <list string="Mailboxes">
+                <field name="email"/>
+                <field name="user_id" widget="many2one_avatar_user" column_invisible="not context.get('rfq_notify_team')"/>
+                <field name="provider"/>
+                <field name="state" widget="badge" decoration-success="state == 'ok'" decoration-danger="state == 'error'"/>
+                <field name="last_error" optional="show"/>
+                <field name="last_check"/>
+                <field name="rfq_count"/>
+                <field name="notify_browser" widget="boolean_toggle"/>
+                <field name="notify_whatsapp" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rfq_notify_mailbox_view_form" model="ir.ui.view">
+        <field name="name">rfq.notify.mailbox.form</field>
+        <field name="model">rfq.notify.mailbox</field>
+        <field name="arch" type="xml">
+            <form string="Mailbox">
+                <header>
+                    <button name="action_test_connection" string="Test connection" type="object" class="btn-primary"/>
+                    <button name="action_test_alert" string="Send me a test alert" type="object"/>
+                    <button name="action_check_now" string="Check now" type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-danger" role="alert" invisible="state != 'error'">
+                        <field name="last_error" readonly="1"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="email"/>
+                        <h1><field name="email" placeholder="ali@technoai.ae"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" widget="many2one_avatar_user" groups="technoai_rfq_notify.group_rfq_notify_manager"/>
+                            <field name="provider"/>
+                            <field name="password" password="True" placeholder="Zoho application-specific password"/>
+                            <field name="whatsapp_number" placeholder="+971 50 123 4567"/>
+                        </group>
+                        <group string="Notify me by">
+                            <field name="notify_browser"/>
+                            <field name="notify_whatsapp"/>
+                            <field name="create_taskhub_rfq"/>
+                            <field name="last_check"/>
+                        </group>
+                    </group>
+                    <group string="Servers" invisible="provider == 'zoho'">
+                        <group>
+                            <field name="imap_host"/>
+                            <field name="imap_port"/>
+                        </group>
+                        <group>
+                            <field name="smtp_host"/>
+                            <field name="smtp_port"/>
+                        </group>
+                    </group>
+                    <group string="Zoho servers" invisible="provider != 'zoho'">
+                        <div colspan="2" class="text-muted">
+                            imap.zoho.com and smtp.zoho.com. If your Zoho account is in another region (zoho.eu, zoho.in...), choose "Other" and change the servers.
+                        </div>
+                    </group>
+                    <separator string="My email signature"/>
+                    <div class="text-muted small mb-1">Added to every email you send from the ERP. Paste it from Zoho (Settings > Signatures) or type it; text, links and images are kept.</div>
+                    <field name="signature" nolabel="1" options="{'height': 160}"/>
+                    <div class="text-muted small mt-3">
+                        <i class="fa fa-lock"/> Only you and the administrator see this mailbox. Only RFQ emails, and later emails from the clients who
+                        sent you an RFQ, come into the ERP; your other emails stay in Zoho. Nothing is marked as read, moved or deleted.
+                        In Zoho, IMAP access must be on (Settings > Mail Accounts > IMAP Access).
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="rfq_notify_mailbox_action" model="ir.actions.act_window">
+        <field name="name">My Mailboxes</field>
+        <field name="res_model">rfq.notify.mailbox</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add your technoai.ae mailbox</p>
+            <p>Then you are alerted on the browser, phone and WhatsApp as soon as an RFQ reaches it.</p>
+        </field>
+    </record>
+
+    <record id="rfq_notify_mailbox_team_action" model="ir.actions.act_window">
+        <field name="name">Team Mailboxes</field>
+        <field name="res_model">rfq.notify.mailbox</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'rfq_notify_team': True}</field>
+    </record>
+</odoo>

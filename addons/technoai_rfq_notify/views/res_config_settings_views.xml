@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.rfq.notify</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="RFQ Mail Notification" string="RFQ Mail Notification" name="technoai_rfq_notify"
+                     groups="technoai_rfq_notify.group_rfq_notify_manager">
+                    <block title="Mailboxes" name="rfq_notify_mailboxes">
+                        <setting string="Check mailboxes every" help="How often every employee's mailbox is read, in minutes.">
+                            <field name="rfq_notify_interval"/> minutes
+                        </setting>
+                        <setting string="RFQ detection" help="The same rules as Task Hub: newsletters, ads and notifications are skipped.">
+                            <div class="text-muted">Shared with Task Hub</div>
+                        </setting>
+                    </block>
+                    <block title="Reminders" name="rfq_notify_reminders">
+                        <setting string="Remind when not opened" help="Alert the employee again when nobody opened the alert. 0 turns reminders off.">
+                            <field name="rfq_notify_remind_minutes"/> minutes
+                        </setting>
+                        <setting string="Then tell the manager" help="After twice that time, the employee's manager (Employees app) is told.">
+                            <field name="rfq_notify_escalate"/>
+                        </setting>
+                    </block>
+                    <block title="WhatsApp" name="rfq_notify_whatsapp">
+                        <setting string="WhatsApp provider" help="The alerts use the WhatsApp provider of Task Hub settings (Cloud API, Twilio or Green API).">
+                            <div class="text-muted">Set in Task Hub settings</div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="rfq_notify_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'technoai_rfq_notify', 'bin_size': False}</field>
+    </record>
+</odoo>

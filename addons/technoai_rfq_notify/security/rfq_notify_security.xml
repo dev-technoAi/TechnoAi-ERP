@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_rfq_notify_manager" model="res.groups">
+        <field name="name">RFQ Mail Notification: manager</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="comment">Sees every team member's mailboxes and alerts, and the settings.</field>
+        <field name="users" eval="[Command.link(ref('base.user_admin'))]"/>
+    </record>
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[Command.link(ref('group_rfq_notify_manager'))]"/>
+    </record>
+
+    <!-- an employee only sees their own mailboxes and emails -->
+    <record id="rule_mailbox_own" model="ir.rule">
+        <field name="name">RFQ notification: own mailboxes</field>
+        <field name="model_id" ref="model_rfq_notify_mailbox"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[Command.link(ref('base.group_user'))]"/>
+    </record>
+    <record id="rule_mailbox_manager" model="ir.rule">
+        <field name="name">RFQ notification: all mailboxes</field>
+        <field name="model_id" ref="model_rfq_notify_mailbox"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[Command.link(ref('group_rfq_notify_manager'))]"/>
+    </record>
+    <record id="rule_message_own" model="ir.rule">
+        <field name="name">RFQ notification: own emails</field>
+        <field name="model_id" ref="model_rfq_notify_message"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[Command.link(ref('base.group_user'))]"/>
+    </record>
+    <record id="rule_message_manager" model="ir.rule">
+        <field name="name">RFQ notification: all emails</field>
+        <field name="model_id" ref="model_rfq_notify_message"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[Command.link(ref('group_rfq_notify_manager'))]"/>
+    </record>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rfq_notify_root" name="RFQ Mail Notification" sequence="6"
+              web_icon="technoai_rfq_notify,static/description/icon.png"/>
+    <menuitem id="menu_rfq_notify_alerts" name="RFQ Alerts" parent="menu_rfq_notify_root" action="rfq_notify_message_action" sequence="10"/>
+    <menuitem id="menu_rfq_notify_mailboxes" name="My Mailboxes" parent="menu_rfq_notify_root" action="rfq_notify_mailbox_action" sequence="20"/>
+    <menuitem id="menu_rfq_notify_team" name="Team Mailboxes" parent="menu_rfq_notify_root" action="rfq_notify_mailbox_team_action" sequence="30"
+              groups="technoai_rfq_notify.group_rfq_notify_manager"/>
+    <menuitem id="menu_rfq_notify_settings" name="Settings" parent="menu_rfq_notify_root" action="rfq_notify_settings_action" sequence="40"
+              groups="technoai_rfq_notify.group_rfq_notify_manager"/>
+    <menuitem id="menu_rfq_notify_taskhub" name="Open Task Hub" parent="menu_rfq_notify_root" action="technoai_taskhub.taskhub_rfq_action" sequence="50"/>
+</odoo>
