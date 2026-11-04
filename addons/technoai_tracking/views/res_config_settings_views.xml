@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.tracking</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Order Tracking" string="Order Tracking" name="technoai_tracking" groups="technoai_tracking.group_tracking_admin">
+                    <block title="Email alerts" name="tracking_emails">
+                        <setting string="Tracking mailbox" help="New orders, status changes and late items. Separate several addresses with commas.">
+                            <field name="tracking_internal_emails" placeholder="tracking@technoai.ae"/>
+                        </setting>
+                        <setting string="Completed orders" help="Told when every item of an order is delivered.">
+                            <field name="tracking_closed_emails" placeholder="accounts@technoai.ae, logistics@technoai.ae"/>
+                        </setting>
+                    </block>
+                    <block title="Tracking page" name="tracking_page">
+                        <setting string="Public tracking page" help="Clients follow their order here with their PO number, or by the QR code on the quotation and the delivery note.">
+                            <a href="/track" target="_blank">/track</a>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tracking_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'technoai_tracking', 'bin_size': False}</field>
+    </record>
+</odoo>

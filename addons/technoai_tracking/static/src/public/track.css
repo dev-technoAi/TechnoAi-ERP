@@ -1,0 +1,49 @@
+/* the public order tracking page */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Noto Sans", Arial, sans-serif; color: #1b2a30; }
+.trk { min-height: 100vh; display: flex; flex-direction: column; background: linear-gradient(160deg, #0b2b33 0%, #104a55 55%, #0FAD98 140%); color: #fff; }
+.trk-top { padding: 22px 40px; }
+.trk-brand { display: inline-flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; opacity: .95; }
+.trk-brand img { height: 30px; }
+main { flex: 1; width: 100%; max-width: 1000px; margin: 0 auto; padding: 10px 20px 40px; text-align: center; }
+h1 { font-size: 32px; margin: 26px 0 6px; }
+.trk-lead { opacity: .85; margin: 0 0 20px; }
+.trk-search { display: flex; max-width: 620px; margin: 0 auto; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.trk-search input { flex: 1; border: 0; padding: 14px 16px; font-size: 16px; outline: none; min-width: 0; }
+.trk-search button { border: 0; background: #e8a33d; color: #fff; font-weight: 700; padding: 0 26px; font-size: 15px; cursor: pointer; }
+.trk-msg { max-width: 620px; margin: 14px auto 0; background: rgba(255,255,255,.14); border-radius: 8px; padding: 10px 14px; }
+.trk-ok { background: rgba(15,173,152,.35); }
+.trk-bad { background: rgba(220,70,70,.4); }
+.trk-card { background: #fff; color: #1b2a30; border-radius: 14px; padding: 22px 26px; margin: 22px auto 0; text-align: left; box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+.trk-empty p { color: #5c6c76; margin: 6px 0 0; }
+.trk-head { display: flex; align-items: center; gap: 12px; }
+.trk-head small { color: #6b7a82; }
+.trk-po { font-size: 24px; font-weight: 700; }
+.trk-head .trk-pill { margin-left: auto; }
+.trk-bar { height: 12px; border-radius: 6px; background: #eef2f4; overflow: hidden; margin: 16px 0 6px; }
+.trk-bar i { display: block; height: 100%; background: #0FAD98; }
+.trk-sub { color: #6b7a82; font-size: 13px; margin-bottom: 12px; }
+.trk-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.trk-table th { text-align: left; color: #5c6c76; font-weight: 600; padding: 9px 8px; border-bottom: 1px solid #e1e8eb; }
+.trk-table td { padding: 11px 8px; border-bottom: 1px solid #eef2f4; }
+.trk-table a, .trk-foot a { color: #1F6E85; }
+.trk-pill { display: inline-block; border-radius: 12px; padding: 3px 11px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.s-processing { background: #eef2f4; color: #5c6c76; }
+.s-ready_to_ship { background: #e3f1f6; color: #1F6E85; }
+.s-in_transit { background: #fff1d6; color: #9a6400; }
+.s-in_inventory { background: #ece6fb; color: #5b3fb0; }
+.s-ready_for_delivery { background: #dff1ff; color: #155f94; }
+.s-delivered { background: #dff5ef; color: #0b7a64; }
+.trk-subscribe { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; padding-top: 14px; border-top: 1px solid #eef2f4; }
+.trk-subscribe label { font-weight: 600; font-size: 14px; margin-right: 6px; }
+.trk-subscribe input { flex: 1; min-width: 200px; border: 1px solid #d8e2e6; border-radius: 6px; padding: 9px 12px; font-size: 14px; }
+.trk-subscribe button { border: 0; background: #1F869E; color: #fff; border-radius: 6px; padding: 9px 16px; font-weight: 600; cursor: pointer; }
+.trk-note { color: #8a99a1; font-size: 12px; margin: 12px 0 0; }
+.trk-foot { text-align: center; padding: 18px; font-size: 13px; opacity: .85; }
+.trk-foot a { color: #9fe7e7; }
+@media (max-width: 640px) {
+  .trk-top { padding: 16px; }
+  h1 { font-size: 24px; }
+  .trk-card { padding: 16px; }
+  .trk-table th:nth-child(5), .trk-table td:nth-child(5) { display: none; }
+}

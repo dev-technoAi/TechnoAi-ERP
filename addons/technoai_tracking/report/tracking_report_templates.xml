@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- the company letter (quotation, sales order): the tracking QR code once the order is confirmed -->
+    <template id="report_saleorder_letter_tracking" inherit_id="sale.report_saleorder_document" priority="95">
+        <xpath expr="//p[contains(., 'This is a computer generated document')]" position="before">
+            <t t-set="tracking_qr" t-value="doc._tai_tracking_qr()"/>
+            <table t-if="tracking_qr" style="margin-top: 16px; border: 0 none !important; border-collapse: collapse;">
+                <tr>
+                    <td style="border: 0 none !important; padding: 0 12px 0 0; vertical-align: middle;">
+                        <img t-att-src="tracking_qr" style="width: 80px; height: 80px;" alt="Track your order"/>
+                    </td>
+                    <td style="border: 0 none !important; padding: 0; vertical-align: middle; font-size: 12px; line-height: 1.5;">
+                        <b>Track your order</b><br/>
+                        Scan the code, or open <t t-out="doc._tai_tracking_url()"/>
+                    </td>
+                </tr>
+            </table>
+        </xpath>
+    </template>
+
+    <!-- the delivery note -->
+    <template id="report_delivery_document_tracking" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <t t-set="tracking_qr" t-value="o.sale_id and o.sale_id._tai_tracking_qr()"/>
+            <table t-if="tracking_qr" style="margin-top: 20px;">
+                <tr>
+                    <td style="padding-right: 12px; vertical-align: middle;">
+                        <img t-att-src="tracking_qr" style="width: 80px; height: 80px;" alt="Track your order"/>
+                    </td>
+                    <td style="vertical-align: middle; font-size: 12px;">
+                        <b>Track your order</b><br/>
+                        Scan the code, or open <t t-out="o.sale_id._tai_tracking_url()"/>
+                    </td>
+                </tr>
+            </table>
+        </xpath>
+    </template>
+</odoo>

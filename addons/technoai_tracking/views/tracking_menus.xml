@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_tracking_root" name="Order Tracking" sequence="7" action="tracking_dashboard_action"
+              web_icon="technoai_tracking,static/description/icon.png" groups="technoai_tracking.group_tracking_viewer"/>
+    <menuitem id="menu_tracking_dashboard" name="Dashboard" parent="menu_tracking_root" action="tracking_dashboard_action" sequence="10"/>
+    <menuitem id="menu_tracking_orders" name="Orders" parent="menu_tracking_root" action="tracking_order_action" sequence="20"/>
+    <menuitem id="menu_tracking_late" name="Late items" parent="menu_tracking_root" action="tracking_line_late_action" sequence="30"/>
+    <menuitem id="menu_tracking_report" name="Reports" parent="menu_tracking_root" action="tracking_line_report_action" sequence="40"/>
+    <menuitem id="menu_tracking_subscribers" name="Client subscribers" parent="menu_tracking_root" action="tracking_subscriber_action" sequence="50"
+              groups="technoai_tracking.group_tracking_data_entry"/>
+    <menuitem id="menu_tracking_settings" name="Settings" parent="menu_tracking_root" action="tracking_settings_action" sequence="60"
+              groups="technoai_tracking.group_tracking_admin"/>
+</odoo>

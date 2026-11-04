@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- the recipients of the original tracking system -->
+        <record id="param_internal_emails" model="ir.config_parameter">
+            <field name="key">technoai_tracking.internal_emails</field>
+            <field name="value">tracking@technoai.ae</field>
+        </record>
+        <record id="param_closed_emails" model="ir.config_parameter">
+            <field name="key">technoai_tracking.closed_emails</field>
+            <field name="value">tracking@technoai.ae, info@technoai.ae, logistics@technoai.ae, accounts@technoai.ae</field>
+        </record>
+        <record id="ir_cron_late_items" model="ir.cron">
+            <field name="name">Order Tracking: late items</field>
+            <field name="model_id" ref="model_technoai_tracking_order"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_late_items()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

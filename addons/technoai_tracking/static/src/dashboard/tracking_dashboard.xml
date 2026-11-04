@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="technoai_tracking.Dashboard">
+        <div class="o_action o_tai_tracking p-4">
+            <t t-if="state.data">
+                <t t-set="d" t-value="state.data"/>
+                <div class="d-flex align-items-center mb-3">
+                    <span class="flex-grow-1"/>
+                    <button class="btn btn-secondary me-2" t-on-click="() => this.load()"><i class="fa fa-refresh"/> Refresh</button>
+                    <a class="btn btn-secondary" href="/track" target="_blank"><i class="fa fa-external-link"/> Tracking page</a>
+                </div>
+                <div class="o_tai_kpis">
+                    <div class="o_tai_kpi" t-on-click="() => this.openList('open')"><b t-esc="d.open_orders"/><span>Open orders</span></div>
+                    <div class="o_tai_kpi" t-on-click="() => this.openList('open')"><b t-esc="d.on_the_way"/><span>Items on the way</span></div>
+                    <div class="o_tai_kpi" t-on-click="() => this.openLate()"><b t-att-class="{ 'text-danger': d.late_items }" t-esc="d.late_items"/><span>Late items</span></div>
+                    <div class="o_tai_kpi" t-on-click="() => this.openList('closed')"><b t-esc="d.delivered_month"/><span>Orders completed this month</span></div>
+                </div>
+                <div class="o_tai_card">
+                    <h5>Items by status</h5>
+                    <div class="o_tai_bar">
+                        <t t-foreach="d.statuses" t-as="s" t-key="s.key">
+                            <i t-if="s.count" t-att-style="'width:' + (100 * s.count / totalItems) + '%;background:' + colors[s.key]" t-att-title="s.label + ': ' + s.count"/>
+                        </t>
+                    </div>
+                    <div class="o_tai_legend">
+                        <t t-foreach="d.statuses" t-as="s" t-key="s.key">
+                            <span><i t-att-style="'background:' + colors[s.key]"/><t t-esc="s.label"/> <b t-esc="s.count"/></span>
+                        </t>
+                    </div>
+                    <div class="text-muted small mt-1">Open orders; Delivered counts the items delivered this month.</div>
+                </div>
+                <div class="o_tai_card">
+                    <h5>Open orders</h5>
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>Client PO</th><th>Our SO</th><th>Client</th><th>Sales person</th><th>Items</th><th style="width:180px">Progress</th><th>Next ETA</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr t-foreach="d.orders" t-as="o" t-key="o.id" t-on-click="() => this.openOrder(o.id)" style="cursor:pointer">
+                                <td><b t-esc="o.po"/></td>
+                                <td t-esc="o.so"/>
+                                <td t-esc="o.client"/>
+                                <td t-esc="o.user"/>
+                                <td t-esc="o.items"/>
+                                <td>
+                                    <div class="o_tai_bar o_tai_bar_small"><i t-att-style="'width:' + o.progress + '%;background:#0FAD98'"/></div>
+                                    <small class="text-muted"><t t-esc="o.delivered"/> of <t t-esc="o.items"/> delivered</small>
+                                </td>
+                                <td t-att-class="{ 'text-danger fw-bold': o.late }" t-esc="o.next_eta or '-'"/>
+                                <td><span class="badge rounded-pill" t-att-class="o.late ? 'text-bg-danger' : 'text-bg-light'" t-esc="o.status"/></td>
+                            </tr>
+                            <tr t-if="!d.orders.length"><td colspan="8" class="text-muted">No open orders. Confirm a Sales Order and its tracking appears here.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-muted small"><i class="fa fa-magic text-success"/> Orders are created on their own when a Sales Order is confirmed.</div>
+            </t>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="public_track" name="Order Tracking page">
+        <t t-set="labels" t-value="{'processing': 'Processing', 'ready_to_ship': 'Ready to ship', 'in_transit': 'In transit', 'in_inventory': 'In our warehouse', 'ready_for_delivery': 'Ready for delivery', 'delivered': 'Delivered'}"/>
+        &lt;!DOCTYPE html&gt;
+        <html lang="en">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta name="robots" content="noindex"/>
+                <title><t t-if="order">Order <t t-out="order.name"/> - </t>Techno AI Order Tracking</title>
+                <link rel="icon" type="image/png" href="/technoai_portal/static/src/img/favicon.png"/>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&amp;display=swap"/>
+                <link rel="stylesheet" href="/technoai_tracking/static/src/public/track.css"/>
+            </head>
+            <body>
+                <div class="trk">
+                    <header class="trk-top">
+                        <a href="/landing" class="trk-brand"><img src="/technoai_backend_theme/static/img/logo-mark-white.png" alt="Techno AI"/><span>Order Tracking</span></a>
+                    </header>
+                    <main>
+                        <h1>Track your order</h1>
+                        <p class="trk-lead">Enter your PO number, or scan the QR code on your quotation or delivery note.</p>
+                        <form class="trk-search" action="/track" method="get">
+                            <input name="po" t-att-value="po" placeholder="Your PO number, e.g. 4500002233" autocomplete="off" required="required"/>
+                            <button type="submit">Track</button>
+                        </form>
+
+                        <div t-if="message == 'check'" class="trk-msg">We sent you an email: please click its link to confirm the updates.</div>
+                        <div t-if="message == 'subscribed'" class="trk-msg trk-ok">Done. You will get an email whenever this order moves.</div>
+                        <div t-if="message == 'confirmed'" class="trk-msg trk-ok">This address already gets updates for this order.</div>
+                        <div t-if="message == 'unsubscribed'" class="trk-msg">You will not get updates for this order any more.</div>
+                        <div t-if="message == 'invalid'" class="trk-msg trk-bad">That did not work. Check the PO number and the email address.</div>
+
+                        <div t-if="searched and not order" class="trk-card trk-empty">
+                            <b>No order found for "<t t-out="po"/>".</b>
+                            <p>Check the number on your purchase order, or contact your Techno AI sales person.</p>
+                        </div>
+
+                        <div t-if="order" class="trk-card">
+                            <t t-set="lines" t-value="order.line_ids"/>
+                            <div class="trk-head">
+                                <div>
+                                    <small>Purchase order</small>
+                                    <div class="trk-po" t-out="order.name"/>
+                                </div>
+                                <span t-if="order.state == 'closed'" class="trk-pill s-delivered">Delivered</span>
+                                <span t-else="" class="trk-pill s-in_transit">On the way</span>
+                            </div>
+                            <div class="trk-bar"><i t-attf-style="width: {{ order.progress }}%"/></div>
+                            <div class="trk-sub">
+                                <t t-out="order.delivered_count"/> of <t t-out="order.line_count"/> items delivered
+                                <t t-if="order.state == 'open' and order.overall_eta"> · expected complete by <t t-out="order.overall_eta.strftime('%d %b %Y')"/></t>
+                            </div>
+                            <table class="trk-table">
+                                <thead><tr><th>Item</th><th>Qty</th><th>Status</th><th>Expected</th><th>Shipment</th></tr></thead>
+                                <tbody>
+                                    <tr t-foreach="lines" t-as="line">
+                                        <td t-out="line.name"/>
+                                        <td><t t-out="'%g' % line.quantity"/> <t t-out="line.uom or ''"/></td>
+                                        <td><span t-attf-class="trk-pill s-{{ line.status }}" t-out="labels.get(line.status)"/></td>
+                                        <td><t t-if="line.status != 'delivered' and line.eta" t-out="line.eta.strftime('%d %b')"/><t t-else="">-</t></td>
+                                        <td><a t-if="line.shipment_link" t-att-href="line.shipment_link" target="_blank" rel="noopener noreferrer">Track shipment</a><t t-else="">-</t></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <form class="trk-subscribe" action="/track/subscribe" method="post">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="po" t-att-value="order.name"/>
+                                <label>Get updates by email</label>
+                                <input type="email" name="email" placeholder="you@company.com" required="required"/>
+                                <button type="submit">Notify me</button>
+                            </form>
+                            <p class="trk-note">Prices, suppliers and internal notes are never shown here.</p>
+                        </div>
+                    </main>
+                    <footer class="trk-foot">Techno AI · Abu Dhabi, UAE · <a href="https://technoai.ae" target="_blank" rel="noopener noreferrer">technoai.ae</a></footer>
+                </div>
+            </body>
+        </html>
+    </template>
+</odoo>

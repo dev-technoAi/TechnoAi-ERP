@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tracking_order_viewer,tracking order viewer,model_technoai_tracking_order,group_tracking_viewer,1,0,0,0
+access_tracking_order_entry,tracking order entry,model_technoai_tracking_order,group_tracking_data_entry,1,1,1,0
+access_tracking_order_admin,tracking order admin,model_technoai_tracking_order,group_tracking_admin,1,1,1,1
+access_tracking_line_viewer,tracking line viewer,model_technoai_tracking_line,group_tracking_viewer,1,0,0,0
+access_tracking_line_entry,tracking line entry,model_technoai_tracking_line,group_tracking_data_entry,1,1,1,1
+access_tracking_subscriber_viewer,tracking subscriber viewer,model_technoai_tracking_subscriber,group_tracking_viewer,1,0,0,0
+access_tracking_subscriber_entry,tracking subscriber entry,model_technoai_tracking_subscriber,group_tracking_data_entry,1,1,1,1

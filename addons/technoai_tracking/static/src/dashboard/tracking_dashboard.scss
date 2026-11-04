@@ -1,0 +1,78 @@
+.o_tai_tracking {
+    overflow: auto;
+    height: 100%;
+
+    .o_tai_kpis {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .o_tai_kpi {
+        background: $o-view-background-color;
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        padding: 12px 16px;
+        cursor: pointer;
+
+        b {
+            display: block;
+            font-size: 26px;
+        }
+
+        span {
+            color: $text-muted;
+            font-size: 0.9em;
+        }
+    }
+
+    .o_tai_card {
+        background: $o-view-background-color;
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-bottom: 14px;
+    }
+
+    .o_tai_bar {
+        display: flex;
+        height: 12px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: $border-color;
+
+        i {
+            display: block;
+            height: 100%;
+        }
+    }
+
+    .o_tai_bar_small {
+        height: 8px;
+        width: 160px;
+    }
+
+    .o_tai_legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 8px;
+        font-size: 0.9em;
+        color: $text-muted;
+
+        i {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .o_tai_kpis {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}

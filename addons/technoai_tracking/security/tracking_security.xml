@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_tracking" model="ir.module.category">
+        <field name="name">Order Tracking</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="group_tracking_viewer" model="res.groups">
+        <field name="name">Viewer</field>
+        <field name="category_id" ref="module_category_tracking"/>
+        <field name="comment">Sees the tracked orders.</field>
+        <field name="implied_ids" eval="[Command.link(ref('base.group_user'))]"/>
+    </record>
+    <record id="group_tracking_data_entry" model="res.groups">
+        <field name="name">Data entry</field>
+        <field name="category_id" ref="module_category_tracking"/>
+        <field name="comment">Updates item statuses, ETAs and shipment links.</field>
+        <field name="implied_ids" eval="[Command.link(ref('group_tracking_viewer'))]"/>
+    </record>
+    <record id="group_tracking_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_category_tracking"/>
+        <field name="comment">Also deletes orders and changes the settings.</field>
+        <field name="implied_ids" eval="[Command.link(ref('group_tracking_data_entry'))]"/>
+        <field name="users" eval="[Command.link(ref('base.user_admin'))]"/>
+    </record>
+    <!-- every employee sees the orders; sales managers and admins update them -->
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids" eval="[Command.link(ref('group_tracking_viewer'))]"/>
+    </record>
+    <record id="sales_team.group_sale_manager" model="res.groups">
+        <field name="implied_ids" eval="[Command.link(ref('group_tracking_data_entry'))]"/>
+    </record>
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[Command.link(ref('group_tracking_admin'))]"/>
+    </record>
+</odoo>
