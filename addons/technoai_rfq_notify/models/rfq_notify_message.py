@@ -220,7 +220,8 @@ class RfqNotifyMessage(models.Model):
         if minutes <= 0:
             return
         now = fields.Datetime.now()
-        base = [('direction', '=', 'in'), ('opened_date', '=', False), ('is_test', '=', False)]
+        # only new RFQs ring, so only they are reminded; replies and other client emails stay quiet
+        base = [('direction', '=', 'in'), ('kind', '=', 'rfq'), ('opened_date', '=', False), ('is_test', '=', False)]
         for message in self.sudo().search(base + [('reminder_level', '=', 0), ('create_date', '<', now - timedelta(minutes=minutes))]):
             message._notify_owner(reminder=True)
             message.reminder_level = 1

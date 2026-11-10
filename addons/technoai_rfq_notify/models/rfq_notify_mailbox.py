@@ -20,6 +20,11 @@ PUBLIC_DOMAINS = {
     'me.com', 'aol.com', 'proton.me', 'protonmail.com', 'yandex.com', 'zoho.com', 'zohomail.com', 'gmx.com', 'mail.com',
 }
 FETCH_LIMIT = 30
+# "Re: …", "RE[2]: …", "AW: …" (German), "رد: …"; "Fwd: …", "FW: …", "TR: …" (French), "WG: …" (German), "إعادة توجيه"
+REPLY_SUBJECT = re.compile(r'^\s*(re|aw|sv|antw|rv|رد)\s*(\[\d+\])?\s*[:：]', re.I)
+FORWARD_SUBJECT = re.compile(r'^\s*(fwd?|fw|tr|wg|rv|enc|إعادة توجيه|توجيه)\s*(\[\d+\])?\s*[:：]', re.I)
+# the company's own domains: emails from colleagues are never an RFQ alert
+OWN_DOMAINS = {'technoai.ae'}
 
 
 def client_key(address):
@@ -220,8 +225,21 @@ class RfqNotifyMailbox(models.Model):
                 pass
         return kept
 
+    def _own_domains(self):
+        """ technoai.ae, the mailbox's own domain and the company email's domain. """
+        domains = set(OWN_DOMAINS)
+        for address in (self.email, self.env.company.email):
+            domain = (email_normalize(address or '') or '').rpartition('@')[2]
+            if domain and domain not in PUBLIC_DOMAINS:
+                domains.add(domain)
+        return domains
+
     def _process_email(self, raw):
-        """ Keep the email when it is an RFQ, a reply in a kept conversation, or from a known RFQ client. """
+        """ Keep the email when it is an RFQ, a reply in a kept conversation, or from a known RFQ client.
+
+        Only a NEW RFQ from outside the company rings (ERP, push and WhatsApp). Replies, forwards and the
+        clients' other emails are kept for the conversation without an alert; colleagues' emails
+        (technoai.ae) never ring and are kept only when they belong to a kept conversation. """
         self.ensure_one()
         Message = self.env['rfq.notify.message'].sudo()
         message = email.message_from_bytes(raw, policy=email.policy.SMTP)
@@ -237,13 +255,19 @@ class RfqNotifyMailbox(models.Model):
         references = re.findall(r'<[^>]+>', ' '.join(filter(None, [parsed.get('in_reply_to'), parsed.get('references')])))
         parent = references and Message.search([('mailbox_id', '=', self.id), ('message_id', 'in', references)], limit=1)
         key = client_key(sender)
-        known_client = Message.search([('mailbox_id', '=', self.id), ('client_key', '=', key), ('kind', '=', 'rfq')], limit=1)
-        if not parent and not known_client:
-            if is_non_rfq(subject, text, parsed.get('email_from')) or not has_rfq_intent(subject, text):
-                return False
+        internal = sender.rpartition('@')[2] in self._own_domains()
+        is_reply = bool(references) or bool(REPLY_SUBJECT.match(subject))
+        is_forward = bool(FORWARD_SUBJECT.match(subject))
+        known_client = not internal and Message.search(
+            [('mailbox_id', '=', self.id), ('client_key', '=', key), ('kind', '=', 'rfq')], limit=1)
+        new_rfq = (not internal and not is_reply and not is_forward
+                   and not is_non_rfq(subject, text, parsed.get('email_from')) and has_rfq_intent(subject, text))
+        if new_rfq:
             kind = 'rfq'
+        elif parent or known_client:
+            kind = 'client'  # kept with its conversation, no alert
         else:
-            kind = 'client'
+            return False
         record = Message.create({
             'mailbox_id': self.id,
             'kind': kind,
@@ -261,7 +285,8 @@ class RfqNotifyMailbox(models.Model):
         record._save_attachments(parsed.get('attachments') or [])
         if kind == 'rfq' and self.create_taskhub_rfq:
             record._link_taskhub_rfq(raw)
-        elif kind == 'client':
-            record.taskhub_rfq_id = (parent.taskhub_rfq_id if parent else False) or known_client.taskhub_rfq_id
-        record._notify_owner()
+        else:
+            record.taskhub_rfq_id = (parent.taskhub_rfq_id if parent else False) or (known_client and known_client.taskhub_rfq_id)
+        if kind == 'rfq':
+            record._notify_owner()
         return record
