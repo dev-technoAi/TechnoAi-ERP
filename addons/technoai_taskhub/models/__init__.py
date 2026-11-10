@@ -7,6 +7,7 @@ from . import taskhub_sourcing
 from . import taskhub_report
 from . import taskhub_mailbox
 from . import hr_employee
+from . import taskhub_wa_bot
 from . import res_config_settings
 from . import res_partner
 from . import res_users

@@ -1,0 +1,6 @@
+# the repo ignores package files and dotfiles elsewhere; this service needs them to build
+!package.json
+!package-lock.json
+!.dockerignore
+node_modules/
+data/

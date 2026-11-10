@@ -25,7 +25,7 @@
                         </setting>
                     </block>
                     <block title="WhatsApp" name="rfq_notify_whatsapp">
-                        <setting string="WhatsApp provider" help="The alerts use the WhatsApp provider of Task Hub settings (Cloud API, Twilio or Green API).">
+                        <setting string="WhatsApp provider" help="The alerts use the WhatsApp provider of Task Hub settings (own company number through the Techno AI bot, Cloud API, Twilio or Green API).">
                             <div class="text-muted">Set in Task Hub settings</div>
                         </setting>
                     </block>

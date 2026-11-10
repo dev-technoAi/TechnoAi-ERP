@@ -97,6 +97,8 @@ class TaskhubDispatch(models.TransientModel):
         params = self.env['ir.config_parameter'].sudo()
         provider = params.get_param('technoai_taskhub.whatsapp_provider', 'link')
         phone = self._clean_phone()
+        if provider == 'bot':
+            return self.env['taskhub.wa.bot']._send(phone, self.message)
         try:
             if provider == 'cloud':
                 token = params.get_param('technoai_taskhub.wa_cloud_token')

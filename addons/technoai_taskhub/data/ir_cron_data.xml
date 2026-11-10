@@ -10,6 +10,16 @@
         <field name="active" eval="True"/>
     </record>
 
+    <record id="ir_cron_taskhub_watch_wa_bot" model="ir.cron">
+        <field name="name">Task Hub: watch the WhatsApp bot</field>
+        <field name="model_id" ref="model_taskhub_wa_bot"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_watch()</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
+
     <record id="ir_cron_taskhub_fetch_rfq_emails" model="ir.cron">
         <field name="name">Task Hub: read RFQ emails</field>
         <field name="model_id" ref="model_taskhub_mailbox"/>

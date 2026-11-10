@@ -22,8 +22,48 @@
                         </setting>
                     </block>
                     <block title="WhatsApp dispatch" name="taskhub_whatsapp">
-                        <setting string="Provider" help="How Dispatch sends WhatsApp messages. Without an account, WhatsApp opens with the message ready to send.">
+                        <setting string="Provider" help="How the RFQ alerts and Dispatch send WhatsApp messages. Without an account, WhatsApp opens with the message ready to send.">
                             <field name="taskhub_whatsapp_provider" widget="radio"/>
+                            <div class="text-muted small mt8" invisible="taskhub_whatsapp_provider != 'bot'">
+                                Free. The bot runs on the Techno AI server with one company number; it only sends alerts and does not read or answer chats on that number.
+                            </div>
+                        </setting>
+                        <setting string="WhatsApp number" invisible="taskhub_whatsapp_provider != 'bot'"
+                                 help="Use a company number, not the Meta / Chatwoot number or a personal one.">
+                            <div class="content-group o_taskhub_wa_bot">
+                                <div class="d-flex align-items-center gap-2 mt8">
+                                    <field name="taskhub_wa_bot_state" widget="badge" nolabel="1"
+                                           decoration-success="taskhub_wa_bot_state == 'connected'"
+                                           decoration-warning="taskhub_wa_bot_state in ('qr', 'starting', 'idle', 'reconnecting')"
+                                           decoration-danger="taskhub_wa_bot_state in ('logged_out', 'error', 'offline')"/>
+                                    <button name="action_taskhub_wa_bot_refresh" type="object" string="Refresh" icon="fa-refresh" class="btn-link p-0"/>
+                                </div>
+                                <div invisible="taskhub_wa_bot_state != 'qr'" class="d-flex gap-3 mt-2">
+                                    <field name="taskhub_wa_bot_qr" widget="image" nolabel="1" readonly="1" options="{'size': [168, 168]}"/>
+                                    <ol class="ps-3 mb-0 small">
+                                        <li>Open WhatsApp on the company phone</li>
+                                        <li>Tap <b>⋮</b> → <b>Linked devices</b></li>
+                                        <li>Tap <b>Link a device</b></li>
+                                        <li>Scan this code</li>
+                                    </ol>
+                                </div>
+                                <div invisible="taskhub_wa_bot_state != 'qr'" class="text-muted small mt-1">
+                                    The code changes every 20 seconds; press Refresh if it stops working.
+                                </div>
+                                <div invisible="taskhub_wa_bot_state != 'connected'" class="mt-2">
+                                    <div class="row"><span class="col-lg-4 o_light_label">Number</span><field name="taskhub_wa_bot_number" class="col-lg-8"/></div>
+                                    <div class="row"><span class="col-lg-4 o_light_label">Connected since</span><field name="taskhub_wa_bot_since" class="col-lg-8"/></div>
+                                    <div class="row"><span class="col-lg-4 o_light_label">Alerts today</span><field name="taskhub_wa_bot_today" class="col-lg-8"/></div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <button name="action_taskhub_wa_bot_test" type="object" string="Send a test to me" icon="fa-paper-plane" class="btn-secondary btn-sm"/>
+                                        <button name="action_taskhub_wa_bot_unlink" type="object" string="Unlink number" icon="fa-sign-out" class="btn-secondary btn-sm text-danger"
+                                                confirm="Unlink the company WhatsApp number? WhatsApp alerts stop until the QR code is scanned again."/>
+                                    </div>
+                                </div>
+                                <div invisible="taskhub_wa_bot_state == 'connected' or not taskhub_wa_bot_error" class="text-danger small mt-1">
+                                    <field name="taskhub_wa_bot_error" nolabel="1"/>
+                                </div>
+                            </div>
                         </setting>
                         <setting string="WhatsApp Cloud API" invisible="taskhub_whatsapp_provider != 'cloud'"
                                  help="Meta business account. Free-form messages reach people who wrote to you in the last 24 hours.">
