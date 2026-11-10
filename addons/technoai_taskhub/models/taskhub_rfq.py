@@ -57,6 +57,16 @@ class TaskhubRfq(models.Model):
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company)
     color = fields.Integer()
 
+    def _notify_get_recipients(self, message, msg_vals=False, **kwargs):
+        """ The RFQ is already in the employee's mailbox: staff are told in the ERP (inbox and phone/browser
+        push) and on WhatsApp, never by another email ("You have been assigned to RFQ-0017" and the like).
+        Customers and suppliers following the RFQ still get their emails. """
+        recipients = super()._notify_get_recipients(message, msg_vals=msg_vals, **kwargs)
+        for recipient in recipients:
+            if recipient.get('notif') == 'email' and recipient.get('uid') and not recipient.get('ushare'):
+                recipient['notif'] = 'inbox'
+        return recipients
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
