@@ -33,6 +33,10 @@ class ResConfigSettings(models.TransientModel):
     taskhub_wa_bot_since = fields.Char(compute='_compute_taskhub_wa_bot')
     taskhub_wa_bot_today = fields.Char(compute='_compute_taskhub_wa_bot')
     taskhub_wa_bot_error = fields.Char(compute='_compute_taskhub_wa_bot')
+    # the provider actually in use: a choice made on the screen only counts once Save is pressed
+    # (a default, not a compute: the settings form gets defaults when it opens, but not dependency-less computes)
+    taskhub_wa_saved_provider = fields.Char(default=lambda self: self.env['ir.config_parameter'].sudo().get_param(
+        'technoai_taskhub.whatsapp_provider', 'link'), readonly=True)
 
     taskhub_rfq_mailbox = fields.Boolean('Read RFQ emails from a mailbox', config_parameter='technoai_taskhub.rfq_mailbox')
     taskhub_imap_host = fields.Char('IMAP server', config_parameter='technoai_taskhub.imap_host', default='imap.gmail.com')

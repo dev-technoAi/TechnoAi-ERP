@@ -198,7 +198,8 @@ class RfqNotifyMessage(models.Model):
             if mailbox.notify_whatsapp and number:
                 sent, info = self.env['taskhub.dispatch'].sudo().new({'phone': number, 'message': text})._send_whatsapp()
                 message.write({'whatsapp_state': 'sent' if sent else 'failed',
-                               'whatsapp_info': info or _('No WhatsApp provider is set in Task Hub settings.')})
+                               'whatsapp_info': info or _('No automatic WhatsApp provider is saved: in Settings > Task Hub > '
+                                                          'WhatsApp dispatch, choose "Own number (Techno AI bot)" and press Save.')})
             elif mailbox.notify_whatsapp and not reminder:
                 message.write({'whatsapp_state': 'failed', 'whatsapp_info': _('No WhatsApp number on the mailbox.')})
 

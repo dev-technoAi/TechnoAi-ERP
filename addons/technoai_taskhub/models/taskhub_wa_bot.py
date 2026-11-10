@@ -88,8 +88,8 @@ class TaskhubWaBot(models.AbstractModel):
         if now == before or not now:
             return
         params.set_param(PARAM % 'wa_bot_last_state', now)
-        if not before and now == 'down':
-            return  # never linked yet: nothing stopped
+        if not before:
+            return  # first check: nothing stopped and nothing came back
         admins = self.env.ref('base.group_system').sudo().users.filtered(lambda u: not u.share and u.active)
         if not admins:
             return

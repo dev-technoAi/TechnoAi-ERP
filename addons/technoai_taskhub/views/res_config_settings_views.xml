@@ -24,6 +24,12 @@
                     <block title="WhatsApp dispatch" name="taskhub_whatsapp">
                         <setting string="Provider" help="How the RFQ alerts and Dispatch send WhatsApp messages. Without an account, WhatsApp opens with the message ready to send.">
                             <field name="taskhub_whatsapp_provider" widget="radio"/>
+                            <field name="taskhub_wa_saved_provider" invisible="1"/>
+                            <div class="alert alert-warning small mt8 mb-0 py-2" role="alert"
+                                 invisible="taskhub_whatsapp_provider == taskhub_wa_saved_provider">
+                                <i class="fa fa-exclamation-triangle me-1"/>
+                                Press <b>Save</b> at the top: until then the WhatsApp alerts keep using the old choice.
+                            </div>
                             <div class="text-muted small mt8" invisible="taskhub_whatsapp_provider != 'bot'">
                                 Free. The bot runs on the Techno AI server with one company number; it only sends alerts and does not read or answer chats on that number.
                             </div>
