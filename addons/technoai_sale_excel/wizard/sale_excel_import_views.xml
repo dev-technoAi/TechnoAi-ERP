@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_excel_import_view_form" model="ir.ui.view">
+        <field name="name">sale.excel.import.form</field>
+        <field name="model">sale.excel.import</field>
+        <field name="arch" type="xml">
+            <form string="Sales Order from Excel">
+                <group col="3">
+                    <group>
+                        <field name="partner_id" options="{'no_quick_create': True}" placeholder="Choose the customer"/>
+                    </group>
+                    <group>
+                        <field name="file" filename="filename"/>
+                        <field name="filename" invisible="1"/>
+                        <field name="item_count" invisible="not file or parse_error" string="Items"/>
+                    </group>
+                    <group>
+                        <field name="vat"/>
+                    </group>
+                </group>
+                <field name="parse_error" invisible="1"/>
+                <field name="items_json" invisible="1"/>
+                <field name="columns_json" invisible="1"/>
+                <field name="preview_html" nolabel="1" readonly="1"/>
+                <footer>
+                    <button name="action_create" type="object" string="Create Sales Order" icon="fa-check" class="btn-primary"
+                            invisible="not file or parse_error"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    <span class="ms-auto text-muted small align-self-center">Nothing is created until you press Create.</span>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
